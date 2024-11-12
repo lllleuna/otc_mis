@@ -1,16 +1,28 @@
 <x-header-tag>
 <x-form-field>
 
-    <form action="" method="POST">
+    <form action="/register" method="POST">
+        @csrf
         
         <x-form-title>Create Account</x-form-title>
-        <x-form-label for="email">Email</x-form-label>
-        <x-form-input name="email" id="email" />
+
+        {{-- name --}}
+        <x-form-input name="name" id="name" placeholder="Name" :value="old('name')" required/>
+        <x-form-error name="name" />
+
+        {{-- email --}}
+        <x-form-input name="email" id="email" placeholder="Email" :value="old('email')" required/>
         <x-form-error name="email" />
+
+        {{-- password --}}
+        <x-form-input name="password" id="password" type="password" placeholder="Password" required/>
+        <x-form-error name="password" />
+
+        {{-- password confirmation --}}
+        <x-form-input name="password_confirmation" id="password_confirmation" type="password" placeholder="Confirm Password" required/>
+        <x-form-error name="password_confirmation" />
     
-        <div class=" place-items-end ">
-            <x-form-submit-button > Create </x-form-submit-button>
-        </div>
+        <x-form-submit-button> Create </x-form-submit-button>
 
     </form>
 
