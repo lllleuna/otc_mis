@@ -1,4 +1,14 @@
-<x-header-tag>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @vite('resources/css/app.css')
+    <title>OTC MIS</title>
+</head>
+<body>
+
     <x-form-field>
     
         <form action="/" method="POST">
@@ -8,7 +18,7 @@
     
             {{-- email --}}
             <x-form-label for="email">Email</x-form-label>
-            <x-form-input name="email" id="email" required/>
+            <x-form-input name="email" id="email" :value="old('email')" required/>
             <x-form-error name="email" />
     
             {{-- password --}}
@@ -16,9 +26,11 @@
             <x-form-input name="password" id="password" type="password" required/>
             <x-form-error name="password" />
         
-            <x-form-submit-button> Login </x-form-submit-button>
+            <x-form-submit-button class="float-right"> Login </x-form-submit-button>
     
         </form>
     
     </x-form-field>
-</x-header-tag>
+    
+</body>
+</html>

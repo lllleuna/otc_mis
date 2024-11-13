@@ -3,42 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite(['resources/css/app.css', 'resources/js/dropdown.js'])
+    {{ $vite }}
     <title>{{$title}}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="h-full">
-  <div class="min-h-full">
-    <nav class="bg-blue-900">
-      <div class="">
-        <div class="flex h-16 items-center justify-between">
-          <div class="flex items-center">
-            <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="OTC Logo">
-          </div>
-          <div class="block">
-            <div class="mr-6 flex items-center">
-                <img class="h-6 mx-5" src="{{ asset('images/icons8-notification-96.png') }}" alt="notif">
-                <img class="h-12" src="{{ asset('images/icons8-male-user-50.png') }}" alt="profile">
+
+    <div class="min-h-full">
+        <nav class="bg-blue-900">
+            <div class="">
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="OTC Logo">
+                    </div>
+                    <div class="block">
+                        <div class="mr-6 flex items-center">
+                            <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}" alt="notif">
+                            
+                            <div class="relative font-[sans-serif] w-max mx-auto">
+                                <button type="button" id="dropdownToggle">
+                                    <div class="flex items-center">
+                                        <h5 class="mx-2 text-gray-200">Leunamme</h5>
+                                        <img class="h-10" src="{{ asset('images/icons8-male-user-50.png') }}" alt="profile">
+                                    </div>
+                                </button>
+                
+                                <ul id="dropdownMenu" class='absolute hidden shadow-lg bg-white py-2 z-[1000] min-w-full w-max rounded-lg max-h-96'>
+                                    <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
+                                    View profile
+                                    </li>
+                                    <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
+                                    Settings
+                                    </li>
+                                    <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
+                                    <form method="POST" action="/logout">
+                                        @csrf
+                                        <button type="submit">Logout</button>
+                                    </form>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-          </div>
-        </div>
-        
-      </div>
-    </nav>
-  
-    <header class="bg-white shadow">
-      <div class="m-auto w-fit items-center px-3 py-2">
-        <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
-        <x-nav-link href="/" :active="request()->is('users')">Manage Users</x-nav-link>
-        <x-nav-link href="/" :active="request()->is('transportcoop')">Transport Cooperative</x-nav-link>
-        <x-nav-link href="/" :active="request()->is('others')">Others </x-nav-link>
-      </div>
-    </header>
-    <main>
-      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        {{-- Page Content --}}
-        {{$slot}}
-      </div>
-    </main>
-  </div>
+        </nav>
+    
+        <header class="bg-white shadow">
+            <div class="m-auto w-fit items-center px-3 py-2">
+                <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
+                <x-nav-link href="/users" :active="request()->is('users')">Manage Users</x-nav-link>
+                <x-nav-link href="" :active="request()->is('transportcoop')">Transport Cooperative</x-nav-link>
+                <x-nav-link href="" :active="request()->is('others')">Others </x-nav-link>
+            </div>
+        </header>
+        <main>
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                {{-- Page Content --}}
+                {{$slot}}
+            </div>
+        </main>
+    </div>
+
 </body>
 </html>
