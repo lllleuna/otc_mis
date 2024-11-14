@@ -76,7 +76,7 @@
                         {{ $user['role'] }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="/users/{{ $user['id'] }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See more</a>
+                        <a href="/users/{{ $user->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See more</a>
                     </td>
                 </tr>
                 @endforeach

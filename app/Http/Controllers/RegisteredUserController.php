@@ -44,4 +44,27 @@ class RegisteredUserController extends Controller
 
         return redirect('/users');
     }
+
+    public function edit(User $user) {
+        return view('users.edit', ['user' => $user]);
+    }
+
+    public function update(User $user) {
+        // Authorize (is the user has permission) on hold...
+
+        $attributes = request()->validate([
+            'firstname' => ['required'],
+            'middlename' => ['nullable'],
+            'lastname' => ['required'],
+            'suffix' => ['nullable'],
+            'division' => ['required'],
+            'role' => ['required'],
+            'employee_id_no' => ['required'],
+            'email' => ['required', 'email', 'unique:'.User::class],
+        ]);
+        
+        $user->update($attributes);
+
+        return redirect('/users/' . $user->id);
+    }
 }

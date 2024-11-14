@@ -23,7 +23,7 @@
                             <div class="relative font-[sans-serif] w-max mx-auto">
                                 <button type="button" id="dropdownToggle">
                                     <div class="flex items-center">
-                                        <h5 class="mx-2 text-gray-200">Leunamme</h5>
+                                        <h5 class="mx-2 text-gray-200">{{ Auth::user()->firstname }}</h5>
                                         <img class="h-10" src="{{ asset('images/icons8-male-user-50.png') }}" alt="profile">
                                     </div>
                                 </button>
@@ -36,9 +36,9 @@
                                     Settings
                                     </li>
                                     <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
-                                    <form method="POST" action="/logout">
+                                    <form method="POST" action="/logout" class="w-full">
                                         @csrf
-                                        <button type="submit">Logout</button>
+                                        <button type="submit" class="w-full text-start">Logout</button>
                                     </form>
                                     </li>
                                 </ul>
@@ -54,7 +54,7 @@
         <header class="bg-white shadow">
             <div class="m-auto w-fit items-center px-3 py-2">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
-                <x-nav-link href="/users" :active="request()->is('users')">Manage Users</x-nav-link>
+                <x-nav-link href="/users" :active="request()->is('users*')">Manage Users</x-nav-link>
                 <x-nav-link href="" :active="request()->is('transportcoop')">Transport Cooperative</x-nav-link>
                 <x-nav-link href="" :active="request()->is('others')">Others </x-nav-link>
             </div>
