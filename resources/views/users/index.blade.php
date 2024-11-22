@@ -28,7 +28,7 @@
                     </form>
 
                     </div>
-                <x-button onclick="openModal('modelConfirm')">Create</x-button>
+                <x-button onclick="openModal('modalCreate')">Create</x-button>
             </div>
             
         </div>
@@ -95,7 +95,11 @@
         {{ $users->links() }}
     </div>
 
-<x-modal>
+<x-modal id="modalCreate"
+    class="{{ $errors->any() ? 'modal-error' : 'hidden' }}">
+    <x-slot:closebtnSlot>
+        <x-modal-close-button onclick="closeModal('modalCreate')" />
+    </x-slot:closebtnSlot>
     @include('users.create')
 </x-modal>
 

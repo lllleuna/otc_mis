@@ -41,12 +41,9 @@
     <x-form-error name="email" />
 
 
-    <div class="flex justify-between mt-2">
+    <div class="flex justify-end mt-2">
         <div>
-            <x-cancel-button onclick="closeModal('modelConfirm')" class="hidden"> Discard </x-cancel-button>
-        </div>
-        <div>
-            <x-form-submit-button> Save </x-form-submit-button>
+            <x-form-submit-button> Save Changes </x-form-submit-button>
         </div>
     </div>
 

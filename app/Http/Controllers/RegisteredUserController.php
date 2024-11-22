@@ -79,11 +79,26 @@ class RegisteredUserController extends Controller
             'suffix' => ['nullable'],
             'division' => ['required'],
             'role' => ['required'],
-            'employee_id_no' => ['required'],
+            'employee_id_no' => ['required', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
         ]);
         
         $user->update($attributes);
+
+        return redirect('/users/' . $user->id);
+    }
+
+    public function updatePassword(User $user)
+    {
+        // Authorize if the user has permission (on hold...)
+
+        $attributespass = request()->validate([
+            'password' => ['required', Password::min(12), 'confirmed'],
+        ]);
+
+        $user->update([
+            'password' => bcrypt($attributespass['password']),
+        ]);
 
         return redirect('/users/' . $user->id);
     }

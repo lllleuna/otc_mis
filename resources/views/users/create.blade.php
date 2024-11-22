@@ -50,7 +50,7 @@
 
     <div class="flex justify-between mt-2">
         <div>
-            <x-cancel-button onclick="closeModal('modelConfirm'), resetForm('create_form')"> Discard </x-cancel-button>
+            <x-cancel-button onclick="closeModal('modalCreate'), resetForm('create_form')"> Discard </x-cancel-button>
         </div>
         <div>
             <x-form-submit-button> Create </x-form-submit-button>

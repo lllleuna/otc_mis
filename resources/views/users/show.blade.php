@@ -10,10 +10,10 @@
                         <h4 class="text-xl text-gray-900 font-bold">Action</h4>
                         <ul class="mt-2 text-gray-700">
                             <li class="flex border-y py-2">
-                                <button href="/users/{{ $user->id }}/edit" onclick="openModal('modelConfirm')" class="text-black-600 hover:text-blue-600">Edit General Info</button>
+                                <button href="/users/{{ $user->id }}/edit" onclick="openModal('modalEdit')" class="text-black-600 hover:text-blue-600">Edit General Info</button>
                             </li>
                             <li class="flex border-b py-2">
-                                <a href="" class="text-black-600 hover:text-blue-600">Reset Password</a>
+                                <button href="/users/{{ $user->id }}/edit" onclick="openModal('modalResetPass')" class="text-black-600 hover:text-blue-600">Reset Password</button>
                             </li>
                             <li class="flex border-b py-2">
                                 <a href="" class="text-black-600 hover:text-red-600">Delete Account</a>
@@ -143,8 +143,20 @@
         </div>
     </div>
 
-<x-modal>
+<x-modal id="modalEdit"
+class="{{ $errors->hasAny(['firstname', 'lastname', 'employee_id_no', 'email']) ? 'modal-error' : 'hidden' }}">
+    <x-slot:closebtnSlot>
+        <x-modal-close-button onclick="closeModal('modalEdit')" />
+    </x-slot:closebtnSlot>
     @include('users.edit')
+</x-modal>
+
+<x-modal id="modalResetPass"
+class="{{ $errors->hasAny(['password', 'password_confirmation']) ? 'modal-error' : 'hidden' }}">
+    <x-slot:closebtnSlot>
+        <x-modal-close-button onclick="closeModal('modalResetPass')" />
+    </x-slot:closebtnSlot>
+    @include('users.reset-password')
 </x-modal>
 
 </x-layout>

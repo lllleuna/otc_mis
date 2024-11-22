@@ -1,3 +1,7 @@
+{{-- Page header
+contains logo, 
+profile name and icon --}}
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
 <head>

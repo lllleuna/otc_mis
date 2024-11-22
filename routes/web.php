@@ -8,6 +8,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 Route::resource('users', RegisteredUserController::class);
+Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
+
+
 Route::get('/search', [RegisteredUserController::class, 'search']);
 
 Route::get('/', [SessionController::class, 'create']);
