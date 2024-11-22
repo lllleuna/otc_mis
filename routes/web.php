@@ -7,9 +7,8 @@ use App\Http\Controllers\SessionController;
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
-
 Route::resource('users', RegisteredUserController::class);
-
+Route::get('/search', [RegisteredUserController::class, 'search']);
 
 Route::get('/', [SessionController::class, 'create']);
 Route::post('/', [SessionController::class, 'store']);

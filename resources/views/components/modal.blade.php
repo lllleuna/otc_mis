@@ -1,5 +1,5 @@
 
- <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 content-center bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+ <div id="modelConfirm" class="fixed  {{ $errors->any() ? 'modal-error' : 'hidden' }} z-50 inset-0 bg-gray-900 content-center bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
      <div class="relative m-auto shadow-xl rounded-md bg-white w-4/5">
  
          <div class="flex justify-end p-2">

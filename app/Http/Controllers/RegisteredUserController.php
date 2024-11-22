@@ -7,14 +7,34 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
 class RegisteredUserController extends Controller
 {
     public function index() 
     {
-        $user = User::all()->sortDesc();
-        return view('users.index', ['users' => $user]);
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        return view('users.index',compact('users'));
     }
+
+    public function search(Request $request) 
+    {
+        $search = $request->search;
+
+        $users = User::where(function($query) use ($search){
+
+            $query->where('firstname', 'like', "%$search%")
+            ->orWhere('lastname', 'like', "%$search%")
+            ->orWhere('division', 'like', "%$search%")
+            ->orWhere('employee_id_no', 'like', "%$search%")
+            ->orWhere('role', 'like', "%$search%");
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+        return view('users.index', compact('users','search'));
+    }
+
     public function create() 
     {
         return view('users.create');
@@ -33,7 +53,7 @@ class RegisteredUserController extends Controller
             'suffix' => ['nullable'],
             'division' => ['required'],
             'role' => ['required'],
-            'employee_id_no' => ['required'],
+            'employee_id_no' => ['required', 'unique:'.User::class],
             'email' => ['required', 'email', 'unique:'.User::class],
             'password' => ['required', Password::min(12), 'confirmed']
         ]);
@@ -60,7 +80,7 @@ class RegisteredUserController extends Controller
             'division' => ['required'],
             'role' => ['required'],
             'employee_id_no' => ['required'],
-            'email' => ['required', 'email', 'unique:'.User::class],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
         ]);
         
         $user->update($attributes);

@@ -27,6 +27,10 @@
                                 <span class="font-bold w-24">Full name:</span>
                                 <span class="text-gray-700">{{ $user->firstname . " " . $user->middlename . " " . $user->lastname . " " . $user->suffix}}</span>
                             </li>
+                            <li class="flex border-y py-2">
+                                <span class="font-bold w-24">ID No:</span>
+                                <span class="text-gray-700">{{ $user->employee_id_no }}</span>
+                            </li>
                             <li class="flex border-b py-2">
                                 <span class="font-bold w-24">Created at:</span>
                                 <span class="text-gray-700">{{ $user->created_at }}</span>
@@ -46,7 +50,7 @@
                             </li>
                             <li class="flex border-b py-2">
                                 <span class="font-bold w-24">Status:</span>
-                                <span class="text-gray-700">Enable/Disable</span>
+                                <span class="text-gray-700">Enabled/Disabled</span>
                             </li>
                         </ul>
                     </div>

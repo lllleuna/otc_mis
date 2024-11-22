@@ -1,4 +1,4 @@
-<form action="/users" method="POST">
+<form action="/users" method="POST" id="create_form">
     @csrf
     
     <x-form-title>Create Account</x-form-title>
@@ -24,6 +24,8 @@
             <option value="AFD" {{ old('division') == 'AFD' ? 'selected' : '' }}v>Administrative and Finance Division</option>
             <option value="OED" {{ old('division') == 'OED' ? 'selected' : '' }}>Office of the Executive Director</option>
         </x-form-select>
+        <x-form-error name="division" />
+
         <x-form-select name="role" required>
             <option class="hidden" value="" disabled selected>Role</option>
             <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
@@ -31,6 +33,7 @@
             <option value="Encoder" {{ old('role') == 'Encoder' ? 'selected' : '' }}>Encoder</option>
             <option value="Viewer" {{ old('role') == 'Viewer' ? 'selected' : '' }}>Viewer</option>
         </x-form-select>
+        <x-form-error name="role" />
     </div>
 
     <x-form-input name="employee_id_no" id="employee_id_no" placeholder="Employee ID" :value="old('employee_id_no')" required/>
@@ -47,7 +50,7 @@
 
     <div class="flex justify-between mt-2">
         <div>
-            <x-cancel-button onclick="closeModal('modelConfirm')"> Discard </x-cancel-button>
+            <x-cancel-button onclick="closeModal('modelConfirm'), resetForm('create_form')"> Discard </x-cancel-button>
         </div>
         <div>
             <x-form-submit-button> Create </x-form-submit-button>
