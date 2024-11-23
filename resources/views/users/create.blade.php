@@ -48,7 +48,7 @@
     <x-form-input name="password_confirmation" id="password_confirmation" type="password" placeholder="Confirm Password" required/>
     <x-form-error name="password_confirmation" />
 
-    <div class="flex justify-between mt-2">
+    <div class="flex justify-between mt-2 mb-2">
         <div>
             <x-cancel-button onclick="closeModal('modalCreate'), resetForm('create_form')"> Discard </x-cancel-button>
         </div>

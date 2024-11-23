@@ -10,7 +10,13 @@
 <body>
 
     <x-form-field>
-    
+
+        <x-slot:bannerSlot>
+            <div class="w-4/5 bg-blue-900 sm:w-1/3 rounded-lg my-2 p-2">
+                <img class="m-1" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="" >
+            </div>
+        </x-slot:bannerSlot>
+
         <form action="/" method="POST">
             @csrf
             
@@ -26,7 +32,9 @@
             <x-form-input name="password" id="password" type="password" required/>
             <x-form-error name="password" />
         
-            <x-form-submit-button class="float-right"> Login </x-form-submit-button>
+            <div class="flex justify-end">
+                <x-form-submit-button> Login </x-form-submit-button>
+            </div>
     
         </form>
     
