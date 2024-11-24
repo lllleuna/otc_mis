@@ -1,6 +1,8 @@
-{{-- Page header
-contains logo, 
-profile name and icon --}}
+{{-- 
+---------- Page header ----------
+contains logo, profile name & icon, and navigation links 
+--------------------------------- 
+--}}
 
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
@@ -58,13 +60,15 @@ profile name and icon --}}
         <header class="bg-white shadow">
             <div class="m-auto w-fit items-center px-3 py-2">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
+                @can('admin-access')
                 <x-nav-link href="/users" :active="request()->is('users*')">Manage Users</x-nav-link>
-                <x-nav-link href="" :active="request()->is('transportcoop')">Transport Cooperative</x-nav-link>
+                @endcan
+                <x-nav-link href="/tc" :active="request()->is('tc*')">Transport Cooperatives</x-nav-link>
                 <x-nav-link href="" :active="request()->is('others')">Others </x-nav-link>
             </div>
         </header>
         <main>
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div class="mx-3 py-2 ">
                 {{-- Page Content --}}
                 {{$slot}}
             </div>

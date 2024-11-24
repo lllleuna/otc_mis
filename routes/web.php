@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
-
+use App\Http\Controllers\TransportCoopController;
 
 
 Route::get('/dashboard', function () {
@@ -14,13 +14,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
+Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
 
 
 Route::get('/search', [RegisteredUserController::class, 'search']);
 
-Route::get('/', [SessionController::class, 'create'])->name('login');
+Route::get('/', [SessionController::class, 'index'])->name('login');
 Route::post('/', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 

@@ -8,7 +8,7 @@ use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
-    public function create()
+    public function index()
     {
         return view('auth.login');
     }

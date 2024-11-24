@@ -4,7 +4,7 @@
     
     
 {{-- List of Users --}}
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="mx-4 relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             
             <div>
@@ -32,6 +32,8 @@
             </div>
             
         </div>
+
+        
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -91,17 +93,19 @@
         </table>
     </div>
 
+    {{-- Pagination --}}
     <div class="mt-4">
         {{ $users->links() }}
     </div>
 
-<x-modal id="modalCreate"
-    class="{{ $errors->any() ? 'modal-error' : 'hidden' }}">
-    <x-slot:closebtnSlot>
-        <x-modal-close-button onclick="closeModal('modalCreate')" />
-    </x-slot:closebtnSlot>
-    @include('users.create')
-</x-modal>
+    {{-- Create User Account --}}
+    <x-modal id="modalCreate"
+        class="{{ $errors->any() ? 'modal-error' : 'hidden' }}">
+        <x-slot:closebtnSlot>
+            <x-modal-close-button onclick="closeModal('modalCreate')" />
+        </x-slot:closebtnSlot>
+        @include('users.create')
+    </x-modal>
 
 
 </x-layout>
