@@ -64,7 +64,7 @@ contains logo, profile name & icon, and navigation links
                 <x-nav-link href="/users" :active="request()->is('users*')">Manage Users</x-nav-link>
                 @endcan
                 <x-nav-link href="/tc" :active="request()->is('tc*')">Transport Cooperatives</x-nav-link>
-                <x-nav-link href="" :active="request()->is('others')">Others </x-nav-link>
+                <x-nav-link href="/application" :active="request()->is('application*')">Application</x-nav-link>
             </div>
         </header>
         <main>

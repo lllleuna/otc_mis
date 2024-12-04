@@ -29,8 +29,9 @@
         <x-form-select name="role" required>
             <option class="hidden" value="" disabled selected>Role</option>
             <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
-            <option value="Approver" {{ old('role') == 'Approver' ? 'selected' : '' }}>Approver</option>
-            <option value="Encoder" {{ old('role') == 'Encoder' ? 'selected' : '' }}>Encoder</option>
+            <option value="Head" {{ old('role') == 'Head' ? 'selected' : '' }}>Head</option>
+            <option value="Officer II" {{ old('role') == 'Officer II' ? 'selected' : '' }}>Officer II</option>
+            <option value="Officer" {{ old('role') == 'Officer' ? 'selected' : '' }}>Officer</option>
             <option value="Viewer" {{ old('role') == 'Viewer' ? 'selected' : '' }}>Viewer</option>
         </x-form-select>
         <x-form-error name="role" />
