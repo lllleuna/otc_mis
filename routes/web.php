@@ -22,6 +22,8 @@ Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePas
 Route::get('/search', [RegisteredUserController::class, 'search']);
 
 Route::get('application', [ApplicationController::class, 'index']);
+Route::get('application/{application}', [ApplicationController::class, 'show']);
+Route::post('/application/{application}', [ApplicationController::class, 'store']);
 Route::get('application/approved', function () {
     return view('application/approved');
 });

@@ -39,7 +39,7 @@
                         {{ $application['created_at'] }}
                     </td>
                     <td class="px-6 py-4 flex">
-                        <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Evaluate</a>
+                        <a href="/application/{{ $application->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Evaluate</a>
                     </td>
                 </tr>
                 @endforeach
