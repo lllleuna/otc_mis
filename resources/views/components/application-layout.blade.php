@@ -10,7 +10,7 @@
             </x-side-link>
             <x-side-link href="application/approved" :active="request()->is('application/approved')">
                 <img src="{{ asset('images/icons8-approved-24.png') }}" alt="">
-                <small class="text-center text-xs font-medium"> Approved </small>
+                <small class="text-center text-xs font-medium"> Review </small>
             </x-side-link>
             <x-side-link href="" :active="request()->is('')">
                 <img src="{{ asset('images/icons8-process-24.png') }}" alt="">

@@ -17,6 +17,15 @@ class ApplicationController extends Controller
     return view('application.index', compact('applications'));
     }
 
+    public function approved() 
+    {
+        $applications = Application::where('status', 'evaluated')
+                                ->orderBy('created_at', 'desc') 
+                                ->get();
+
+    return view('application.approved', compact('applications'));
+    }
+
     public function show(Application $application) {
         return view('application.show', ['application' => $application]);
     }
