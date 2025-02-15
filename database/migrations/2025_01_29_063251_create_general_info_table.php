@@ -30,11 +30,13 @@ return new class extends Migration
             $table->string('barangay');
             $table->string('business_address');
             $table->string('email')->unique();
+
             $table->string('contact_no');
             $table->string('contact_firstname');
             $table->string('contact_lastname');
             $table->string('contact_mid_initial')->nullable();
             $table->string('contact_suffix')->nullable();
+            
             $table->string('employer_sss_reg_no')->nullable();
             $table->string('employer_pagibig_reg_no')->nullable();
             $table->string('employer_philhealth_reg_no')->nullable();

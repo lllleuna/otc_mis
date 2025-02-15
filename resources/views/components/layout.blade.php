@@ -20,7 +20,7 @@ contains logo, profile name & icon, and navigation links
             <div class="">
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
-                        <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="OTC Logo">
+                        <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo3.png') }}" alt="OTC Logo">
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
@@ -64,6 +64,7 @@ contains logo, profile name & icon, and navigation links
                 <x-nav-link href="/users" :active="request()->is('users*')">Manage Users</x-nav-link>
                 @endcan
                 <x-nav-link href="/tc" :active="request()->is('tc*')">Transport Cooperatives</x-nav-link>
+               
                 <x-nav-link href="/application" :active="request()->is('application*')">Application</x-nav-link>
             </div>
         </header>

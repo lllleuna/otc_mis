@@ -20,8 +20,11 @@ Route::get('/pass-update', function () {
 });
 
 
-Route::resource('tc', TransportCoopController::class)->middleware('auth');
+Route::get('/tc/show', function () {
+    return view('tc.show');
+})->middleware('auth');
 
+Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
 Route::get('/search', [RegisteredUserController::class, 'search']);

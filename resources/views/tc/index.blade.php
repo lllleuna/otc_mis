@@ -93,6 +93,7 @@
                                         Actions
                                     </th>
                                 </tr>
+                                
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($coops as $coop)
@@ -115,8 +116,8 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="/tc/{{ $coop->id }}" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
-                                        <a href="/tc/{{ $coop->id }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <a href="/tc/show" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                                       
                                     </td>
                                 </tr>
                                 @endforeach
