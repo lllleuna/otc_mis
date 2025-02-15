@@ -8,7 +8,7 @@
             <div class="bg-white rounded-lg shadow-xl p-8 w-1/3">
                 <!-- Form Title -->
                 <h2 class="text-xl font-semibold mb-4">Evaluation Form</h2>
-                    
+
                 <!-- Check if applicable -->
                 <form action="/application/{{ $application->id }}" method="POST">
                     @csrf
@@ -22,7 +22,7 @@
                             </label>
                         </div>
                     </div>
-                        
+
                         <!-- Units Section -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700">Units:</label>
@@ -37,16 +37,16 @@
                             </label>
                         </div>
                     </div>
-                        
+
                         <!-- Remarks Section -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700">Remarks:</label>
                         <textarea name="eval_remarks"
                             class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
-                            rows="4" 
+                            rows="4"
                             placeholder="Add any remarks or observations here..." required></textarea>
                     </div>
-    
+
                         <!-- Document Verification -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700">I hereby certify that:</label>
@@ -63,19 +63,19 @@
                     </div>
 
                     <input type="text" hidden name="application_id" id="" value="{{ $application->id }}">
-                        
+
                         <!-- Submit Button -->
                     <div class="mt-4">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             Submit for Review and Approval
                         </button>
                     </div>
                 </form>
-                  
+
             </div>
-        
+
             {{-- Application Requirements/Information Submitted --}}
             <div class="bg-white rounded-lg shadow-xl p-8 ml-4 w-2/3">
                 <h4 class="text-xl text-gray-900 font-bold">Accreditation</h4>

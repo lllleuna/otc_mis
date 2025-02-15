@@ -1,7 +1,7 @@
-{{-- 
+{{--
 ---------- Page header ----------
-contains logo, profile name & icon, and navigation links 
---------------------------------- 
+contains logo, profile name & icon, and navigation links
+---------------------------------
 --}}
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ contains logo, profile name & icon, and navigation links
                     <div class="block">
                         <div class="mr-6 flex items-center">
                             <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}" alt="notif">
-                            
+
                             <div class="relative font-[sans-serif] w-max mx-auto">
                                 <button type="button" id="dropdownToggle">
                                     <div class="flex items-center">
@@ -33,7 +33,7 @@ contains logo, profile name & icon, and navigation links
                                         <img class="h-10" src="{{ asset('images/icons8-male-user-50.png') }}" alt="profile">
                                     </div>
                                 </button>
-                
+
                                 <ul id="dropdownMenu" class='absolute hidden shadow-lg bg-white py-2 z-[1000] min-w-full w-max rounded-lg max-h-96'>
                                     <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
                                     View profile
@@ -53,10 +53,10 @@ contains logo, profile name & icon, and navigation links
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </nav>
-    
+
         <header class="bg-white shadow">
             <div class="m-auto w-fit items-center px-3 py-2">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
