@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
+use Illuminate\Auth\Events\Registered;
 
 class RegisteredUserController extends Controller
 {
@@ -58,7 +59,9 @@ class RegisteredUserController extends Controller
             'password' => ['required', Password::min(12), 'confirmed']
         ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+
+        event(new Registered($user));
 
         // Auth::login($user);
 
