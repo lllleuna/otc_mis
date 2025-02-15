@@ -26,12 +26,12 @@ class UserFactory extends Factory
         return [
             'firstname' => fake()->firstname(),
             'lastname' => fake()->lastname(),
-            'division' => "PED",
-            'role' => "Admin",
-            'employee_id_no' => "123456789",
+            'division' => fake()->randomElement(['PED', 'OD', 'AFD', 'OED']),
+            'role' => fake()->randomElement(['Admin', 'Head', 'Officer 2', 'Officer 1', 'Viewer']),
+            'employee_id_no' => fake()->unique()->numerify('#########'),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password')
+            'password' => static::$password ??= Hash::make('password12.')
         ];
     }
 

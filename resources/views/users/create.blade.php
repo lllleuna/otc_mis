@@ -30,8 +30,8 @@
             <option class="hidden" value="" disabled selected>Role</option>
             <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
             <option value="Head" {{ old('role') == 'Head' ? 'selected' : '' }}>Head</option>
-            <option value="Officer II" {{ old('role') == 'Officer II' ? 'selected' : '' }}>Officer II</option>
-            <option value="Officer" {{ old('role') == 'Officer' ? 'selected' : '' }}>Officer</option>
+            <option value="Officer II" {{ old('role') == 'Officer 2' ? 'selected' : '' }}>Officer 2</option>
+            <option value="Officer" {{ old('role') == 'Officer 1' ? 'selected' : '' }}>Officer 1</option>
             <option value="Viewer" {{ old('role') == 'Viewer' ? 'selected' : '' }}>Viewer</option>
         </x-form-select>
         <x-form-error name="role" />
