@@ -8,19 +8,19 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $applications = Application::where('status', 'on-process')
-                                ->orderBy('created_at', 'desc') 
+                                ->orderBy('created_at', 'desc')
                                 ->get();
 
     return view('application.index', compact('applications'));
     }
 
-    public function approved() 
+    public function approved()
     {
         $applications = Application::where('status', 'evaluated')
-                                ->orderBy('created_at', 'desc') 
+                                ->orderBy('created_at', 'desc')
                                 ->get();
 
     return view('application.approved', compact('applications'));

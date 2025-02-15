@@ -1,5 +1,5 @@
 <x-application-layout>
-    
+
     <div class="my-6 m-auto w-4/5 items-center whitespace-nowrap relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-md text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -22,10 +22,10 @@
                 </tr>
             </thead>
             <tbody>
-                
+
                 @foreach ($applications as $application)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    
+
                     <td  class="px-6 py-4 ">
                         {{ $application['tc_name'] }}
                     </td>
@@ -43,7 +43,7 @@
                     </td>
                 </tr>
                 @endforeach
-                
+
             </tbody>
         </table>
     </div>

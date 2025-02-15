@@ -15,6 +15,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
+Route::get('/pass-update', function () {
+    return view('auth.pass-update');
+});
+
+
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
 
 Route::resource('users', RegisteredUserController::class)->middleware('auth');

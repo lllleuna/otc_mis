@@ -3,120 +3,128 @@
     <x-slot:title>Transport Cooperative</x-slot:title>
 
     <x-container>
-        <div class="flex">
-
-            <div class="text-gray-600 bg-white text-sm rounded-lg shadow-xl p-2 py-8 w-1/5">
+        <div class="flex gap-4">
+            <!-- Sidebar Filter - Keep the same but improve styling -->
+            <div class="w-72 bg-white rounded-lg shadow-lg p-6">
                 <form action="/search" method="GET">
                     <x-form-label for="search">Search</x-form-label>
-                    <input id="search" name="search" type="text" placeholder="Search ..." class="w-full p-1 rounded-md mb-3 border-2 ">
+                    <input id="search" name="search" type="text" placeholder="Search ..."
+                        class="w-full p-2 rounded-md mb-4 border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+
                     <x-form-label for="sort">Sort By</x-form-label>
-                    <select name="sort" id="sort" class="w-full p-1 rounded-md mb-3 border-2 ">
+                    <select name="sort" id="sort"
+                        class="w-full p-2 rounded-md mb-4 border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                         <option value="">Date (asc)</option>
                         <option value="">Date (desc)</option>
                         <option value="">Name (A-Z)</option>
                         <option value="">Name (Z-A)</option>
                     </select>
+
                     <x-form-label for="date_from">Date Range</x-form-label>
-                    <input id="date_from" name="date_from" type="date" placeholder="" class="w-full p-1 rounded-md mb-3 border-2 ">
-                    <input id="date_from" name="date_from" type="date" placeholder="" class="w-full p-1 rounded-md mb-3 border-2 ">
-                    
-                    <x-form-label for="">List</x-form-label>
-                    <div class="flex items-center mb-2">
-                        <input id="list-1" type="radio" value="" name="list" class="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="list-1" class="ms-2">Membership</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input id="list-2" type="radio" value="" name="list" class="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="list-2" class="ms-2">Employment</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input id="list-3" type="radio" value="" name="list" class="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="list-3" class="ms-2">Units</label>
-                    </div>
-                    <div class="flex items-center mb-2">
-                        <input id="list-4" type="radio" value="" name="list" class="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="list-4" class="ms-2">Franchise</label>
+                    <div class="space-y-2 mb-4">
+                        <input id="date_from" name="date_from" type="date"
+                            class="w-full p-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                        <input id="date_to" name="date_to" type="date"
+                            class="w-full p-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                     </div>
 
-                    <button type="submit" class="w-full p-1 mt-5 text-white rounded-md mb-3 bg-blue-900">Search</button>
+                    <x-form-label>List Type</x-form-label>
+                    <div class="space-y-2 mb-4">
+                        <label class="flex items-center p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="list" value="membership" class="mr-2">
+                            <span>Membership</span>
+                        </label>
+                        <label class="flex items-center p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="list" value="employment" class="mr-2">
+                            <span>Employment</span>
+                        </label>
+                        <label class="flex items-center p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="list" value="units" class="mr-2">
+                            <span>Units</span>
+                        </label>
+                        <label class="flex items-center p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="list" value="franchise" class="mr-2">
+                            <span>Franchise</span>
+                        </label>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition duration-200">
+                        Search
+                    </button>
                 </form>
             </div>
 
+            <!-- Main Content -->
+            <div class="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="mb-4 flex justify-between items-center">
+                        <h2 class="text-xl font-semibold text-gray-800">Transport Cooperatives</h2>
+                        <div class="space-x-2">
+                            <button class="px-4 py-2 text-sm bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100">
+                                Export
+                            </button>
+                            <button class="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                                Add New
+                            </button>
+                        </div>
+                    </div>
 
-            <div class="whitespace-nowrap ml-2 relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-md text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Accreditation No
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Transport Cooperative Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date of Accreditation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Type of Accreditation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date of Accreditation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Type of Accreditation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date of Accreditation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Type of Accreditation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        @foreach ($coops as $coop)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            
-                            <td  class="px-6 py-4 ">
-                                {{ $coop['accreditation_no'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['name'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['accreditation_date'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['accreditation_type'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['accreditation_date'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['accreditation_date'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['accreditation_type'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $coop['accreditation_type'] }}
-                            </td>
-                            <td class="px-6 py-4 flex">
-                                <a href="/tc/{{ $coop->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                                <a href="/tc/{{ $coop->id }}" class="ml-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                </table>
+                    <div class="border rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Accreditation No
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Transport Cooperative Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Date
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Type
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($coops as $coop)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $coop['accreditation_no'] }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $coop['name'] }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $coop['accreditation_date'] }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $coop['accreditation_type'] }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="/tc/{{ $coop->id }}" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                                        <a href="/tc/{{ $coop->id }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
         </div>
     </x-container>
-
 </x-layout>
