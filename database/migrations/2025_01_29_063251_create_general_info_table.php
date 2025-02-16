@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('contact_lastname');
             $table->string('contact_mid_initial')->nullable();
             $table->string('contact_suffix')->nullable();
-            
+
             $table->string('employer_sss_reg_no')->nullable();
             $table->string('employer_pagibig_reg_no')->nullable();
             $table->string('employer_philhealth_reg_no')->nullable();
@@ -60,7 +60,7 @@ return new class extends Migration
             $table->integer('other_member_female')->default(0);
             $table->integer('number_of_pwd')->default(0);
             $table->integer('number_of_senior')->default(0);
-            
+
             $table->integer('total_members')->default(0);
 
             $table->timestamps();
@@ -71,7 +71,7 @@ return new class extends Migration
         Schema::create('employment', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
-            $table->year('entry_year'); 
+            $table->year('entry_year');
             $table->integer('drivers_probationary_male')->default(0);
             $table->integer('drivers_probationary_female')->default(0);
             $table->integer('drivers_regular_male')->default(0);
@@ -84,7 +84,7 @@ return new class extends Migration
             $table->integer('allied_probationary_female')->default(0);
             $table->integer('allied_regular_male')->default(0);
             $table->integer('allied_regular_female')->default(0);
-            
+
             $table->integer('total_employees')->default(0);
 
             $table->timestamps();
@@ -139,7 +139,7 @@ return new class extends Migration
         Schema::create('governance', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
-            $table->string('role_name', 50); 
+            $table->string('role_name', 50);
             $table->string('first_name', 100);
             $table->string('middle_name', 100)->nullable();
             $table->string('last_name', 100);
@@ -158,7 +158,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
             $table->year('entry_year');
-        
+
             // FINANCIAL ASPECT
             $table->decimal('current_assets', 15, 2);  // Assets in currency (precision of 2 decimal points)
             $table->decimal('noncurrent_assets', 15, 2);
@@ -169,7 +169,7 @@ return new class extends Migration
             $table->decimal('total_gross_revenues', 15, 2);
             $table->decimal('total_expenses', 15, 2);
             $table->decimal('net_surplus', 15, 2);
-            
+
             // CAPITALIZATION
             $table->decimal('initial_auth_capital_share', 15, 2);
             $table->decimal('present_auth_capital_share', 15, 2);
@@ -187,9 +187,9 @@ return new class extends Migration
             $table->decimal('others', 15, 2);
             $table->decimal('total', 15, 2);
             $table->decimal('deficit_from_financial_aspect', 15, 2);
-        
+
             $table->timestamps();
-        
+
             $table->foreign('accreditation_no')->references('accreditation_no')->on('general_info')->onDelete('cascade');
         });
 
@@ -213,7 +213,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
             $table->year('entry_year');
-            
+
             $table->string('course_taken');
             $table->integer('beneficiary')->default(value: 0); // No. of Scholar Beneficiary
             $table->string('remarks');
@@ -227,7 +227,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
             $table->year('entry_year');
-            
+
             $table->string('financing_institution');
             $table->date('acquired_at');
             $table->decimal('amount', 15, 2);
@@ -243,7 +243,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
             $table->year('entry_year');
-            
+
             $table->enum('type', ['Proposed', 'Existing']);
             $table->string('nature_of_business');
             $table->decimal('starting_capital', 15, 2);
@@ -261,7 +261,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
             $table->year('entry_year');
-            
+
             $table->integer('members_with');
             $table->integer('members_without');
             $table->integer('total');
@@ -275,7 +275,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accreditation_no');
             $table->year('entry_year');
-            
+
             $table->string('title');
             $table->date('start');
             $table->date('end');
@@ -288,7 +288,7 @@ return new class extends Migration
 
         // others
         // awards
-        
+
     }
 
     /**
