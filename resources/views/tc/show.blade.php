@@ -18,9 +18,20 @@
         },
         cooperativeData: {
             general: [
-                { label: 'Cooperative Name', value: '{{ $cooperative->name ?? 'Sample Coop' }}' },
-                { label: 'Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-001' }}' },
-                { label: 'Address', value: '{{ $cooperative->address ?? '123 Sample St' }}' }
+                { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2024-001' }}' },
+                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Sample Transport Cooperative' }}' },
+                { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'STC' }}' },
+                { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Full' }}' },
+                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2024-01-15' }}' },
+                { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2024-001' }}' },
+                { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2023-12-01' }}' },
+                { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Transport Service Providers' }}' },
+                { label: 'Membership Fee (per by-laws)', value: '{{ $cooperative->membership_fee ?? 'PHP 1,000.00' }}' },
+                { label: 'Area / Region / City / Province / Barangay', value: '{{ $cooperative->area ?? 'NCR, Manila, Sampaloc' }}' },
+                { label: 'Business Address', value: '{{ $cooperative->address ?? '123 Sample St, Sampaloc, Manila' }}' },
+                { label: 'Contact Person', value: '{{ $cooperative->contact_person ?? 'Juan P. Dela Cruz Jr.' }}' },
+                { label: 'E-mail', value: '{{ $cooperative->email ?? 'sample@email.com' }}' },
+                { label: 'Contact Numbers', value: '{{ $cooperative->contact_numbers ?? '(02) 8123-4567 / 0917-123-4567' }}' }
             ],
             membership: [
                 { label: 'Total Members', value: '{{ $cooperative->total_members ?? '150' }}' },
@@ -67,12 +78,11 @@
                 >
             </div>
         </div>
-
         <div class="flex gap-6">
             <!-- Navigation Menu -->
             <div class="w-64 bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="p-4 bg-blue-900 text-white">
-                    <h2 class="font-semibold">Navigation Menu</h2>
+                <div class="p-4 bg-blue-900 text-white text-center">
+                    <h2 class="font-semibold">Data Overview</h2>
                 </div>
                 <nav class="p-2">
                     <!-- Operations Menu -->
@@ -172,15 +182,20 @@
                 </template>
 
                 <template x-if="!searchQuery">
+
                     <div>
                         <h2 class="text-xl font-semibold text-gray-800 mb-4" x-text="tab.charAt(0).toUpperCase() + tab.slice(1)"></h2>
+
                         <template x-if="cooperativeData[tab]">
+
                             <div class="grid gap-4">
+
                                 <template x-for="(item, index) in cooperativeData[tab]" :key="index">
                                     <div class="p-4 border rounded-lg">
                                         <div class="font-medium" x-text="item.label"></div>
                                         <div class="text-gray-600" x-text="item.value"></div>
                                     </div>
+
                                 </template>
                             </div>
                         </template>
