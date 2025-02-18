@@ -11,6 +11,8 @@
     x-data="{
         tab: 'general',
         searchQuery: '',
+        showEditGeneralModal: false,
+        showEditMembershipModal: false,
         menus: {
             operations: false,
             financial: false,
@@ -18,25 +20,73 @@
         },
         cooperativeData: {
             general: [
-                { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2024-001' }}' },
-                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Sample Transport Cooperative' }}' },
-                { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'STC' }}' },
-                { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Full' }}' },
-                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2024-01-15' }}' },
-                { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2024-001' }}' },
-                { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2023-12-01' }}' },
-                { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Transport Service Providers' }}' },
-                { label: 'Membership Fee (per by-laws)', value: '{{ $cooperative->membership_fee ?? 'PHP 1,000.00' }}' },
-                { label: 'Area / Region / City / Province / Barangay', value: '{{ $cooperative->area ?? 'NCR, Manila, Sampaloc' }}' },
-                { label: 'Business Address', value: '{{ $cooperative->address ?? '123 Sample St, Sampaloc, Manila' }}' },
-                { label: 'Contact Person', value: '{{ $cooperative->contact_person ?? 'Juan P. Dela Cruz Jr.' }}' },
-                { label: 'E-mail', value: '{{ $cooperative->email ?? 'sample@email.com' }}' },
-                { label: 'Contact Numbers', value: '{{ $cooperative->contact_numbers ?? '(02) 8123-4567 / 0917-123-4567' }}' }
+                { label: 'OTC Accreditation Number', value: 'OTC-2024-001' },
+                { label: 'Transport Cooperative Name', value: 'Sample Transport Cooperative' },
+                { label: 'Short Name', value: 'STC' },
+                { label: 'OTC Accreditation Date', value: '2024-01-15' },
+                { label: 'Type of Accreditation', value: 'Full' },
+                { label: 'Cooperative Registration Number', value: 'REG-2024-001' },
+                { label: 'CDA Registration Date', value: '2023-12-01' },
+                { label: 'Common Bond of Membership', value: 'Transport Service Providers' },
+                { label: 'Membership Fee (per by-laws)', value: 'PHP 1,000.00' },
+                { label: 'Area', value: 'NCR' },
+                { label: 'Region', value: 'Metro Manila' },
+                { label: 'City', value: 'Manila' },
+                { label: 'Province / Sector', value: 'Metro Manila' },
+                { label: 'Barangay', value: 'Sampaloc' },
+                { label: 'Business Address', value: '123 Sample St, Sampaloc, Manila' },
+                { label: 'E-mail', value: 'sample@email.com' },
+                { label: 'Contact Numbers', value: '(02) 8123-4567 / 0917-123-4567' },
+                { label: 'CONTACT\'S FIRST NAME', value: 'Juan' },
+                { label: 'CONTACT\'S LAST NAME', value: 'Dela Cruz' },
+                { label: 'CONTACT\'S M.I. (if applicable)', value: 'P.' },
+                { label: 'CONTACT\'S SUFFIX (if applicable)', value: 'Jr.' },
+                { label: 'SSS Employer Registration Number', value: '123456789' },
+                { label: 'No. Of SSS Enrolled Employees', value: '10' },
+                { label: 'Pag-IBIG Employer Registration Number', value: '987654321' },
+                { label: 'No. Of Pag-IBIG Enrolled Employees', value: '8' },
+                { label: 'PhilHealth Employer Registration Number', value: '456789123' },
+                { label: 'No. Of PhilHealth Enrolled Employees', value: '9' },
+                { label: 'BIR TIN Number', value: '123-456-789' },
+                { label: 'BIR Tax Exemption Number', value: 'TAX-EXEMPT-001' },
+                { label: 'BIR Tax Exemption Validity Date', value: '2025-12-31' },
+                { label: 'Latest Date of Assess and Assist Activity', value: '2023-11-01' },
+                { label: 'Latest Date of Financial Management Assistance (FMA)', value: '2023-10-15' }
             ],
-            membership: [
-                { label: 'Total Members', value: '{{ $cooperative->total_members ?? '150' }}' },
-                { label: 'Active Members', value: '{{ $cooperative->active_members ?? '130' }}' }
+           membership: [
+                { label: 'OTC Accreditation Number', value: 'OTC-2024-001', id: 1 },
+                { label: 'Transport Cooperative Name', value: 'Sample Transport Cooperative', id: 2 },
+                { label: 'Entry Year', value: '2023', id: 3 },
+                { label: 'Total Male Drivers', value: '50', id: 4 },
+                { label: 'Total Female Drivers', value: '35', id: 5 },
+                { label: 'Total Male Operators/Investors', value: '20', id: 6 },
+                { label: 'Total Female Operators/Investors', value: '15', id: 7 },
+                { label: 'Total Male Allied Workers', value: '10', id: 8 },
+                { label: 'Total Female Allied Workers', value: '5', id: 9 },
+                { label: 'Total Members', value: '140', id: 10 },
+                { label: 'Special Type Status of Member', value: 'Regular', id: 11 },
+                { label: 'Total', value: '140', id: 12 }
             ]
+        },
+        openEditGeneralModal() {
+            this.showEditGeneralModal = true;
+        },
+        openEditMembershipModal() {
+            this.showEditMembershipModal = true;
+        },
+        saveEditGeneral() {
+            // Logic to save general information
+            this.closeEditGeneralModal();
+        },
+        saveEditMembership() {
+            // Logic to save membership information
+            this.closeEditMembershipModal();
+        },
+        closeEditGeneralModal() {
+            this.showEditGeneralModal = false;
+        },
+        closeEditMembershipModal() {
+            this.showEditMembershipModal = false;
         },
         get filteredData() {
             if (!this.searchQuery) return [];
@@ -65,147 +115,18 @@
         </div>
 
         <!-- Search Bar -->
-        <div class="mb-6">
-            <div class="relative">
-                <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input
-                    type="text"
-                    placeholder="Search cooperative information..."
-                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    x-model="searchQuery"
-                >
-            </div>
-        </div>
+        @include('components.search-bar')
+
         <div class="flex gap-6">
             <!-- Navigation Menu -->
-            <div class="w-64 bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="p-4 bg-blue-900 text-white text-center">
-                    <h2 class="font-semibold">Data Overview</h2>
-                </div>
-                <nav class="p-2">
-                    <!-- Operations Menu -->
-                    <div class="mb-2">
-                        <button @click="menus.operations = !menus.operations"
-                            class="w-full px-4 py-3 text-left rounded-lg flex items-center justify-between hover:bg-gray-50">
-                            <span class="font-medium text-gray-700">Operations</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                :class="menus.operations ? 'transform rotate-90' : ''"
-                                class="w-5 h-5 transition-transform"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div x-show="menus.operations" class="ml-4">
-                            <template x-for="item in ['general', 'membership', 'employment', 'units', 'franchise']">
-                                <button
-                                    @click="tab = item"
-                                    class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
-                                    :class="tab === item ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'"
-                                    x-text="item.charAt(0).toUpperCase() + item.slice(1)">
-                                </button>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Financial Menu -->
-                    <div class="mb-2">
-                        <button @click="menus.financial = !menus.financial"
-                            class="w-full px-4 py-3 text-left rounded-lg flex items-center justify-between hover:bg-gray-50">
-                            <span class="font-medium text-gray-700">Financial</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                :class="menus.financial ? 'transform rotate-90' : ''"
-                                class="w-5 h-5 transition-transform"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div x-show="menus.financial" class="ml-4">
-                            <template x-for="item in ['finances', 'grantsdonations', 'loans', 'businesses']">
-                                <button
-                                    @click="tab = item"
-                                    class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
-                                    :class="tab === item ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'"
-                                    x-text="item.charAt(0).toUpperCase() + item.slice(1)">
-                                </button>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Development Menu -->
-                    <div class="mb-2">
-                        <button @click="menus.development = !menus.development"
-                            class="w-full px-4 py-3 text-left rounded-lg flex items-center justify-between hover:bg-gray-50">
-                            <span class="font-medium text-gray-700">Development</span>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                :class="menus.development ? 'transform rotate-90' : ''"
-                                class="w-5 h-5 transition-transform"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div x-show="menus.development" class="ml-4">
-                            <template x-for="item in ['trainingsseminars', 'scholarships', 'cetos', 'awards']">
-                                <button
-                                    @click="tab = item"
-                                    class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
-                                    :class="tab === item ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'"
-                                    x-text="item.charAt(0).toUpperCase() + item.slice(1)">
-                                </button>
-                            </template>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+            @include('components.navigation-menu')
 
             <!-- Content Area -->
-            <div class="flex-1 bg-white rounded-lg shadow-lg p-6">
-                <template x-if="searchQuery">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Search Results</h2>
-                        <template x-if="filteredData.length > 0">
-                            <div class="space-y-4">
-                                <template x-for="(item, index) in filteredData" :key="index">
-                                    <div class="p-4 border rounded-lg">
-                                        <div class="text-sm text-blue-600 mb-1" x-text="item.category.charAt(0).toUpperCase() + item.category.slice(1)"></div>
-                                        <div class="font-medium" x-text="item.label"></div>
-                                        <div class="text-gray-600" x-text="item.value"></div>
-                                    </div>
-                                </template>
-                            </div>
-                        </template>
-                        <template x-if="filteredData.length === 0">
-                            <p class="text-gray-500">No results found for "<span x-text="searchQuery"></span>"</p>
-                        </template>
-                    </div>
-                </template>
-
-                <template x-if="!searchQuery">
-
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4" x-text="tab.charAt(0).toUpperCase() + tab.slice(1)"></h2>
-
-                        <template x-if="cooperativeData[tab]">
-
-                            <div class="grid gap-4">
-
-                                <template x-for="(item, index) in cooperativeData[tab]" :key="index">
-                                    <div class="p-4 border rounded-lg">
-                                        <div class="font-medium" x-text="item.label"></div>
-                                        <div class="text-gray-600" x-text="item.value"></div>
-                                    </div>
-
-                                </template>
-                            </div>
-                        </template>
-                        <template x-if="!cooperativeData[tab]">
-                            <p class="text-gray-500">No data available for this section</p>
-                        </template>
-                    </div>
-                </template>
-            </div>
+            @include('components.content-area')
         </div>
     </div>
+
+    <!-- Edit Modals -->
+    @include('components.edit-modal')
 </body>
 </html>
