@@ -127,12 +127,7 @@
 
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-4 mt-10">
-    <div class="container mx-auto text-center">
-        <p>&copy; 2025 Office of Transportation Cooperatives. All rights reserved.</p>
-        <p><a href="/privacy-policy" class="text-blue-300 hover:text-blue-500">Privacy Policy</a> | <a href="/terms-of-service" class="text-blue-300 hover:text-blue-500">Terms of Service</a></p>
-    </div>
-</footer>
+@include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 

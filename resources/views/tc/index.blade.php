@@ -128,4 +128,5 @@
             </div>
         </div>
     </x-container>
+    @include('components.footer')
 </x-layout>

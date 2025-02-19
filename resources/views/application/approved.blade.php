@@ -26,10 +26,10 @@
             </thead>
             <tbody>
 
-                @foreach ($applications as $application)
+                @forelse ($applications as $application)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                    <td  class="px-6 py-4 ">
+                    <td class="px-6 py-4 ">
                         {{ $application['tc_name'] }}
                     </td>
                     <td class="px-6 py-4">
@@ -39,16 +39,44 @@
                         {{ $application['cda_reg_date'] }}
                     </td>
                     <td class="px-6 py-4">
-                        Pending
+                        {{ $application['status'] }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $application['updated_at'] }}
                     </td>
                     <td class="px-6 py-4 flex">
-                        <a href="/application/{{ $application->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                        <a href="/application/{{ $application['id'] }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td colspan="6" class="px-6 py-4 text-center">
+                        No applications found.
+                    </td>
+                </tr>
+                @endforelse
+
+                <!-- Sample Data -->
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4 ">
+                        Sample Transport Cooperative
+                    </td>
+                    <td class="px-6 py-4">
+                        CDA123456
+                    </td>
+                    <td class="px-6 py-4">
+                        2023-01-15
+                    </td>
+                    <td class="px-6 py-4">
+                        Pending
+                    </td>
+                    <td class="px-6 py-4">
+                        2023-10-01
+                    </td>
+                    <td class="px-6 py-4 flex">
+                        <a href="/application/1" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                    </td>
+                </tr>
 
             </tbody>
         </table>

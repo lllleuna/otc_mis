@@ -61,7 +61,7 @@
             <h4 class="text-xl text-gray-900 font-bold">Activity log</h4>
             <div class="relative px-4">
                 <div class="absolute h-full border border-dashed border-opacity-20 border-secondary">
-                    
+
                 </div>
 
                 <!-- start::Timeline item -->
@@ -143,6 +143,7 @@
     </x-container>
 
 
+
 <x-modal id="modalEdit"
 class="{{ $errors->hasAny(['firstname', 'lastname', 'employee_id_no', 'email']) ? 'modal-error' : 'hidden' }}">
     <x-slot:closebtnSlot>
@@ -157,6 +158,8 @@ class="{{ $errors->hasAny(['password', 'password_confirmation']) ? 'modal-error'
         <x-modal-close-button onclick="closeModal('modalResetPass')" />
     </x-slot:closebtnSlot>
     @include('users.reset-password')
+
 </x-modal>
 
 </x-layout>
+@include('components.footer')

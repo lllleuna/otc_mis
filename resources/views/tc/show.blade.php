@@ -128,5 +128,6 @@
 
     <!-- Edit Modals -->
     @include('components.edit-modal')
+    @include('components.footer')
 </body>
 </html>

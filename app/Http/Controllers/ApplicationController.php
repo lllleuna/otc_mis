@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Application;
 use App\Models\Evaluation;
-
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -14,7 +14,7 @@ class ApplicationController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-    return view('application.index', compact('applications'));
+        return view('application.index', compact('applications'));
     }
 
     public function approved()
@@ -23,7 +23,16 @@ class ApplicationController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-    return view('application.approved', compact('applications'));
+        return view('application.approved', compact('applications'));
+    }
+
+    public function processing()
+    {
+        $applications = Application::where('status', 'processing')
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+
+        return view('application.processing', compact('applications'));
     }
 
     public function show(Application $application) {
@@ -45,4 +54,5 @@ class ApplicationController extends Controller
 
         return redirect('/application');
     }
+
 }
