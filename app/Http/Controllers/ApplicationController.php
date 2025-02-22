@@ -26,14 +26,7 @@ class ApplicationController extends Controller
         return view('application.approved', compact('applications'));
     }
 
-    public function processing()
-    {
-        $applications = Application::where('status', 'processing')
-                                ->orderBy('created_at', 'desc')
-                                ->get();
 
-        return view('application.processing', compact('applications'));
-    }
 
     public function show(Application $application) {
         return view('application.show', ['application' => $application]);
@@ -52,7 +45,17 @@ class ApplicationController extends Controller
 
         Application::where('id', $attributes['application_id'])->update(['status' => 'evaluated']);
 
-        return redirect('/application');
+        return redirect()->route('application.processing')->with('success', 'Application evaluated successfully.');
     }
 
+    // Method to display applications that are currently being processed
+    public function processing()
+    {
+        // Retrieve applications with the status 'Processing'
+        $applications = Application::where('status', 'Processing')->get();
+
+        // Return the processing view with the applications
+        return view('application.processing', compact('applications'));
+    }
 }
+

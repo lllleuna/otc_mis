@@ -38,7 +38,7 @@ Route::get('/search', [RegisteredUserController::class, 'search']);
 // Application Routes
 Route::get('application', [ApplicationController::class, 'index']);
 Route::get('application/approved', [ApplicationController::class, 'approved']);
-Route::get('application/processing', [ApplicationController::class, 'processing']); // Processing route
+Route::get('application/processing', [ApplicationController::class, 'processing'])->name('application.processing');
 Route::get('application/{application}', [ApplicationController::class, 'show']);
 Route::post('/application/{application}', [ApplicationController::class, 'store']);
 
