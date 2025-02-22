@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TransportCoopController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\TcController;
 
 // Dashboard Route
 Route::get('/dashboard', function () {
@@ -25,6 +26,7 @@ Route::get('/tc/show', function () {
     return view('tc.show');
 })->middleware('auth');
 
+Route::view('tc/evaluation', 'evaluation');
 // Resource Routes for Transport Cooperative and Users
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');
@@ -46,3 +48,6 @@ Route::post('/application/{application}', [ApplicationController::class, 'store'
 Route::get('/', [SessionController::class, 'index'])->name('login');
 Route::post('/', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
+
+// Route for Transport Cooperative Evaluation
+Route::get('/tc/evaluation', [TcController::class, 'showEvaluation'])->name('tc.evaluation');

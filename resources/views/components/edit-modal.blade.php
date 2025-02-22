@@ -1,282 +1,96 @@
-<!-- General Information Edit Modal -->
-<div
-    x-show="showEditGeneralModal"
-    @click.away="closeEditGeneralModal"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0 transform scale-90"
-    x-transition:enter-end="opacity-100 transform scale-100"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="opacity-100 transform scale-100"
-    x-transition:leave-end="opacity-0 transform scale-90"
-    class="fixed inset-0 z-10 overflow-y-auto"
-    style="display: none;"
->
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-        <div
-            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-headline"
-        >
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class="sm:flex sm:items-start">
-                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                            Edit
-                        </h3>
-                        <div class="mt-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">OTC Accreditation Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][0].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Transport Cooperative Name</label>
-                                    <input type="text" x-model="cooperativeData['general'][1].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Short Name</label>
-                                    <input type="text" x-model="cooperativeData['general'][2].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">OTC Accreditation Date</label>
-                                    <input type="date" x-model="cooperativeData['general'][3].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Type of Accreditation</label>
-                                    <select x-model="cooperativeData['general'][4].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                        <option value="Full">Full</option>
-                                        <option value="Provisional">Provisional</option>
-                                        <option value="Temporary">Temporary</option>
-                                        <option value="Suspended">Suspended</option>
-                                    </select>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Cooperative Registration Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][5].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">CDA Registration Date</label>
-                                    <input type="date" x-model="cooperativeData['general'][6].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Common Bond of Membership</label>
-                                    <input type="text" x-model="cooperativeData['general'][7].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Membership Fee (per by-laws)</label>
-                                    <input type="text" x-model="cooperativeData['general'][8].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Area</label>
-                                    <input type="text" x-model="cooperativeData['general'][9].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Region</label>
-                                    <input type="text" x-model="cooperativeData['general'][10].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">City</label>
-                                    <input type="text" x-model="cooperativeData['general'][11].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Province / Sector</label>
-                                    <input type="text" x-model="cooperativeData['general'][12].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Barangay</label>
-                                    <input type="text" x-model="cooperativeData['general'][13].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Business Address</label>
-                                    <input type="text" x-model="cooperativeData['general'][14].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">E-mail</label>
-                                    <input type="email" x-model="cooperativeData['general'][15].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Contact Numbers</label>
-                                    <input type="text" x-model="cooperativeData['general'][16].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">CONTACT'S FIRST NAME</label>
-                                    <input type="text" x-model="cooperativeData['general'][17].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">CONTACT'S LAST NAME</label>
-                                    <input type="text" x-model="cooperativeData['general'][18].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">CONTACT'S M.I. (if applicable)</label>
-                                    <input type="text" x-model="cooperativeData['general'][19].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">CONTACT'S SUFFIX (if applicable)</label>
-                                    <input type="text" x-model="cooperativeData['general'][20].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">SSS Employer Registration Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][21].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">No. Of SSS Enrolled Employees</label>
-                                    <input type="number" x-model="cooperativeData['general'][22].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Pag-IBIG Employer Registration Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][23].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">No. Of Pag-IBIG Enrolled Employees</label>
-                                    <input type="number" x-model="cooperativeData['general'][24].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">PhilHealth Employer Registration Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][25].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">No. Of PhilHealth Enrolled Employees</label>
-                                    <input type="number" x-model="cooperativeData['general'][26].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">BIR TIN Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][27].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">BIR Tax Exemption Number</label>
-                                    <input type="text" x-model="cooperativeData['general'][28].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">BIR Tax Exemption Validity Date</label>
-                                    <input type="date" x-model="cooperativeData['general'][29].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Latest Date of Assess and Assist Activity</label>
-                                    <input type="date" x-model="cooperativeData['general'][30].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Latest Date of Financial Management Assistance (FMA)</label>
-                                    <input type="date" x-model="cooperativeData['general'][31].value" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                </div>
-                            </div>
-                        </div>
+<div x-show="showEditModal" class="fixed inset-0 flex items-center justify-center z-50 overflow-auto">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="bg-white rounded-lg shadow-lg z-50 w-11/12 md:w-3/4 lg:w-1/2 m-4 relative max-h-screen overflow-y-auto p-5">
+        <button @click="closeEdit()" class="absolute top-2 right-2 text-gray-600 hover:text-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <h2 class="text-xl font-bold mb-4">Edit Details</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="font-semibold text-lg mb-2 border-b pb-1">Transaction & Applicant Details</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Transaction Reference</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="transactionData['Transaction Reference']">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Accreditation Number</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="transactionData['Accreditation Number']">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Date Created</label>
+                        <input type="text" class="w-full border rounded-md p-2 bg-gray-100"
+                               x-model="transactionData['Date Created']" disabled>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Cooperative</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="transactionData['Cooperative']">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Submitted Documents</label>
+                        <a :href="`/downloads/${transactionData['Submitted Documents']}`"
+                           class="block w-full border rounded-md p-2 bg-gray-100 text-blue-600 hover:underline"
+                           target="_blank" download
+                           x-text="transactionData['Submitted Documents']"></a>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Applicant Name</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="applicantData['Applicant Name']">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Email</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="applicantData['Email']">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Contact</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="applicantData['Contact']">
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                    type="button"
-                    @click="saveEditGeneral()"
-                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                    Save
-                </button>
-                <button
-                    type="button"
-                    @click="closeEditGeneralModal()"
-                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Membership Information Edit Modal -->
-<div
-    x-show="showEditMembershipModal"
-    @click.away="closeEditMembershipModal"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0 transform scale-90"
-    x-transition:enter-end="opacity-100 transform scale-100"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="opacity-100 transform scale-100"
-    x-transition:leave-end="opacity-0 transform scale-90"
-    class="fixed inset-0 z-10 overflow-y-auto"
-    style="display: none;"
->
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-        <div
-            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-headline"
-        >
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class="sm:flex sm:items-start">
-                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                            Edit Membership Information
-                        </h3>
-                        <div class="mt-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <template x-for="(item, index) in cooperativeData['membership']" :key="index">
-                                    <div class="mb-4">
-                                        <label class="block text-sm font-medium text-gray-700" x-text="item.label"></label>
-                                        <template x-if="item.label === 'Total Male Drivers' || item.label === 'Total Female Drivers'">
-                                            <div class="grid grid-cols-2 gap-4">
-                                                <div>
-                                                    <label class="block text-sm font-medium text-gray-700">F</label>
-                                                    <input
-                                                        type="number"
-                                                        x-model="cooperativeData['membership'][3].value"  <!-- Total Female Drivers -->
-                                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label class="block text-sm font-medium text-gray-700">M</label>
-                                                    <input
-                                                        type="number"
-                                                        x-model="cooperativeData['membership'][4].value"  <!-- Total Male Drivers -->
-                                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </template>
-                                        <template x-if="item.label !== 'Total Male Drivers' && item.label !== 'Total Female Drivers'">
-                                            <input
-                                                type="text"
-                                                x-model="item.value"
-                                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                            />
-                                        </template>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
+            <div>
+                <h3 class="font-semibold text-lg mb-2 border-b pb-1">Processing & Status Updates</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Current Status</label>
+                        <input type="text" class="w-full border rounded-md p-2 bg-gray-100"
+                               x-model="processingData['Current Status']" disabled>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Remarks</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="processingData['Remarks']" placeholder="Enter officer remarks">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Attachments</label>
+                        <input type="text" class="w-full border rounded-md p-2"
+                               x-model="processingData['Attachments']">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1 text-sm">Log & History</label>
+                        <table class="w-full text-xs border">
+                            <tr class="border-b" x-for="(log, index) in logData" :key="index">
+                                <td class="p-2" x-text="log"></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                    type="button"
-                    @click="saveEditMembership()"
-                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                    Save
-                </button>
-                <button
-                    type="button"
-                    @click="closeEditMembershipModal()"
-                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                    Cancel
-                </button>
-            </div>
+        </div>
+        <div class="mt-6 flex justify-end space-x-4">
+            <button @click="updateData(); closeEdit();" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                Update
+            </button>
+            <button @click="saveEdit()" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                Send
+            </button>
         </div>
     </div>
 </div>
