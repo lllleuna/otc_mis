@@ -26,7 +26,6 @@ Route::get('/tc/show', function () {
     return view('tc.show');
 })->middleware('auth');
 
-Route::view('tc/evaluation', 'evaluation');
 // Resource Routes for Transport Cooperative and Users
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');

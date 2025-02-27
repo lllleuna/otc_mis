@@ -1,173 +1,288 @@
-<x-layout>
-    <x-slot:vite>
-        <link rel="stylesheet" href="/dist/styles.css">
-    </x-slot:vite>
-    <x-slot:title>Transport Cooperative Details</x-slot:title>
-
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Transport Cooperative Details</title>
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    </head>
-
-    <body class="bg-gray-100 min-h-screen p-8" x-data="{
-        tab: 'transaction',
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Cooperative Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8"
+    x-data="{
+        tab: 'general',
         searchQuery: '',
-        showEditModal: false,
-        transactionData: {
-            'Transaction Reference': 'TRX-2025-001',
-            'Accreditation Number': 'ACC-2025-001',
-            'Transaction Type': 'Online Payment',
-            'Date Created': '2025-01-15 08:30 AM',
-            'Cooperative': 'Sample Transport Cooperative',
-            'Submitted Documents': 'CDA-file.pdf'
+        menus: {
+            operations: false,
+            financial: false,
+            development: false,
+            governance: false
         },
-        applicantData: {
-            'Applicant Name': 'Juan Dela Cruz',
-            'Email': 'juan@example.com',
-            'Contact': '09171234567'
-        },
-        processingData: {
-            'Current Status': 'Pending (Last Updated: 2025-01-10 02:00 PM)',
-            'Remarks': '',
-            'Attachments': 'Document1.pdf, Document2.pdf'
-        },
-        logData: [
-            '2025-01-10 02:00 PM – Submitted by Juan Dela Cruz',
-            '2025-01-12 03:30 PM – Reviewed by Officer 1',
-            '2025-01-15 10:00 AM – Modified by Officer 2'
-        ],
-        accreditationData: {
-            'Cooperative Information': {
-                'Name': 'Sample Transport Cooperative',
-                'Address': '123 Sample St, Sample City',
-                'Contact Details': '0917-123-4567'
-            },
-            'Registration Details': {
-                'CDA Registration No.': 'CDA-2025-001',
-                'Date of Registration': '2025-01-01'
-            },
-            'Officers & Board Members': [
-                { 'Name': 'Maria Santos', 'Position': 'President', 'Contact Info': '0917-765-4321' },
-                { 'Name': 'Jose Reyes', 'Position': 'Vice President', 'Contact Info': '0917-234-5678' }
+        cooperativeData: {
+            general: [
+                { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2024-001' }}' },
+                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Sample Transport Cooperative' }}' },
+                { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'STC' }}' },
+                { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Full' }}' },
+                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2024-01-15' }}' },
+                { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2024-001' }}' },
+                { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2023-12-01' }}' },
+                { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Transport Service Providers' }}' },
+                { label: 'Membership Fee (per by-laws)', value: '{{ $cooperative->membership_fee ?? 'PHP 1,000.00' }}' },
+                { label: 'Area / Region / City / Province / Barangay', value: '{{ $cooperative->area ?? 'NCR, Manila, Sampaloc' }}' },
+                { label: 'Business Address', value: '{{ $cooperative->address ?? '123 Sample St, Sampaloc, Manila' }}' },
+                { label: 'Contact Person', value: '{{ $cooperative->contact_person ?? 'Juan P. Dela Cruz Jr.' }}' },
+                { label: 'E-mail', value: '{{ $cooperative->email ?? 'sample@email.com' }}' },
+                { label: 'Contact Numbers', value: '{{ $cooperative->contact_numbers ?? '(02) 8123-4567 / 0917-123-4567' }}' },
+                { label: 'SSS Employer Registration Number', value: '{{ $cooperative->sss_number ?? 'SSS-123456789' }}' },
+                { label: 'No. Of SSS Enrolled Employees', value: '{{ $cooperative->sss_employees ?? '25' }}' },
+                { label: 'Pag-IBIG Employer Registration Number', value: '{{ $cooperative->pagibig_number ?? 'PAGIBIG-123456789' }}' },
+                { label: 'No. Of Pagibig Enrolled Employees', value: '{{ $cooperative->pagibig_employees ?? '22' }}' },
+                { label: 'PhilHealth Employer Registration Number', value: '{{ $cooperative->philhealth_number ?? 'PH-123456789' }}' },
+                { label: 'No. Of PhilHealth Enrolled Employees', value: '{{ $cooperative->philhealth_employees ?? '20' }}' },
+                { label: 'BIR TIN Number', value: '{{ $cooperative->bir_tin ?? '123-456-789-000' }}' },
+                { label: 'BIR Tax Exemption Number', value: '{{ $cooperative->bir_exemption ?? 'BIR-EXEMPT-2024-001' }}' },
+                { label: 'BIR Tax Exemption Validity Date', value: '{{ $cooperative->bir_validity ?? '2026-01-15' }}' },
+                { label: 'Latest Date of Assess and Assist Activity', value: '{{ $cooperative->assist_date ?? '2023-11-30' }}' },
+                { label: 'Latest Date of Financial Management Assistance (FMA)', value: '{{ $cooperative->fma_date ?? '2023-10-15' }}' }
             ],
-            'Financial Information': 'Latest Audited Financial Statements available upon request.',
-            'Operational Details': {
-                'Type of Services': 'Transport Services',
-                'Area of Operation': 'Metro Sample'
+            membership: [
+                { label: 'ENTRY YEAR', value: '{{ $cooperative->entry_year ?? '2023' }}' },
+                { label: 'DRIVER', value: '{{ $cooperative->driver_members ?? '45' }}' },
+                { label: 'OPERATOR/INVESTOR', value: '{{ $cooperative->operator_members ?? '30' }}' },
+                { label: 'ALLIED WORKERS', value: '{{ $cooperative->allied_members ?? '20' }}' },
+                { label: 'OTHER TYPE OF MEMBER', value: '{{ $cooperative->other_members ?? '5' }}' },
+                { label: 'TOTAL MEMBERS', value: '{{ $cooperative->total_members ?? '100' }}' },
+                { label: 'SPECIAL TYPE', value: '{{ $cooperative->special_type ?? 'N/A' }}' },
+                { label: 'STATUS OF MEMBER', value: '{{ $cooperative->member_status ?? 'Active' }}' }
+            ],
+            employment: {
+                headers: ['', 'PROBATIONARY (Male)', 'PROBATIONARY (Female)', 'REGULAR (Male)', 'REGULAR (Female)'],
+                rows: [
+                    {
+                        category: 'EMPLOYEES (DRIVERS)',
+                        values: ['15', '5', '40', '10']
+                    },
+                    {
+                        category: 'MANAGEMENT STAFF',
+                        values: ['3', '4', '8', '10']
+                    },
+                    {
+                        category: 'EMPLOYEES (ALLIED WORKERS)',
+                        values: ['5', '7', '12', '8']
+                    },
+                    {
+                        category: 'TOTAL',
+                        values: ['23', '16', '60', '28']
+                    }
+                ]
             },
-            'Required Documents': [
-                'Bylaws',
-                'Articles of Cooperation',
-                'Business Permits'
-            ]
-        },
-        cgRequestData: {
-            'Cooperative Name': 'Sample Transport Cooperative',
-            'Registration No.': 'CDA-2025-001',
-            'Proof of Compliance': 'Latest Reports, Financial Statements',
-            'Authorized Representative': {
-                'Name': 'Juan Dela Cruz',
-                'Position': 'Authorized Signatory',
-                'Contact Info': '0917-123-4567'
+            units: {
+                headers: ['MODE OF SERVICE', 'TYPE OF UNIT', 'No. of Cooperatively Owned Units (2020)', 'No. of Individually Owned Units (2020)', 'No. of Cooperatively Owned Units (2021)', 'No. of Individually Owned Units (2021)', 'No. of Cooperatively Owned Units (2022)', 'No. of Individually Owned Units (2022)'],
+                rows: [
+                    {
+                        mode: 'PUJ',
+                        type: 'Traditional',
+                        values: ['5', '25', '8', '22', '12', '18']
+                    },
+                    {
+                        mode: 'PUJ',
+                        type: 'Modern',
+                        values: ['10', '0', '15', '0', '20', '0']
+                    },
+                    {
+                        mode: 'UV Express',
+                        type: 'Van',
+                        values: ['3', '12', '5', '10', '8', '8']
+                    }
+                ]
             },
-            'Purpose of Request': 'Loan application'
-        },
-        trainingData: {
-            'Cooperative Name': 'Sample Transport Cooperative',
-            'Registration No.': 'CDA-2025-001',
-            'Trainee Information': {
-                'Name': 'Maria Santos',
-                'Position': 'Driver',
-                'Contact Details': '0917-765-4321'
+            franchise: {
+                headers: ['CGS Number', 'CGS Date of Issuance', 'CGS Expiration Date'],
+                rows: [
+                    {
+                        year: '2020',
+                        values: ['CGS-2020-001', '2020-01-15', '2025-01-14']
+                    },
+                    {
+                        year: '2021',
+                        values: ['CGS-2021-002', '2021-03-22', '2026-03-21']
+                    },
+                    {
+                        year: '2022',
+                        values: ['CGS-2022-003', '2022-05-30', '2027-05-29']
+                    }
+                ]
             },
-            'Training Type & Schedule': 'Safety Training - March 1, 2025',
-            'Payment Details': 'Paid via bank transfer'
+            governance: {
+                headers: ['Role', 'First Name', 'Last Name', 'M.I.', 'Suffix', 'Term In Office', 'Mobile No.', 'E-mail'],
+                rows: [
+                    {
+                        values: ['Chairperson', 'Juan', 'Dela Cruz', 'P', 'Jr.', '2022-2024', '0917-123-4567', 'juan@email.com']
+                    },
+                    {
+                        values: ['Vice-Chairperson', 'Maria', 'Santos', 'L', '', '2022-2024', '0918-234-5678', 'maria@email.com']
+                    },
+                    {
+                        values: ['Secretary', 'Pedro', 'Reyes', 'M', '', '2022-2024', '0919-345-6789', 'pedro@email.com']
+                    }
+                ]
+            },
+            finances: {
+                headers: ['ENTRY YEAR', 'ASSETS', 'LIABILITIES', 'PAID-UP', 'AUTHORIZED', 'STATUTORY FUNDS', 'RESERVE FUND', 'EDUCATION FUND', 'OPT. FUND', 'CDF', 'INTEREST ON CAPITAL', 'PATRONAGE REFUND', 'DUE TO UNION/FEDERATION'],
+                rows: [
+                    {
+                        values: ['2020', '5,000,000', '2,000,000', '3,000,000', '10,000,000', '500,000', '300,000', '150,000', '50,000', '100,000', '200,000', '150,000', '50,000']
+                    },
+                    {
+                        values: ['2021', '6,500,000', '2,500,000', '4,000,000', '10,000,000', '650,000', '400,000', '200,000', '50,000', '120,000', '250,000', '180,000', '60,000']
+                    },
+                    {
+                        values: ['2022', '8,000,000', '3,000,000', '5,000,000', '10,000,000', '800,000', '500,000', '250,000', '50,000', '150,000', '300,000', '200,000', '70,000']
+                    }
+                ]
+            },
+            grantsdonations: {
+                headers: ['Date Acquired', 'Amount', 'Source', 'Status/Remarks'],
+                rows: [
+                    {
+                        values: ['2020-05-15', '500,000', 'Department of Transportation', 'Fully utilized']
+                    },
+                    {
+                        values: ['2021-08-22', '750,000', 'Local Government', 'Ongoing project']
+                    },
+                    {
+                        values: ['2022-03-10', '300,000', 'Private Foundation', 'Completed']
+                    }
+                ]
+            },
+            loans: {
+                headers: ['Financing Institution/s', 'Date Acquired', 'Amount of Loan', 'Utilization', 'Status/Remarks'],
+                rows: [
+                    {
+                        values: ['Development Bank', '2020-06-10', '2,000,000', 'Vehicle Acquisition', 'Fully paid']
+                    },
+                    {
+                        values: ['Cooperative Bank', '2021-04-15', '1,500,000', 'Operational Expenses', 'Ongoing payment']
+                    },
+                    {
+                        values: ['Government Program', '2022-02-28', '3,000,000', 'Modern Jeepney Purchase', 'Current']
+                    }
+                ]
+            },
+            businesses: {
+                headers: ['Type', 'Nature of Business', 'Starting Capital', 'Capital to Date', 'Years of Existence', 'Status', 'Remarks'],
+                rows: [
+                    {
+                        values: ['Retail', 'Auto Parts Store', '500,000', '750,000', '3', 'Operational', 'Growing steadily']
+                    },
+                    {
+                        values: ['Service', 'Vehicle Repair Shop', '800,000', '1,200,000', '2', 'Operational', 'Profitable']
+                    },
+                    {
+                        values: ['Transport', 'Shuttle Service', '1,000,000', '1,500,000', '1', 'Operational', 'Expanding']
+                    }
+                ]
+            },
+            trainingsseminars: {
+                headers: ['Title of Training', 'Start Date', 'End Date', 'No. of Attendees', 'Remarks'],
+                rows: [
+                    {
+                        values: ['Cooperative Management', '2022-01-15', '2022-01-16', '30', 'Successful completion']
+                    },
+                    {
+                        values: ['Financial Literacy', '2022-03-20', '2022-03-20', '25', 'Well-received']
+                    },
+                    {
+                        values: ['Defensive Driving', '2022-05-10', '2022-05-12', '45', 'Mandatory for all drivers']
+                    }
+                ]
+            },
+            scholarships: {
+                headers: ['Course Taken', 'No. of TC Scholar Beneficiary', 'Remarks'],
+                rows: [
+                    {
+                        values: ['Business Administration', '5', 'Ongoing']
+                    },
+                    {
+                        values: ['Automotive Technology', '8', 'Completed by 3']
+                    },
+                    {
+                        values: ['Mechanical Engineering', '2', 'Ongoing']
+                    }
+                ]
+            },
+            cetos: {
+                headers: ['', 'Members with CETOS (2020)', 'Members without CETOS (2020)', 'TOTAL (2020)', 'Members with CETOS (2021)', 'Members without CETOS (2021)', 'TOTAL (2021)', 'Members with CETOS (2022)', 'Members without CETOS (2022)', 'TOTAL (2022)'],
+                rows: [
+                    {
+                        values: ['', '20', '30', '50', '35', '15', '50', '45', '5', '50']
+                    }
+                ]
+            },
+            awards: {
+                headers: ['Awarding Body', 'Nature', 'Date Received', 'Remarks'],
+                rows: [
+                    {
+                        values: ['City Government', 'Best Transport Cooperative', '2020-12-10', 'Annual Recognition']
+                    },
+                    {
+                        values: ['Department of Transportation', 'Service Excellence', '2021-06-15', 'National Award']
+                    },
+                    {
+                        values: ['Cooperative Development Authority', 'Most Improved Cooperative', '2022-02-25', 'Regional Recognition']
+                    }
+                ]
+            }
         },
-        filteredContent() {
+        get filteredData() {
             if (!this.searchQuery) return [];
+
             let results = [];
-            for (let key in this.transactionData) {
-                if (this.transactionData[key].toLowerCase().includes(this.searchQuery.toLowerCase())) {
-                    results.push({ group: 'transaction', field: key, value: this.transactionData[key] });
+            for (let category in this.cooperativeData) {
+                if (Array.isArray(this.cooperativeData[category])) {
+                    const items = this.cooperativeData[category].filter(item =>
+                        item.value.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                        item.label.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    ).map(item => ({
+                        ...item,
+                        category: category
+                    }));
+                    results.push(...items);
                 }
             }
-            for (let key in this.applicantData) {
-                if (this.applicantData[key].toLowerCase().includes(this.searchQuery.toLowerCase())) {
-                    results.push({ group: 'transaction', field: key, value: this.applicantData[key] });
-                }
-            }
-            for (let key in this.processingData) {
-                if (this.processingData[key].toLowerCase().includes(this.searchQuery.toLowerCase())) {
-                    results.push({ group: 'processing', field: key, value: this.processingData[key] });
-                }
-            }
-            this.logData.forEach(log => {
-                if (log.toLowerCase().includes(this.searchQuery.toLowerCase())) {
-                    results.push({ group: 'processing', field: 'Log', value: log });
-                }
-            });
             return results;
-        },
-        selectResult(result) {
-            this.tab = result.group;
-            this.searchQuery = '';
-        },
-        openEdit() {
-            this.showEditModal = true;
-        },
-        closeEdit() {
-            this.showEditModal = false;
-        },
-        updateData() {
-            alert('Data updated!');
-        },
-        sendData() {
-            alert('Data sent!');
-        },
-        saveEdit() {
-            this.updateData();
-            this.sendData();
-            this.closeEdit();
-        },
-        setTab(newTab) {
-            this.tab = newTab;
-        },
-        showAccreditationDetails() {
-            this.transactionData['Transaction Type'] = 'Accreditation';
-            this.tab = 'accreditation'; // Set the tab to accreditation
-        },
-        showCGSRequestDetails() {
-            this.transactionData['Transaction Type'] = 'Certificate of Good Standing (CGS) Request';
-            this.tab = 'cgsRequest'; // Set the tab to CGS Request
-        },
-        showTrainingDetails() {
-            this.transactionData['Transaction Type'] = 'Training';
-            this.tab = 'training'; // Set the tab to Training
         }
     }">
-        <div class="max-w-7xl mx-auto p-5">
-            <header class="flex items-center justify-between mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">Transport Cooperative</h1>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Back</button>
-            </header>
 
-            <!-- Search Bar -->
-            @include('components.search-bar')
-
-            <div class="mb-6 flex">
-                <!-- Navigation Menu -->
-                @include('components.navigation-menu')
-
-                <!-- Content Area -->
-                @include('components.content-area')
+    <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Transport Cooperative</h1>
+            <div class="flex space-x-2">
+                <div class="relative">
+                    <input type="text"
+                           x-model="searchQuery"
+                           placeholder="Search..."
+                           class="px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button x-show="searchQuery"
+                            @click="searchQuery = ''"
+                            class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                    ← Back
+                </button>
             </div>
         </div>
+        <div class="flex gap-6">
+            <!-- Include Navigation Menu -->
+            @include('components.navigation-menu')
 
-        <!-- Edit Modal -->
-        @include('components.edit-modal')
-
-        @include('components.footer')
-    </body>
-</x-layout>
+            <!-- Include Content Area -->
+            @include('components.content-area')
+        </div>
+    </div>
+</body>
+</html>

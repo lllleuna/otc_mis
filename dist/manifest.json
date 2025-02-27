@@ -1,0 +1,19 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BPl1Za1k.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-z8A_VDJZ.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/dropdown.js": {
+    "file": "assets/dropdown-CvShPh9r.js",
+    "name": "dropdown",
+    "src": "resources/js/dropdown.js",
+    "isEntry": true
+  }
+}

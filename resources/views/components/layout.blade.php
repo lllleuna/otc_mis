@@ -61,11 +61,11 @@ contains logo, profile name & icon, and navigation links
             <div class="m-auto w-fit items-center px-3 py-2">
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
                 @can('admin-access')
-                <x-nav-link href="/users" :active="request()->is('users*')">Manage Users</x-nav-link>
+                <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
                 @endcan
-                <x-nav-link href="/tc" :active="request()->is('tc*')">Transport Cooperatives</x-nav-link>
+                <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link>
 
-                <x-nav-link href="/application" :active="request()->is('application*')">Application</x-nav-link>
+                <x-nav-link href="/application" :active="request()->is('application*')">Accreditation Module</x-nav-link>
             </div>
         </header>
         <main>

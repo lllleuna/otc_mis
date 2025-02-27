@@ -1,0 +1,1 @@
+let d=document.getElementById("dropdownToggle"),e=document.getElementById("dropdownMenu");function l(){e.className.includes("block")?(e.classList.add("hidden"),e.classList.remove("block")):(e.classList.add("block"),e.classList.remove("hidden"))}d.addEventListener("click",l);
