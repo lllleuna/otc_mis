@@ -10,6 +10,7 @@ export default {
         './resources/**/*.vue',
         './resources/**/**/*.blade.php',
         './resources/*.blade.php',
+        './resources/js/dropdown.js',
     ],
     theme: {
         extend: {

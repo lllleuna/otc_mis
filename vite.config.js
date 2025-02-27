@@ -14,7 +14,7 @@ export default defineConfig({
   ],
   server: {
     cors: {
-      origin: 'http://otc_mis.com:8000',
+      origin: 'http://otc_mis.com:8001',
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
     }

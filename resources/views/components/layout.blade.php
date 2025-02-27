@@ -76,25 +76,5 @@ contains logo, profile name & icon, and navigation links
         </main>
     </div>
 
-
-    {{-- guys di gumagana dropdown.js ko since ayaw ko na galawin ung bandle ng composer na fruitcake baka di ko maayos
-     agad or mahirapan ako mag setup dito muna ilagay for viewing ko lang muna..--}}
-
-    <script>
-        let dropdownToggle = document.getElementById('dropdownToggle');
-        let dropdownMenu = document.getElementById('dropdownMenu');
-
-        function handleClick() {
-            if (dropdownMenu.className.includes('block')) {
-                dropdownMenu.classList.add('hidden');
-                dropdownMenu.classList.remove('block');
-            } else {
-                dropdownMenu.classList.add('block');
-                dropdownMenu.classList.remove('hidden');
-            }
-        }
-
-        dropdownToggle.addEventListener('click', handleClick);
-    </script>
 </body>
 </html>
