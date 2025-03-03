@@ -26,6 +26,10 @@ Route::get('/tc/show', function () {
     return view('tc.show');
 })->middleware('auth');
 
+Route::get('/edit-cooperative', function () {
+    return view('components.edit-content');
+})->name('edit.cooperative');
+
 // Resource Routes for Transport Cooperative and Users
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');

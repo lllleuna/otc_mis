@@ -81,19 +81,9 @@
                 rows: [
                     {
                         mode: 'PUJ',
-                        type: 'Traditional',
-                        values: ['5', '25', '8', '22', '12', '18']
-                    },
-                    {
-                        mode: 'PUJ',
                         type: 'Modern',
                         values: ['10', '0', '15', '0', '20', '0']
                     },
-                    {
-                        mode: 'UV Express',
-                        type: 'Van',
-                        values: ['3', '12', '5', '10', '8', '8']
-                    }
                 ]
             },
             franchise: {
@@ -103,14 +93,7 @@
                         year: '2020',
                         values: ['CGS-2020-001', '2020-01-15', '2025-01-14']
                     },
-                    {
-                        year: '2021',
-                        values: ['CGS-2021-002', '2021-03-22', '2026-03-21']
-                    },
-                    {
-                        year: '2022',
-                        values: ['CGS-2022-003', '2022-05-30', '2027-05-29']
-                    }
+
                 ]
             },
             governance: {
@@ -257,25 +240,15 @@
     <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Transport Cooperative</h1>
-            <div class="flex space-x-2">
-                <div class="relative">
-                    <input type="text"
-                           x-model="searchQuery"
-                           placeholder="Search..."
-                           class="px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button x-show="searchQuery"
-                            @click="searchQuery = ''"
-                            class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
-                <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
-                    ← Back
-                </button>
-            </div>
         </div>
+
+        <div class="flex justify-between mb-4">
+            <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                ← Back
+            </button>
+            <a href="{{ route('edit.cooperative') }}" class="text-blue-600 hover:underline">Edit</a>
+        </div>
+
         <div class="flex gap-6">
             <!-- Include Navigation Menu -->
             @include('components.navigation-menu')
