@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\User;
 use App\Models\ApplicationStatusHistory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // To get the logged-in user
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
     public function index(Request $request)
 {
-    $status = $request->query('status', 'new'); // Default status filter
-    $search = $request->query('search'); // Get search input
+    $status = $request->query('status', 'new');
+    $search = $request->query('search'); 
 
     $applications = Application::when($search, function ($query, $search) {
             return $query->where('reference_number', 'LIKE', "%$search%");
@@ -20,8 +21,8 @@ class ApplicationController extends Controller
         ->when(!$search, function ($query) use ($status) {
             return $query->where('status', $status);
         })
-        ->paginate(10) // Paginate results
-        ->appends(['search' => $search, 'status' => $status]); // Append query parameters for persistence
+        ->paginate(10)
+        ->appends(['search' => $search, 'status' => $status]); 
 
     return view('accreditation.officer.index', compact('applications', 'status', 'search'));
 }
@@ -31,7 +32,6 @@ class ApplicationController extends Controller
     {
         $application = Application::findOrFail($id);
 
-        // Get the latest evaluation record for this application
         $latestEvaluation = ApplicationStatusHistory::where('application_id', $id)
             ->latest()
             ->first();
@@ -42,11 +42,10 @@ class ApplicationController extends Controller
     public function storeEvaluation(Request $request, $id)
     {
         $application = Application::findOrFail($id);
-        $userId = Auth::id(); // Get logged-in user ID
+        $userId = Auth::id(); 
 
-        $status = $request->input('action') === 'submit' ? 'waiting' : 'evaluated';
+        $status = $request->input('action') === 'submit' ? 'evaluated' : 'saved';
 
-        // Store evaluation details in application_status_histories
         ApplicationStatusHistory::create([
             'application_id' => $application->id,
             'status' => $status,
@@ -54,11 +53,45 @@ class ApplicationController extends Controller
             'updated_by' => $userId
         ]);
 
-        // Update application's current status
         $application->update(['status' => $status]);
 
         return redirect()->route('accreditation.index')
             ->with('success', 'Evaluation updated successfully!');
 
     }
+
+    public function approval($id)
+    {
+        $application = Application::findOrFail($id);
+
+        $evaluation = ApplicationStatusHistory::where('application_id', $id)
+            ->latest('updated_at')
+            ->with('updatedBy') 
+            ->first();
+
+        return view('accreditation.head.approval', compact('application', 'evaluation'));
+    }
+
+    public function storeApproval(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:approved,rejected,needs_info',
+            'message' => 'required|string|max:1000',
+        ]);
+
+        $application = Application::findOrFail($id);
+        $userId = auth()->id(); 
+
+        ApplicationStatusHistory::create([
+            'application_id' => $application->id,
+            'status' => $request->status,
+            'message' => $request->message,
+            'updated_by' => $userId,
+        ]);
+
+        $application->update(['status' => $request->status]);
+
+        return redirect()->route('accreditation.index')->with('success', 'Application status updated successfully.');
+    }
+
 }

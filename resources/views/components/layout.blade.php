@@ -67,6 +67,9 @@ contains logo, profile name & icon, and navigation links
                 @can('officer-access')
                     <x-nav-link href="{{route('accreditation.index')}}" :active="request()->is('accreditation*')">Accreditation</x-nav-link>
                 @endcan
+                @can('head-access')
+                    <x-nav-link href="{{route('accreditation.index')}}" :active="request()->is('accreditation*')">Accreditation</x-nav-link>
+                @endcan
             </div>
         </header>
         <main>

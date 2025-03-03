@@ -10,10 +10,10 @@
                 @php
                     $statusLabels = [
                         'new' => 'New Applications',
-                        'evaluated' => 'In Evaluation',
-                        'waiting' => 'Waiting Approval',
+                        'saved' => 'In Evaluation',
+                        'evaluated' => 'Waiting Approval',
                         'approved' => 'Approved Applications',
-                        'nmi' => 'Applications Needing More Information',
+                        'needs_info' => 'Applications Needing More Information',
                         'rejected' => 'Rejected Applications',
                     ];
                     $currentStatus =
@@ -88,7 +88,7 @@
                                     Region</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                    Date Created</th>
+                                    Date Submitted</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                                     Status</th>
@@ -112,10 +112,10 @@
                                         @php
                                             $statusClasses = [
                                                 'new' => 'bg-blue-100 text-blue-800',
-                                                'evaluated' => 'bg-yellow-100 text-yellow-800',
-                                                'waiting' => 'bg-purple-100 text-purple-800',
+                                                'saved' => 'bg-yellow-100 text-yellow-800',
+                                                'evaluated' => 'bg-purple-100 text-purple-800',
                                                 'approved' => 'bg-green-100 text-green-800',
-                                                'nmi' => 'bg-orange-100 text-orange-800',
+                                                'needs_info' => 'bg-orange-100 text-orange-800',
                                                 'rejected' => 'bg-red-100 text-red-800',
                                             ];
                                             $statusClass =
@@ -127,14 +127,20 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                                        @if ($application->status === 'new')
+                                        @if ($application->status === 'new' || $application->status === 'saved')
                                             <a href="{{ route('accreditation.evaluate', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 Evaluate
                                             </a>
+                                        @elseif ($application->status === 'evaluated')
+                                            <a href="{{ route('accreditation.approval', $application->id) }}"
+                                                class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
+                                                View
+                                            </a>
                                         @else
                                             <span class="text-gray-500">N/A</span>
                                         @endif
+
                                     </td>
 
                                 </tr>
