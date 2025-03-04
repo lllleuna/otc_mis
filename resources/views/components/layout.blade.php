@@ -21,7 +21,6 @@ contains logo, profile name & icon, and navigation links
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo3.png') }}" alt="OTC Logo">
-                        <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo3.png') }}" alt="OTC Logo">
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
