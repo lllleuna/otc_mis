@@ -1,7 +1,5 @@
 <x-layout>
-    <x-slot:vite>
-    <link rel="stylesheet" href="/path/to/your/styles.css">
-    </x-slot:vite>
+    <x-slot:vite></x-slot:vite>
 
     <x-slot:title>Record Management System</x-slot:title>
 
@@ -26,7 +24,7 @@
             <div class="mt-5">
                 <!-- Include the blade for Transportation Cooperative -->
                 <div x-show="activeTab === 'transportation'">
-                    @include('tc.transportation-cooperative')
+                    @include('components.transportation-cooperative')
                 </div>
 
 
@@ -38,7 +36,7 @@
 
                 <!-- Include the blade for Head Record Management -->
                 <div x-show="activeTab === 'head'">
-                    @include('tc.head-record-management')
+                    @include('components.head-record-management')
                 </div>
             </div>
         </div>

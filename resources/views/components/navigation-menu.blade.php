@@ -16,14 +16,14 @@
                 </svg>
             </button>
             <div x-show="menus.operations" class="ml-4">
-                <template x-for="item in ['general', 'membership', 'employment', 'units', 'franchise']">
+                @foreach(['general', 'membership', 'employment', 'units', 'franchise'] as $item)
                     <button
-                        @click="tab = item"
+                        @click="tab = '{{ $item }}'"
                         class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
-                        :class="tab === item ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'"
-                        x-text="item.charAt(0).toUpperCase() + item.slice(1)">
+                        :class="tab === '{{ $item }}' ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'">
+                        {{ ucfirst($item) }}
                     </button>
-                </template>
+                @endforeach
             </div>
         </div>
 
@@ -62,14 +62,14 @@
                 </svg>
             </button>
             <div x-show="menus.financial" class="ml-4">
-                <template x-for="item in ['finances', 'grantsdonations', 'loans', 'businesses']">
+                @foreach(['finances', 'grantsdonations', 'loans', 'businesses'] as $item)
                     <button
-                        @click="tab = item"
+                        @click="tab = '{{ $item }}'"
                         class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
-                        :class="tab === item ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'"
-                        x-text="item === 'grantsdonations' ? 'Grants & Donations' : item.charAt(0).toUpperCase() + item.slice(1)">
+                        :class="tab === '{{ $item }}' ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'">
+                        {{ $item === 'grantsdonations' ? 'Grants & Donations' : ucfirst($item) }}
                     </button>
-                </template>
+                @endforeach
             </div>
         </div>
 
@@ -86,14 +86,37 @@
                 </svg>
             </button>
             <div x-show="menus.development" class="ml-4">
-                <template x-for="item in ['trainingsseminars', 'scholarships', 'cetos', 'awards']">
+                @foreach(['trainingsseminars', 'scholarships', 'cetos', 'awards'] as $item)
                     <button
-                        @click="tab = item"
+                        @click="tab = '{{ $item }}'"
                         class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
-                        :class="tab === item ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'"
-                        x-text="item === 'trainingsseminars' ? 'Trainings & Seminars' : item === 'cetos' ? 'CETOS' : item.charAt(0).toUpperCase() + item.slice(1)">
+                        :class="tab === '{{ $item }}' ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'">
+                        {{ $item === 'trainingsseminars' ? 'Trainings & Seminars' : ($item === 'cetos' ? 'CETOS' : ucfirst($item)) }}
                     </button>
-                </template>
+                @endforeach
+            </div>
+        </div>
+
+         <!-- Documents Menu -->
+         <div class="mb-2">
+            <button @click="menus.documents = !menus.documents"
+                class="w-full px-4 py-3 text-left rounded-lg flex items-center justify-between hover:bg-gray-50">
+                <span class="font-medium text-gray-700">Documents</span>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    :class="menus.documents ? 'transform rotate-90' : ''"
+                    class="w-5 h-5 transition-transform"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            <div x-show="menus.documents" class="ml-4">
+                <button
+                    @click="tab = 'Proof of Documents'"
+                    class="w-full px-4 py-2 text-left rounded-lg mb-1 text-sm transition-colors"
+                    :class="tab === 'proof_of_documents' ? 'bg-blue-50 text-blue-900 font-medium' : 'text-gray-600 hover:bg-gray-50'">
+                    Prooof Of Documents
+                </button>
+
             </div>
         </div>
     </nav>

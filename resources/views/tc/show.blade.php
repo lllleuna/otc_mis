@@ -19,60 +19,60 @@
         },
         cooperativeData: {
             general: [
-                { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2024-001' }}' },
-                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Sample Transport Cooperative' }}' },
-                { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'STC' }}' },
-                { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Full' }}' },
-                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2024-01-15' }}' },
-                { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2024-001' }}' },
-                { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2023-12-01' }}' },
-                { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Transport Service Providers' }}' },
-                { label: 'Membership Fee (per by-laws)', value: '{{ $cooperative->membership_fee ?? 'PHP 1,000.00' }}' },
-                { label: 'Area / Region / City / Province / Barangay', value: '{{ $cooperative->area ?? 'NCR, Manila, Sampaloc' }}' },
-                { label: 'Business Address', value: '{{ $cooperative->address ?? '123 Sample St, Sampaloc, Manila' }}' },
-                { label: 'Contact Person', value: '{{ $cooperative->contact_person ?? 'Juan P. Dela Cruz Jr.' }}' },
-                { label: 'E-mail', value: '{{ $cooperative->email ?? 'sample@email.com' }}' },
-                { label: 'Contact Numbers', value: '{{ $cooperative->contact_numbers ?? '(02) 8123-4567 / 0917-123-4567' }}' },
-                { label: 'SSS Employer Registration Number', value: '{{ $cooperative->sss_number ?? 'SSS-123456789' }}' },
-                { label: 'No. Of SSS Enrolled Employees', value: '{{ $cooperative->sss_employees ?? '25' }}' },
-                { label: 'Pag-IBIG Employer Registration Number', value: '{{ $cooperative->pagibig_number ?? 'PAGIBIG-123456789' }}' },
-                { label: 'No. Of Pagibig Enrolled Employees', value: '{{ $cooperative->pagibig_employees ?? '22' }}' },
-                { label: 'PhilHealth Employer Registration Number', value: '{{ $cooperative->philhealth_number ?? 'PH-123456789' }}' },
-                { label: 'No. Of PhilHealth Enrolled Employees', value: '{{ $cooperative->philhealth_employees ?? '20' }}' },
-                { label: 'BIR TIN Number', value: '{{ $cooperative->bir_tin ?? '123-456-789-000' }}' },
-                { label: 'BIR Tax Exemption Number', value: '{{ $cooperative->bir_exemption ?? 'BIR-EXEMPT-2024-001' }}' },
-                { label: 'BIR Tax Exemption Validity Date', value: '{{ $cooperative->bir_validity ?? '2026-01-15' }}' },
-                { label: 'Latest Date of Assess and Assist Activity', value: '{{ $cooperative->assist_date ?? '2023-11-30' }}' },
-                { label: 'Latest Date of Financial Management Assistance (FMA)', value: '{{ $cooperative->fma_date ?? '2023-10-15' }}' }
+                { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2025-001' }}' },
+                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Metro Transport Cooperative' }}' },
+                { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'MTC' }}' },
+                { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Provisional' }}' },
+                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2025-02-01' }}' },
+                { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2025-002' }}' },
+                { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2024-12-15' }}' },
+                { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Public Transport Operators' }}' },
+                { label: 'Membership Fee (per by-laws)', value: '{{ $cooperative->membership_fee ?? 'PHP 1,500.00' }}' },
+                { label: 'Area / Region / City / Province / Barangay', value: '{{ $cooperative->area ?? 'NCR, Quezon City, Barangay Central' }}' },
+                { label: 'Business Address', value: '{{ $cooperative->address ?? '456 Metro Ave, Quezon City' }}' },
+                { label: 'Contact Person', value: '{{ $cooperative->contact_person ?? 'Maria P. Santos' }}' },
+                { label: 'E-mail', value: '{{ $cooperative->email ?? 'info@metrotransportcoop.com' }}' },
+                { label: 'Contact Numbers', value: '{{ $cooperative->contact_numbers ?? '(02) 8123-7890 / 0917-987-6543' }}' },
+                { label: 'SSS Employer Registration Number', value: '{{ $cooperative->sss_number ?? 'SSS-987654321' }}' },
+                { label: 'No. Of SSS Enrolled Employees', value: '{{ $cooperative->sss_employees ?? '30' }}' },
+                { label: 'Pag-IBIG Employer Registration Number', value: '{{ $cooperative->pagibig_number ?? 'PAGIBIG-987654321' }}' },
+                { label: 'No. Of Pagibig Enrolled Employees', value: '{{ $cooperative->pagibig_employees ?? '25' }}' },
+                { label: 'PhilHealth Employer Registration Number', value: '{{ $cooperative->philhealth_number ?? 'PH-987654321' }}' },
+                { label: 'No. Of PhilHealth Enrolled Employees', value: '{{ $cooperative->philhealth_employees ?? '22' }}' },
+                { label: 'BIR TIN Number', value: '{{ $cooperative->bir_tin ?? '987-654-321-000' }}' },
+                { label: 'BIR Tax Exemption Number', value: '{{ $cooperative->bir_exemption ?? 'BIR-EXEMPT-2025-002' }}' },
+                { label: 'BIR Tax Exemption Validity Date', value: '{{ $cooperative->bir_validity ?? '2027-02-01' }}' },
+                { label: 'Latest Date of Assess and Assist Activity', value: '{{ $cooperative->assist_date ?? '2024-12-30' }}' },
+                { label: 'Latest Date of Financial Management Assistance (FMA)', value: '{{ $cooperative->fma_date ?? '2024-11-15' }}' }
             ],
             membership: [
-                { label: 'ENTRY YEAR', value: '{{ $cooperative->entry_year ?? '2023' }}' },
-                { label: 'DRIVER', value: '{{ $cooperative->driver_members ?? '45' }}' },
-                { label: 'OPERATOR/INVESTOR', value: '{{ $cooperative->operator_members ?? '30' }}' },
-                { label: 'ALLIED WORKERS', value: '{{ $cooperative->allied_members ?? '20' }}' },
-                { label: 'OTHER TYPE OF MEMBER', value: '{{ $cooperative->other_members ?? '5' }}' },
-                { label: 'TOTAL MEMBERS', value: '{{ $cooperative->total_members ?? '100' }}' },
+                { label: 'ENTRY YEAR', value: '{{ $cooperative->entry_year ?? '2025' }}' },
+                { label: 'DRIVER', value: '{{ $cooperative->driver_members ?? '50' }}' },
+                { label: 'OPERATOR/INVESTOR', value: '{{ $cooperative->operator_members ?? '35' }}' },
+                { label: 'ALLIED WORKERS', value: '{{ $cooperative->allied_members ?? '15' }}' },
+                { label: 'OTHER TYPE OF MEMBER', value: '{{ $cooperative->other_members ?? '10' }}' },
+                { label: 'TOTAL MEMBERS', value: '{{ $cooperative->total_members ?? '110' }}' },
                 { label: 'SPECIAL TYPE', value: '{{ $cooperative->special_type ?? 'N/A' }}' },
                 { label: 'STATUS OF MEMBER', value: '{{ $cooperative->member_status ?? 'Active' }}' }
             ],
             employment: {
-                headers: ['', 'PROBATIONARY (Male)', 'PROBATIONARY (Female)', 'REGULAR (Male)', 'REGULAR (Female)'],
+                headers: ['PROBATIONARY (Male)', 'PROBATIONARY (Female)', 'REGULAR (Male)', 'REGULAR (Female)'],
                 rows: [
                     {
                         category: 'EMPLOYEES (DRIVERS)',
-                        values: ['15', '5', '40', '10']
+                        values: ['20', '5', '45', '12']
                     },
                     {
                         category: 'MANAGEMENT STAFF',
-                        values: ['3', '4', '8', '10']
+                        values: ['4', '2', '10', '5']
                     },
                     {
                         category: 'EMPLOYEES (ALLIED WORKERS)',
-                        values: ['5', '7', '12', '8']
+                        values: ['6', '3', '15', '7']
                     },
                     {
                         category: 'TOTAL',
-                        values: ['23', '16', '60', '28']
+                        values: ['30', '10', '70', '24']
                     }
                 ]
             },
@@ -81,35 +81,22 @@
                 rows: [
                     {
                         mode: 'PUJ',
-                        type: 'Traditional',
-                        values: ['5', '25', '8', '22', '12', '18']
-                    },
-                    {
-                        mode: 'PUJ',
                         type: 'Modern',
-                        values: ['10', '0', '15', '0', '20', '0']
+                        values: ['12', '2', '18', '3', '25', '5']
                     },
-                    {
-                        mode: 'UV Express',
-                        type: 'Van',
-                        values: ['3', '12', '5', '10', '8', '8']
-                    }
+
                 ]
             },
             franchise: {
                 headers: ['CGS Number', 'CGS Date of Issuance', 'CGS Expiration Date'],
                 rows: [
                     {
-                        year: '2020',
-                        values: ['CGS-2020-001', '2020-01-15', '2025-01-14']
-                    },
-                    {
                         year: '2021',
-                        values: ['CGS-2021-002', '2021-03-22', '2026-03-21']
+                        values: ['CGS-2021-001', '2021-03-01', '2026-02-28']
                     },
                     {
                         year: '2022',
-                        values: ['CGS-2022-003', '2022-05-30', '2027-05-29']
+                        values: ['CGS-2022-002', '2022-04-15', '2027-04-14']
                     }
                 ]
             },
@@ -117,13 +104,13 @@
                 headers: ['Role', 'First Name', 'Last Name', 'M.I.', 'Suffix', 'Term In Office', 'Mobile No.', 'E-mail'],
                 rows: [
                     {
-                        values: ['Chairperson', 'Juan', 'Dela Cruz', 'P', 'Jr.', '2022-2024', '0917-123-4567', 'juan@email.com']
+                        values: ['Chairperson', 'Carlos', 'Mendoza', 'A', '', '2023-2025', '0917-123-4567', 'carlos@email.com']
                     },
                     {
-                        values: ['Vice-Chairperson', 'Maria', 'Santos', 'L', '', '2022-2024', '0918-234-5678', 'maria@email.com']
+                        values: ['Vice-Chairperson', 'Liza', 'Garcia', 'B', '', '2023-2025', '0918-234-5678', 'liza@email.com']
                     },
                     {
-                        values: ['Secretary', 'Pedro', 'Reyes', 'M', '', '2022-2024', '0919-345-6789', 'pedro@email.com']
+                        values: ['Secretary', 'Rafael', 'Lopez', 'C', '', '2023-2025', '0919-345-6789', 'rafael@email.com']
                     }
                 ]
             },
@@ -131,13 +118,13 @@
                 headers: ['ENTRY YEAR', 'ASSETS', 'LIABILITIES', 'PAID-UP', 'AUTHORIZED', 'STATUTORY FUNDS', 'RESERVE FUND', 'EDUCATION FUND', 'OPT. FUND', 'CDF', 'INTEREST ON CAPITAL', 'PATRONAGE REFUND', 'DUE TO UNION/FEDERATION'],
                 rows: [
                     {
-                        values: ['2020', '5,000,000', '2,000,000', '3,000,000', '10,000,000', '500,000', '300,000', '150,000', '50,000', '100,000', '200,000', '150,000', '50,000']
+                        values: ['2021', '7,000,000', '3,000,000', '4,000,000', '12,000,000', '600,000', '400,000', '200,000', '70,000', '150,000', '300,000', '250,000', '80,000']
                     },
                     {
-                        values: ['2021', '6,500,000', '2,500,000', '4,000,000', '10,000,000', '650,000', '400,000', '200,000', '50,000', '120,000', '250,000', '180,000', '60,000']
+                        values: ['2022', '9,000,000', '4,000,000', '5,000,000', '12,000,000', '800,000', '500,000', '300,000', '100,000', '200,000', '400,000', '300,000', '90,000']
                     },
                     {
-                        values: ['2022', '8,000,000', '3,000,000', '5,000,000', '10,000,000', '800,000', '500,000', '250,000', '50,000', '150,000', '300,000', '200,000', '70,000']
+                        values: ['2023', '10,500,000', '4,500,000', '6,000,000', '12,000,000', '1,000,000', '600,000', '350,000', '120,000', '250,000', '500,000', '400,000', '100,000']
                     }
                 ]
             },
@@ -145,13 +132,13 @@
                 headers: ['Date Acquired', 'Amount', 'Source', 'Status/Remarks'],
                 rows: [
                     {
-                        values: ['2020-05-15', '500,000', 'Department of Transportation', 'Fully utilized']
+                        values: ['2021-06-15', '600,000', 'Department of Transportation', 'Fully utilized']
                     },
                     {
-                        values: ['2021-08-22', '750,000', 'Local Government', 'Ongoing project']
+                        values: ['2022-09-10', '800,000', 'Local Government', 'Ongoing project']
                     },
                     {
-                        values: ['2022-03-10', '300,000', 'Private Foundation', 'Completed']
+                        values: ['2023-01-20', '400,000', 'Private Foundation', 'Completed']
                     }
                 ]
             },
@@ -159,13 +146,13 @@
                 headers: ['Financing Institution/s', 'Date Acquired', 'Amount of Loan', 'Utilization', 'Status/Remarks'],
                 rows: [
                     {
-                        values: ['Development Bank', '2020-06-10', '2,000,000', 'Vehicle Acquisition', 'Fully paid']
+                        values: ['Metro Bank', '2021-05-10', '3,000,000', 'Vehicle Acquisition', 'Fully paid']
                     },
                     {
-                        values: ['Cooperative Bank', '2021-04-15', '1,500,000', 'Operational Expenses', 'Ongoing payment']
+                        values: ['Cooperative Bank', '2022-03-15', '2,000,000', 'Operational Expenses', 'Ongoing payment']
                     },
                     {
-                        values: ['Government Program', '2022-02-28', '3,000,000', 'Modern Jeepney Purchase', 'Current']
+                        values: ['Government Program', '2023-02-28', '4,000,000', 'Modern Jeepney Purchase', 'Current']
                     }
                 ]
             },
@@ -173,13 +160,13 @@
                 headers: ['Type', 'Nature of Business', 'Starting Capital', 'Capital to Date', 'Years of Existence', 'Status', 'Remarks'],
                 rows: [
                     {
-                        values: ['Retail', 'Auto Parts Store', '500,000', '750,000', '3', 'Operational', 'Growing steadily']
+                        values: ['Retail', 'Fuel Station', '1,000,000', '1,500,000', '4', 'Operational', 'Steady growth']
                     },
                     {
-                        values: ['Service', 'Vehicle Repair Shop', '800,000', '1,200,000', '2', 'Operational', 'Profitable']
+                        values: ['Service', 'Vehicle Maintenance', '600,000', '900,000', '3', 'Operational', 'Profitable']
                     },
                     {
-                        values: ['Transport', 'Shuttle Service', '1,000,000', '1,500,000', '1', 'Operational', 'Expanding']
+                        values: ['Transport', 'Shuttle Service', '1,200,000', '1,800,000', '2', 'Operational', 'Expanding']
                     }
                 ]
             },
@@ -187,35 +174,30 @@
                 headers: ['Title of Training', 'Start Date', 'End Date', 'No. of Attendees', 'Remarks'],
                 rows: [
                     {
-                        values: ['Cooperative Management', '2022-01-15', '2022-01-16', '30', 'Successful completion']
+                        values: ['Leadership Training', '2023-01-10', '2023-01-12', '40', 'Successful completion']
                     },
                     {
-                        values: ['Financial Literacy', '2022-03-20', '2022-03-20', '25', 'Well-received']
+                        values: ['Safety Protocols', '2023-03-15', '2023-03-15', '30', 'Well-received']
                     },
                     {
-                        values: ['Defensive Driving', '2022-05-10', '2022-05-12', '45', 'Mandatory for all drivers']
+                        values: ['Customer Service', '2023-05-20', '2023-05-22', '50', 'Mandatory for all staff']
                     }
                 ]
             },
             scholarships: {
-                headers: ['Course Taken', 'No. of TC Scholar Beneficiary', 'Remarks'],
+                headers: ['Course Taken', 'Scholarship Program','No. of TC Scholar Beneficiary', 'Remarks'],
                 rows: [
                     {
-                        values: ['Business Administration', '5', 'Ongoing']
+                        values: ['NC II - Driving', 'TESDA Tsuper Iskolar', '10', 'Ongoing']
                     },
-                    {
-                        values: ['Automotive Technology', '8', 'Completed by 3']
-                    },
-                    {
-                        values: ['Mechanical Engineering', '2', 'Ongoing']
-                    }
                 ]
             },
+
             cetos: {
-                headers: ['', 'Members with CETOS (2020)', 'Members without CETOS (2020)', 'TOTAL (2020)', 'Members with CETOS (2021)', 'Members without CETOS (2021)', 'TOTAL (2021)', 'Members with CETOS (2022)', 'Members without CETOS (2022)', 'TOTAL (2022)'],
+                headers: ['Members with CETOS (2020)', 'Members without CETOS (2020)', 'TOTAL (2020)', 'Members with CETOS (2021)', 'Members without CETOS (2021)', 'TOTAL (2021)', 'Members with CETOS (2022)', 'Members without CETOS (2022)', 'TOTAL (2022)'],
                 rows: [
                     {
-                        values: ['', '20', '30', '50', '35', '15', '50', '45', '5', '50']
+                        values: ['25', '35', '60', '30', '20', '50', '40', '10', '50']
                     }
                 ]
             },
@@ -223,13 +205,13 @@
                 headers: ['Awarding Body', 'Nature', 'Date Received', 'Remarks'],
                 rows: [
                     {
-                        values: ['City Government', 'Best Transport Cooperative', '2020-12-10', 'Annual Recognition']
+                        values: ['City Government', 'Best Transport Cooperative', '2021-12-10', 'Annual Recognition']
                     },
                     {
-                        values: ['Department of Transportation', 'Service Excellence', '2021-06-15', 'National Award']
+                        values: ['Department of Transportation', 'Service Excellence', '2022-06-15', 'National Award']
                     },
                     {
-                        values: ['Cooperative Development Authority', 'Most Improved Cooperative', '2022-02-25', 'Regional Recognition']
+                        values: ['Cooperative Development Authority', 'Most Innovative Cooperative', '2023-02-25', 'Regional Recognition']
                     }
                 ]
             }
@@ -257,25 +239,15 @@
     <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Transport Cooperative</h1>
-            <div class="flex space-x-2">
-                <div class="relative">
-                    <input type="text"
-                           x-model="searchQuery"
-                           placeholder="Search..."
-                           class="px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button x-show="searchQuery"
-                            @click="searchQuery = ''"
-                            class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
-                <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
-                    ← Back
-                </button>
-            </div>
         </div>
+
+        <div class="flex justify-between mb-4">
+            <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                ← Back
+            </button>
+            <a href="{{ route('edit.cooperative') }}" class="text-blue-600 hover:underline">Edit</a>
+        </div>
+
         <div class="flex gap-6">
             <!-- Include Navigation Menu -->
             @include('components.navigation-menu')

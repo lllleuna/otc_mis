@@ -48,4 +48,11 @@ class TransportCoopController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Record approved successfully!');
     }
+    public function edit($id)
+    {
+        // Fetch the cooperative details using the ID
+        $coop = Coop::findOrFail($id);
+        return view('components.edit-content', compact('coop'));
+    }
+
 }
