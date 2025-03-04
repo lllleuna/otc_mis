@@ -33,22 +33,26 @@
         <template x-if="tab === 'general' && Array.isArray(cooperativeData[tab])">
             <div class="space-y-8">
                 <!-- Cooperative Identity Section -->
-                <div>
-                    <h3 class="text-lg font-medium text-gray-700 mb-3 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                        </svg>
-                        Cooperative Identity
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <template x-for="item in cooperativeData[tab].filter(i =>
-                            ['Transport Cooperative Name', 'Short Name', 'Common Bond of Membership', 'Membership Fee (per by-laws)'].includes(i.label))"
-                            :key="item.label">
-                            <div class="p-4 rounded-lg border border-gray-200 hover:shadow-md transition">
-                                <div class="text-sm text-gray-500 mb-1" x-text="item.label"></div>
-                                <div class="font-semibold text-lg text-gray-800" x-text="item.value"></div>
-                            </div>
-                        </template>
+                <div class="flex-1 bg-">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <span class="bg-blue-100 p-2 rounded-full mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </span>
+                            <h2 class="text-xl font-semibold text-gray-800">Cooperative Identity</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <template x-for="item in cooperativeData.general.filter(i =>
+                                ['Transport Cooperative Name', 'Short Name', 'Common Bond of Membership', 'Membership Fee (per by-laws)'].includes(i.label))" :key="item.label">
+                                <div class="p-4 rounded-lg border border-gray-200 hover:shadow-md transition">
+                                    <div class="text-sm text-gray-500 mb-1" x-text="item.label"></div>
+                                    <div class="font-semibold text-lg text-gray-800" x-text="item.value"></div>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                 </div>
 
@@ -100,8 +104,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
-                        Government Registrations
-                    </h3>
+                        Government Registrations</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <template x-for="item in cooperativeData[tab].filter(i =>
                             ['SSS Employer Registration Number', 'No. Of SSS Enrolled Employees',
@@ -161,7 +164,7 @@
                     <template x-for="(row, rowIndex) in tab === 'finance' && selectedYear !== 'all' ? cooperativeData[tab].rows.filter(r => r.year === selectedYear) : cooperativeData[tab].rows" :key="rowIndex">
                         <div class="rounded-lg border border-gray-200 overflow-hidden bg-white hover:shadow-md transition">
                             <!-- Card Header -->
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                            <div class="bg-gray -50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                                 <h3 class="font-medium text-gray-700" x-text="tab === 'units' ? row.mode + ' - ' + row.type :
                                        tab === 'franchise' ? 'Year ' + row.year :
                                        tab === 'employment' || tab === 'cetos' ? row.category :
@@ -171,7 +174,7 @@
                                 <button @click="row.expanded = !row.expanded" class="text-gray-500 hover:text-gray-700 focus:outline-none">
                                     <span x-show="!row.expanded">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0 v6m0-6h6m-6 0H6" />
                                         </svg>
                                     </span>
                                     <span x-show="row.expanded">
@@ -205,13 +208,66 @@
             </div>
         </template>
 
-        <!-- Empty State -->
+        <!-- Proof Documents Section -->
         <template x-if="!cooperativeData[tab]">
-            <div class="text-center py-12">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                </svg>
-                <p class="text-gray-500 text-lg">No data available for this section</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-8">
+                <!-- Letter of Request Card -->
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-medium text-gray-700 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Letter of Request
+                        </h3>
+                    </div>
+                    <div class="p-4">
+                        <img src="{{ asset('images/letter_request.jpg') }}" alt="Letter Request" class="w-full h-auto rounded shadow">
+                        <div class="mt-4 text-sm text-gray-600">
+                            Official letter of request for Certificate of Good Standing
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proof of Compliance Card -->
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-medium text-gray-700 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Proof of Compliance
+                        </h3>
+                    </div>
+                    <div class="p-4">
+                        <img src="{{ asset('images/proof_of_compliance.jpg') }}" alt="Proof of Compliance" class="w-full h-auto rounded shadow">
+                        <div class="mt-4 text-sm text-gray-600">
+                            Documentation verifying compliance with regulatory requirements
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Proof of Compliance Card -->
+                 <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-medium text-gray-700 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Management Agreement
+                        </h3>
+                    </div>
+                    <div class="p-4">
+                        <object data="{{ asset('images/Requirements-Management-Agreement.pdf') }}" type="application/pdf" width="100%" height="500">
+                            <p>It seems your browser does not support embedded PDFs. You can <a href="{{ asset('images/Requirements-Management-Agreement.pdf') }}">download it here</a>.</p>
+                        </object>
+                        <div class="mt-4 text-sm text-gray-600">
+                            Documentation verifying compliance with regulatory requirements
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </template>
     </div>
