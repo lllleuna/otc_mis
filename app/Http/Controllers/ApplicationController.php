@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Application;
 use App\Models\User;
 use App\Models\ApplicationStatusHistory;
@@ -95,3 +96,4 @@ class ApplicationController extends Controller
     }
 
 }
+

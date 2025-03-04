@@ -84,5 +84,8 @@
             <x-modal-close-button onclick="closeModal('modalCreate')" />
         </x-slot:closebtnSlot>
         @include('users.create')
+
     </x-modal>
+
 </x-layout>
+@include('components.footer')

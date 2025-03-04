@@ -8,7 +8,7 @@ use App\Http\Controllers\ApplicationController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
-
+// Dashboard Route
 Route::get('/dashboard', function () {
     if (!auth()->user()) {
         return redirect('auth.login'); // or any other page
@@ -17,15 +17,28 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified']);
 
+// Password Update Route
 Route::get('/pass-update', function () {
     return view('auth.pass-update');
 });
 
+// Transport Cooperative Show Route
+Route::get('/tc/show', function () {
+    return view('tc.show');
+})->middleware('auth');
 
+Route::get('/edit-cooperative', function () {
+    return view('components.edit-content');
+})->name('edit.cooperative');
+
+// Resource Routes for Transport Cooperative and Users
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
-
 Route::resource('users', RegisteredUserController::class)->middleware('auth');
+
+// User Password Reset Route
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
+
+// User Search Route
 Route::get('/search', [RegisteredUserController::class, 'search']);
 
 // Route::get('application', [ApplicationController::class, 'index']);
@@ -33,6 +46,7 @@ Route::get('/search', [RegisteredUserController::class, 'search']);
 // Route::get('application/{application}', [ApplicationController::class, 'show']);
 // Route::post('/application/{application}', [ApplicationController::class, 'store']);
 
+// Authentication Routes
 Route::get('/', [SessionController::class, 'index'])->name('login');
 Route::post('/', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
