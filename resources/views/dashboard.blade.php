@@ -3,6 +3,10 @@
     <x-slot:title>Dashboard</x-slot:title>
 
     <div class="container mx-auto">
+        <a href="{{ route('backup.index') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            Backup Data
+        </a>
+        
         <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Management Dashboard</h1>
         <div class="bg-white rounded-lg shadow-md p-6 mt-6">
              <h2 class="text-xl font-semibold mb-4 text-gray-700">Summary</h2>
