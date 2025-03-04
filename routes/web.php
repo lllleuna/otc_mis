@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TransportCoopController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\BackupController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -75,3 +76,9 @@ Route::post('/accreditation/evaluate/{id}', [ApplicationController::class, 'stor
 Route::get('/accreditation/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
 Route::post('/accreditation/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
 
+// Admin Feature
+Route::middleware(['auth'])->group(function () {
+    Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+    Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
+    Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
+});
