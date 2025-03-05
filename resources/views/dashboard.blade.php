@@ -81,6 +81,7 @@
                             Generate Report
                         </button>
                     </div>
+
                 </div>
 
 
@@ -125,6 +126,7 @@
                     <button class="bg-green-500 text-white px-4 py-2 rounded-md">Mark as Done</button>
                 </div>
 
+                @can('admin-access')
                 <div class="flex items-center justify-between bg-blue-100 p-4 rounded-md">
                     <div>
                         <h3 class="font-semibold text-blue-700">Generate Monthly Reports</h3>
@@ -136,6 +138,7 @@
                         </button>
                     </a>
                 </div>
+                @endcan
             </div>
         </div>
     </div>
@@ -151,17 +154,17 @@
             // Transaction Status Chart (Sample Data)
             var transactionStatusChart = new ApexCharts(document.getElementById("transactionStatusChart"), {
                 series: [{
-                        name: 'Evaluated',
-                        data: [50, 60, 45, 70, 65, 50, 55, 60, 65, 75, 80, 90]
-                    },
-                    {
-                        name: 'In Progress',
-                        data: [30, 20, 25, 15, 30, 35, 40, 45, 50, 55, 60, 65]
-                    },
-                    {
-                        name: 'Completed',
-                        data: [20, 25, 30, 25, 25, 20, 25, 30, 35, 40, 45, 50]
-                    }
+                    name: 'Evaluated',
+                    data: [50, 60, 45, 70, 65, 50, 55, 60, 65, 75, 80, 90]
+                },
+                {
+                    name: 'In Progress',
+                    data: [30, 20, 25, 15, 30, 35, 40, 45, 50, 55, 60, 65]
+                },
+                {
+                    name: 'Completed',
+                    data: [20, 25, 30, 25, 25, 20, 25, 30, 35, 40, 45, 50]
+                }
                 ],
                 chart: {
                     type: 'bar',

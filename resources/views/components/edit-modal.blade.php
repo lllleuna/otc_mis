@@ -33,7 +33,7 @@
                     </div>
                     <div>
                         <label class="block font-medium mb-1 text-sm">Submitted Documents</label>
-                        <a :href="`/downloads/${transactionData['Submitted Documents']}`"
+                        <a href=""
                            class="block w-full border rounded-md p-2 bg-gray-100 text-blue-600 hover:underline"
                            target="_blank" download
                            x-text="transactionData['Submitted Documents']"></a>

@@ -68,10 +68,14 @@ contains logo, profile name & icon, and navigation links
             <div class="m-auto w-fit items-center px-3 py-2">
 
                 <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
-                <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
+                @can('admin-access')
+                    <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
+                @endcan
                 <x-nav-link href="/tc" :active="request()->is('tc*')">Transport Cooperatives</x-nav-link>
-                <x-nav-link href="{{ route('accreditation.index') }}" :active="request()->is('accreditation*')">Accreditation</x-nav-link>
-
+                @can('employee-access')
+                    <x-nav-link href="{{ route('accreditation.index') }}"
+                        :active="request()->is('accreditation*')">Accreditation</x-nav-link>
+                @endcan
             </div>
         </header>
         <main>
