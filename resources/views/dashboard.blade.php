@@ -125,26 +125,24 @@
                     <button class="bg-green-500 text-white px-4 py-2 rounded-md">Mark as Done</button>
                 </div>
 
-                @can('admin-access')
-                    <div class="flex items-center justify-between bg-blue-100 p-4 rounded-md">
-                        <div>
-                            <h3 class="font-semibold text-blue-700">Generate Monthly Reports</h3>
-                            <p class="text-sm text-gray-600">Deadline: 28th Feb, 2025</p>
-                        </div>
-                        <a href="{{ route('backup.index') }}" class="bg-blue-500 text-white px-5 py-2 rounded-md">
-                            <button>
-                                Backup Data
-                            </button>
-                        </a>
+                <div class="flex items-center justify-between bg-blue-100 p-4 rounded-md">
+                    <div>
+                        <h3 class="font-semibold text-blue-700">Generate Monthly Reports</h3>
+                        {{-- <p class="text-sm text-gray-600">Deadline: 28th Feb, 2025</p> --}}
                     </div>
-                @endcan
+                    <a href="{{ route('backup.index') }}" class="bg-blue-500 text-white px-5 py-2 rounded-md">
+                        <button>
+                            Backup Data
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
 
-<!-- Footer -->
-@include('components.footer')
+    <!-- Footer -->
+    @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
