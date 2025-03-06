@@ -7,8 +7,8 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex justify-between items-center mb-6">
             <div>
-                <h2 class="text-xl font-semibold mb-2">Recent Entries</h2>
-                <p class="text-gray-700">View the status of transaction records and activities</p>
+                <h2 class="text-xl font-semibold mb-2">Transaction Monitoring</h2>
+                <p class="text-gray-700">Track all changes and activities for transportation cooperative applications</p>
             </div>
         </div>
 
@@ -26,12 +26,12 @@
                     </select>
                 </div>
                 <div class="w-48">
-                    <label for="type-filter" class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                    <label for="type-filter" class="block text-sm font-medium text-gray-700 mb-1">Type of Application</label>
                     <select id="type-filter" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3">
                         <option value="all">All Types</option>
-                        <option value="franchise">Franchise Application</option>
-                        <option value="route">Route Modification</option>
-                        <option value="vehicle">Vehicle Replacement</option>
+                        <option value="franchise">Accreditation</option>
+                        <option value="route">Renewal of Accreditation</option>
+                        <option value="vehicle">Issuance of Certificate of Good Standing (CGS)</option>
                     </select>
                 </div>
                 <div class="w-48">
@@ -60,9 +60,9 @@
                 <thead>
                     <tr class="bg-gray-50">
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ref No.</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applicant</th>
-                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type of Application</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cooperative Name</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Update</th>
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
                     </tr>
@@ -71,8 +71,8 @@
                     <!-- Hardcoded Sample Data -->
                     <tr class="hover:bg-gray-50 cursor-pointer" data-type="franchise" data-status="pending" onclick="viewTransactionDetails('TRX-2024-001')">
                         <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-blue-600">TRX-2024-001</td>
-                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Franchise Application</td>
-                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Juan Dela Cruz</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Accreditation</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Bagong Pag-asa Transport Cooperative</td>
                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2025-02-22</td>
                         <td class="px-4 py-3 whitespace-nowrap">
                             <span class="px-2 py-1 inline-flex text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
@@ -92,21 +92,30 @@
                                         <div class="flex items-start">
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-xs text-gray-500">
-                                                    <span class="font-medium">2025-02-22 09:30</span> - Created by <span class="font-medium">Juan Dela Cruz</span>
+                                                    <span class="font-medium">2025-02-22 09:30</span> - <span class="font-medium">Juan Dela Cruz (Applicant)</span>
                                                 </p>
                                                 <p class="text-sm text-gray-700 mt-1">
-                                                    Application submitted with required documents.
+                                                    Submitted initial application with CDA registration, route map, and list of 15 vehicles.
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="flex items-start">
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-xs text-gray-500">
-                                                    <span class="font-medium">2025-02-22 09:45</span> - System <span class="font-medium">Automation</span>
+                                                    <span class="font-medium">2025-02-22 09:45</span> - <span class="font-medium">System</span>
                                                 </p>
                                                 <p class="text-sm text-gray-700 mt-1">
-                                                    Application queued for review.
-                                                    Assigned to Processing Department.
+                                                    Application assigned to Evaluator: Maria Garcia.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs text-gray-500">
+                                                    <span class="font-medium">2025-02-22 14:30</span> - <span class="font-medium">Maria Garcia (Evaluator)</span>
+                                                </p>
+                                                <p class="text-sm text-gray-700 mt-1">
+                                                    Initial review completed. Requested missing financial statement for past 2 years.
                                                 </p>
                                             </div>
                                         </div>
@@ -118,8 +127,8 @@
 
                     <tr class="hover:bg-gray-50 cursor-pointer" data-type="route" data-status="approved" onclick="viewTransactionDetails('TRX-2024-002')">
                         <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-blue-600">TRX-2024-002</td>
-                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Route Modification</td>
-                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Maria Santos</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Issuance of Certificate of Good Standing (CGS)</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Mabuhay Drivers Transport Cooperative</td>
                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2025-02-21</td>
                         <td class="px-4 py-3 whitespace-nowrap">
                             <span class="px-2 py-1 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800">
@@ -139,30 +148,40 @@
                                         <div class="flex items-start">
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-xs text-gray-500">
-                                                    <span class="font-medium">2025-02-21 09:15</span> - Created by <span class="font-medium">Maria Santos</span>
+                                                    <span class="font-medium">2025-02-21 09:15</span> - <span class="font-medium">Maria Santos (Coop Manager)</span>
                                                 </p>
                                                 <p class="text-sm text-gray-700 mt-1">
-                                                    Route modification request submitted.
+                                                    Requested CGS for bank loan application. Uploaded tax clearance and compliance reports.
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="flex items-start">
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-xs text-gray-500">
-                                                    <span class="font-medium">2025-02-21 10:30</span> - Reviewed by <span class="font-medium">John Supervisor</span>
+                                                    <span class="font-medium">2025-02-21 10:30</span> - <span class="font-medium">John Ramos (Records Officer)</span>
                                                 </p>
                                                 <p class="text-sm text-gray-700 mt-1">
-                                                    Initial review completed. Recommended for approval.
+                                                    Verified compliance history. No violations in past 24 months. Complete membership payments.
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="flex items-start">
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-xs text-gray-500">
-                                                    <span class="font-medium">2025-02-21 10:45</span> - Approved by <span class="font-medium">Admin User</span>
+                                                    <span class="font-medium">2025-02-21 11:15</span> - <span class="font-medium">Patricia Cruz (Legal Officer)</span>
                                                 </p>
                                                 <p class="text-sm text-gray-700 mt-1">
-                                                    Route modification approved. Notification sent to applicant.
+                                                    Legal review completed. No pending cases or liabilities found.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs text-gray-500">
+                                                    <span class="font-medium">2025-02-21 14:45</span> - <span class="font-medium">Atty. Santos (Department Head)</span>
+                                                </p>
+                                                <p class="text-sm text-gray-700 mt-1">
+                                                    Certificate of Good Standing approved and issued. Valid for 1 year.
                                                 </p>
                                             </div>
                                         </div>
@@ -174,8 +193,8 @@
 
                     <tr class="hover:bg-gray-50 cursor-pointer" data-type="vehicle" data-status="draft" onclick="viewTransactionDetails('TRX-2024-003')">
                         <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-blue-600">TRX-2024-003</td>
-                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Vehicle Replacement</td>
-                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Pedro Reyes</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Renewal of Accreditation</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">Bagong Sikap Transport Cooperative</td>
                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2025-02-20</td>
                         <td class="px-4 py-3 whitespace-nowrap">
                             <span class="px-2 py-1 inline-flex text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
@@ -195,10 +214,30 @@
                                         <div class="flex items-start">
                                             <div class="min-w-0 flex-1">
                                                 <p class="text-xs text-gray-500">
-                                                    <span class="font-medium">2025-02-20 16:30</span> - Drafted by <span class="font-medium">Pedro Reyes</span>
+                                                    <span class="font-medium">2025-02-20 16:30</span> - <span class="font-medium">Pedro Reyes (Coop Secretary)</span>
                                                 </p>
                                                 <p class="text-sm text-gray-700 mt-1">
-                                                    Initial draft of vehicle replacement application created.
+                                                    Started renewal application draft. Current accreditation expires on 2025-04-15.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs text-gray-500">
+                                                    <span class="font-medium">2025-02-20 16:45</span> - <span class="font-medium">Pedro Reyes (Coop Secretary)</span>
+                                                </p>
+                                                <p class="text-sm text-gray-700 mt-1">
+                                                    Uploaded updated member list (42 members) and vehicle inventory (28 units).
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs text-gray-500">
+                                                    <span class="font-medium">2025-02-20 17:10</span> - <span class="font-medium">Pedro Reyes (Coop Secretary)</span>
+                                                </p>
+                                                <p class="text-sm text-gray-700 mt-1">
+                                                    Saved as draft. Pending financial statements and annual general meeting minutes.
                                                 </p>
                                             </div>
                                         </div>

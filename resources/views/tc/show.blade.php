@@ -20,10 +20,10 @@
         cooperativeData: {
             general: [
                 { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2025-001' }}' },
-                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Metro Transport Cooperative' }}' },
+                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Metro Manila Transport Cooperative' }}' },
                 { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'MTC' }}' },
                 { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Provisional' }}' },
-                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2025-02-01' }}' },
+                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2023-03-15' }}' },
                 { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2025-002' }}' },
                 { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2024-12-15' }}' },
                 { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Public Transport Operators' }}' },
