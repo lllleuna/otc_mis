@@ -11,17 +11,21 @@ use Illuminate\Http\Request;
 
 // Dashboard Route
 Route::get('/dashboard', function () {
-    if (!auth()->user()) {
-        return redirect('auth.login'); // or any other page
+    $user = auth()->user();
+    
+    if (!$user) {
+        return redirect()->route('auth.login'); // Redirect to login if not authenticated
+    }
+
+    if (!$user->password_changed) {
+        return view('auth.update-password'); // Redirect to password change page
     }
 
     return view('dashboard');
 })->middleware(['auth', 'verified']);
 
-// Password Update Route
-Route::get('/pass-update', function () {
-    return view('auth.pass-update');
-});
+// password change requirement for new account
+Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
 
 // Transport Cooperative Show Route
 Route::get('/tc/show', function () {
@@ -36,7 +40,7 @@ Route::get('/edit-cooperative', function () {
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');
 
-// User Password Reset Route
+// For Admin to reset user's password
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
 
 // User Search Route

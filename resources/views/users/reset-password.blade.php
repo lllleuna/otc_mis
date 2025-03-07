@@ -1,3 +1,5 @@
+{{-- For admin to reset user's password --}}
+{{-- ---------------------------------- --}}
 <form action="/users/{{ $user->id }}/reset" method="POST">
     @csrf
     @method('PATCH') 

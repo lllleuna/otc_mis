@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 
 class RegisteredUserController extends Controller
 {
@@ -58,14 +59,14 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'email', 'unique:'.User::class],
             'password' => ['required', Password::min(12), 'confirmed']
         ]);
-
+    
+        $attributes['password_changed'] = false;
+    
         $user = User::create($attributes);
-
+    
         event(new Registered($user));
-
-        // Auth::login($user);
-
-        return redirect('/users');
+    
+        return redirect('/users')->with('success', 'User created successfully. They must change their password upon first login.');
     }
 
     public function edit(User $user) {
@@ -91,18 +92,34 @@ class RegisteredUserController extends Controller
         return redirect('/users/' . $user->id);
     }
 
+    // For admin to reset the user's password
     public function updatePassword(User $user)
     {
-        // Authorize if the user has permission (on hold...)
-
         $attributespass = request()->validate([
             'password' => ['required', Password::min(12), 'confirmed'],
         ]);
 
         $user->update([
             'password' => bcrypt($attributespass['password']),
+            'password_changed' => false,
         ]);
 
         return redirect('/users/' . $user->id);
+    }
+
+
+    // Password change requirement for newly created account
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|min:12|confirmed',
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->password_changed = true; 
+        $user->save();
+
+        return view('dashboard');
     }
 }
