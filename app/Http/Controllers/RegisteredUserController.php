@@ -57,9 +57,11 @@ class RegisteredUserController extends Controller
             'role' => ['required'],
             'employee_id_no' => ['required', 'unique:'.User::class],
             'email' => ['required', 'email', 'unique:'.User::class],
-            'password' => ['required', Password::min(12), 'confirmed']
+            'password' => ['required', Password::min(12), 'confirmed'],
+            'mobile_number' => ['required', 'regex:/^09[0-9]{9}$/', 'digits:11'],
         ]);
-    
+
+        $attributes['mobile_number'] = '63' . substr($attributes['mobile_number'], 1);
         $attributes['password_changed'] = false;
     
         $user = User::create($attributes);
@@ -73,10 +75,10 @@ class RegisteredUserController extends Controller
         return view('users.edit', ['user' => $user]);
     }
 
-    public function update(User $user) {
+    public function update(Request $request, User $user) {
         // Authorize (is the user has permission) on hold...
 
-        $attributes = request()->validate([
+        $attributes = $request->validate([
             'firstname' => ['required'],
             'middlename' => ['nullable'],
             'lastname' => ['required'],
@@ -85,6 +87,7 @@ class RegisteredUserController extends Controller
             'role' => ['required'],
             'employee_id_no' => ['required', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'mobile_number' => ['required', 'regex:/^63[0-9]{10}$/', 'digits:12'],
         ]);
         
         $user->update($attributes);

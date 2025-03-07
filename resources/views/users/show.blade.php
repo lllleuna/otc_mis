@@ -44,6 +44,11 @@
                         <span class="text-gray-700">{{ $user->division }}</span>
                     </li>
                     <li class="flex border-b py-2">
+                        <span class="font-bold w-24">Mobile No:</span>
+                        <span class="text-gray-700">{{ $user->mobile_number }}</span>
+                        <span class="text-gray-700 text-sm mx-2">verified</span>
+                    </li>
+                    <li class="flex border-b py-2">
                         <span class="font-bold w-24">Email:</span>
                         <span class="text-gray-700">{{ $user->email }}</span>
                         <span class="text-gray-700 text-sm mx-2">verified</span>

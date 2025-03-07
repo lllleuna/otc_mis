@@ -27,6 +27,11 @@ Route::get('/dashboard', function () {
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
 
+// OTP verification routes
+Route::get('/otp/verification', [SessionController::class, 'showOTPVerificationForm'])->name('otp.verification.form');
+Route::post('/otp/verification', [SessionController::class, 'verifyOTP'])->name('otp.verification');
+Route::post('/otp/resend', [SessionController::class, 'resendOTP'])->name('otp.resend');
+
 // Transport Cooperative Show Route
 Route::get('/tc/show', function () {
     return view('tc.show');
@@ -42,14 +47,11 @@ Route::resource('users', RegisteredUserController::class)->middleware('auth');
 
 // For Admin to reset user's password
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
+Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->name('users.update');
+
 
 // User Search Route
 Route::get('/search', [RegisteredUserController::class, 'search']);
-
-// Route::get('application', [ApplicationController::class, 'index']);
-// Route::get('application/approved', [ApplicationController::class, 'approved']);
-// Route::get('application/{application}', [ApplicationController::class, 'show']);
-// Route::post('/application/{application}', [ApplicationController::class, 'store']);
 
 // Authentication Routes
 Route::get('/', [SessionController::class, 'index'])->name('login');
