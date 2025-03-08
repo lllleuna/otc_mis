@@ -56,6 +56,7 @@ class TransportCoopController extends Controller
 
         $relatedModels = [
             'membership' => Membership::class,
+            'unit' => Unit::class,
             'employment' => Employment::class,
             'franchise' => Franchise::class,
             'cgs' => Cgs::class,

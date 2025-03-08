@@ -50,47 +50,44 @@
                 { label: 'SPECIAL TYPE', value: '{{ $membership->number_of_senior ?? 'N/A' }}' }
             ],
             employment: {
+            
                 headers: ['PROBATIONARY (Male)', 'PROBATIONARY (Female)', 'REGULAR (Male)', 'REGULAR (Female)'],
                 rows: [
                     {
                         category: 'EMPLOYEES (DRIVERS)',
-                        values: ['20', '5', '45', '12']
+                        values: ['{{ $employment->drivers_probationary_male ?? 'N/A' }}', '{{ $employment->drivers_probationary_female ?? 'N/A' }}', '{{ $employment->drivers_regular_male ?? 'N/A' }}', '{{ $employment->drivers_regular_female ?? 'N/A' }}']
                     },
                     {
                         category: 'MANAGEMENT STAFF',
-                        values: ['4', '2', '10', '5']
+                        values: ['{{ $employment->management_probationary_male ?? 'N/A' }}', '{{ $employment->management_probationary_female ?? 'N/A' }}', '{{ $employment->management_regular_male ?? 'N/A' }}', '{{ $employment->management_regular_female ?? 'N/A' }}']
                     },
                     {
                         category: 'EMPLOYEES (ALLIED WORKERS)',
-                        values: ['6', '3', '15', '7']
-                    },
-                    {
-                        category: 'TOTAL',
-                        values: ['30', '10', '70', '24']
+                        values: ['{{ $employment->allied_probationary_male ?? 'N/A' }}', '{{ $employment->allied_probationary_female ?? 'N/A' }}', '{{ $employment->allied_regular_male ?? 'N/A' }}', '{{ $employment->allied_regular_female ?? 'N/A' }}']
                     }
                 ]
             },
             units: {
-                headers: ['MODE OF SERVICE', 'TYPE OF UNIT', 'No. of Cooperatively Owned Units (2020)', 'No. of Individually Owned Units (2020)', 'No. of Cooperatively Owned Units (2021)', 'No. of Individually Owned Units (2021)', 'No. of Cooperatively Owned Units (2022)', 'No. of Individually Owned Units (2022)'],
+                headers: ['MODE OF SERVICE', 'TYPE OF UNIT', 'No. of Cooperatively Owned Units ', 'No. of Individually Owned Units '],
                 rows: [
                     {
                         mode: 'PUJ',
                         type: 'Modern',
-                        values: ['12', '2', '18', '3', '25', '5']
+                        values: ['{{ $unit->mode_of_service ?? 'N/A' }}', '{{ $unit->type_of_unit ?? 'N/A' }}', '{{ $unit->cooperatively_owned ?? 'N/A' }}', '{{ $unit->individually_owned ?? 'N/A' }}']
                     },
 
                 ]
             },
             franchise: {
-                headers: ['CGS Number', 'CGS Date of Issuance', 'CGS Expiration Date'],
+                headers: ['Route', 'CPC Case No.', 'Type of Franchise', 'Mode of Service', 'Type of Unit', 'Validity'],
                 rows: [
                     {
                         year: '2021',
-                        values: ['CGS-2021-001', '2021-03-01', '2026-02-28']
+                        values: ['{{ $franchise->route ?? 'N/A' }}', '{{ $franchise->cpc_case_number ?? 'N/A' }}', '{{ $franchise->type_of_franchise ?? 'N/A' }}', '{{ $franchise->mode_of_service ?? 'N/A' }}', '{{ $franchise->type_of_unit ?? 'N/A' }}', '{{ $franchise->validity ?? 'N/A' }}']
                     },
                     {
                         year: '2022',
-                        values: ['CGS-2022-002', '2022-04-15', '2027-04-14']
+                        values: ['{{ $franchise->route ?? 'N/A' }}', '{{ $franchise->cpc_case_number ?? 'N/A' }}', '{{ $franchise->type_of_franchise ?? 'N/A' }}', '{{ $franchise->mode_of_service ?? 'N/A' }}', '{{ $franchise->type_of_unit ?? 'N/A' }}', '{{ $franchise->validity ?? 'N/A' }}']
                     }
                 ]
             },
