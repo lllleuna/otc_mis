@@ -8,6 +8,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\BackupController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Models\GeneralInfo;
 
 // Dashboard Route
 Route::get('/dashboard', function () {
@@ -33,13 +34,25 @@ Route::post('/otp/verification', [SessionController::class, 'verifyOTP'])->name(
 Route::post('/otp/resend', [SessionController::class, 'resendOTP'])->name('otp.resend');
 
 // Transport Cooperative Show Route
-Route::get('/tc/show', function () {
-    return view('tc.show');
-})->middleware('auth');
+Route::get('/api/cooperatives', function (Request $request) {
+    return GeneralInfo::select(
+        'accreditation_no',
+        'name',
+        'common_bond_membership',
+        'accreditation_date',
+        'region'
+    )->get();
+});
+// In routes/web.php
+Route::get('/cooperatives/{accreditation_no}', [TransportCoopController::class, 'show'])->name('cooperative.details');
+Route::get('/cooperative/edit/{accreditation_no}', [TransportCoopController::class, 'edit'])->name('edit.cooperative');
 
-Route::get('/edit-cooperative', function () {
-    return view('components.edit-content');
-})->name('edit.cooperative');
+
+
+// Route::get('/tc/show', function () {
+//     return view('tc.show');
+// })->middleware('auth');
+
 
 // Resource Routes for Transport Cooperative and Users
 Route::resource('tc', TransportCoopController::class)->middleware('auth');

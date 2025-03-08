@@ -1,6 +1,6 @@
-<div x-data="transactionData()" class="p-8 border rounded-lg shadow-lg">
+<div x-data="transactionData()" x-init="fetchCooperatives()" class="p-8 border rounded-lg shadow-lg">
     <div class="relative mb-5">
-        <input type="text" placeholder="Search cooperatives..."
+        <input type="text" placeholder="Search cooperatives by accreditation no."
             class="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             x-model="searchQuery">
         <div class="absolute left-3 top-3">
@@ -13,29 +13,27 @@
     <table class="w-full divide-y divide-gray-200">
         <thead>
             <tr class="bg-gray-100">
+                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Accreditation No</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cooperative Name</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mode of Service</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Common Bond Membership</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of Accreditation</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service Area</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-            <template x-for="cooperative in filteredCooperatives()" :key="cooperative.id">
+            <template x-for="cooperative in filteredCooperatives()" :key="cooperative.accreditation_no">
                 <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.accreditation_no"></td>
                     <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.name"></td>
-                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.modeOfService"></td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 inline-flex text-xs font-semibold rounded-full"
-                            :class="cooperative.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'">
-                            <span x-text="cooperative.status"></span>
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-sm" x-text="cooperative.dateOfAccreditation"></td>
-                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.serviceArea"></td>
+                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.common_bond_membership"></td>
+                    <td class="px-6 py-4 text-sm" x-text="cooperative.accreditation_date"></td>
+                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.region"></td>
                     <td class="px-6 py-4 text-sm">
-                        <a href="/tc/show" class="text-blue-500 hover:underline">View More</a>
+                        <a :href="'/cooperatives/' + cooperative.accreditation_no"
+                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                            View More
+                        </a>
                     </td>
                 </tr>
             </template>
@@ -45,13 +43,13 @@
     <div class="flex justify-between mt-4">
         <button @click="currentPage = currentPage > 1 ? currentPage - 1 : 1"
                 :disabled="currentPage === 1"
-                class="px-3 py-1 bg-blue-900 text-white rounded-md disabled:opacity-90 hover:bg-gray-600 ">
+                class="px-3 py-1 bg-blue-900 text-white rounded-md disabled:opacity-90 hover:bg-gray-600">
             Previous
         </button>
         <span class="text-gray-700 self-center">Page <span x-text="currentPage"></span> of <span x-text="totalPages()"></span></span>
         <button @click="currentPage = currentPage < totalPages() ? currentPage + 1 : totalPages()"
                 :disabled="currentPage === totalPages()"
-                class="px-3 py-1 bg-blue-900 text-white rounded-md disabled:opacity-90 hover:bg-gray-600 ">
+                class="px-3 py-1 bg-blue-900 text-white rounded-md disabled:opacity-90 hover:bg-gray-600">
             Next
         </button>
     </div>
@@ -63,117 +61,54 @@
             searchQuery: '',
             currentPage: 1,
             itemsPerPage: 10,
-            cooperatives: [
-                {
-                    id: 1,
-                    name: 'Metro Manila Transport Cooperative',
-                    modeOfService: 'PUJ',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-03-15',
-                    serviceArea: 'Quezon City - Makati'
-                },
-                {
-                    id: 2,
-                    name: 'Mindanao Star Transport Cooperative',
-                    modeOfService: 'UV Express',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-01-10',
-                    serviceArea: 'Davao City'
-                },
-                {
-                    id: 3,
-                    name: 'Cebu United Transport Cooperative',
-                    modeOfService: 'Taxi',
-                    status: 'Active',
-                    dateOfAccreditation: '2022-11-05',
-                    serviceArea: 'Cebu City'
-                },
-                {
-                    id: 4,
-                    name: 'Luzon Express Cooperative',
-                    modeOfService: 'PUJ',
-                    status: 'Inactive',
-                    dateOfAccreditation: '2022-08-22',
-                    serviceArea: 'Baguio - La Trinidad'
-                },
-                {
-                    id: 5,
-                    name: 'Visayas Modern Transport Cooperative',
-                    modeOfService: 'Modern Jeepney',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-02-18',
-                    serviceArea: 'Iloilo City'
-                },
-                {
-                    id: 6,
-                    name: 'National Capital Region Transport Cooperative',
-                    modeOfService: 'PUB',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-04-30',
-                    serviceArea: 'Manila - Pasay'
-                },
-                {
-                    id: 7,
-                    name: 'Southern Tagalog Transport Cooperative',
-                    modeOfService: 'UV Express',
-                    status: 'Inactive',
-                    dateOfAccreditation: '2022-09-15',
-                    serviceArea: 'Batangas - Laguna'
-                },
-                {
-                    id: 8,
-                    name: 'Bicol Express Transport Cooperative',
-                    modeOfService: 'PUJ',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-05-12',
-                    serviceArea: 'Legazpi City'
-                },
-                {
-                    id: 9,
-                    name: 'Ilocos Transport Service Cooperative',
-                    modeOfService: 'Modern Jeepney',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-06-01',
-                    serviceArea: 'Laoag - Vigan'
-                },
-                {
-                    id: 10,
-                    name: 'Palawan Island Transport Cooperative',
-                    modeOfService: 'PUV',
-                    status: 'Active',
-                    dateOfAccreditation: '2023-01-25',
-                    serviceArea: 'Puerto Princesa City'
-                },
-                {
-                    id: 11,
-                    name: 'Zamboanga Peninsula Transport Cooperative',
-                    modeOfService: 'PUJ',
-                    status: 'Active',
-                    dateOfAccreditation: '2022-12-03',
-                    serviceArea: 'Zamboanga City'
-                },
-                {
-                    id: 12,
-                    name: 'CARAGA Region Transport Cooperative',
-                    modeOfService: 'UV Express',
-                    status: 'Inactive',
-                    dateOfAccreditation: '2022-10-17',
-                    serviceArea: 'Butuan City'
+            cooperatives: [], 
+            regionMapping: {},
+
+            async fetchRegions() {
+                try {
+                    let response = await fetch('https://psgc.gitlab.io/api/regions/');
+                    let regions = await response.json();
+                    this.regionMapping = regions.reduce((map, region) => {
+                        map[region.code] = region.name;
+                        return map;
+                    }, {});
+                } catch (error) {
+                    console.error('Error fetching region data:', error);
                 }
-            ],
+            },
+
+            async fetchCooperatives() {
+                try {
+                    await this.fetchRegions();
+                    let response = await fetch('/api/cooperatives');
+                    let data = await response.json();
+                    this.cooperatives = data.map(coop => ({
+                        ...coop,
+                        accreditation_date: new Date(coop.accreditation_date).toLocaleDateString('en-GB', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        }).replace(/(\d+) (\w+) (\d+)/, '$3 $2 $1'),
+                        region: this.regionMapping[coop.region] || "Unknown Region"
+                    }));
+                } catch (error) {
+                    console.error('Error fetching cooperatives:', error);
+                }
+            },
+
             filteredCooperatives() {
                 let filtered = this.cooperatives.filter(cooperative => {
                     return cooperative.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                        cooperative.modeOfService.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                        cooperative.status.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                        cooperative.serviceArea.toLowerCase().includes(this.searchQuery.toLowerCase());
+                        cooperative.accreditation_no.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                        cooperative.region.toLowerCase().includes(this.searchQuery.toLowerCase());
                 });
 
                 return filtered.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
             },
+
             totalPages() {
                 return Math.ceil(this.cooperatives.length / this.itemsPerPage);
             }
-        }
+        };
     }
 </script>

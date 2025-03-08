@@ -69,18 +69,18 @@ class GeneralInfoFactory extends Factory
                 '112402019', // Brgy. Buhangin, Davao City
                 '141102004', // Brgy. Irisan, Baguio City
             ]),
-            'business_address' => $this->faker->address,
+            'business_address' => fake()->randomNumber(3) . ' Block ' . fake()->randomDigit(),
             'email' => $this->faker->unique()->safeEmail,
-            'contact_no' => $this->faker->phoneNumber,
+            'contact_no' => fake()->regexify('63[0-9]{10}'),
             'contact_firstname' => $this->faker->firstName,
             'contact_lastname' => $this->faker->lastName,
             'contact_mid_initial' =>  $this->faker->lastName(),
             'contact_suffix' => $this->faker->optional()->randomElement(['Jr.', 'Sr.', 'II', 'III', 'IV']),
-            'employer_sss_reg_no' => $this->faker->optional()->regexify('[0-9]{10}'), // 10-digit SSS number
-            'employer_pagibig_reg_no' => $this->faker->optional()->regexify('[0-9]{12}'), // 12-digit Pag-IBIG number
-            'employer_philhealth_reg_no' => $this->faker->optional()->regexify('[0-9]{12}'), // 12-digit PhilHealth number
-            'bir_tin' => $this->faker->optional()->regexify('[0-9]{9}'), // 9-digit TIN number
-            'bir_tax_exemption_no' => $this->faker->optional()->regexify('[A-Z0-9]{5,10}'),
+            'employer_sss_reg_no' => fake()->regexify('[0-9]{10}'), // Standard 10-digit SSS number
+            'employer_pagibig_reg_no' => fake()->regexify('[0-9]{4}-[0-9]{4}-[0-9]{4}'), 
+            'employer_philhealth_reg_no' => fake()->regexify('[0-9]{2}-[0-9]{9}-[0-9]'),
+            'bir_tin' => fake()->regexify('[0-9]{3}-[0-9]{3}-[0-9]{3}'), 
+            'bir_tax_exemption_no' => fake()->regexify('[A-Z0-9]{5,10}'), 
             'created_at' => now(),
             'updated_at' => now(),
         ];

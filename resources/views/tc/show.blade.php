@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transport Cooperative Details</title>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen p-8"
     x-data="{
@@ -19,41 +17,37 @@
         },
         cooperativeData: {
             general: [
-                { label: 'OTC Accreditation Number', value: '{{ $cooperative->otc_number ?? 'OTC-2025-001' }}' },
-                { label: 'Transport Cooperative Name', value: '{{ $cooperative->name ?? 'Metro Manila Transport Cooperative' }}' },
-                { label: 'Short Name', value: '{{ $cooperative->short_name ?? 'MTC' }}' },
-                { label: 'Type of Accreditation', value: '{{ $cooperative->accreditation_type ?? 'Provisional' }}' },
-                { label: 'OTC Accreditation Date', value: '{{ $cooperative->otc_date ?? '2023-03-15' }}' },
-                { label: 'Cooperative Registration Number', value: '{{ $cooperative->registration_number ?? 'REG-2025-002' }}' },
-                { label: 'CDA Registration Date', value: '{{ $cooperative->cda_date ?? '2024-12-15' }}' },
-                { label: 'Common Bond of Membership', value: '{{ $cooperative->bond ?? 'Public Transport Operators' }}' },
-                { label: 'Membership Fee (per by-laws)', value: '{{ $cooperative->membership_fee ?? 'PHP 1,500.00' }}' },
-                { label: 'Area / Region / City / Province / Barangay', value: '{{ $cooperative->area ?? 'NCR, Quezon City, Barangay Central' }}' },
-                { label: 'Business Address', value: '{{ $cooperative->address ?? '456 Metro Ave, Quezon City' }}' },
-                { label: 'Contact Person', value: '{{ $cooperative->contact_person ?? 'Maria P. Santos' }}' },
-                { label: 'E-mail', value: '{{ $cooperative->email ?? 'info@metrotransportcoop.com' }}' },
-                { label: 'Contact Numbers', value: '{{ $cooperative->contact_numbers ?? '(02) 8123-7890 / 0917-987-6543' }}' },
-                { label: 'SSS Employer Registration Number', value: '{{ $cooperative->sss_number ?? 'SSS-987654321' }}' },
-                { label: 'No. Of SSS Enrolled Employees', value: '{{ $cooperative->sss_employees ?? '30' }}' },
-                { label: 'Pag-IBIG Employer Registration Number', value: '{{ $cooperative->pagibig_number ?? 'PAGIBIG-987654321' }}' },
-                { label: 'No. Of Pagibig Enrolled Employees', value: '{{ $cooperative->pagibig_employees ?? '25' }}' },
-                { label: 'PhilHealth Employer Registration Number', value: '{{ $cooperative->philhealth_number ?? 'PH-987654321' }}' },
-                { label: 'No. Of PhilHealth Enrolled Employees', value: '{{ $cooperative->philhealth_employees ?? '22' }}' },
-                { label: 'BIR TIN Number', value: '{{ $cooperative->bir_tin ?? '987-654-321-000' }}' },
-                { label: 'BIR Tax Exemption Number', value: '{{ $cooperative->bir_exemption ?? 'BIR-EXEMPT-2025-002' }}' },
-                { label: 'BIR Tax Exemption Validity Date', value: '{{ $cooperative->bir_validity ?? '2027-02-01' }}' },
-                { label: 'Latest Date of Assess and Assist Activity', value: '{{ $cooperative->assist_date ?? '2024-12-30' }}' },
-                { label: 'Latest Date of Financial Management Assistance (FMA)', value: '{{ $cooperative->fma_date ?? '2024-11-15' }}' }
+                { label: 'Accreditation Number', value: '{{ $generalinfo->accreditation_no }}' },
+                { label: 'Transport Cooperative Name', value: '{{ addslashes($generalinfo->name) }}' },
+                { label: 'Short Name', value: '{{ addslashes($generalinfo->short_name) }}' },
+                { label: 'Type of Accreditation', value: '{{ $generalinfo->accreditation_type }}' },
+                { label: 'Accreditation Date', value: '{{ $generalinfo->accreditation_date }}' },
+                { label: 'CDA Registration Number', value: '{{ $generalinfo->cda_registration_no }}' },
+                { label: 'CDA Registration Date', value: '{{ $generalinfo->cda_registration_date }}' },
+                { label: 'Common Bond of Membership', value: '{{ $generalinfo->common_bond_membership }}' },
+                { label: 'Membership Fee (per by-laws)', value: '{{ $generalinfo->membership_fee }}' },
+                { label: 'Area / Region / City / Province / Barangay', value: '{{ $generalinfo->region }}' },
+                { label: 'Business Address', value: '{{ addslashes($generalinfo->business_address) }}' },
+                { label: 'Contact Person', value: '{{ $generalinfo->contact_firstname . ' ' . $generalinfo->contact_lastname ?? 'Maria P. Santos' }}' },
+                { label: 'E-mail', value: '{{ $generalinfo->email ?? 'info@metrotransportcoop.com' }}' },
+                { label: 'Contact Number', value: '{{ $generalinfo->contact_no ?? '(02) 8123-7890 / 0917-987-6543' }}' },
+                { label: 'SSS Employer Registration Number', value: '{{ $generalinfo->employer_sss_reg_no ?? 'SSS-987654321' }}' },
+                { label: 'No. Of SSS Enrolled Employees', value: '{{ $generalinfo->sss_employees ?? '30' }}' },
+                { label: 'Pag-IBIG Employer Registration Number', value: '{{ $generalinfo->employer_pagibig_reg_no ?? 'PAGIBIG-987654321' }}' },
+                { label: 'No. Of Pagibig Enrolled Employees', value: '{{ $generalinfo->pagibig_employees ?? '25' }}' },
+                { label: 'PhilHealth Employer Registration Number', value: '{{ $generalinfo->employer_philhealth_reg_no ?? 'PH-987654321' }}' },
+                { label: 'No. Of PhilHealth Enrolled Employees', value: '{{ $generalinfo->philhealth_employees ?? '22' }}' },
+                { label: 'BIR TIN Number', value: '{{ $generalinfo->bir_tin ?? '987-654-321-000' }}' },
+                { label: 'BIR Tax Exemption Number', value: '{{ $generalinfo->bir_tax_exemption_no ?? 'BIR-EXEMPT-2025-002' }}' }
             ],
             membership: [
-                { label: 'ENTRY YEAR', value: '{{ $cooperative->entry_year ?? '2025' }}' },
-                { label: 'DRIVER', value: '{{ $cooperative->driver_members ?? '50' }}' },
-                { label: 'OPERATOR/INVESTOR', value: '{{ $cooperative->operator_members ?? '35' }}' },
-                { label: 'ALLIED WORKERS', value: '{{ $cooperative->allied_members ?? '15' }}' },
-                { label: 'OTHER TYPE OF MEMBER', value: '{{ $cooperative->other_members ?? '10' }}' },
-                { label: 'TOTAL MEMBERS', value: '{{ $cooperative->total_members ?? '110' }}' },
-                { label: 'SPECIAL TYPE', value: '{{ $cooperative->special_type ?? 'N/A' }}' },
-                { label: 'STATUS OF MEMBER', value: '{{ $cooperative->member_status ?? 'Active' }}' }
+                { label: 'ENTRY YEAR', value: '{{ $membership->entry_year ?? '2025' }}' },
+                { label: 'DRIVER', value: '{{ $membership->driver_male ?? '50' }}' },
+                { label: 'OPERATOR/INVESTOR', value: '{{ $membership->operator_investor_male ?? '35' }}' },
+                { label: 'ALLIED WORKERS', value: '{{ $membership->allied_workers_male ?? '15' }}' },
+                { label: 'OTHER TYPE OF MEMBER', value: '{{ $membership->allied_workers_female ?? '10' }}' },
+                { label: 'TOTAL MEMBERS', value: '{{ $membership->total_members ?? '110' }}' },
+                { label: 'SPECIAL TYPE', value: '{{ $membership->number_of_senior ?? 'N/A' }}' }
             ],
             employment: {
                 headers: ['PROBATIONARY (Male)', 'PROBATIONARY (Female)', 'REGULAR (Male)', 'REGULAR (Female)'],
@@ -245,7 +239,9 @@
             <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
                 ← Back
             </button>
-            <a href="{{ route('edit.cooperative') }}" class="text-blue-600 hover:underline">Edit</a>
+            <a href="{{ route('edit.cooperative', ['accreditation_no' => $generalinfo->accreditation_no]) }}" class="text-blue-600 hover:underline">
+                Edit
+            </a>
         </div>
 
         <div class="flex gap-6">
@@ -256,5 +252,10 @@
             @include('components.content-area')
         </div>
     </div>
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

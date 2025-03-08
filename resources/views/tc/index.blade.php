@@ -7,7 +7,6 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Record Management</title>
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     </head>
 
     <body class="bg-gray-100 min-h-screen p-7" x-data="{ activeTab: 'transportation', searchQuery: '', currentPage: 1, itemsPerPage: 10 }">
@@ -43,4 +42,7 @@
 
         @include('components.footer')
     </body>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </x-layout>

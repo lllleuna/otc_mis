@@ -30,8 +30,9 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['Admin', 'Officer 2', 'Officer 1']),
             'employee_id_no' => fake()->unique()->numerify('#########'),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password')
+            'email_verified_at' => null,
+            'password' => static::$password ??= Hash::make('password'),
+            'mobile_number' => '63' . fake()->numerify('##########'),
         ];
     }
 
