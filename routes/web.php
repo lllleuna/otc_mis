@@ -49,7 +49,6 @@ Route::resource('users', RegisteredUserController::class)->middleware('auth');
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
 Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->name('users.update');
 
-
 // User Search Route
 Route::get('/search', [RegisteredUserController::class, 'search']);
 
