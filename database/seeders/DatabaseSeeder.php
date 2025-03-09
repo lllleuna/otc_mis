@@ -18,6 +18,8 @@ use App\Models\Loan;
 use App\Models\Business;
 use App\Models\Cetos;
 use App\Models\TrainingSeminar;
+use Database\Seeders\ExternalUserSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -52,6 +54,12 @@ class DatabaseSeeder extends Seeder
             Cetos::factory()->count(1)->create(['accreditation_no' => $generalInfo->accreditation_no]);
         
         });
+
+
+        // Seeder for external users (client portal)
+        $this->call([
+            ExternalUserSeeder::class,  // Call the UserSeeder
+        ]);
 
     }
 }
