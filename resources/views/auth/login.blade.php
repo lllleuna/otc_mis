@@ -33,7 +33,7 @@
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="password" id="password" placeholder="************" required class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300">
+                        <input type="password" name="password" id="password" autocomplete="password" placeholder="************" required class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300">
                         @error('password')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
