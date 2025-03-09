@@ -123,6 +123,6 @@ class RegisteredUserController extends Controller
         $user->password_changed = true; 
         $user->save();
 
-        return view('dashboard');
+        return redirect('dashboard');
     }
 }

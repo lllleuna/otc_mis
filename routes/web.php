@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     }
 
     return view('dashboard');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
@@ -78,7 +78,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
-    return redirect('/');
+    return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
  
 Route::post('/email/verification-notification', function (Request $request) {

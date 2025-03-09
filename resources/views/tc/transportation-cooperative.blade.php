@@ -31,8 +31,8 @@
                     <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.region"></td>
                     <td class="px-6 py-4 text-sm">
                         <a :href="'/cooperatives/' + cooperative.accreditation_no"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                            View More
+                            class="px-4 py-2  text-green-900 font-semibold rounded-lg hover:underline">
+                            View
                         </a>
                     </td>
                 </tr>
