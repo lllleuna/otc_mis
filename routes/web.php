@@ -43,7 +43,7 @@ Route::get('/api/cooperatives', function (Request $request) {
         'region'
     )->get();
 });
-// In routes/web.php
+
 Route::get('/cooperatives/{accreditation_no}', [TransportCoopController::class, 'show'])->name('cooperative.details');
 Route::get('/cooperative/edit/{accreditation_no}', [TransportCoopController::class, 'edit'])->name('edit.cooperative');
 
@@ -88,11 +88,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // Accreditation Module
-Route::get('/accreditation', [ApplicationController::class, 'index'])->name('accreditation.index');
-Route::get('/accreditation/evaluate/{id}', [ApplicationController::class, 'evaluate'])->name('accreditation.evaluate');
-Route::post('/accreditation/evaluate/{id}', [ApplicationController::class, 'storeEvaluation'])->name('accreditation.storeEvaluation');
-Route::get('/accreditation/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
-Route::post('/accreditation/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
+Route::get('/application/evaluate', [ApplicationController::class, 'index'])->name('accreditation.evaluate.index');
+Route::get('/application/approval', [ApplicationController::class, 'showApproval'])->name('accreditation.approval.index');
+Route::get('/application/evaluate/{id}', [ApplicationController::class, 'evaluate'])->name('accreditation.evaluate');
+Route::post('/application/evaluate/{id}', [ApplicationController::class, 'storeEvaluation'])->name('accreditation.storeEvaluation');
+Route::get('/application/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
+Route::post('/application/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
 
 // Admin Feature
 Route::middleware(['auth'])->group(function () {

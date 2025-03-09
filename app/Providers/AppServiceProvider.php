@@ -25,12 +25,13 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'Admin';
         });
 
-        Gate::define('officer-access', function (User $user) {
-            return $user->role === 'Officer 1' || $user->role === 'Officer 2';
+        Gate::define('officer1-access', function (User $user) {
+            return $user->role === 'Officer 1' ;
         });
 
-        Gate::define('employee-access', function (User $user) {
-            return $user->role === 'Head' || $user->role === 'Officer 1' || $user->role === 'Officer 2';
+        Gate::define('officer2-access', function (User $user) {
+            return $user->role === 'Officer 2';
         });
+
     }
 }

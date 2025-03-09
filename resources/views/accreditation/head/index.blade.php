@@ -2,7 +2,7 @@
     <x-slot:vite></x-slot:vite>
     <x-slot:title>Accreditation Applications</x-slot:title>
 
-    <x-side-nav-eval />
+    <x-side-nav-approval />
 
     <div class="ml-64 p-6 bg-gray-50 min-h-screen">
         <div class="bg-white rounded-lg shadow-md p-6">
@@ -24,7 +24,7 @@
             </h1>
 
             <div class="mb-6">
-                <form method="GET" action="{{ route('accreditation.evaluate.index') }}" class="flex space-x-2">
+                <form method="GET" action="{{ route('accreditation.approval.index') }}" class="flex space-x-2">
                     <input type="hidden" name="status" value="{{ $currentStatus }}">
                     <div class="flex-1 max-w-md">
                         <div class="relative">
@@ -46,7 +46,7 @@
                         Search
                     </button>
                     @if (request('search'))
-                        <a href="{{ route('accreditation.evaluate.index', ['status' => $currentStatus]) }}"
+                        <a href="{{ route('accreditation.approval.index', ['status' => $currentStatus]) }}"
                             class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md transition duration-150 ease-in-out">
                             Clear
                         </a>

@@ -28,6 +28,23 @@ class ApplicationController extends Controller
     return view('accreditation.officer.index', compact('applications', 'status', 'search'));
 }
 
+    public function showApproval(Request $request)
+    {
+        $status = $request->query('status', 'evaluated');
+        $search = $request->query('search'); 
+
+        $applications = Application::when($search, function ($query, $search) {
+                return $query->where('reference_number', 'LIKE', "%$search%");
+            })
+            ->when(!$search, function ($query) use ($status) {
+                return $query->where('status', $status);
+            })
+            ->paginate(10)
+            ->appends(['search' => $search, 'status' => $status]); 
+
+        return view('accreditation.head.index', compact('applications', 'status', 'search'));
+    }
+
 
     public function evaluate($id)
     {
@@ -56,7 +73,7 @@ class ApplicationController extends Controller
 
         $application->update(['status' => $status]);
 
-        return redirect()->route('accreditation.index')
+        return redirect()->route('accreditation.evaluate.index')
             ->with('success', 'Evaluation updated successfully!');
 
     }
@@ -92,7 +109,7 @@ class ApplicationController extends Controller
 
         $application->update(['status' => $request->status]);
 
-        return redirect()->route('accreditation.index')->with('success', 'Application status updated successfully.');
+        return redirect()->route('accreditation.approval.index')->with('success', 'Application status updated successfully.');
     }
 
 }
