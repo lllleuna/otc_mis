@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('applications', function (Blueprint $table) {
             $table->string('file_upload');
-            $table->string('reference_number')->unique();
+            $table->string('reference_number');
         });
     }
 
