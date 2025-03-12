@@ -1,9 +1,6 @@
 <!-- resources/views/transaction-dashboard.blade.php -->
 @extends('layouts.transaction-layout')
 
-@section('title', 'Transaction Dashboard')
-
-@section('content')
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex justify-between items-center mb-6">
             <div>
@@ -343,4 +340,3 @@
             alert(`Opening details for ${transactionId}`);
         }
     </script>
-@endsection

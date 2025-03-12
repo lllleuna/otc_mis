@@ -8,44 +8,62 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\BackupController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Models\GeneralInfo;
 
 // Dashboard Route
 Route::get('/dashboard', function () {
-    if (!auth()->user()) {
-        return redirect('auth.login'); // or any other page
+    $user = auth()->user();
+    
+    if (!$user) {
+        return redirect()->route('auth.login'); // Redirect to login if not authenticated
+    }
+
+    if (!$user->password_changed) {
+        return view('auth.update-password'); // Redirect to password change page
     }
 
     return view('dashboard');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Password Update Route
-Route::get('/pass-update', function () {
-    return view('auth.pass-update');
-});
+// password change requirement for new account
+Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
+
+// OTP verification routes
+Route::get('/otp/verification', [SessionController::class, 'showOTPVerificationForm'])->name('otp.verification.form');
+Route::post('/otp/verification', [SessionController::class, 'verifyOTP'])->name('otp.verification');
+Route::post('/otp/resend', [SessionController::class, 'resendOTP'])->name('otp.resend');
 
 // Transport Cooperative Show Route
-Route::get('/tc/show', function () {
-    return view('tc.show');
-})->middleware('auth');
+Route::get('/api/cooperatives', function (Request $request) {
+    return GeneralInfo::select(
+        'accreditation_no',
+        'name',
+        'common_bond_membership',
+        'accreditation_date',
+        'region'
+    )->get();
+});
 
-Route::get('/edit-cooperative', function () {
-    return view('components.edit-content');
-})->name('edit.cooperative');
+Route::get('/cooperatives/{accreditation_no}', [TransportCoopController::class, 'show'])->name('cooperative.details');
+Route::get('/cooperative/edit/{accreditation_no}', [TransportCoopController::class, 'edit'])->name('edit.cooperative');
+
+
+
+// Route::get('/tc/show', function () {
+//     return view('tc.show');
+// })->middleware('auth');
+
 
 // Resource Routes for Transport Cooperative and Users
 Route::resource('tc', TransportCoopController::class)->middleware('auth');
 Route::resource('users', RegisteredUserController::class)->middleware('auth');
 
-// User Password Reset Route
+// For Admin to reset user's password
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
+Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->name('users.update');
 
 // User Search Route
 Route::get('/search', [RegisteredUserController::class, 'search']);
-
-// Route::get('application', [ApplicationController::class, 'index']);
-// Route::get('application/approved', [ApplicationController::class, 'approved']);
-// Route::get('application/{application}', [ApplicationController::class, 'show']);
-// Route::post('/application/{application}', [ApplicationController::class, 'store']);
 
 // Authentication Routes
 Route::get('/', [SessionController::class, 'index'])->name('login');
@@ -60,7 +78,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
-    return redirect('/');
+    return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
  
 Route::post('/email/verification-notification', function (Request $request) {
@@ -70,11 +88,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // Accreditation Module
-Route::get('/accreditation', [ApplicationController::class, 'index'])->name('accreditation.index');
-Route::get('/accreditation/evaluate/{id}', [ApplicationController::class, 'evaluate'])->name('accreditation.evaluate');
-Route::post('/accreditation/evaluate/{id}', [ApplicationController::class, 'storeEvaluation'])->name('accreditation.storeEvaluation');
-Route::get('/accreditation/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
-Route::post('/accreditation/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
+Route::get('/application/evaluate', [ApplicationController::class, 'index'])->name('accreditation.evaluate.index');
+Route::get('/application/approval', [ApplicationController::class, 'showApproval'])->name('accreditation.approval.index');
+Route::get('/application/evaluate/{id}', [ApplicationController::class, 'evaluate'])->name('accreditation.evaluate');
+Route::post('/application/evaluate/{id}', [ApplicationController::class, 'storeEvaluation'])->name('accreditation.storeEvaluation');
+Route::get('/application/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
+Route::post('/application/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
 
 // Admin Feature
 Route::middleware(['auth'])->group(function () {

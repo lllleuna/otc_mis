@@ -40,7 +40,6 @@
                     <th scope="col" class="px-6 py-3">Employee ID</th>
                     <th scope="col" class="px-6 py-3">Division</th>
                     <th scope="col" class="px-6 py-3">Role</th>
-                    <th scope="col" class="px-6 py-3">Status</th>
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
@@ -60,12 +59,6 @@
                     <td class="px-6 py-4">{{ $user['employee_id_no'] }}</td>
                     <td class="px-6 py-4">{{ $user['division'] }}</td>
                     <td class="px-6 py-4">{{ $user['role'] }}</td>
-                    <td class="px-6 py-4">
-                        <span class="inline-flex items-center">
-                            <span class="h-2.5 w-2.5 rounded-full {{ $user['is_online'] ? 'bg-green-500' : 'bg-gray-500' }} me-2"></span>
-                            {{ $user['is_online'] ? 'Online' : 'Offline' }}
-                        </span>
-                    </td>
                     <td class="px-6 py-4">
                         <a href="/users/{{ $user->id }}" class="font-medium text-blue-600 hover:underline">See more</a>
                     </td>

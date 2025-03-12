@@ -30,10 +30,10 @@
                 request()->query('status') ?? (request()->has('search') ? session('last_status', 'new') : 'new');
         @endphp
 
-        @can('officer-access')
+        @canany(['admin-access', 'officer1-access', 'officer2-access'])
             @foreach ($statuses as $status => $label)
                 <x-apply-side-nav-links
-                    href="{{ route('accreditation.index', ['status' => $status, 'search' => request('search')]) }}"
+                    href="{{ route('accreditation.evaluate.index', ['status' => $status, 'search' => request('search')]) }}"
                     :active="$currentStatus === $status">
 
                     <div class="flex items-center">

@@ -29,16 +29,17 @@
         <x-form-select name="role" required>
             <option class="hidden" value="" disabled selected>Role</option>
             <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
-            <option value="Head" {{ old('role') == 'Head' ? 'selected' : '' }}>Head</option>
-            <option value="Officer II" {{ old('role') == 'Officer 2' ? 'selected' : '' }}>Officer 2</option>
-            <option value="Officer" {{ old('role') == 'Officer 1' ? 'selected' : '' }}>Officer 1</option>
-            <option value="Viewer" {{ old('role') == 'Viewer' ? 'selected' : '' }}>Viewer</option>
+            <option value="Officer 2" {{ old('role') == 'Officer 2' ? 'selected' : '' }}>Officer 2</option>
+            <option value="Officer 1" {{ old('role') == 'Officer 1' ? 'selected' : '' }}>Officer 1</option>
         </x-form-select>
         <x-form-error name="role" />
     </div>
 
     <x-form-input name="employee_id_no" id="employee_id_no" placeholder="Employee ID" :value="old('employee_id_no')" required/>
     <x-form-error name="employee_id_no" />
+
+    <x-form-input name="mobile_number" id="mobile_number" placeholder="Mobile Number" :value="old('mobile_number')" required pattern="^09[0-9]{9}$" maxlength="11" title="Mobile number must start with 09 and be exactly 11 digits."/>
+    <x-form-error name="mobile_number" />
 
     <x-form-input name="email" id="email" placeholder="Email" :value="old('email')" required/>
     <x-form-error name="email" />

@@ -71,11 +71,12 @@ contains logo, profile name & icon, and navigation links
                 @can('admin-access')
                     <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
                 @endcan
-                <x-nav-link href="/tc" :active="request()->is('tc*')">Transport Cooperatives</x-nav-link>
-                @can('employee-access')
-                    <x-nav-link href="{{ route('accreditation.index') }}"
-                        :active="request()->is('accreditation*')">Accreditation</x-nav-link>
+                <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link>
+                <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')" > Accreditaiton & CGS Evaluation </x-nav-link>
+                @can('admin-access')
+                <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')" > Accreditaiton & CGS Approval </x-nav-link>
                 @endcan
+
             </div>
         </header>
         <main>

@@ -28,14 +28,16 @@
         <x-form-select name="role" required>
             <option class="hidden" disabled selected>Role</option>
             <option value="Admin" {{ old('role', $user->role) == 'Admin' ? 'selected' : '' }}>Admin</option>
-            <option value="Approver" {{ old('role', $user->role) == 'Approver' ? 'selected' : '' }}>Approver</option>
-            <option value="Encoder" {{ old('role', $user->role) == 'Encoder' ? 'selected' : '' }}>Encoder</option>
-            <option value="Viewer" {{ old('role', $user->role) == 'Viewer' ? 'selected' : '' }}>Viewer</option>
+            <option value="Officer 2" {{ old('role', $user->role) == 'Officer 2' ? 'selected' : '' }}>Officer 2</option>
+            <option value="Officer 1" {{ old('role', $user->role) == 'Officer 1' ? 'selected' : '' }}>Officer 1</option>
         </x-form-select>
     </div>
 
     <x-form-input name="employee_id_no" id="employee_id_no" placeholder="Employee ID" value="{{ $user->employee_id_no }}" required/>
     <x-form-error name="employee_id_no" />
+
+    <x-form-input name="mobile_number" id="mobile_number" placeholder="Mobile Number" value="{{ $user->mobile_number }}" required pattern="^63[0-9]{10}$" maxlength="12" title="Mobile number must start with 63 and be exactly 12 digits."/>
+    <x-form-error name="mobile_number" />
 
     <x-form-input name="email" id="email" placeholder="Email" value="{{ $user->email }}" required/>
     <x-form-error name="email" />

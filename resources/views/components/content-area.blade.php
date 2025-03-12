@@ -66,8 +66,8 @@
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <template x-for="item in cooperativeData[tab].filter(i =>
-                            ['OTC Accreditation Number', 'Type of Accreditation', 'OTC Accreditation Date',
-                             'Cooperative Registration Number', 'CDA Registration Date'].includes(i.label))"
+                            ['Accreditation Number', 'Type of Accreditation', 'Accreditation Date',
+                             'CDA Registration Number', 'CDA Registration Date'].includes(i.label))"
                             :key="item.label">
                             <div class="p-4 rounded-lg border border-gray-200 hover:shadow-md transition">
                                 <div class="text-sm text-gray-500 mb-1" x-text="item.label"></div>
@@ -88,7 +88,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <template x-for="item in cooperativeData[tab].filter(i =>
                             ['Area / Region / City / Province / Barangay', 'Business Address',
-                             'Contact Person', 'E-mail', 'Contact Numbers'].includes(i.label))"
+                             'Contact Person', 'E-mail', 'Contact Number'].includes(i.label))"
                             :key="item.label">
                             <div class="p-4 rounded-lg border border-gray-200 hover:shadow-md transition">
                                 <div class="text-sm text-gray-500 mb-1" x-text="item.label"></div>
@@ -228,7 +228,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Proof of Compliance Card -->
                 <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition">
                     <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">

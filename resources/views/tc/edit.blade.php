@@ -21,20 +21,20 @@
             <h2 class="text-lg font-semibold text-gray-800">Cooperative Identity</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <div class="form-group">
-                    <label for="coopName" class="block text-sm font-medium text-gray-700 mb-1">Transport Cooperative Name</label>
-                    <input type="text" id="coopName" name="coopName" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="Sample Transport Cooperative" required>
+                    <label for="tc_name" class="block text-sm font-medium text-gray-700 mb-1">Transport Cooperative Name</label>
+                    <input type="text" id="tc_name" name="tc_name" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="{{ old('tc_name', $generalinfo->name) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="shortName" class="block text-sm font-medium text-gray-700 mb-1">Short Name</label>
-                    <input type="text" id="shortName" name="shortName" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="STC" required>
+                    <input type="text" id="shortName" name="shortName" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="{{ old('shortName', $generalinfo->short_name) }}" required>
                 </div>
                 <div class="form-group md:col-span-3">
                     <label for="bondMembership" class="block text-sm font-medium text-gray-700 mb-1">Common Bond of Membership</label>
-                    <textarea id="bondMembership" name="bondMembership" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md">Drivers and Operators</textarea>
+                    <input type="text" id="bondMembership" name="bondMembership" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="{{ old('shortName', $generalinfo->common_bond_membership) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="membershipFee" class="block text-sm font-medium text-gray-700 mb-1">Membership Fee</label>
-                    <input type="text" id="membershipFee" name="membershipFee" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="500" required>
+                    <input type="text" id="membershipFee" name="membershipFee" value="{{ old('shortName', $generalinfo->membership_fee) }}" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="500" required>
                 </div>
             </div>
         </div>
