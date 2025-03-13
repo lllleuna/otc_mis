@@ -5939,14 +5939,9 @@
         {
             "name": "vonage/client",
             "version": "4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Vonage/vonage-php-sdk.git",
-                "reference": "ba15633a9e8db681f770d06ebc049cd06fce4e01"
-            },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vonage/vonage-php-sdk/zipball/ba15633a9e8db681f770d06ebc049cd06fce4e01",
+                "url": "https://mirrors.cloud.tencent.com/repository/composer/vonage/client/4.1.1/vonage-client-4.1.1.zip",
                 "reference": "ba15633a9e8db681f770d06ebc049cd06fce4e01",
                 "shasum": ""
             },
@@ -5956,7 +5951,6 @@
                 "vonage/client-core": "^4.0"
             },
             "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
