@@ -1540,14 +1540,9 @@
         {
             "name": "lcobucci/clock",
             "version": "2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/clock.git",
-                "reference": "c7aadcd6fd97ed9e199114269c0be3f335e38876"
-            },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/clock/zipball/c7aadcd6fd97ed9e199114269c0be3f335e38876",
+                "url": "https://mirrors.cloud.tencent.com/repository/composer/lcobucci/clock/2.3.0/lcobucci-clock-2.3.0.zip",
                 "reference": "c7aadcd6fd97ed9e199114269c0be3f335e38876",
                 "shasum": ""
             },
@@ -1574,7 +1569,6 @@
                     "Lcobucci\\Clock\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1589,29 +1583,14 @@
                 "issues": "https://github.com/lcobucci/clock/issues",
                 "source": "https://github.com/lcobucci/clock/tree/2.3.0"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
             "time": "2022-12-19T14:38:11+00:00"
         },
         {
             "name": "lcobucci/jwt",
             "version": "4.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "55564265fddf810504110bd68ca311932324b0e9"
-            },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/55564265fddf810504110bd68ca311932324b0e9",
+                "url": "https://mirrors.cloud.tencent.com/repository/composer/lcobucci/jwt/4.0.4/lcobucci-jwt-4.0.4.zip",
                 "reference": "55564265fddf810504110bd68ca311932324b0e9",
                 "shasum": ""
             },
@@ -1645,7 +1624,6 @@
                     "Lcobucci\\JWT\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -1665,16 +1643,6 @@
                 "issues": "https://github.com/lcobucci/jwt/issues",
                 "source": "https://github.com/lcobucci/jwt/tree/4.0.4"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
             "time": "2021-09-28T19:18:28+00:00"
         },
         {
