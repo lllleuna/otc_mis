@@ -14,8 +14,8 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 
                 'resources/js/app.js',
-                'resources/js/dropdown.js'
-            
+                'resources/js/dropdown.js',
+		'resources/js/modal.js'
             ],
             refresh: true,
         }),
