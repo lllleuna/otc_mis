@@ -13,7 +13,7 @@ use App\Models\GeneralInfo;
 // Dashboard Route
 Route::get('/dashboard', function () {
     $user = auth()->user();
-    
+
     if (!$user) {
         return redirect()->route('auth.login'); // Redirect to login if not authenticated
     }
@@ -74,16 +74,16 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
- 
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
+
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
- 
+
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
@@ -101,3 +101,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
     Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
 });
+
+
+
+Route::get('/generate-reports', function() {
+    return view('tc.generate-reports');
+})->name('reports.generate');
+
+Route::post('/generate-reports', function() {
+    return redirect()->route('reports.generate')->with('success', 'Report generation feature will be implemented soon.');
+})->name('reports.generate.submit');
