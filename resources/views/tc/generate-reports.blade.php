@@ -233,6 +233,8 @@
         </div>
     </div>
 
+    @include('components.footer')
+
     <script>
         // JavaScript to show/hide the appropriate period selection fields
         document.addEventListener('DOMContentLoaded', function() {

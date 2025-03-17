@@ -1,62 +1,78 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0 bg-gray-100">
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-        <div class="mb-4 text-center">
-            <h2 class="text-2xl font-bold text-gray-700">Verify OTP</h2>
-            <p class="mt-1 text-sm text-gray-500">Please enter the OTP sent to your mobile phone</p>
-        </div>
+<div class="bg-gray-100 min-h-screen flex items-center justify-center py-16 relative">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
+        <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'152\' height=\'152\' viewBox=\'0 0 152 152\'%3E%3Cg fill-rule=\'evenodd\'%3E%3Cg id=\'temple\' fill=\'%23003366\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); background-size: 152px 152px;"></div>
+    </div>
 
-        @if (session('status'))
-            <div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative" role="alert">
-                <span>{{ session('status') }}</span>
-            </div>
-        @endif
+    <div class="absolute top-9 text-center w-full">
+        <h1 class="text-2xl font-bold text-blue-900">Management Information System</h1>
+        <h2 class="text-lg text-blue-900">Office of Transportation Cooperative</h2>
+    </div>
 
-        @if ($errors->any())
-            <div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('otp.verification') }}">
-            @csrf
-            <div class="mb-4">
-                <label for="otp" class="block text-sm font-medium text-gray-700 mb-3">OTP Code</label>
-                <div class="mt-1 flex items-center justify-between gap-2">
-                    <input id="otp" type="text" name="otp" required autofocus maxlength="6"
-                        class="shadow-sm block w-full p-3 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md"
-                        placeholder="Enter 6-digit code">
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between mt-6">
-                <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition">
-                    Verify & Proceed
-                </button>
-            </div>
-        </form>
-
-        <div class="mt-6 pt-6 border-t border-gray-200">
-            <div class="flex flex-col items-center">
-                <span class="text-sm text-gray-600">Didn't receive the code?</span>
-                <form method="POST" action="{{ route('otp.resend') }}" class="mt-2 w-full">
-                    @csrf
-                    <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md transition duration-150 ease-in-out">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                        Resend OTP
-                    </button>
-                </form>
-            </div>
-            <div class="mt-4 text-center">
-                <p class="text-xs text-gray-500">
-                    Valid for 5 minutes. Please check your mobile phone.
+    <div class="relative w-[28rem] mt-19">
+        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+            <div class="bg-blue-900 px-5 pt-7 pb-5 text-center rounded-t-lg">
+                <h1 class="text-3xl font-bold text-white mt-4">Verify OTP</h1>
+                <p class="text-sm text-blue-100 max-w-sm mx-auto mt-2">
+                    Please enter the OTP sent to your mobile phone.
                 </p>
+            </div>
+
+            @if (session('status'))
+                <div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <span>{{ session('status') }}</span>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            <div class="px-8 pb-8 pt-6">
+                <form method="POST" action="{{ route('otp.verification') }}">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="otp" class="block text-sm font-medium text-gray-700 mb-3">OTP Code</label>
+                        <div class="mt-1 flex items-center justify-between gap-2">
+                            <input id="otp" type="text" name="otp" required autofocus maxlength="6"
+                                class="shadow-sm block w-full p-3 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md"
+                                placeholder="Enter 6-digit code">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between mt-6">
+                        <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition">
+                            Verify & Proceed
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="flex flex-col items-center">
+                        <span class="text-sm text-gray-600">Didn't receive the code?</span>
+                        <form method="POST" action="{{ route('otp.resend') }}" class="mt-2 w-full">
+                            @csrf
+                            <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md transition duration-150 ease-in-out">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Resend OTP
+                            </button>
+                        </form>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-xs text-gray-500">
+                            Valid for 5 minutes. Please check your mobile phone.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
