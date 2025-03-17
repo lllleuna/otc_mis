@@ -111,3 +111,13 @@ Route::get('/generate-reports', function() {
 Route::post('/generate-reports', function() {
     return redirect()->route('reports.generate')->with('success', 'Report generation feature will be implemented soon.');
 })->name('reports.generate.submit');
+
+
+
+Route::get('/user/profile', function () {
+    return view('components.view-profile');
+})->name('user.profile');
+
+Route::get('/settings', function () {
+    return view('components.settings');
+});

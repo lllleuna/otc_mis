@@ -26,8 +26,9 @@ contains logo, profile name & icon, and navigation links
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
-                            <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}" alt="notif">
-
+                            <a href="/tc?tab=office">
+                                <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}" alt="notif">
+                            </a>
                             <div class="relative font-[sans-serif] w-max mx-auto">
                                 <button type="button" id="dropdownToggle">
                                     <div class="flex items-center">
@@ -39,13 +40,8 @@ contains logo, profile name & icon, and navigation links
 
                                 <ul id="dropdownMenu"
                                     class='absolute hidden shadow-lg bg-white py-2 z-[1000] min-w-full w-max rounded-lg max-h-96'>
-                                    <li
-                                        class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
-                                        View profile
-                                    </li>
-                                    <li
-                                        class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
-                                        Settings
+                                    <li class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
+                                        <a href="/user/profile" class="w-full h-full">View profile</a>
                                     </li>
                                     <li
                                         class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
