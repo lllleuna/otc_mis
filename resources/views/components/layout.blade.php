@@ -76,6 +76,7 @@ contains logo, profile name & icon, and navigation links
                 @can('admin-access')
                 <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')" > Accreditaiton & CGS Approval </x-nav-link>
                 @endcan
+                <x-nav-link href="/generate-reports" :active="request()->is('/generate-reports*')">Generation Report</x-nav-link>
 
             </div>
         </header>
