@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
 
 // Dashboard Route
+// Dashboard Route
 Route::get('/dashboard', function () {
     $user = auth()->user();
 
@@ -22,8 +23,15 @@ Route::get('/dashboard', function () {
         return view('auth.update-password'); // Redirect to password change page
     }
 
-    return view('dashboard');
+    // Check role
+    if ($user->role === 'Admin') {
+        return view('dashboard'); // Admins go to login view (as per your requirement)
+    } else {
+        return view('tc.index'); // Non-admin users go to tc.index view
+    }
+
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
