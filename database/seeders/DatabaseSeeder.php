@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             $accreditationNo = $generalInfo->accreditation_no;
 
             // Create related records for each GeneralInfo entry
-            Membership::factory()->count(3)->create(['accreditation_no' => $accreditationNo]);
+            Membership::factory()->count(30)->create(['accreditation_no' => $accreditationNo]);
             Employment::factory()->count(3)->create(['accreditation_no' => $accreditationNo]);
             Unit::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
             Franchise::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
