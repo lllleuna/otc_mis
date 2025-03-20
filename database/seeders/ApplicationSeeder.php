@@ -14,7 +14,7 @@ class ApplicationSeeder extends Seeder
     public function run(): void
     {
         // Create applications only for ExternalUsers with accreditation_status = 'New'
-        Application::factory()->count(5)->create(); // Application for accreditation
+        // Application::factory()->count(5)->create(); // Application for accreditation
         
     }
 }

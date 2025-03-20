@@ -8,25 +8,48 @@ use App\Models\User;
 use App\Models\ApplicationStatusHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AppGeneralInfo;
+use App\Models\AppAward;
+use App\Models\AppBusiness;
+use App\Models\AppCetos;
+use App\Models\AppFinance;
+use App\Models\AppFranchise;
+use App\Models\AppGovernance;
+use App\Models\AppGrant;
+use App\Models\AppLoan;
+use App\Models\AppUnit;
 
 class ApplicationController extends Controller
 {
     public function index(Request $request)
-{
-    $status = $request->query('status', 'new');
-    $search = $request->query('search'); 
+    {
+        $status = $request->query('status', 'new');
+        $search = $request->query('search'); 
+        $userId = auth()->id();
+    
+        $applications = Application::query()
+            ->when($search, fn($query) => 
+                $query->where('reference_number', 'LIKE', "%$search%")
+            )
+            ->when(!$search, function ($query) use ($status, $userId) {
+                // Always filter by status first
+                $query->where('status', $status);
+    
+                // Apply user filter only if NOT new
+                if ($status !== 'new') {
+                    $query->where(function ($query) use ($userId) {
+                        $query->where('evaluated_by', $userId)
+                              ->orWhere('approved_by', $userId);
+                    });
+                }
+            })
+            ->paginate(10)
+            ->appends(['search' => $search, 'status' => $status]); 
+    
+        return view('accreditation.officer.index', compact('applications', 'status', 'search'));
+    }
+    
 
-    $applications = Application::when($search, function ($query, $search) {
-            return $query->where('reference_number', 'LIKE', "%$search%");
-        })
-        ->when(!$search, function ($query) use ($status) {
-            return $query->where('status', $status);
-        })
-        ->paginate(10)
-        ->appends(['search' => $search, 'status' => $status]); 
-
-    return view('accreditation.officer.index', compact('applications', 'status', 'search'));
-}
 
     public function showApproval(Request $request)
     {
@@ -71,11 +94,13 @@ class ApplicationController extends Controller
             'updated_by' => $userId
         ]);
 
-        $application->update(['status' => $status]);
+        $application->update([
+            'status' => $status,
+            'evaluated_by' => $userId 
+        ]);
 
         return redirect()->route('accreditation.evaluate.index')
             ->with('success', 'Evaluation updated successfully!');
-
     }
 
     public function approval($id)
@@ -107,9 +132,13 @@ class ApplicationController extends Controller
             'updated_by' => $userId,
         ]);
 
-        $application->update(['status' => $request->status]);
+        $application->update([
+            'status' => $request->status,
+            'approved_by' => $userId 
+        ]);
 
-        return redirect()->route('accreditation.approval.index')->with('success', 'Application status updated successfully.');
+        return redirect()->route('accreditation.approval.index')
+            ->with('success', 'Application status updated successfully.');
     }
 
 }

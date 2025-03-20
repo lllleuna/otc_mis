@@ -11,6 +11,12 @@
 
 <body>
 
+    <div class="max-w-7xl mx-auto p-4">
+        <button onclick="window.history.back()" class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+            ← Back
+        </button>
+    </div>
+
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
         <div class="bg-blue-600 px-6 py-4">

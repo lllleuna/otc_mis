@@ -63,9 +63,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Accreditation application factory and seeder
-        $this->call([
-            ApplicationSeeder::class,  // Call the UserSeeder
-        ]);
+        // $this->call([
+        //     ApplicationSeeder::class,  // Call the UserSeeder
+        // ]);
 
     }
 }
