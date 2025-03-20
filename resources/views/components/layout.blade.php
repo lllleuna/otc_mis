@@ -70,10 +70,10 @@ contains logo, profile name & icon, and navigation links
                     <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
                 @endcan
                 <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link>
-                <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')"> Accreditaiton & CGS
+                <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')"> Accreditation & CGS
                     Evaluation </x-nav-link>
                 @can('admin-access')
-                    <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')"> Accreditaiton & CGS
+                    <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')"> Accreditation & CGS
                         Approval </x-nav-link>
                 @endcan
                 <x-nav-link href="/generate-reports" :active="request()->is('/generate-reports*')">Generation Report</x-nav-link>
