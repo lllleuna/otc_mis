@@ -287,6 +287,10 @@ class ApplicationController extends Controller
         $application->release_message = $request->message;
         $application->save();
 
+        ExternalUser::where('id', $application->user_id)->update([
+            'accreditation_status' => 'Active',
+        ]);
+
         return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released Successfully!');
     }
 
