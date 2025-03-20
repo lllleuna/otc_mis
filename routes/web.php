@@ -103,6 +103,10 @@ Route::post('/application/evaluate/{id}', [ApplicationController::class, 'storeE
 Route::get('/application/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
 Route::post('/application/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
 
+Route::get('/application/release/{id}', [ApplicationController::class, 'release'])->name('accreditation.release');
+Route::post('/application/release/{id}', [ApplicationController::class, 'storeRelease'])->name('accreditation.storeRelease');
+
+
 // Admin Feature
 Route::middleware(['auth'])->group(function () {
     Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');

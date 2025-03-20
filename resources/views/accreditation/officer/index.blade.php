@@ -13,7 +13,7 @@
                         'saved' => 'In Evaluation',
                         'evaluated' => 'Waiting Approval',
                         'approved' => 'Approved Applications',
-                        'needs_info' => 'Applications Needing More Information',
+                        'released' => 'Released Certificates',
                         'rejected' => 'Rejected Applications',
                     ];
                     $currentStatus =
@@ -23,6 +23,7 @@
                 @endphp
             </h1>
 
+            {{-- Search Container --}}
             <div class="mb-6">
                 <form method="GET" action="{{ route('accreditation.evaluate.index') }}" class="flex space-x-2">
                     <input type="hidden" name="status" value="{{ $currentStatus }}">
@@ -91,9 +92,6 @@
                                     Type</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                    Date Submitted</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                                     Status</th>
                                 <th
                                     class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
@@ -114,8 +112,6 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ ucwords($application->application_type) }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $application->created_at->format('M d, Y') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
                                             $statusClasses = [
@@ -123,7 +119,7 @@
                                                 'saved' => 'bg-yellow-100 text-yellow-800',
                                                 'evaluated' => 'bg-purple-100 text-purple-800',
                                                 'approved' => 'bg-green-100 text-green-800',
-                                                'needs_info' => 'bg-orange-100 text-orange-800',
+                                                'released' => 'bg-orange-100 text-orange-800',
                                                 'rejected' => 'bg-red-100 text-red-800',
                                             ];
                                             $statusClass =
@@ -140,10 +136,15 @@
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 Evaluate
                                             </a>
-                                        @elseif ($application->status === 'evaluated')
+                                            @elseif ($application->status === 'evaluated' && Auth::user()->role === 'Admin')
                                             <a href="{{ route('accreditation.approval', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 View
+                                            </a>
+                                        @elseif ($application->status === 'approved')
+                                            <a href="{{ route('accreditation.release', $application->id) }}"
+                                                class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
+                                                Release Certificate
                                             </a>
                                         @else
                                             <span class="text-gray-500">N/A</span>

@@ -13,7 +13,7 @@
                         'saved' => 'In Evaluation',
                         'evaluated' => 'Waiting Approval',
                         'approved' => 'Approved Applications',
-                        'needs_info' => 'Applications Needing More Information',
+                        'released' => 'Released Certificates',
                         'rejected' => 'Rejected Applications',
                     ];
                     $currentStatus =
@@ -88,9 +88,6 @@
                                     Region</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                    Date Submitted</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                                     Status</th>
                                 <th
                                     class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
@@ -104,10 +101,10 @@
                                         {{ $application->reference_number }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ $application->tc_name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $application->region }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $application->created_at->format('M d, Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 region-name"
+                                        data-region="{{ $application->region }}">
+                                        {{ $application->region }}
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
                                             $statusClasses = [
@@ -115,7 +112,7 @@
                                                 'saved' => 'bg-yellow-100 text-yellow-800',
                                                 'evaluated' => 'bg-purple-100 text-purple-800',
                                                 'approved' => 'bg-green-100 text-green-800',
-                                                'needs_info' => 'bg-orange-100 text-orange-800',
+                                                'released' => 'bg-orange-100 text-orange-800',
                                                 'rejected' => 'bg-red-100 text-red-800',
                                             ];
                                             $statusClass =
@@ -155,4 +152,25 @@
             @endif
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://psgc.gitlab.io/api/regions/')
+                .then(response => response.json())
+                .then(data => {
+                    const regionMap = {};
+                    data.forEach(region => {
+                        regionMap[region.code] = region.name;
+                    });
+
+                    document.querySelectorAll('.region-name').forEach(el => {
+                        const code = el.dataset.region;
+                        el.textContent = regionMap[code] || code;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching regions:', error);
+                });
+        });
+    </script>
 </x-layout>
