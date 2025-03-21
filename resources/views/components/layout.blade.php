@@ -26,8 +26,10 @@ contains logo, profile name & icon, and navigation links
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
-                            <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}" alt="notif">
-
+                            <a href="/tc?tab=office">
+                                <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}"
+                                    alt="notif">
+                            </a>
                             <div class="relative font-[sans-serif] w-max mx-auto">
                                 <button type="button" id="dropdownToggle">
                                     <div class="flex items-center">
@@ -41,11 +43,7 @@ contains logo, profile name & icon, and navigation links
                                     class='absolute hidden shadow-lg bg-white py-2 z-[1000] min-w-full w-max rounded-lg max-h-96'>
                                     <li
                                         class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
-                                        View profile
-                                    </li>
-                                    <li
-                                        class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
-                                        Settings
+                                        <a href="/user/profile" class="w-full h-full">View profile</a>
                                     </li>
                                     <li
                                         class='py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer'>
@@ -67,15 +65,18 @@ contains logo, profile name & icon, and navigation links
         <header class="bg-white shadow">
             <div class="m-auto w-fit items-center px-3 py-2">
 
-                <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
                 @can('admin-access')
+                    <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
                     <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
                 @endcan
                 <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link>
-                <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')" > Accreditaiton & CGS Evaluation </x-nav-link>
+                <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')"> Accreditation & CGS
+                    Evaluation </x-nav-link>
                 @can('admin-access')
-                <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')" > Accreditaiton & CGS Approval </x-nav-link>
+                    <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')"> Accreditation & CGS
+                        Approval </x-nav-link>
                 @endcan
+                <x-nav-link href="/generate-reports" :active="request()->is('/generate-reports*')">Generation Report</x-nav-link>
 
             </div>
         </header>

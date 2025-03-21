@@ -13,21 +13,22 @@
 </head>
 
 <body>
+
+    <div class="max-w-7xl mx-auto p-4">
+        <button onclick="window.history.back()"
+            class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+            ← Back
+        </button>
+    </div>
+
     <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-xl font-semibold mb-4">Application Approval</h2>
 
         {{-- Application Information --}}
-        <div class="mb-4 p-4 border rounded-md bg-gray-50">
-            <h3 class="text-lg font-semibold mb-2">Cooperative Details</h3>
-            <p><strong>Reference No:</strong> {{ $application->reference_number }}</p>
-            <p><strong>TC Name:</strong> {{ $application->tc_name }}</p>
-            <p><strong>File Upload:</strong>
-                <a href="{{ asset('storage/' . $application->file_upload) }}" target="_blank"
-                    class="text-blue-600 hover:underline">
-                    View File
-                </a>
-            </p>
+        <div class="mb-4 p-4 border rounded-md bg-gray-50 max-h-64 overflow-y-auto">
+            @include('components.evaluationInfo')
         </div>
+
 
         {{-- Evaluator Details --}}
         <div class="mb-4 p-4 border rounded-md bg-gray-50">
@@ -59,7 +60,6 @@
                 <select name="status" id="status" class="w-full p-2 border rounded-md" required>
                     <option value="approved">Approve</option>
                     <option value="rejected">Reject</option>
-                    <option value="needs_info">Needs More Info</option>
                 </select>
             </div>
 

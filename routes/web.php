@@ -10,10 +10,22 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
 
+
+Route::get('/download-cgs/{filename}', function ($filename) {
+    $filePath = public_path('storage/certificates/' . $filename);
+
+    if (file_exists($filePath)) {
+        return response()->download($filePath);
+    } else {
+        abort(404, 'File not found');
+    }
+})->name('download.cgs');
+
+// Dashboard Route
 // Dashboard Route
 Route::get('/dashboard', function () {
     $user = auth()->user();
-    
+
     if (!$user) {
         return redirect()->route('auth.login'); // Redirect to login if not authenticated
     }
@@ -22,8 +34,15 @@ Route::get('/dashboard', function () {
         return view('auth.update-password'); // Redirect to password change page
     }
 
-    return view('dashboard');
+    // Check role
+    if ($user->role === 'Admin') {
+        return view('dashboard'); // Admins go to login view (as per your requirement)
+    } else {
+        return view('tc.index'); // Non-admin users go to tc.index view
+    }
+
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
@@ -74,16 +93,16 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
- 
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
+
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
- 
+
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
@@ -95,9 +114,31 @@ Route::post('/application/evaluate/{id}', [ApplicationController::class, 'storeE
 Route::get('/application/approval/{id}', [ApplicationController::class, 'approval'])->name('accreditation.approval');
 Route::post('/application/approval/{id}', [ApplicationController::class, 'storeApproval'])->name('accreditation.storeApproval');
 
+Route::get('/application/release/{id}', [ApplicationController::class, 'release'])->name('accreditation.release');
+Route::post('/application/release/{id}', [ApplicationController::class, 'storeRelease'])->name('accreditation.storeRelease');
+
+
 // Admin Feature
 Route::middleware(['auth'])->group(function () {
     Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
     Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
     Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
+});
+
+Route::get('/generate-reports', function() {
+    return view('tc.generate-reports');
+})->name('reports.generate');
+
+Route::post('/generate-reports', function() {
+    return redirect()->route('reports.generate')->with('success', 'Report generation feature will be implemented soon.');
+})->name('reports.generate.submit');
+
+
+
+Route::get('/user/profile', function () {
+    return view('components.view-profile');
+})->name('user.profile');
+
+Route::get('/settings', function () {
+    return view('components.settings');
 });

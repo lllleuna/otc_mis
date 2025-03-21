@@ -11,63 +11,27 @@
 
 <body>
 
-    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="max-w-7xl mx-auto p-4">
+        <button onclick="window.history.back()"
+            class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+            ← Back
+        </button>
+    </div>
+
+    <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
         <div class="bg-blue-600 px-6 py-4">
             <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
         </div>
 
-        <div class="md:flex">
+        <div class="md:flex ">
             <!-- Application Details (Left Panel) -->
-            <div class="md:w-1/2 p-6 bg-gray-50 md:overflow-y-auto md:max-h-[calc(100vh-12rem)]">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-                    Application Details
-                </h3>
-
-                <div class="space-y-3">
-                    <div>
-                        <p class="text-sm text-gray-500">Reference No</p>
-                        <p class="font-medium">{{ $application->reference_number }}</p>
-                    </div>
-
-                    <div>
-                        <p class="text-sm text-gray-500">Cooperative Name</p>
-                        <p class="font-medium">{{ $application->tc_name }}</p>
-                    </div>
-
-                    <div>
-                        <p class="text-sm text-gray-500">Region</p>
-                        <p class="font-medium">{{ $application->region }}</p>
-                    </div>
-
-                    <div>
-                        <p class="text-sm text-gray-500">Status</p>
-                        <p class="font-medium">
-                            <span
-                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                {{ ucfirst($application->status) }}
-                            </span>
-                        </p>
-                    </div>
-
-                    <div class="pt-2">
-                        <p class="text-sm text-gray-500 mb-2">Attached Document</p>
-                        <a href="{{ asset('/storage/' . $application->file_upload) }}"
-                            class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors"
-                            target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                            </svg>
-                            View Document
-                        </a>
-                    </div>
-                </div>
+            <div class="md:w-2/3 p-6 bg-gray-50 md:overflow-y-auto md:max-h-[calc(100vh-12rem)]">
+                @include('components.evaluationInfo')
             </div>
 
             <!-- Evaluation Form (Right Panel) -->
-            <div class="md:w-1/2 p-6 bg-white">
+            <div class="md:w-1/3 p-6 bg-white">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
                     Evaluation Form
                 </h3>
