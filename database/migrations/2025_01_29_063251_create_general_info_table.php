@@ -14,11 +14,11 @@ return new class extends Migration
         // General Info Table
         Schema::create('general_info', function (Blueprint $table) {
             $table->id();
-            $table->string('accreditation_no')->unique(); // Changed to string
+            $table->string('accreditation_no')->unique()->nullable(); // Changed to string
             $table->string('name');
-            $table->string('short_name');
+            $table->string('short_name')->nullable();
             $table->date('accreditation_date');
-            $table->string('accreditation_type');
+            $table->string('accreditation_type')->nullable();
             $table->string('cda_registration_no');
             $table->date('cda_registration_date');
             $table->string('common_bond_membership');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('area');
             $table->string('region');
             $table->string('city');
-            $table->string('province');
+            $table->string('province')->nullable();
             $table->string('barangay');
             $table->string('business_address');
             $table->string('email')->unique();

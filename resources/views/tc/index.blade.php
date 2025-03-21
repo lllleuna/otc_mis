@@ -1,3 +1,7 @@
+@php
+    $activeTab = request('tab', 'office');
+@endphp
+
 <x-layout>
     <x-slot:vite></x-slot:vite>
     <x-slot:title>Record Management</x-slot:title>
@@ -47,5 +51,5 @@
 
     </body>
 
-    
+
 </x-layout>

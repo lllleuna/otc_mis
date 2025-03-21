@@ -16,6 +16,16 @@ class Application extends Model
         return $this->hasMany(ApplicationStatusHistory::class);
     }
 
+    public function generalInfo()
+    {
+        return $this->hasMany(AppGeneralInfo::class);
+    }
+
+    public function unit()
+    {
+        return $this->hasMany(AppUnit::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
