@@ -79,7 +79,7 @@ Route::resource('users', RegisteredUserController::class)->middleware('auth');
 
 // For Admin to reset user's password
 Route::patch('/users/{user}/reset', [RegisteredUserController::class, 'updatePassword']);
-Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->name('users.update');
+Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->name('users.updatepass');
 
 // User Search Route
 Route::get('/search', [RegisteredUserController::class, 'search']);
@@ -124,8 +124,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
     Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
 });
-
-
 
 Route::get('/generate-reports', function() {
     return view('tc.generate-reports');
