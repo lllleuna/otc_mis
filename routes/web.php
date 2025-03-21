@@ -10,6 +10,17 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
 
+
+Route::get('/download-cgs/{filename}', function ($filename) {
+    $filePath = public_path('storage/certificates/' . $filename);
+
+    if (file_exists($filePath)) {
+        return response()->download($filePath);
+    } else {
+        abort(404, 'File not found');
+    }
+})->name('download.cgs');
+
 // Dashboard Route
 // Dashboard Route
 Route::get('/dashboard', function () {
