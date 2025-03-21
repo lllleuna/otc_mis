@@ -255,45 +255,46 @@ class ApplicationController extends Controller
         $request->validate([
             'message' => 'required|string',
             'validity_date' => 'required|date',
-            'certificate_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048', // max 2MB
-            'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048', // max 2MB
+            'certificate_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
-
+    
         $application = Application::findOrFail($id);
-
+    
         $certificateFile = $request->file('certificate_file');
         $cgsFile = $request->file('cgs_file');
-
+    
         $dateString = now()->format('Ymd_His');
         $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
         $cgsFilename = 'cgs_' . $dateString . '.' . $cgsFile->getClientOriginalExtension();
-
-        $certificatePath = $certificateFile->storeAs('certificates', $certificateFilename, 'public');
-        $cgsPath = $cgsFile->storeAs('certificates', $cgsFilename, 'public');
-
+    
+        $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
+        $cgsFile->move(public_path('shared/certificates'), $cgsFilename);
+    
         $accreditationNumber = $this->generateUniqueAccreditationNumber();
-
+    
         $generalInfo = GeneralInfo::where('cda_registration_no', $application->cda_reg_no)->first();
-
+    
         if ($generalInfo) {
             $generalInfo->accreditation_no = $accreditationNumber;
             $generalInfo->status = 'active';
             $generalInfo->validity_date = $request->validity_date;
-            $generalInfo->accreditation_certificate_filename = $certificateFilename; // Store filename, not full path
+            $generalInfo->accreditation_certificate_filename = $certificateFilename;
             $generalInfo->cgs_filename = $cgsFilename;
             $generalInfo->save();
         }
-
+    
         $application->status = 'released';
         $application->release_message = $request->message;
         $application->save();
-
+    
         ExternalUser::where('id', $application->user_id)->update([
             'accreditation_status' => 'Active',
         ]);
-
+    
         return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released Successfully!');
     }
+    
 
 
 }
