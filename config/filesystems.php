@@ -57,6 +57,13 @@ return [
             'throw' => false,
         ],
 
+	'shared' => [
+        'driver' => 'local',
+        'root' => '/var/www/shared_uploads',
+        'url' => env('APP_URL') . '/shared',
+        'visibility' => 'public',
+    ],
+
     ],
 
     /*
