@@ -57,9 +57,9 @@
                             </button>
                         </form>
 
-                        <button type="button" class="text-blue font-semi hover:underline mt-5">
-                            <a href="{{ route('dashboard') }}">Go back</a>
-                        </button>
+                        <x-button class="mt-20 ml-1 mb-1 bg-red-600 hover:bg-red-500" onclick="window.location.href='{{ route('dashboard') }}'">
+                            <- Go back
+                        </x-button>
                     </div>
 
                     <div class="flex items-center text-sm text-gray-500 bg-blue-50 p-4 rounded-lg">
