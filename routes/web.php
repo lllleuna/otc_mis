@@ -9,6 +9,7 @@ use App\Http\Controllers\BackupController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
+use App\Http\Controllers\ReportController;
 
 
 Route::get('/download-cgs/{filename}', function ($filename) {
@@ -130,18 +131,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
 });
 
-//Forgot Password
-Route::get('/forgot-password', function () {
-    return view('auth.forgot_password');
-})->name('password.request');
-
-Route::get('/generate-reports', function() {
-    return view('tc.generate-reports');
-})->name('reports.generate');
-
-Route::post('/generate-reports', function() {
-    return redirect()->route('reports.generate')->with('success', 'Report generation feature will be implemented soon.');
-})->name('reports.generate.submit');
+Route::get('/generate-reports', [ReportController::class, 'index'])->name('reports.generate');
+Route::post('/generate-reports', [ReportController::class, 'generateReport'])->name('reports.generate.submit');
+Route::get('/reports/download/{id}', [App\Http\Controllers\ReportController::class, 'download'])->name('reports.download');
 
 
 
