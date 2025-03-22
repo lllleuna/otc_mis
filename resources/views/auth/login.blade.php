@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-10 relative">
+    <div class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-2 relative">
         <!-- Background -->
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Login Box -->
-            <div class="relative w-[28rem] mt-5"> <!-- Added margin-top here -->
+            <div class="relative w-[28rem] mt-10"> <!-- Added margin-top here -->
                 <div
                     class="absolute -top-12 left-1/2 transform -translate-x-1/2 w-28 h-28 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-blue-900">
                     <img class="w-full h-auto" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="Logo">
