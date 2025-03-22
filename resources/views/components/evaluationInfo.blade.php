@@ -62,102 +62,142 @@
     </h3>
 
     <div class="space-y-3">
+        <!-- CDA Registration No -->
         <div class="flex justify-between">
             <div>
-                <p class="text-sm text-gray-500">CDA Registration No</p>
-                <p class="">{{ $appGenInfo->cda_registration_no ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">CDA Registration No</label>
+                <input type="text" name="cda_registration_no"
+                    value="{{ old('cda_registration_no', $appGenInfo->cda_registration_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
 
             <div>
-                <p class="text-sm text-gray-500">CDA REgistration Date</p>
-                <p class="">{{ $appGenInfo->cda_registration_date ?? 'N/A' }}
-                </p>
+                <label class="text-sm text-gray-500">CDA Registration Date</label>
+                <input type="date" name="cda_registration_date"
+                    value="{{ old('cda_registration_date', $appGenInfo->cda_registration_date ?? '') }}"
+                    class="border p-2 rounded w-full">
             </div>
 
             <div>
-                <p class="text-sm text-gray-500">Common Bond Membership</p>
-                <p class="">{{ $appGenInfo->common_bond_membership ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">Common Bond Membership</label>
+                <input type="text" name="common_bond_membership"
+                    value="{{ old('common_bond_membership', $appGenInfo->common_bond_membership ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
+        </div>
+
+        <!-- Membership Fee, Email, Contact No -->
+        <div class="flex justify-between">
+            <div>
+                <label class="text-sm text-gray-500">Membership Fee</label>
+                <input type="number" step="0.01" name="membership_fee"
+                    value="{{ old('membership_fee', $appGenInfo->membership_fee ?? '0.00') }}"
+                    class="border p-2 rounded w-full">
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">Business Email</label>
+                <input type="email" name="email" value="{{ old('email', $appGenInfo->email ?? '') }}"
+                    class="border p-2 rounded w-full">
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">Contact Number</label>
+                <input type="text" name="contact_no"
+                    value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
+            </div>
+        </div>
+
+        <!-- Business Address -->
+        <div class="flex justify-between">
+            <div>
+                <label class="text-sm text-gray-500">Business Address</label>
+                <input type="text" name="business_address"
+                    value="{{ old('business_address', $appGenInfo->business_address ?? 'N/A') }}"
+                    class="border p-2 rounded w-full mt-1 mb-1">
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">Barangay</label>
+                <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
+                    placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1">
+            </div>
+
+            <div>
+                <label class="text-sm text-gray-500">Municipality/City</label>
+                <input type="text" name="city" value="{{ old('city', $appGenInfo->city ?? 'N/A') }}"
+                    placeholder="City" class="border p-2 rounded w-full mt-1 mb-1">
+            </div>
+
         </div>
 
         <div class="flex justify-between">
             <div>
-                <p class="text-sm text-gray-500">Membership Fee</p>
-                <p class="">{{ $appGenInfo->membership_fee ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">Province</label>
+                <input type="text" name="province" value="{{ old('province', $appGenInfo->province ?? 'N/A') }}"
+                    placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
-
             <div>
-                <p class="text-sm text-gray-500">Business Email</p>
-                <p class="">{{ $appGenInfo->email ?? 'N/A' }}
-                </p>
+                <label class="text-sm text-gray-500">Region</label>
+                <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
+                    placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
-
             <div>
-                <p class="text-sm text-gray-500">Contact Number</p>
-                <p class="">{{ $appGenInfo->contact_no ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">Area</label>
+                <input type="text" name="area" value="{{ old('area', $appGenInfo->area ?? 'N/A') }}"
+                    placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
         </div>
 
-        <div class="flex justify-between">
-            <div>
-                <p class="text-sm text-gray-500">Business Address</p>
-                @php
-                    $addressParts = [
-                        $appGenInfo->business_address ?? 'N/A',
-                        $appGenInfo->barangay ?? 'N/A',
-                        $appGenInfo->province ?? 'N/A',
-                        $appGenInfo->city ?? 'N/A',
-                        $appGenInfo->region ?? 'N/A',
-                        $appGenInfo->area ?? 'N/A',
-                    ];
-                    $address = implode(', ', array_filter($addressParts));
-                @endphp
-
-                <div class="flex">
-                    <p>{{ $address }}</p>
-                </div>
-
-            </div>
-        </div>
-
+        <!-- SSS, Pag-IBIG, PhilHealth -->
         <div class="flex justify-between pt-5">
             <div>
-                <p class="text-sm text-gray-500">SSS Registration No</p>
-                <p class="">{{ $appGenInfo->employer_sss_reg_no ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">SSS Registration No</label>
+                <input type="text" name="employer_sss_reg_no"
+                    value="{{ old('employer_sss_reg_no', $appGenInfo->employer_sss_reg_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
 
             <div>
-                <p class="text-sm text-gray-500">Pag-IBIG Registration No</p>
-                <p class="">{{ $appGenInfo->employer_pagibig_reg_no ?? 'N/A' }}
-                </p>
+                <label class="text-sm text-gray-500">Pag-IBIG Registration No</label>
+                <input type="text" name="employer_pagibig_reg_no"
+                    value="{{ old('employer_pagibig_reg_no', $appGenInfo->employer_pagibig_reg_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
 
             <div>
-                <p class="text-sm text-gray-500">PhilHealth Registration No</p>
-                <p class="">{{ $appGenInfo->employer_philhealth_reg_no ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">PhilHealth Registration No</label>
+                <input type="text" name="employer_philhealth_reg_no"
+                    value="{{ old('employer_philhealth_reg_no', $appGenInfo->employer_philhealth_reg_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
         </div>
 
+        <!-- BIR TIN, Tax Exemption, Validity -->
         <div class="flex justify-between">
             <div>
-                <p class="text-sm text-gray-500">BIR Tax Identification No</p>
-                <p class="">{{ $appGenInfo->bir_tin ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">BIR Tax Identification No</label>
+                <input type="text" name="bir_tin" value="{{ old('bir_tin', $appGenInfo->bir_tin ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
 
             <div>
-                <p class="text-sm text-gray-500">BIR Tax Exemption No</p>
-                <p class="">{{ $appGenInfo->bir_tax_exemption_no ?? 'N/A' }}
-                </p>
+                <label class="text-sm text-gray-500">BIR Tax Exemption No</label>
+                <input type="text" name="bir_tax_exemption_no"
+                    value="{{ old('bir_tax_exemption_no', $appGenInfo->bir_tax_exemption_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full">
             </div>
 
             <div>
-                <p class="text-sm text-gray-500">Date of Validity</p>
-                <p class="">{{ $appGenInfo->validity ?? 'N/A' }}</p>
+                <label class="text-sm text-gray-500">Date of Validity</label>
+                <input type="date" name="validity" value="{{ old('validity', $appGenInfo->validity ?? '') }}"
+                    class="border p-2 rounded w-full">
             </div>
         </div>
-
     </div>
 </div>
+
 
 <div class="mb-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
