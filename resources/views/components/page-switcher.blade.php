@@ -1,6 +1,6 @@
 {{-- page-switcher.blade.php --}}
 
-<div class="fixed bottom-4 right-4 z-50">
+<div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded shadow">
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-1.5 flex items-center">
         @php
             $currentUrl = request()->url();
