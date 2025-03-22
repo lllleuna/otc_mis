@@ -60,4 +60,8 @@
         </div>
         @include('components.page-switcher')
     </div>
+    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded shadow">
+        @include('components.page-switcher')
+    </div>
+    
 @endsection
