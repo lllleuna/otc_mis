@@ -9,12 +9,12 @@
             </div>
         </div>
 
-        <div class="absolute top-9 text-center w-full">
+        <div class="absolute top-9 text-center w-full z-100">
             <h1 class="text-2xl font-bold text-blue-900">Management Information System</h1>
             <h2 class="text-lg text-blue-900">Office of Transportation Cooperative</h2>
         </div>
 
-        <div class="relative w-[28rem] mt-20"> <!-- Added margin-top here -->
+        <div class="relative w-[28rem] mt-20">
             <div
                 class="absolute -top-12 left-1/2 transform -translate-x-1/2 w-28 h-28 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-blue-900">
                 <img class="w-full h-auto" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="Logo">
@@ -58,10 +58,10 @@
                 </div>
             </div>
         </div>
-        @include('components.page-switcher')
+
+        <!-- Fixed Page Switcher -->
+        <div class="fixed bottom-4 right-4">
+            @include('components.page-switcher')
+        </div>
     </div>
-    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded shadow">
-        @include('components.page-switcher')
-    </div>
-    
 @endsection
