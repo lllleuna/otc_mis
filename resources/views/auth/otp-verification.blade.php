@@ -14,7 +14,7 @@
 
     <div class="relative w-[28rem] mt-19">
         <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-            <div class="bg-blue-900 px-5 pt-7 pb-5 text-center rounded-t-lg">
+            <div class="bg-blue-900 px-5 py-7 text-center rounded-t-lg">
                 <h1 class="text-3xl font-bold text-white mt-4">Verify OTP</h1>
                 <p class="text-sm text-blue-100 max-w-sm mx-auto mt-2">
                     Please enter the OTP sent to your mobile phone.
