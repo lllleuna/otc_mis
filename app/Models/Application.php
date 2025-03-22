@@ -18,7 +18,7 @@ class Application extends Model
 
     public function generalInfo()
     {
-        return $this->hasMany(AppGeneralInfo::class);
+        return $this->hasOne(AppGeneralInfo::class);
     }
 
     public function unit()

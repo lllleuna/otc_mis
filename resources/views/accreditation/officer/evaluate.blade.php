@@ -24,57 +24,62 @@
             <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
         </div>
 
-        <div class="md:flex ">
-            <!-- Application Details (Left Panel) -->
-            <div class="md:w-2/3 p-6 bg-gray-50 md:overflow-y-auto md:max-h-[calc(100vh-12rem)]">
-                @include('components.evaluationInfo')
-            </div>
+        <form method="POST" action="{{ route('accreditation.storeEvaluation', $application->id) }}">
+            @csrf
+            
+            <div class="md:flex ">
+                <!-- Application Details (Left Panel) -->
+                <div class="md:w-2/3 p-6 bg-gray-50 md:overflow-y-auto md:max-h-[calc(100vh-12rem)]">
+                    @include('components.evaluationInfo')
+                </div>
 
-            <!-- Evaluation Form (Right Panel) -->
-            <div class="md:w-1/3 p-6 bg-white">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-                    Evaluation Form
-                </h3>
+                <!-- Evaluation Form (Right Panel) -->
+                <div class="md:w-1/3 p-6 bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+                        Evaluation Form
+                    </h3>
 
-                <form method="POST" action="{{ route('accreditation.storeEvaluation', $application->id) }}"
-                    class="space-y-6">
-                    @csrf
-                    <div>
-                        <label for="evaluation_notes" class="block text-sm font-medium text-gray-700 mb-1">
-                            Evaluation Notes
-                        </label>
-                        <textarea id="evaluation_notes" name="evaluation_notes"
-                            class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
-                            rows="8" placeholder="Enter your evaluation notes here...">
+                    <div class="space-y-6">
+
+
+                        <div>
+                            <label for="evaluation_notes" class="block text-sm font-medium text-gray-700 mb-1">
+                                Evaluation Notes
+                            </label>
+                            <textarea id="evaluation_notes" name="evaluation_notes"
+                                class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                rows="8" placeholder="Enter your evaluation notes here...">
                             {{ old('evaluation_notes', $latestEvaluation->message ?? '') }}
                         </textarea>
 
-                    </div>
+                        </div>
 
-                    <!-- Action Buttons -->
-                    <div class="flex justify-end gap-4 pt-4">
-                        <button type="submit" name="action" value="save"
-                            class="inline-flex items-center px-4 py-2 border border-yellow-300 text-sm font-medium rounded-md text-yellow-700 bg-yellow-50 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                            </svg>
-                            Save Draft
-                        </button>
-                        <button type="submit" name="action" value="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            Submit Evaluation
-                        </button>
+                        <!-- Action Buttons -->
+                        <div class="flex justify-end gap-4 pt-4">
+                            <button type="submit" name="action" value="save"
+                                class="inline-flex items-center px-4 py-2 border border-yellow-300 text-sm font-medium rounded-md text-yellow-700 bg-yellow-50 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                </svg>
+                                Save Draft
+                            </button>
+                            <button type="submit" name="action" value="submit"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                Submit Evaluation
+                            </button>
+                        </div>
+
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
 
