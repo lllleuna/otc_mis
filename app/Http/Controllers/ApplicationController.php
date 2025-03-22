@@ -104,24 +104,54 @@ class ApplicationController extends Controller
     {
         $application = Application::findOrFail($id);
         $userId = Auth::id(); 
-
+    
         $status = $request->input('action') === 'submit' ? 'evaluated' : 'saved';
-
+    
+        // Save Evaluation History
         ApplicationStatusHistory::create([
             'application_id' => $application->id,
             'status' => $status,
             'message' => $request->input('evaluation_notes'),
             'updated_by' => $userId
         ]);
-
+    
+        // Update application status
         $application->update([
             'status' => $status,
-            'evaluated_by' => $userId 
+            'evaluated_by' => $userId,
         ]);
-
-        return redirect()->route('accreditation.evaluate.index')
-            ->with('success', 'Evaluation updated successfully!');
+    
+        // Find AppGeneralInfo record by application_id
+        $generalInfo = AppGeneralInfo::where('application_id', $application->id)->first();
+    
+        if ($generalInfo) {
+            $generalInfo->update([
+                'cda_registration_no' => $request->input('cda_registration_no'),
+                'cda_registration_date' => $request->input('cda_registration_date'),
+                'common_bond_membership' => $request->input('common_bond_membership'),
+                'membership_fee' => $request->input('membership_fee'),
+                'email' => $request->input('email'),
+                'contact_no' => $request->input('contact_no'),
+                'business_address' => $request->input('business_address'),
+                'barangay' => $request->input('barangay'),
+                'city' => $request->input('city'),
+                'province' => $request->input('province'),
+                'region' => $request->input('region'),
+                'area' => $request->input('area'),
+                'employer_sss_reg_no' => $request->input('employer_sss_reg_no'),
+                'employer_pagibig_reg_no' => $request->input('employer_pagibig_reg_no'),
+                'employer_philhealth_reg_no' => $request->input('employer_philhealth_reg_no'),
+                'bir_tin' => $request->input('bir_tin'),
+                'bir_tax_exemption_no' => $request->input('bir_tax_exemption_no'),
+                'validity' => $request->input('validity'),
+            ]);
+            
+        }
+    
+        return redirect()->route('accreditation.evaluate.index', $application->id)
+                         ->with('success', 'Evaluation saved successfully!');
     }
+    
 
     public function approval($id)
     {
