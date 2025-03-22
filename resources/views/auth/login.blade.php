@@ -66,7 +66,7 @@
 
         </div>
 
-        <div class="m-auto">
+        <div class="mt-5">
             @include('components.page-switcher')
 
         </div>
