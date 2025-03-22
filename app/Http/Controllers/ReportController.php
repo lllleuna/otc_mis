@@ -65,9 +65,11 @@ class ReportController extends Controller
             $pdf->save($pdfPath);
         } else {
             // Store Excel file in shared storage
-            Excel::store(new GeneralInfoExport($generalInfos), "reports/{$fileName}.xlsx", [
-                'disk' => 'shared',
-            ]);
+            Excel::store(
+                new GeneralInfoExport($generalInfos),
+                "reports/{$fileName}.xlsx",
+                'shared' // <--- Disk name as a string, NOT array
+            );            
             
             // Move file manually to shared directory if needed
             $excelFullPath = storage_path("app/reports/{$fileName}.xlsx");
