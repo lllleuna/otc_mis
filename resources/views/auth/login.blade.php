@@ -64,9 +64,19 @@
                 </div>
             </div>
 
+        </div>
+
+        <div>
+            <h1>page sw 1</h1>
             @include('components.page-switcher')
 
         </div>
+
+    </div>
+
+    <div>
+        <h1>page sw 2</h1>
+        @include('components.page-switcher')
 
     </div>
 @endsection
