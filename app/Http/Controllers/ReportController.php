@@ -16,16 +16,12 @@ class ReportController extends Controller
 {
     public function index()
     {
-        
-        // Fetch report history, latest first, with pagination (optional)
-        $reportHistories = ReportHistory::with('admin') // Assuming admin relation is set
-            ->orderBy('generated_at', 'desc')
-            ->paginate(10);
-
+        // Fetch report history, latest first, WITH pagination, WITHOUT admin relation
+        $reportHistories = ReportHistory::orderBy('generated_at', 'desc')->paginate(10);
+    
         return view('tc.generate-reports', compact('reportHistories'));
     }
-
-
+    
     public function generateReport(Request $request)
     {
         $validated = $request->validate([
