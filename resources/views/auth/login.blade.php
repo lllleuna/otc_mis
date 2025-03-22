@@ -15,7 +15,7 @@
             <!-- Title -->
             <div class="text-center mb-5">
                 <h1 class="text-2xl font-bold text-blue-900">Management Information System</h1>
-                <h2 class="text-lg text-blue-900">Office of Transportation Cooperative</h2>
+                <h2 class="text-lg text-blue-900">Office of Transportation Cooperatives</h2>
             </div>
 
             <!-- Login Box -->
