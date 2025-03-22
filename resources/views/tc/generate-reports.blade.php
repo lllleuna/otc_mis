@@ -159,7 +159,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex gap-2">
 
                                     <a href="{{ route('reports.download', $history->id) }}" 
-                                       class="text-blue-600 hover:underline"
+                                       class="px-2 py-1 bg-blue-900 text-white rounded hover:bg-blue-600 flex items-center"
                                        target="_blank">
                                         Download
                                     </a>
