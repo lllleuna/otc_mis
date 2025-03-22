@@ -13,5 +13,7 @@
     <main>
         @yield('content')
     </main>
+    
+    @include('components.page-switcher') 
 </body>
 </html>
