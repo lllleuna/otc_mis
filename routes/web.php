@@ -44,6 +44,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
 
@@ -52,10 +53,9 @@ Route::get('/otp/verification', [SessionController::class, 'showOTPVerificationF
 Route::post('/otp/verification', [SessionController::class, 'verifyOTP'])->name('otp.verification');
 Route::post('/otp/resend', [SessionController::class, 'resendOTP'])->name('otp.resend');
 
-Route::get('/reset-password', function() {
-    return view('reset-password');
-})->name('reset-password'); //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-
+Route::get('/reset-password', function (Request $request) {
+    return view('reset-password', ['request' => $request]);
+})->name('reset-password');
 
 // Transport Cooperative Show Route
 Route::get('/api/cooperatives', function (Request $request) {
@@ -130,7 +130,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
 });
 
-
+//Forgot Password
+Route::get('/forgot-password', function () {
+    return view('auth.forgot_password');
+})->name('password.request');
 
 Route::get('/generate-reports', function() {
     return view('tc.generate-reports');
