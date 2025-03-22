@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-16 relative">
+    <div class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-10 relative">
         <!-- Background -->
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
@@ -13,13 +13,13 @@
         <!-- Title and Login Container -->
         <div class="relative flex flex-col items-center z-10">
             <!-- Title -->
-            <div class="text-center mb-4">
+            <div class="text-center mb-5">
                 <h1 class="text-2xl font-bold text-blue-900">Management Information System</h1>
                 <h2 class="text-lg text-blue-900">Office of Transportation Cooperative</h2>
             </div>
 
             <!-- Login Box -->
-            <div class="relative w-[28rem] mt-4"> <!-- Added margin-top here -->
+            <div class="relative w-[28rem] mt-5"> <!-- Added margin-top here -->
                 <div
                     class="absolute -top-12 left-1/2 transform -translate-x-1/2 w-28 h-28 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-blue-900">
                     <img class="w-full h-auto" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="Logo">
@@ -63,11 +63,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Page Switcher -->
-        <div class="absolute bottom-8 z-10">
             @include('components.page-switcher')
+
         </div>
 
     </div>
