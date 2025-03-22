@@ -66,7 +66,7 @@
 
         </div>
 
-        <div class="items-center">
+        <div class="m-auto">
             @include('components.page-switcher')
 
         </div>
