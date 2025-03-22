@@ -53,6 +53,11 @@ Route::get('/otp/verification', [SessionController::class, 'showOTPVerificationF
 Route::post('/otp/verification', [SessionController::class, 'verifyOTP'])->name('otp.verification');
 Route::post('/otp/resend', [SessionController::class, 'resendOTP'])->name('otp.resend');
 
+Route::get('/reset-password', function() {
+    return view('reset-password');
+})->name('reset-password'); //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
+
+
 // Transport Cooperative Show Route
 Route::get('/api/cooperatives', function (Request $request) {
     return GeneralInfo::select(
