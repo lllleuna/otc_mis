@@ -59,4 +59,5 @@
             </div>
         </div>
     </div>
+    @include('components.page-switcher')
 @endsection
