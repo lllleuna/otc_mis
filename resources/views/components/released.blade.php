@@ -51,7 +51,7 @@
             <div>
                 <h4 class="font-medium">CGS Certificate:</h4>
                 @if ($application->maingeneralInfo->cgs_filename)
-                    <a href="{{ asset('storage/uploads/' . $application->maingeneralInfo->cgs_filename) }}" target="_blank" class="text-blue-500 underline">View CGS</a>
+                    <a href="{{ asset('shared/uploads/' . basename($application->maingeneralInfo->cgs_filename)) }}" target="_blank" class="text-blue-500 underline">View CGS</a>
                 @else
                     <p>No CGS Uploaded</p>
                 @endif
