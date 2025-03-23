@@ -10,15 +10,9 @@
         <div class="max-w-8xl mx-auto p-9 bg-white shadow-lg rounded-lg">
             <header class="mb-5">
                 <h1 class="text-2xl font-bold text-gray-800">Record Management</h1>
-                <nav class="flex justify-center space-x-4 mt-4">
+                <nav class="flex justify-start mt-2">
                     <button @click="activeTab = 'transportation'" class="px-6 py-3 text-lg rounded-lg text-gray-700 hover:text-gray-900 transition duration-200" :class="{ 'font-bold': activeTab === 'transportation' }">Transportation Cooperatives</button>
-                    @canany(['admin-access', 'officer1-access', 'officer2-access'])
-                    <button @click="activeTab = 'office'" class="px-6 py-3 text-lg rounded-lg text-gray-700 hover:text-gray-900 transition duration-200" :class="{ 'font-bold ': activeTab === 'office' }">Edit Record Management</button>
-                    @endcan
-
-                    @can('admin-access')
-                    <button @click="activeTab = 'head'" class="px-6 py-3 text-lg rounded-lg text-gray-700 hover:text-gray-900 transition duration-200" :class="{ 'font-bold ': activeTab === 'head' }">Approval Record Management</button>
-                    @endcan
+                    
                 </nav>
             </header>
 
