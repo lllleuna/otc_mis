@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('province')->nullable();
             $table->string('barangay');
             $table->string('business_address');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('contact_no');
             $table->string('contact_firstname');
             $table->string('contact_lastname');
