@@ -67,7 +67,7 @@
             <div>
                 <label class="text-sm text-gray-500">CDA Registration No</label>
                 <input type="text" name="cda_registration_no"
-                    value="{{ old('cda_registration_no', $application->cda_registration_no ?? 'N/A') }}"
+                    value="{{ old('cda_registration_no', $application->cda_reg_no ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
