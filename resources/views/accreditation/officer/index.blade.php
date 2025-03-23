@@ -136,7 +136,7 @@
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 Evaluate
                                             </a>
-                                            @elseif ($application->status === 'evaluated' && Auth::user()->role === 'Admin')
+                                        @elseif ($application->status === 'evaluated' && Auth::user()->role === 'Admin')
                                             <a href="{{ route('accreditation.approval', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 View
@@ -145,6 +145,11 @@
                                             <a href="{{ route('accreditation.release', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 Release Certificate
+                                            </a>
+                                        @elseif ($application->status === 'released')
+                                            <a href="{{ route('applications.history', $application->id) }}"
+                                                class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
+                                                View
                                             </a>
                                         @else
                                             <span class="text-gray-500">N/A</span>

@@ -22,6 +22,7 @@ use App\Models\GeneralInfo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ExternalUser;
+use App\Models\AppTrainingsList;
 
 class ApplicationController extends Controller
 {
@@ -87,6 +88,10 @@ class ApplicationController extends Controller
         $appFranchises = AppFranchise::where('application_id', $id)->get();
         $appLoans = AppLoan::where('application_id', $id)->get();
         $appGov = AppGovernance::where('application_id', $id)->get();
+        $appGrants = AppGrant::where('application_id', $id)->get();
+        $appAwards = AppAward::where('application_id', $id)->get();
+        $appBusinesses = AppBusiness::where('application_id', $id)->get();
+        $appTrainings = AppTrainingsList::where('application_id', $id)->get();
 
         $appFinance = AppFinance::where('application_id', $id)
             ->latest()
@@ -96,7 +101,7 @@ class ApplicationController extends Controller
             ->latest()
             ->first();
 
-        return view('accreditation.officer.evaluate', compact('appGov', 'appCetos', 'appLoans', 'appFinance','application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises'));
+        return view('accreditation.officer.evaluate', compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'appGov', 'appCetos', 'appLoans', 'appFinance','application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises'));
     
     }
 
@@ -170,6 +175,10 @@ class ApplicationController extends Controller
         $appFranchises = AppFranchise::where('application_id', $id)->get();
         $appLoans = AppLoan::where('application_id', $id)->get();
         $appGov = AppGovernance::where('application_id', $id)->get();
+        $appGrants = AppGrant::where('application_id', $id)->get();
+        $appAwards = AppAward::where('application_id', $id)->get();
+        $appBusinesses = AppBusiness::where('application_id', $id)->get();
+        $appTrainings = AppTrainingsList::where('application_id', $id)->get();
 
         $appFinance = AppFinance::where('application_id', $id)
             ->latest()
@@ -179,7 +188,7 @@ class ApplicationController extends Controller
             ->latest()
             ->first();
 
-        return view('accreditation.head.approval', compact('application', 'evaluation', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'appGenInfo', 'appUnits', 'appFranchises'));
+        return view('accreditation.head.approval', compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'application', 'evaluation', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'appGenInfo', 'appUnits', 'appFranchises'));
     }
 
     public function storeApproval(Request $request, $id)
@@ -267,6 +276,10 @@ class ApplicationController extends Controller
         $appFranchises = AppFranchise::where('application_id', $id)->get();
         $appLoans = AppLoan::where('application_id', $id)->get();
         $appGov = AppGovernance::where('application_id', $id)->get();
+        $appGrants = AppGrant::where('application_id', $id)->get();
+        $appAwards = AppAward::where('application_id', $id)->get();
+        $appBusinesses = AppBusiness::where('application_id', $id)->get();
+        $appTrainings = AppTrainingsList::where('application_id', $id)->get();
 
         $appFinance = AppFinance::where('application_id', $id)
             ->latest()
@@ -276,53 +289,74 @@ class ApplicationController extends Controller
             ->latest()
             ->first();
 
-        return view('accreditation.officer.release', compact('application', 'evaluation', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'appGenInfo', 'appUnits', 'appFranchises'));
+        return view('accreditation.officer.release', compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'application', 'evaluation', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'appGenInfo', 'appUnits', 'appFranchises'));
     }
 
     public function storeRelease(Request $request, $id)
     {
         $request->validate([
-            'message' => 'required|string',
+            'message' => 'required|string|max:1000',
             'validity_date' => 'required|date',
             'certificate_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048', // max 2MB
             'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048', // max 2MB
         ]);
-
+    
         $application = Application::findOrFail($id);
-
+    
+        // Handle file uploads
         $certificateFile = $request->file('certificate_file');
         $cgsFile = $request->file('cgs_file');
-
+    
         $dateString = now()->format('Ymd_His');
         $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
         $cgsFilename = 'cgs_' . $dateString . '.' . $cgsFile->getClientOriginalExtension();
-
-        $certificatePath = $certificateFile->storeAs('certificates', $certificateFilename, 'public');
-        $cgsPath = $cgsFile->storeAs('certificates', $cgsFilename, 'public');
-
+    
+        $certificateFile->storeAs('certificates', $certificateFilename, 'public');
+        $cgsFile->storeAs('certificates', $cgsFilename, 'public');
+    
+        // Generate accreditation number
         $accreditationNumber = $this->generateUniqueAccreditationNumber();
-
-        $generalInfo = GeneralInfo::where('cda_registration_no', $application->cda_reg_no)->first();
-
-        if ($generalInfo) {
-            $generalInfo->accreditation_no = $accreditationNumber;
-            $generalInfo->status = 'active';
-            $generalInfo->validity_date = $request->validity_date;
-            $generalInfo->accreditation_certificate_filename = $certificateFilename; // Store filename, not full path
-            $generalInfo->cgs_filename = $cgsFilename;
-            $generalInfo->save();
-        }
-
+    
+        // Insert new row to GeneralInfo (ALWAYS create new row)
+        $generalInfo = new GeneralInfo();
+        $generalInfo->application_id = $application->id;
+        $generalInfo->cda_registration_no = $application->cda_reg_no;
+        $generalInfo->accreditation_no = $accreditationNumber;
+        $generalInfo->status = 'active';
+        $generalInfo->validity_date = $request->validity_date;
+        $generalInfo->accreditation_certificate_filename = $certificateFilename;
+        $generalInfo->cgs_filename = $cgsFilename;
+        $generalInfo->save();
+    
+        // Update application status to 'released'
         $application->status = 'released';
         $application->release_message = $request->message;
         $application->save();
-
+    
+        // Add to status history
+        ApplicationStatusHistory::create([
+            'application_id' => $application->id,
+            'status' => 'released',
+            'message' => $request->message,
+            'updated_by' => auth()->id(),
+        ]);
+    
+        // Update external user status
         ExternalUser::where('id', $application->user_id)->update([
             'accreditation_status' => 'Active',
         ]);
-
+    
         return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released Successfully!');
     }
+    
+    
+    public function showHistory($id)
+    {
+        $application = Application::with(['statusHistories.updatedBy', 'generalInfo'])->findOrFail($id);
+    
+        return view('components.released', compact('application'));
+    }
+    
 
 
 }

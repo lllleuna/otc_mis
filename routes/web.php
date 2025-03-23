@@ -123,6 +123,7 @@ Route::post('/application/approval/{id}', [ApplicationController::class, 'storeA
 Route::get('/application/release/{id}', [ApplicationController::class, 'release'])->name('accreditation.release');
 Route::post('/application/release/{id}', [ApplicationController::class, 'storeRelease'])->name('accreditation.storeRelease');
 
+Route::get('/applications/{id}/history', [ApplicationController::class, 'showHistory'])->name('applications.history');
 
 // Admin Feature
 Route::middleware(['auth'])->group(function () {
