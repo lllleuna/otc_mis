@@ -42,7 +42,7 @@
             <div>
                 <h4 class="font-medium">Accreditation Certificate:</h4>
                 @if ($application->maingeneralInfo->accreditation_certificate_filename)
-                    <a href="{{ asset('shared/uploads/' . basename($application->file_upload)) }}" target="_blank" class="text-blue-500 underline">View Certificate</a>
+                    <a href="{{ asset('shared/certificates/' . $application->maingeneralInfo->accreditation_certificate_filename) }}" target="_blank" class="text-blue-500 underline">View Certificate</a>
                 @else
                     <p>No Certificate Uploaded</p>
                 @endif
@@ -51,7 +51,7 @@
             <div>
                 <h4 class="font-medium">CGS Certificate:</h4>
                 @if ($application->maingeneralInfo->cgs_filename)
-                    <a href="{{ asset('shared/uploads/' . basename($application->maingeneralInfo->cgs_filename)) }}" target="_blank" class="text-blue-500 underline">View CGS</a>
+                    <a href="{{ asset('shared/certificates/' . $application->maingeneralInfo->cgs_filename) }}" target="_blank" class="text-blue-500 underline">View CGS</a>
                 @else
                     <p>No CGS Uploaded</p>
                 @endif
