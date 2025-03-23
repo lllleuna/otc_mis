@@ -323,6 +323,8 @@ class ApplicationController extends Controller
         $generalInfo = new GeneralInfo();
         $generalInfo->application_id = $application->id;
         $generalInfo->name = $application->tc_name ?? 'N/A';
+        $generalInfo->accreditation_date = now();
+        $generalInfo->accreditation_date = $application->cda_reg_date;
         $generalInfo->cda_registration_no = $application->cda_reg_no;
         $generalInfo->accreditation_no = $accreditationNumber;
         $generalInfo->status = 'active';
