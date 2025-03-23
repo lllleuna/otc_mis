@@ -303,9 +303,8 @@ class ApplicationController extends Controller
         ]);
     
         $application = Application::findOrFail($id);
-        $appGen = AppGeneralInfo::where('application_id', $id);
+        $appGen = AppGeneralInfo::where('application_id', $id)->first();
 
-    
         // Handle file uploads
         $certificateFile = $request->file('certificate_file');
         $cgsFile = $request->file('cgs_file');
