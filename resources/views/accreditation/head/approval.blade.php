@@ -12,7 +12,7 @@
     </head>
 </head>
 
-<body>
+<body class="bg-gray-200">
 
     <div class="max-w-7xl mx-auto p-4">
         <button onclick="window.history.back()"
