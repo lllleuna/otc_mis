@@ -322,6 +322,7 @@ class ApplicationController extends Controller
         // Insert new row to GeneralInfo (ALWAYS create new row)
         $generalInfo = new GeneralInfo();
         $generalInfo->application_id = $application->id;
+        $generalInfo->name = $application->tc_name ?? 'N/A';
         $generalInfo->cda_registration_no = $application->cda_reg_no;
         $generalInfo->accreditation_no = $accreditationNumber;
         $generalInfo->status = 'active';
