@@ -42,7 +42,7 @@
 
         <div class="pt-2">
             <p class="text-sm text-gray-500 mb-2">Attached Document</p>
-            <a href="{{ asset('/storage/' . $application->file_upload) }}"
+            <a href="{{ asset('shared/uploads/' . basename($application->file_upload)) }}"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors"
                 target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
