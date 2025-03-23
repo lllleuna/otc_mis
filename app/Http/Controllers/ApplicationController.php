@@ -334,7 +334,7 @@ class ApplicationController extends Controller
         $generalInfo->city = $appGen->city;
         $generalInfo->province = $appGen->province;
         $generalInfo->barangay = $appGen->barangay;
-        $generalInfo->business_address = $application->business_address;
+        $generalInfo->business_address = $appGen->business_address ?? 'N/A';
         $generalInfo->email = $appGen->email;
         $generalInfo->contact_no = $appGen->contact_no;
         $generalInfo->contact_firstname = $appGen->contact_firstname ?? 'N/A';
