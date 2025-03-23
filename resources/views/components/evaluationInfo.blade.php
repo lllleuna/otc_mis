@@ -74,7 +74,7 @@
             <div>
                 <label class="text-sm text-gray-500">CDA Registration Date</label>
                 <input type="date" name="cda_registration_date"
-                    value="{{ old('cda_registration_date', $application->cda_registration_date ?? '') }}"
+                    value="{{ old('cda_registration_date', $application->cda_reg_date ?? '') }}"
                     class="border p-2 rounded w-full">
             </div>
 
