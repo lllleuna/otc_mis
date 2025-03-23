@@ -32,6 +32,10 @@ class DatabaseSeeder extends Seeder
         // Employee accounts
         User::factory(10)->create(); 
 
+        $this->call([
+            UsersTableSeeder::class,
+        ]);
+
         // Create GeneralInfo records first
         GeneralInfo::factory(10)->create()->each(function ($generalInfo) {
             $accreditationNo = $generalInfo->accreditation_no;
@@ -58,9 +62,9 @@ class DatabaseSeeder extends Seeder
 
 
         // Seeder for external users (client portal)
-        $this->call([
-            ExternalUserSeeder::class,  // Call the UserSeeder
-        ]);
+        // $this->call([
+        //     ExternalUserSeeder::class,  // Call the UserSeeder
+        // ]);
 
         // Accreditation application factory and seeder
         // $this->call([
