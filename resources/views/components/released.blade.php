@@ -34,7 +34,7 @@
     <hr class="my-8 border-gray-300">
 
     {{-- Uploaded Files --}}
-    <h2 class="text-2xl font-bold text-blue-900 mb-6">Uploaded Certificates</h2>
+    <h2 class="text-2xl font-bold text-blue-900 mb-6 mt-10">Uploaded Certificates</h2>
 
     @if($application->maingeneralInfo)
         <div class="bg-gray-100 p-6 rounded-lg mb-6">
@@ -61,7 +61,7 @@
 
                 {{-- CGS Certificate --}}
                 <div class="flex-1">
-                    <h4 class="font-medium text-gray-800 mb-2">CGS Certificate:</h4>
+                    <h4 class="font-medium text-gray-800 mb-2">Certificate of Good Standing:</h4>
                     @if ($application->maingeneralInfo->cgs_filename)
                         <a href="{{ asset('shared/certificates/' . $application->maingeneralInfo->cgs_filename) }}" target="_blank" 
                            class="inline-block bg-blue-900 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-800 transition">
