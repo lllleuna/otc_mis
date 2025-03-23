@@ -326,6 +326,7 @@ class ApplicationController extends Controller
         $generalInfo->name = $application->tc_name ?? 'N/A';
         $generalInfo->accreditation_date = now();
         $generalInfo->cda_registration_date = $application->cda_reg_date;
+        $generalInfo->cda_registration_no = $application->cda_reg_no;
 
         $generalInfo->common_bond_membership = $appGen->common_bond_membership;
         $generalInfo->membership_fee = $appGen->membership_fee;
