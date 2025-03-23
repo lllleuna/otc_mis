@@ -303,6 +303,8 @@ class ApplicationController extends Controller
         ]);
     
         $application = Application::findOrFail($id);
+        $appGen = AppGeneralInfo::where('application_id', $id);
+
     
         // Handle file uploads
         $certificateFile = $request->file('certificate_file');
@@ -325,7 +327,25 @@ class ApplicationController extends Controller
         $generalInfo->name = $application->tc_name ?? 'N/A';
         $generalInfo->accreditation_date = now();
         $generalInfo->cda_registration_date = $application->cda_reg_date;
-        $generalInfo->cda_registration_no = $application->cda_reg_no;
+
+        $generalInfo->common_bond_membership = $appGen->common_bond_membership;
+        $generalInfo->membership_fee = $appGen->membership_fee;
+        $generalInfo->area = $appGen->area;
+        $generalInfo->region = $appGen->region;
+        $generalInfo->city = $appGen->city;
+        $generalInfo->province = $appGen->province;
+        $generalInfo->barangay = $appGen->barangay;
+        $generalInfo->business_address = $application->business_address;
+        $generalInfo->email = $appGen->email;
+        $generalInfo->contact_no = $appGen->contact_no;
+        $generalInfo->contact_firstname = $appGen->contact_firstname ?? 'N/A';
+        $generalInfo->contact_lastname = $appGen->contact_lastname ?? 'N/A';
+        $generalInfo->employer_sss_reg_no = $appGen->employer_sss_reg_no;
+        $generalInfo->employer_pagibig_reg_no = $appGen->employer_pagibig_reg_no;
+        $generalInfo->employer_philhealth_reg_no = $appGen->employer_philhealth_reg_no;
+        $generalInfo->bir_tin = $appGen->bir_tin;
+        $generalInfo->bir_tax_exemption_no = $appGen->bir_tax_exemption_no;
+
         $generalInfo->accreditation_no = $accreditationNumber;
         $generalInfo->status = 'active';
         $generalInfo->validity_date = $request->validity_date;
