@@ -21,8 +21,10 @@
         </button>
     </div>
 
-    <div class="max-w-3xl mx-auto bg-blue-900 p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold mb-4">Application Approval</h2>
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="w-full bg-blue-900 py-2 px-5">
+            <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
+        </div>
 
         {{-- Application Information --}}
         <div class="mb-4 p-4 border rounded-md bg-gray-50 max-h-64 overflow-y-auto">
