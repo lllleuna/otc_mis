@@ -67,14 +67,14 @@
             <div>
                 <label class="text-sm text-gray-500">CDA Registration No</label>
                 <input type="text" name="cda_registration_no"
-                    value="{{ old('cda_registration_no', $appGenInfo->cda_registration_no ?? 'N/A') }}"
+                    value="{{ old('cda_registration_no', $application->cda_registration_no ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">CDA Registration Date</label>
                 <input type="date" name="cda_registration_date"
-                    value="{{ old('cda_registration_date', $appGenInfo->cda_registration_date ?? '') }}"
+                    value="{{ old('cda_registration_date', $application->cda_registration_date ?? '') }}"
                     class="border p-2 rounded w-full">
             </div>
 
@@ -114,19 +114,19 @@
             <div>
                 <label class="text-sm text-gray-500">Business Address</label>
                 <input type="text" name="business_address"
-                    value="{{ old('business_address', $appGenInfo->business_address ?? 'N/A') }}"
+                    value="{{ old('business_address', $application->business_address ?? 'N/A') }}"
                     class="border p-2 rounded w-full mt-1 mb-1">
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Barangay</label>
-                <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
+                <input type="text" name="barangay" value="{{ old('barangay', $application->barangay ?? 'N/A') }}"
                     placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Municipality/City</label>
-                <input type="text" name="city" value="{{ old('city', $appGenInfo->city ?? 'N/A') }}"
+                <input type="text" name="city" value="{{ old('city', $application->city ?? 'N/A') }}"
                     placeholder="City" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
 
@@ -135,17 +135,17 @@
         <div class="flex justify-between">
             <div>
                 <label class="text-sm text-gray-500">Province</label>
-                <input type="text" name="province" value="{{ old('province', $appGenInfo->province ?? 'N/A') }}"
+                <input type="text" name="province" value="{{ old('province', $application->province ?? 'N/A') }}"
                     placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
             <div>
                 <label class="text-sm text-gray-500">Region</label>
-                <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
+                <input type="text" name="region" value="{{ old('region', $application->region ?? 'N/A') }}"
                     placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
             <div>
                 <label class="text-sm text-gray-500">Area</label>
-                <input type="text" name="area" value="{{ old('area', $appGenInfo->area ?? 'N/A') }}"
+                <input type="text" name="area" value="{{ old('area', $application->area ?? 'N/A') }}"
                     placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1">
             </div>
         </div>
