@@ -21,7 +21,7 @@
         </button>
     </div>
 
-    <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div class="max-w-3xl mx-auto bg-blue-900 p-6 rounded-lg shadow-md">
         <h2 class="text-xl font-semibold mb-4">Application Approval</h2>
 
         {{-- Application Information --}}

@@ -20,7 +20,7 @@
 
     <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
-        <div class="bg-blue-600 px-6 py-4">
+        <div class="bg-blue-900 px-6 py-4">
             <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
         </div>
 
