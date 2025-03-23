@@ -42,7 +42,7 @@
 
         <div class="pt-2">
             <p class="text-sm text-gray-500 mb-2">Attached Document</p>
-            <a href="{{ asset('shared/uploads/' . basename($application->file_upload)) }}"
+            <a href="{{ asset('/storage/' . $application->file_upload) }}"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors"
                 target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
@@ -67,22 +67,22 @@
             <div>
                 <label class="text-sm text-gray-500">CDA Registration No</label>
                 <input type="text" name="cda_registration_no"
-                    value="{{ old('cda_registration_no', $application->cda_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    value="{{ old('cda_registration_no', $appGenInfo->cda_registration_no ?? 'N/A') }}"
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">CDA Registration Date</label>
                 <input type="date" name="cda_registration_date"
-                    value="{{ old('cda_registration_date', $application->cda_reg_date ?? '') }}"
-                    class="border p-2 rounded w-full">
+                    value="{{ old('cda_registration_date', $appGenInfo->cda_registration_date ?? '') }}"
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Common Bond Membership</label>
                 <input type="text" name="common_bond_membership"
                     value="{{ old('common_bond_membership', $appGenInfo->common_bond_membership ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
         </div>
 
@@ -92,20 +92,20 @@
                 <label class="text-sm text-gray-500">Membership Fee</label>
                 <input type="number" step="0.01" name="membership_fee"
                     value="{{ old('membership_fee', $appGenInfo->membership_fee ?? '0.00') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Business Email</label>
                 <input type="email" name="email" value="{{ old('email', $appGenInfo->email ?? '') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Contact Number</label>
                 <input type="text" name="contact_no"
                     value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
         </div>
 
@@ -114,20 +114,20 @@
             <div>
                 <label class="text-sm text-gray-500">Business Address</label>
                 <input type="text" name="business_address"
-                    value="{{ old('business_address', $application->business_address ?? 'N/A') }}"
-                    class="border p-2 rounded w-full mt-1 mb-1">
+                    value="{{ old('business_address', $appGenInfo->business_address ?? 'N/A') }}"
+                    class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Barangay</label>
-                <input type="text" name="barangay" value="{{ old('barangay', $application->barangay ?? 'N/A') }}"
-                    placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1">
+                <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
+                    placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Municipality/City</label>
-                <input type="text" name="city" value="{{ old('city', $application->city ?? 'N/A') }}"
-                    placeholder="City" class="border p-2 rounded w-full mt-1 mb-1">
+                <input type="text" name="city" value="{{ old('city', $appGenInfo->city ?? 'N/A') }}"
+                    placeholder="City" class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
 
         </div>
@@ -135,18 +135,18 @@
         <div class="flex justify-between">
             <div>
                 <label class="text-sm text-gray-500">Province</label>
-                <input type="text" name="province" value="{{ old('province', $application->province ?? 'N/A') }}"
-                    placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1">
+                <input type="text" name="province" value="{{ old('province', $appGenInfo->province ?? 'N/A') }}"
+                    placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
             <div>
                 <label class="text-sm text-gray-500">Region</label>
-                <input type="text" name="region" value="{{ old('region', $application->region ?? 'N/A') }}"
-                    placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1">
+                <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
+                    placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
             <div>
                 <label class="text-sm text-gray-500">Area</label>
-                <input type="text" name="area" value="{{ old('area', $application->area ?? 'N/A') }}"
-                    placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1">
+                <input type="text" name="area" value="{{ old('area', $appGenInfo->area ?? 'N/A') }}"
+                    placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
         </div>
 
@@ -156,21 +156,21 @@
                 <label class="text-sm text-gray-500">SSS Registration No</label>
                 <input type="text" name="employer_sss_reg_no"
                     value="{{ old('employer_sss_reg_no', $appGenInfo->employer_sss_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Pag-IBIG Registration No</label>
                 <input type="text" name="employer_pagibig_reg_no"
                     value="{{ old('employer_pagibig_reg_no', $appGenInfo->employer_pagibig_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">PhilHealth Registration No</label>
                 <input type="text" name="employer_philhealth_reg_no"
                     value="{{ old('employer_philhealth_reg_no', $appGenInfo->employer_philhealth_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
         </div>
 
@@ -179,20 +179,20 @@
             <div>
                 <label class="text-sm text-gray-500">BIR Tax Identification No</label>
                 <input type="text" name="bir_tin" value="{{ old('bir_tin', $appGenInfo->bir_tin ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">BIR Tax Exemption No</label>
                 <input type="text" name="bir_tax_exemption_no"
                     value="{{ old('bir_tax_exemption_no', $appGenInfo->bir_tax_exemption_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
 
             <div>
                 <label class="text-sm text-gray-500">Date of Validity</label>
                 <input type="date" name="validity" value="{{ old('validity', $appGenInfo->validity ?? '') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" disabled>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@
 
         {{-- Application Information --}}
         <div class="mb-4 p-4 border rounded-md bg-gray-50 max-h-64 overflow-y-auto">
-            @include('components.evaluationInfo')
+            @include('components.releasing')
         </div>
 
 

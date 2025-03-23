@@ -21,6 +21,11 @@ class Application extends Model
         return $this->hasOne(AppGeneralInfo::class);
     }
 
+    public function maingeneralInfo()
+    {
+        return $this->hasOne(GeneralInfo::class);
+    }
+    
     public function unit()
     {
         return $this->hasMany(AppUnit::class);

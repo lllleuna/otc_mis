@@ -45,6 +45,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
 
@@ -53,10 +54,9 @@ Route::get('/otp/verification', [SessionController::class, 'showOTPVerificationF
 Route::post('/otp/verification', [SessionController::class, 'verifyOTP'])->name('otp.verification');
 Route::post('/otp/resend', [SessionController::class, 'resendOTP'])->name('otp.resend');
 
-Route::get('/reset-password', function() {
-    return view('reset-password');
-})->name('reset-password'); //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-
+Route::get('/reset-password', function (Request $request) {
+    return view('reset-password', ['request' => $request]);
+})->name('reset-password');
 
 // Transport Cooperative Show Route
 Route::get('/api/cooperatives', function (Request $request) {
@@ -123,6 +123,7 @@ Route::post('/application/approval/{id}', [ApplicationController::class, 'storeA
 Route::get('/application/release/{id}', [ApplicationController::class, 'release'])->name('accreditation.release');
 Route::post('/application/release/{id}', [ApplicationController::class, 'storeRelease'])->name('accreditation.storeRelease');
 
+Route::get('/applications/{id}/history', [ApplicationController::class, 'showHistory'])->name('applications.history');
 
 // Admin Feature
 Route::middleware(['auth'])->group(function () {

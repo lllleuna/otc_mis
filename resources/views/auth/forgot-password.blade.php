@@ -28,22 +28,26 @@
                     <!-- Password Reset Token -->
                     <input type="hidden" name="token" value="#">
 
-                    <!-- Email Address -->
+
+                    <!-- New Password -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Enter your email" value="{{ old('email', $request->email) }}" required readonly
-                            class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300 bg-gray-50">
-                        @error('email')
+                        <label for="password" class="block text-sm font-medium text-gray-700">New Password</label>
+                        <input type="password" name="password" id="password" required
+                            class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300">
+                        @error('password')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
+                    <!-- Confirm Password -->
+                    <div>
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation" required
+                            class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300">
+                    </div>
 
                     <div class="pt-4">
                         <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition">Reset Password</button>
-                    </div>
-                    <div class="text-center mt-4">
-                        <a href="{{ route('login') }}" class="text-blue-700 text-sm hover:underline">Back to Login</a>
                     </div>
                 </form>
             </div>
