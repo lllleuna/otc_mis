@@ -10,6 +10,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
 {
@@ -130,9 +131,15 @@ class RegisteredUserController extends Controller
     public function destroy(Request $request, User $user)
     {
         // Validate password input
-        $request->validate([
-            'password' => ['required', 'current_password'],
+        $validator = Validator::make($request->all(), [
+            'password' => ['required', 'current_password:web'],
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'deletePassword') // Named error bag here
+                ->withInput();
+        }
 
         // Prevent deleting yourself (optional, safety)
         if (Auth::id() === $user->id) {

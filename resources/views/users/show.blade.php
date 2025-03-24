@@ -175,7 +175,9 @@
 
     </x-modal>
 
-    <div id="modalDelete" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div id="modalDelete"
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 
+    {{ $errors->deletePassword->any() ? '' : 'hidden' }}">
         <div class="bg-white p-6 rounded shadow-lg">
             <h2 class="text-lg font-semibold mb-4">Confirm Delete</h2>
             <p>Enter your password to delete this account:</p>
@@ -184,17 +186,18 @@
                 @method('DELETE')
                 <input type="password" name="password" class="border p-2 w-full mb-2" required
                     placeholder="Password">
-                @error('password')
-                    <p class="text-red-500 text-sm">{{ $message }}</p>
-                @enderror
+                @if ($errors->deletePassword->has('password'))
+                    <p class="text-red-500 text-sm">{{ $errors->deletePassword->first('password') }}</p>
+                @endif
                 <div class="flex justify-end gap-2">
                     <button type="button" onclick="closeModal('modalDelete')"
                         class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded">Delete</button>
+                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded">Delete</button>
                 </div>
             </form>
         </div>
     </div>
+
 
     <script>
         function openModal(id) {
@@ -204,6 +207,13 @@
         function closeModal(id) {
             document.getElementById(id).classList.add('hidden');
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('#modalDelete') && !document.querySelector('#modalDelete').classList
+                .contains('hidden')) {
+                openModal('modalDelete');
+            }
+        });
     </script>
 
 
