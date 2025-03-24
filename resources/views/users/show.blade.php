@@ -176,11 +176,11 @@
     </x-modal>
 
     <div id="modalDelete"
-        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 
+        class="fixed inset-0 flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-50
     {{ $errors->deletePassword->any() ? '' : 'hidden' }}">
-        <div class="bg-white p-6 rounded shadow-lg">
-            <h2 class="text-lg font-semibold mb-4">Confirm Delete</h2>
-            <p>Enter your password to delete this account:</p>
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-sm mx-auto">
+            <h2 class="text-lg font-semibold mb-4 text-center">Confirm Delete</h2>
+            <p class="text-center">Enter your password to delete this account:</p>
             <form method="POST" action="{{ route('users.destroy', $user->id) }}" class="mt-4">
                 @csrf
                 @method('DELETE')
@@ -197,6 +197,7 @@
             </form>
         </div>
     </div>
+
 
 
     <script>
