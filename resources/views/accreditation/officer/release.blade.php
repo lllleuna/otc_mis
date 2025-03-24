@@ -67,6 +67,10 @@
                     Certificate</label>
                 <input type="file" name="certificate_file" id="certificate_file" class="w-full p-2 border rounded-md"
                     accept=".pdf,.jpg,.jpeg,.png" required>
+
+                @error('certificate_file')
+                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="mb-4">
@@ -74,6 +78,10 @@
                     Standing</label>
                 <input type="file" name="cgs_file" id="cgs_file" class="w-full p-2 border rounded-md"
                     accept=".pdf,.jpg,.jpeg,.png" required>
+
+                @error('cgs_file')
+                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
 
