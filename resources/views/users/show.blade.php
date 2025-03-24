@@ -192,7 +192,7 @@
                 <div class="flex justify-end gap-2">
                     <button type="button" onclick="closeModal('modalDelete')"
                         class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded">Delete</button>
+                    <button type="submit" class="text-red-800 font-semibold">Delete</button>
                 </div>
             </form>
         </div>
