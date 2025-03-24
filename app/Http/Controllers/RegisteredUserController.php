@@ -125,4 +125,24 @@ class RegisteredUserController extends Controller
 
         return redirect('dashboard');
     }
+
+
+    public function destroy(Request $request, User $user)
+    {
+        // Validate password input
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+
+        // Prevent deleting yourself (optional, safety)
+        if (Auth::id() === $user->id) {
+            return back()->withErrors(['error' => 'You cannot delete your own account.']);
+        }
+
+        // Delete user
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'User account deleted successfully.');
+    }
+
 }
