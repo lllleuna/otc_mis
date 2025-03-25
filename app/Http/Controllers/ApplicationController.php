@@ -23,6 +23,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ExternalUser;
 use App\Models\AppTrainingsList;
+use Illuminate\Support\Facades\Http;
 
 class ApplicationController extends Controller
 {
@@ -72,18 +73,45 @@ class ApplicationController extends Controller
     }
 
 
-    public function evaluate($id)
+    public function evaluate(Request $request, $id)
     {
+        $formData = $request->session()->get('form_data', []);
+    
+        $provinceName = 'Unknown Province';
+        $cityName = 'Unknown City/Municipality';
+        $barangayName = 'Unknown Barangay';
+    
+        // Fetch Province Name
+        if (!empty($formData['province'])) {
+            $provinceResponse = Http::get("https://psgc.gitlab.io/api/provinces/{$formData['province']}/");
+            if ($provinceResponse->successful()) {
+                $provinceName = $provinceResponse->json()['name'];
+            }
+        }
+    
+        // Fetch City/Municipality Name
+        if (!empty($formData['city_municipality'])) {
+            $cityResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$formData['city_municipality']}/");
+            if ($cityResponse->successful()) {
+                $cityName = $cityResponse->json()['name'];
+            }
+        }
+    
+        // Fetch Barangay Name
+        if (!empty($formData['barangay'])) {
+            $barangayResponse = Http::get("https://psgc.gitlab.io/api/barangays/{$formData['barangay']}/");
+            if ($barangayResponse->successful()) {
+                $barangayName = $barangayResponse->json()['name'];
+            }
+        }
+    
         $application = Application::findOrFail($id);
-
+    
         $latestEvaluation = ApplicationStatusHistory::where('application_id', $id)
             ->latest()
             ->first();
-
-        $appGenInfo = AppGeneralInfo::where('application_id', $id)
-            ->latest()
-            ->first();
-
+    
+        $appGenInfo = AppGeneralInfo::where('application_id', $id)->latest()->first();
         $appUnits = AppUnit::where('application_id', $id)->get();
         $appFranchises = AppFranchise::where('application_id', $id)->get();
         $appLoans = AppLoan::where('application_id', $id)->get();
@@ -92,17 +120,19 @@ class ApplicationController extends Controller
         $appAwards = AppAward::where('application_id', $id)->get();
         $appBusinesses = AppBusiness::where('application_id', $id)->get();
         $appTrainings = AppTrainingsList::where('application_id', $id)->get();
-
-        $appFinance = AppFinance::where('application_id', $id)
-            ->latest()
-            ->first();
-
-        $appCetos = AppCetos::where('application_id', $id)
-            ->latest()
-            ->first();
-
-        return view('accreditation.officer.evaluate', compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'appGov', 'appCetos', 'appLoans', 'appFinance','application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises'));
+        $appFinance = AppFinance::where('application_id', $id)->latest()->first();
+        $appCetos = AppCetos::where('application_id', $id)->latest()->first();
     
+        // Merge all data into a single array for the view
+        return view('accreditation.officer.evaluate', array_merge(
+            compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises'),
+            [
+                'formData' => $formData,
+                'provinceName' => $provinceName,
+                'cityName' => $cityName,
+                'barangayName' => $barangayName,
+            ]
+        ));
     }
 
     public function storeEvaluation(Request $request, $id)
@@ -157,20 +187,46 @@ class ApplicationController extends Controller
                          ->with('success', 'Evaluation saved successfully!');
     }
     
-
-    public function approval($id)
+    public function approval(Request $request, $id)
     {
+        $formData = $request->session()->get('form_data', []);
+    
+        $provinceName = 'Unknown Province';
+        $cityName = 'Unknown City/Municipality';
+        $barangayName = 'Unknown Barangay';
+    
+        // Fetch Province Name
+        if (!empty($formData['province'])) {
+            $provinceResponse = Http::get("https://psgc.gitlab.io/api/provinces/{$formData['province']}/");
+            if ($provinceResponse->successful()) {
+                $provinceName = $provinceResponse->json()['name'];
+            }
+        }
+    
+        // Fetch City/Municipality Name
+        if (!empty($formData['city_municipality'])) {
+            $cityResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$formData['city_municipality']}/");
+            if ($cityResponse->successful()) {
+                $cityName = $cityResponse->json()['name'];
+            }
+        }
+    
+        // Fetch Barangay Name
+        if (!empty($formData['barangay'])) {
+            $barangayResponse = Http::get("https://psgc.gitlab.io/api/barangays/{$formData['barangay']}/");
+            if ($barangayResponse->successful()) {
+                $barangayName = $barangayResponse->json()['name'];
+            }
+        }
+    
         $application = Application::findOrFail($id);
-
+    
         $evaluation = ApplicationStatusHistory::where('application_id', $id)
             ->latest('updated_at')
-            ->with('updatedBy') 
+            ->with('updatedBy')
             ->first();
-
-            $appGenInfo = AppGeneralInfo::where('application_id', $id)
-            ->latest()
-            ->first();
-
+    
+        $appGenInfo = AppGeneralInfo::where('application_id', $id)->latest()->first();
         $appUnits = AppUnit::where('application_id', $id)->get();
         $appFranchises = AppFranchise::where('application_id', $id)->get();
         $appLoans = AppLoan::where('application_id', $id)->get();
@@ -179,17 +235,21 @@ class ApplicationController extends Controller
         $appAwards = AppAward::where('application_id', $id)->get();
         $appBusinesses = AppBusiness::where('application_id', $id)->get();
         $appTrainings = AppTrainingsList::where('application_id', $id)->get();
-
-        $appFinance = AppFinance::where('application_id', $id)
-            ->latest()
-            ->first();
-
-        $appCetos = AppCetos::where('application_id', $id)
-            ->latest()
-            ->first();
-
-        return view('accreditation.head.approval', compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'application', 'evaluation', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'appGenInfo', 'appUnits', 'appFranchises'));
+        $appFinance = AppFinance::where('application_id', $id)->latest()->first();
+        $appCetos = AppCetos::where('application_id', $id)->latest()->first();
+    
+        // Merge all data into a single array
+        return view('accreditation.head.approval', array_merge(
+            compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'application', 'evaluation', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'appGenInfo', 'appUnits', 'appFranchises'),
+            [
+                'formData' => $formData,
+                'provinceName' => $provinceName,
+                'cityName' => $cityName,
+                'barangayName' => $barangayName,
+            ]
+        ));
     }
+    
 
     public function storeApproval(Request $request, $id)
     {
