@@ -358,7 +358,7 @@ class ApplicationController extends Controller
     
         $application = Application::findOrFail($id);
         $appGen = AppGeneralInfo::where('application_id', $id)->first();
-        
+
         $request->validate([
             'message' => 'required|string|max:1000',
             'validity_date' => 'required|date',
@@ -367,22 +367,25 @@ class ApplicationController extends Controller
                 : 'required|mimes:pdf,jpg,jpeg,png|max:2048',
             'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
-        
 
         // Handle file uploads
         $certificateFile = $request->file('certificate_file');
         $cgsFile = $request->file('cgs_file');
-    
+
         $dateString = now()->format('Ymd_His');
 
-        $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
-        $cgsFilename = 'cgs_' . $dateString . '.' . $cgsFile->getClientOriginalExtension();
+        if ($certificateFile) { // Only process if the file exists
+            $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
+            $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
+        } else {
+            $certificateFilename = null; // Handle the case where there's no file
+        }
 
-        // Store in the shared directory
-        $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
+        $cgsFilename = 'cgs_' . $dateString . '.' . $cgsFile->getClientOriginalExtension();
         $cgsFile->move(public_path('shared/certificates'), $cgsFilename);
 
         $accreditationNumber = $this->generateUniqueAccreditationNumber();
+
     
         // Insert new row to GeneralInfo (ALWAYS create new row)
         $generalInfo = new GeneralInfo();
