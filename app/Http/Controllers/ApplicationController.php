@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\ExternalUser;
 use App\Models\AppTrainingsList;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ApplicationStatusMail;
 
 class ApplicationController extends Controller
 {
@@ -257,51 +259,61 @@ class ApplicationController extends Controller
             'status' => 'required|in:approved,rejected,needs_info',
             'message' => 'required|string|max:1000',
         ]);
-
+    
         $application = Application::findOrFail($id);
         $userId = auth()->id(); 
-
+        $user = $application->user; // Get user who submitted the application
+    
+        // Store status history
         ApplicationStatusHistory::create([
             'application_id' => $application->id,
             'status' => $request->status,
             'message' => $request->message,
             'updated_by' => $userId,
         ]);
-
-        $appgeninfo = AppGeneralInfo::where('application_id', $id)->first();
-
-        GeneralInfo::create([
-            'name' => $appgeninfo->name ?? 'N/A',
-            'accreditation_date' => now(),
-            'cda_registration_no' => $appgeninfo->cda_registration_no ?? 'N/A',
-            'cda_registration_date' => $appgeninfo->cda_registration_date ?? now(),
-            'common_bond_membership' => $appgeninfo->common_bond_membership ?? 'N/A',
-            'membership_fee' => $appgeninfo->membership_fee ?? 0,
-            'area' => $appgeninfo->area ?? 'N/A',
-            'region' => $appgeninfo->region ?? 'N/A',
-            'city' => $appgeninfo->city ?? 'N/A',
-            'province' => $appgeninfo->province ?? 'N/A',
-            'barangay' => $appgeninfo->barangay ?? 'N/A',
-            'business_address' => $appgeninfo->business_address ?? 'N/A',
-            'email' => $appgeninfo->email ?? 'N/A',
-            'contact_no' => $appgeninfo->contact_no ?? 'N/A',
-            'contact_firstname' => "test",
-            'contact_lastname' => "test",
-            'contact_mid_initial' => "test",
-            'contact_suffix' => "test",
-            'employer_sss_reg_no' => $appgeninfo->employer_sss_reg_no ?? 'N/A',
-            'employer_pagibig_reg_no' => $appgeninfo->employer_pagibig_reg_no ?? 'N/A',
-            'employer_philhealth_reg_no' => $appgeninfo->employer_philhealth_reg_no ?? 'N/A',
-            'bir_tin' => $appgeninfo->bir_tin ?? 'N/A',
-            'bir_tax_exemption_no' => $appgeninfo->bir_tax_exemption_no ?? 'N/A',
-        ]);
-        
-
+    
+        // Only create GeneralInfo if status is "approved"
+        if ($request->status === 'approved') {
+            $appgeninfo = AppGeneralInfo::where('application_id', $id)->first();
+    
+            GeneralInfo::create([
+                'name' => $appgeninfo->name ?? 'N/A',
+                'accreditation_date' => now(),
+                'cda_registration_no' => $appgeninfo->cda_registration_no ?? 'N/A',
+                'cda_registration_date' => $appgeninfo->cda_registration_date ?? now(),
+                'common_bond_membership' => $appgeninfo->common_bond_membership ?? 'N/A',
+                'membership_fee' => $appgeninfo->membership_fee ?? 0,
+                'area' => $appgeninfo->area ?? 'N/A',
+                'region' => $appgeninfo->region ?? 'N/A',
+                'city' => $appgeninfo->city ?? 'N/A',
+                'province' => $appgeninfo->province ?? 'N/A',
+                'barangay' => $appgeninfo->barangay ?? 'N/A',
+                'business_address' => $appgeninfo->business_address ?? 'N/A',
+                'email' => $appgeninfo->email ?? 'N/A',
+                'contact_no' => $appgeninfo->contact_no ?? 'N/A',
+                'contact_firstname' => "test",
+                'contact_lastname' => "test",
+                'contact_mid_initial' => "test",
+                'contact_suffix' => "test",
+                'employer_sss_reg_no' => $appgeninfo->employer_sss_reg_no ?? 'N/A',
+                'employer_pagibig_reg_no' => $appgeninfo->employer_pagibig_reg_no ?? 'N/A',
+                'employer_philhealth_reg_no' => $appgeninfo->employer_philhealth_reg_no ?? 'N/A',
+                'bir_tin' => $appgeninfo->bir_tin ?? 'N/A',
+                'bir_tax_exemption_no' => $appgeninfo->bir_tax_exemption_no ?? 'N/A',
+            ]);
+        }
+    
+        // Update application status
         $application->update([
             'status' => $request->status,
-            'approved_by' => $userId 
+            'approved_by' => $userId
         ]);
-
+    
+        // Send email notification to the applicant
+        if ($user && $user->email) {
+            Mail::to($user->email)->send(new ApplicationStatusMail($application, $request->status, $request->message));
+        }
+    
         return redirect()->route('accreditation.approval.index')
             ->with('success', 'Application status updated successfully.');
     }
