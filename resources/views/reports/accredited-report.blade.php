@@ -68,7 +68,7 @@
 
     <div class="header">
         <h2>{{ $report_type }} Report</h2>
-        <p>Region: {{ $regions[$info->region] ?? 'All Regions' }}</p>
+        <p>Region: {{ $region ? ($regions[$region] ?? 'Unknown Region') : 'All Regions' }}</p>
         <p>Year: {{ $year ?? 'All Years' }}</p>
         <p>Date Generated: {{ \Carbon\Carbon::parse($generated_at)->format('F d, Y h:i A') }}</p>
     </div>
