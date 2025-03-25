@@ -108,7 +108,7 @@
                                         data-region="{{ $application->region }}">
                                         {{ $application->region }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 region-name">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ ucwords($application->application_type) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
