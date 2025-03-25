@@ -46,10 +46,10 @@ class ReportController extends Controller
             $query->whereYear('created_at', $validated['year']);
         }
     
-        // Use a subquery to ensure only one row per cda_registration_date (latest entry)
+        // Use a subquery to ensure only one row per cda_registration_no (latest entry)
         $query->whereIn('id', function ($subquery) {
             $subquery->selectRaw('id FROM (
-                SELECT id, ROW_NUMBER() OVER (PARTITION BY cda_registration_date ORDER BY created_at DESC) as row_num
+                SELECT id, ROW_NUMBER() OVER (PARTITION BY cda_registration_no ORDER BY created_at DESC) as row_num
                 FROM general_info
                 WHERE status = "Active"
             ) as temp WHERE row_num = 1');
@@ -102,6 +102,7 @@ class ReportController extends Controller
     
         return back()->with('success', 'Report generated successfully!');
     }
+    
     
     
 
