@@ -63,7 +63,7 @@ Route::get('/api/cooperatives', function (Request $request) {
     return GeneralInfo::select(
         'accreditation_no',
         'name',
-        'common_bond_membership',
+        'status',
         'accreditation_date',
         'region'
     )->get();

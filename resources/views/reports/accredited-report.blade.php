@@ -77,17 +77,18 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Cooperative Name</th>
-                <th>Registration No.</th>
+                <th>Accreditation No.</th>
+                <th>Transport Cooperative Name</th>
+                <th>CDA Registration No.</th>
                 <th>Region</th>
-                <th>Status</th>
-                <th>Validity Date</th>
+                <th>Accreditation Date</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($generalInfos as $index => $info)
                 <tr>
                     <td>{{ $index + 1 }}</td>
+                    <td>{{ $info->accreditation_no ?? 'N/A' }}</td>
                     <td>{{ $info->name ?? 'N/A' }}</td>
                     <td>{{ $info->cda_registration_no ?? 'N/A' }}</td>
                     <td>
@@ -95,7 +96,7 @@
                     </td>
                     
                     <td>{{ ucfirst($info->status) ?? 'N/A' }}</td>
-                    <td>{{ $info->validity_date ? \Carbon\Carbon::parse($info->validity_date)->format('M d, Y') : 'N/A' }}
+                    <td>{{ $info->accreditation_date ? \Carbon\Carbon::parse($info->accreditation_date)->format('M d, Y') : 'N/A' }}
                     </td>
                 </tr>
             @empty
