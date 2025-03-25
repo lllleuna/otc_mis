@@ -27,11 +27,20 @@
                             <label for="report_type" class="block text-sm font-medium text-gray-700 mb-2">Report
                                 Type</label>
                             {{-- based on status column in GEneralInfo model if it is active --}}
-                            <select id="report_type" name="report_type"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <select id="report_type" name="report_type" required
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 
+                                @error('report_type') border-red-500 @enderror">
                                 <option value="" selected disabled>Select Report Type</option>
-                                <option value="accredited">Accredited Transportation Cooperatives</option>
+                                <option value="accredited" {{ old('report_type') == 'accredited' ? 'selected' : '' }}>
+                                    Accredited Transportation Cooperatives
+                                </option>
                             </select>
+
+                            <!-- Display Validation Error -->
+                            @error('report_type')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+
                         </div>
 
                     </div>
@@ -158,12 +167,12 @@
                                 </td> --}}
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex gap-2">
 
-                                    <a href="{{ route('reports.download', $history->id) }}" 
-                                       class="px-2 py-1 bg-blue-900 text-white rounded hover:bg-blue-600 flex items-center"
-                                       target="_blank">
+                                    <a href="{{ route('reports.download', $history->id) }}"
+                                        class="px-2 py-1 bg-blue-900 text-white rounded hover:bg-blue-600 flex items-center"
+                                        target="_blank">
                                         Download
                                     </a>
-                                
+
                                 </td>
                             </tr>
                         @empty
