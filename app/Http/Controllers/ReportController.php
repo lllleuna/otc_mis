@@ -30,22 +30,30 @@ class ReportController extends Controller
             'region' => 'nullable|string',
             'format' => 'required|in:pdf,excel',
         ]);
-
+    
         $timestamp = Carbon::now()->format('Ymd_His');
         $fileName = $validated['report_type'] . '_' . ($validated['year'] ?? 'All') . '_' . $timestamp;
         
         $query = GeneralInfo::query();
-
-        if ($validated['region']) {
+    
+        // Filter by region if provided
+        if (!empty($validated['region'])) {
             $query->where('region', $validated['region']);
         }
-
-        if ($validated['year']) {
+    
+        // Filter by year if provided
+        if (!empty($validated['year'])) {
             $query->whereYear('created_at', $validated['year']);
         }
-
-        $generalInfos = $query->get();
-
+    
+        // Only include Active status
+        $query->where('status', 'Active');
+    
+        // Prevent duplicate cda_registration_date values
+        $generalInfos = $query->selectRaw('*, ROW_NUMBER() OVER (PARTITION BY cda_registration_date ORDER BY created_at DESC) as row_num')
+            ->having('row_num', 1)
+            ->get();
+    
         $data = [
             'report_type' => ucfirst($validated['report_type']),
             'year' => $validated['year'],
@@ -53,12 +61,12 @@ class ReportController extends Controller
             'generated_at' => Carbon::now()->toDateTimeString(),
             'generalInfos' => $generalInfos,
         ];
-
-        // Ensure directory exists
+    
+        // Ensure the shared reports directory exists
         if (!file_exists(public_path('shared/reports'))) {
             mkdir(public_path('shared/reports'), 0777, true);
         }
-
+    
         if ($validated['format'] === 'pdf') {
             $pdf = PDF::loadView('reports.accredited-report', $data);
             $pdfPath = public_path("shared/reports/{$fileName}.pdf");
@@ -68,17 +76,17 @@ class ReportController extends Controller
             Excel::store(
                 new GeneralInfoExport($generalInfos),
                 "reports/{$fileName}.xlsx",
-                'shared' // <--- Disk name as a string, NOT array
-            );            
-            
+                'shared'
+            );
+    
             // Move file manually to shared directory if needed
             $excelFullPath = storage_path("app/reports/{$fileName}.xlsx");
             if (file_exists($excelFullPath)) {
                 rename($excelFullPath, public_path("shared/reports/{$fileName}.xlsx"));
             }
         }
-
-        // Save history
+    
+        // Save report generation history
         ReportHistory::create([
             'report_type' => $validated['report_type'],
             'year' => $validated['year'],
@@ -88,9 +96,10 @@ class ReportController extends Controller
             'admin_id' => auth()->id(),
             'generated_at' => now(),
         ]);
-
+    
         return back()->with('success', 'Report generated successfully!');
     }
+    
 
 
     public function download($id)
