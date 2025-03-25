@@ -104,8 +104,8 @@
             <div>
                 <label class="text-sm text-gray-500">Contact Number</label>
                 <input type="text" name="contact_no"
-                    value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full" disabled>
+                    value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}" class="border p-2 rounded w-full"
+                    disabled>
             </div>
         </div>
 
@@ -118,37 +118,41 @@
                     class="border p-2 rounded w-full mt-1 mb-1" disabled>
             </div>
 
-            <div>
-                <label class="text-sm text-gray-500">Barangay</label>
-                <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
-                    placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" disabled>
-            </div>
+            @if ($application->application_type !== 'CGS Renewal')
+                <div>
+                    <label class="text-sm text-gray-500">Barangay</label>
+                    <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
+                        placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" disabled>
+                </div>
 
-            <div>
-                <label class="text-sm text-gray-500">Municipality/City</label>
-                <input type="text" name="city" value="{{ old('city', $appGenInfo->city ?? 'N/A') }}"
-                    placeholder="City" class="border p-2 rounded w-full mt-1 mb-1" disabled>
-            </div>
+                <div>
+                    <label class="text-sm text-gray-500">Municipality/City</label>
+                    <input type="text" name="city" value="{{ old('city', $appGenInfo->city ?? 'N/A') }}"
+                        placeholder="City" class="border p-2 rounded w-full mt-1 mb-1" disabled>
+                </div>
+            @endif
 
         </div>
 
-        <div class="flex justify-between">
-            <div>
-                <label class="text-sm text-gray-500">Province</label>
-                <input type="text" name="province" value="{{ old('province', $appGenInfo->province ?? 'N/A') }}"
-                    placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1" disabled>
+        @if ($application->application_type !== 'CGS Renewal')
+            <div class="flex justify-between">
+                <div>
+                    <label class="text-sm text-gray-500">Province</label>
+                    <input type="text" name="province" value="{{ old('province', $appGenInfo->province ?? 'N/A') }}"
+                        placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1" disabled>
+                </div>
+                <div>
+                    <label class="text-sm text-gray-500">Region</label>
+                    <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
+                        placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" disabled>
+                </div>
+                <div>
+                    <label class="text-sm text-gray-500">Area</label>
+                    <input type="text" name="area" value="{{ old('area', $appGenInfo->area ?? 'N/A') }}"
+                        placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1" disabled>
+                </div>
             </div>
-            <div>
-                <label class="text-sm text-gray-500">Region</label>
-                <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
-                    placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" disabled>
-            </div>
-            <div>
-                <label class="text-sm text-gray-500">Area</label>
-                <input type="text" name="area" value="{{ old('area', $appGenInfo->area ?? 'N/A') }}"
-                    placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1" disabled>
-            </div>
-        </div>
+        @endif
 
         <!-- SSS, Pag-IBIG, PhilHealth -->
         <div class="flex justify-between pt-5">
