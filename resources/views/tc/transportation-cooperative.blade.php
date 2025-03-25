@@ -15,9 +15,9 @@
             <tr class="bg-gray-100">
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Accreditation No</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cooperative Name</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Common Bond Membership</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of Accreditation</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service Area</th>
+                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
         </thead>
@@ -26,9 +26,9 @@
                 <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.accreditation_no"></td>
                     <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.name"></td>
-                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.common_bond_membership"></td>
                     <td class="px-6 py-4 text-sm" x-text="cooperative.accreditation_date"></td>
                     <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.region"></td>
+                    <td class="px-6 py-4 text-sm text-gray-900" x-text="cooperative.status"></td>
                     <td class="px-6 py-4 text-sm">
                         <a :href="'/cooperatives/' + cooperative.accreditation_no"
                             class="px-4 py-2  text-green-900 font-semibold rounded-lg hover:underline">
