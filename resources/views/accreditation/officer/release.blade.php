@@ -62,16 +62,18 @@
 
 
             {{-- File Upload --}}
-            <div class="mb-4">
-                <label for="certificate_file" class="block text-sm font-medium text-gray-700">Upload Accreditation
-                    Certificate</label>
-                <input type="file" name="certificate_file" id="certificate_file" class="w-full p-2 border rounded-md"
-                    accept=".pdf,.jpg,.jpeg,.png" required>
+            @if ($application->application_type !== 'CGS Renewal')
+                <div class="mb-4">
+                    <label for="certificate_file" class="block text-sm font-medium text-gray-700">Upload Accreditation
+                        Certificate</label>
+                    <input type="file" name="certificate_file" id="certificate_file"
+                        class="w-full p-2 border rounded-md" accept=".pdf,.jpg,.jpeg,.png" required>
 
-                @error('certificate_file')
-                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                    @error('certificate_file')
+                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            @endif
 
             <div class="mb-4">
                 <label for="cgs_file" class="block text-sm font-medium text-gray-700">Upload Certificate of Good
