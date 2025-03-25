@@ -68,7 +68,7 @@
 
     <div class="header">
         <h2>{{ $report_type }} Report</h2>
-        <p>Region: {{ $region ?? 'All Regions' }}</p>
+        <p>Region: {{ $regions[$info->region] ?? 'All Regions' }}</p>
         <p>Year: {{ $year ?? 'All Years' }}</p>
         <p>Date Generated: {{ \Carbon\Carbon::parse($generated_at)->format('F d, Y h:i A') }}</p>
     </div>
@@ -94,8 +94,6 @@
                     <td>
                         {{ $regions[$info->region] ?? 'N/A' }}
                     </td>
-                    
-                    <td>{{ ucfirst($info->status) ?? 'N/A' }}</td>
                     <td>{{ $info->accreditation_date ? \Carbon\Carbon::parse($info->accreditation_date)->format('M d, Y') : 'N/A' }}
                     </td>
                 </tr>
