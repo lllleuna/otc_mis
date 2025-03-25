@@ -13,13 +13,13 @@ class GeneralInfoFactory extends Factory
     public function definition()
     {
         return [
-            'accreditation_no' => $this->faker->numberBetween(2000, now()->year) . '-' . $this->faker->numerify('######'),
+            'accreditation_no' => ($year = $this->faker->numberBetween(2020, now()->year)) . '-' . $this->faker->numerify('######'),
             'name' => $this->faker->company . ' Cooperative',
             'short_name' => Str::before($this->faker->company, ' ') . ' Coop',
-            'cda_registration_date' => $cdaDate = $this->faker->dateTimeBetween('-10 years', 'now'),
+            'cda_registration_date' => $cdaDate = $this->faker->dateTimeBetween('-6 years', 'now'),
             'cda_registration_no' => 'T-' . $this->faker->randomNumber(8),
             'accreditation_type' => $this->faker->randomElement(['Provisional', 'Full']),
-            'accreditation_date' => $this->faker->dateTimeBetween($cdaDate, 'now'),
+            'accreditation_date' => $this->faker->dateTimeBetween("$year-01-01", "$year-12-31"),
             'common_bond_membership' => $this->faker->randomElement(['Occupational', 'Residential', 'Associational', 'Institutional', 'Others']),
             'membership_fee' => $this->faker->numberBetween(100, 500),
             'area' => $this->faker->randomElement(['01', '02', '03']), // Example: 01 = Luzon, 02 = Visayas, 03 = Mindanao
@@ -71,7 +71,7 @@ class GeneralInfoFactory extends Factory
             ]),
             'business_address' => fake()->randomNumber(3) . ' Block ' . fake()->randomDigit(),
             'email' => $this->faker->unique()->safeEmail,
-            'contact_no' => fake()->regexify('63[0-9]{10}'),
+            'contact_no' => fake()->regexify('9[0-9]{9}'),
             'contact_firstname' => $this->faker->firstName,
             'contact_lastname' => $this->faker->lastName,
             'contact_mid_initial' =>  $this->faker->lastName(),
