@@ -355,15 +355,19 @@ class ApplicationController extends Controller
 
     public function storeRelease(Request $request, $id)
     {
-        $request->validate([
-            'message' => 'required|string|max:1000',
-            'validity_date' => 'required|date',
-            'certificate_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-            'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-        ]);
     
         $application = Application::findOrFail($id);
         $appGen = AppGeneralInfo::where('application_id', $id)->first();
+        
+        $request->validate([
+            'message' => 'required|string|max:1000',
+            'validity_date' => 'required|date',
+            'certificate_file' => $application->application_type === 'CGS Renewal' 
+                ? 'nullable' 
+                : 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+        ]);
+        
 
         // Handle file uploads
         $certificateFile = $request->file('certificate_file');
