@@ -33,26 +33,29 @@ class ReportController extends Controller
     
         $timestamp = Carbon::now()->format('Ymd_His');
         $fileName = $validated['report_type'] . '_' . ($validated['year'] ?? 'All') . '_' . $timestamp;
-        
-        $query = GeneralInfo::query();
     
-        // Filter by region if provided
+        // Base query for Active status
+        $query = GeneralInfo::where('status', 'Active');
+    
+        // Apply filters
         if (!empty($validated['region'])) {
             $query->where('region', $validated['region']);
         }
     
-        // Filter by year if provided
         if (!empty($validated['year'])) {
             $query->whereYear('created_at', $validated['year']);
         }
     
-        // Only include Active status
-        $query->where('status', 'Active');
+        // Use a subquery to ensure only one row per cda_registration_date (latest entry)
+        $query->whereIn('id', function ($subquery) {
+            $subquery->selectRaw('id FROM (
+                SELECT id, ROW_NUMBER() OVER (PARTITION BY cda_registration_date ORDER BY created_at DESC) as row_num
+                FROM general_info
+                WHERE status = "Active"
+            ) as temp WHERE row_num = 1');
+        });
     
-        // Prevent duplicate cda_registration_date values
-        $generalInfos = $query->selectRaw('*, ROW_NUMBER() OVER (PARTITION BY cda_registration_date ORDER BY created_at DESC) as row_num')
-            ->having('row_num', 1)
-            ->get();
+        $generalInfos = $query->get();
     
         $data = [
             'report_type' => ucfirst($validated['report_type']),
@@ -99,6 +102,7 @@ class ReportController extends Controller
     
         return back()->with('success', 'Report generated successfully!');
     }
+    
     
 
 
