@@ -26,10 +26,6 @@ contains logo, profile name & icon, and navigation links
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
-                            <a href="/tc?tab=office">
-                                <img class="h-6 mx-3" src="{{ asset('images/icons8-notification-96.png') }}"
-                                    alt="notif">
-                            </a>
                             <div class="relative font-[sans-serif] w-max mx-auto">
                                 <button type="button" id="dropdownToggle">
                                     <div class="flex items-center">
