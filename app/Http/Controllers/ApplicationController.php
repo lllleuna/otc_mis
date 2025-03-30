@@ -84,7 +84,7 @@ class ApplicationController extends Controller
     
         // Get codes from database if not in session
         $regionCode = $formData['region'] ?? $appGenInfo->region ?? null;
-        $cityCode = $formData['city_municipality'] ?? $appGenInfo->city_municipality ?? null;
+        $cityCode = $formData['city'] ?? $appGenInfo->city ?? null;
         $barangayCode = $formData['barangay'] ?? $appGenInfo->barangay ?? null;
     
         // Default values
