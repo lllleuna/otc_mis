@@ -10,7 +10,7 @@
                 @php
                     $statusLabels = [
                         'new' => 'New Applications',
-                        'pending' => 'In Evaluation',
+                        'saved' => 'In Evaluation',
                         'evaluated' => 'Waiting Approval',
                         'approved' => 'Approved Applications',
                         'released' => 'Released Certificates',
@@ -115,8 +115,8 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
                                             $statusClasses = [
-                                                'new' => 'bg-blue-100 text-blue-800', //submitted
-                                                'pending' => 'bg-yellow-100 text-yellow-800', //from saved to pending
+                                                'new' => 'bg-blue-100 text-blue-800', // submitted
+                                                'saved' => 'bg-yellow-100 text-yellow-800', // now mapped to "Pending"
                                                 'evaluated' => 'bg-purple-100 text-purple-800',
                                                 'approved' => 'bg-green-100 text-green-800',
                                                 'released' => 'bg-orange-100 text-orange-800',
@@ -124,15 +124,20 @@
                                             ];
                                             $statusClass =
                                                 $statusClasses[$application->status] ?? 'bg-gray-100 text-gray-800';
+                                            $statusLabel =
+                                                $application->status === 'saved'
+                                                    ? 'Pending'
+                                                    : ucfirst($application->status);
                                         @endphp
                                         <span
                                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusClass }}">
-                                            {{ ucfirst($application->status) }}
+                                            {{ $statusLabel }}
                                         </span>
                                     </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                                        @if ($application->status === 'new' || $application->status === 'pending')
-                                        {{-- components.evaluationInfo --}}
+                                        @if ($application->status === 'new' || $application->status === 'saved')
+                                            {{-- components.evaluationInfo --}}
                                             <a href="{{ route('accreditation.evaluate', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 Evaluate

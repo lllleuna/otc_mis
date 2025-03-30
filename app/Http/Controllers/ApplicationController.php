@@ -145,7 +145,7 @@ class ApplicationController extends Controller
         $application = Application::findOrFail($id);
         $userId = Auth::id(); 
     
-        $status = $request->input('action') === 'submit' ? 'evaluated' : 'pending';
+        $status = $request->input('action') === 'submit' ? 'evaluated' : 'saved';
     
         // Save Evaluation History
         ApplicationStatusHistory::create([
