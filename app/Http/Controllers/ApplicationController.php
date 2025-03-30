@@ -79,41 +79,44 @@ class ApplicationController extends Controller
     {
         $formData = $request->session()->get('form_data', []);
     
+        $application = Application::findOrFail($id);
+        $appGenInfo = AppGeneralInfo::where('application_id', $id)->latest()->first();
+    
+        // Get codes from database if not in session
+        $regionCode = $formData['region'] ?? $appGenInfo->region ?? null;
+        $cityCode = $formData['city_municipality'] ?? $appGenInfo->city_municipality ?? null;
+        $barangayCode = $formData['barangay'] ?? $appGenInfo->barangay ?? null;
+    
+        // Default values
         $regionName = 'Unknown Region';
         $cityName = 'Unknown City/Municipality';
         $barangayName = 'Unknown Barangay';
     
-        // Fetch Region Name
-        if (!empty($formData['region'])) {
-            $regionResponse = Http::get("https://psgc.gitlab.io/api/regions/{$formData['region']}/");
+        // Fetch Region Name from PSGC API
+        if ($regionCode) {
+            $regionResponse = Http::get("https://psgc.gitlab.io/api/regions/{$regionCode}/");
             if ($regionResponse->successful()) {
                 $regionName = $regionResponse->json()['name'];
             }
         }
     
-        // Fetch City/Municipality Name
-        if (!empty($formData['city_municipality'])) {
-            $cityResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$formData['city_municipality']}/");
+        // Fetch City/Municipality Name from PSGC API
+        if ($cityCode) {
+            $cityResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$cityCode}/");
             if ($cityResponse->successful()) {
                 $cityName = $cityResponse->json()['name'];
             }
         }
     
-        // Fetch Barangay Name
-        if (!empty($formData['barangay'])) {
-            $barangayResponse = Http::get("https://psgc.gitlab.io/api/barangays/{$formData['barangay']}/");
+        // Fetch Barangay Name from PSGC API
+        if ($barangayCode) {
+            $barangayResponse = Http::get("https://psgc.gitlab.io/api/barangays/{$barangayCode}/");
             if ($barangayResponse->successful()) {
                 $barangayName = $barangayResponse->json()['name'];
             }
         }
     
-        $application = Application::findOrFail($id);
-    
-        $latestEvaluation = ApplicationStatusHistory::where('application_id', $id)
-            ->latest()
-            ->first();
-    
-        $appGenInfo = AppGeneralInfo::where('application_id', $id)->latest()->first();
+        $latestEvaluation = ApplicationStatusHistory::where('application_id', $id)->latest()->first();
         $appUnits = AppUnit::where('application_id', $id)->get();
         $appFranchises = AppFranchise::where('application_id', $id)->get();
         $appLoans = AppLoan::where('application_id', $id)->get();
@@ -125,17 +128,15 @@ class ApplicationController extends Controller
         $appFinance = AppFinance::where('application_id', $id)->latest()->first();
         $appCetos = AppCetos::where('application_id', $id)->latest()->first();
     
-        // Merge all data into a single array for the view
         return view('accreditation.officer.evaluate', array_merge(
             compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises'),
             [
-                'formData' => $formData,
                 'regionName' => $regionName,
                 'cityName' => $cityName,
                 'barangayName' => $barangayName,
             ]
         ));
-    }
+    }    
     
 
     public function storeEvaluation(Request $request, $id)
