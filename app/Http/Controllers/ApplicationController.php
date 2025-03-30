@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApplicationStatusMail;
 use App\Mail\EvaluationNotification;
+use App\Mail\ApplicationApprovedMail;
+use App\Mail\ApplicationRejectedMail;
 
 class ApplicationController extends Controller
 {
@@ -278,7 +280,7 @@ class ApplicationController extends Controller
     
         $application = Application::findOrFail($id);
         $userId = auth()->id(); 
-        $user = $application->user; // Get user who submitted the application
+        $user = $application->user;
     
         // Store status history
         ApplicationStatusHistory::create([
@@ -287,8 +289,10 @@ class ApplicationController extends Controller
             'message' => $request->message,
             'updated_by' => $userId,
         ]);
+
+        $coopgeneralInfo = $coopgeneralInfo::where('application_id', $application->id)->first();
     
-        // Only create GeneralInfo if status is "approved"
+        // If approved, store in GeneralInfo
         if ($request->status === 'approved') {
             $appgeninfo = AppGeneralInfo::where('application_id', $id)->first();
     
@@ -317,6 +321,14 @@ class ApplicationController extends Controller
                 'bir_tin' => $appgeninfo->bir_tin ?? 'N/A',
                 'bir_tax_exemption_no' => $appgeninfo->bir_tax_exemption_no ?? 'N/A',
             ]);
+    
+            // Send Approval Email
+            Mail::to($coopgeneralInfo->email)->send(new ApplicationApprovedMail($application));
+        }
+    
+        // If rejected, send a rejection email
+        if ($request->status === 'rejected') {
+            Mail::to($coopgeneralInfo->email)->send(new ApplicationRejectedMail($application, $request->message));
         }
     
         // Update application status
@@ -324,11 +336,6 @@ class ApplicationController extends Controller
             'status' => $request->status,
             'approved_by' => $userId
         ]);
-    
-        // Send email notification to the applicant
-        if ($user && $user->email) {
-            Mail::to($user->email)->send(new ApplicationStatusMail($application, $request->status, $request->message));
-        }
     
         return redirect()->route('accreditation.approval.index')
             ->with('success', 'Application status updated successfully.');
