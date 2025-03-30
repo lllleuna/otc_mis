@@ -56,7 +56,7 @@
     </div>
 </div>
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         General Information
     </h3>
@@ -64,21 +64,21 @@
     <div class="space-y-3">
         <!-- CDA Registration No -->
         <div class="flex justify-between">
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">CDA Registration No</label>
                 <input type="text" name="cda_registration_no"
                     value="{{ old('cda_registration_no', $application->cda_reg_no ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">CDA Registration Date</label>
                 <input type="date" name="cda_registration_date"
                     value="{{ old('cda_registration_date', $application->cda_reg_date ?? '') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">Common Bond Membership</label>
                 <input type="text" name="common_bond_membership"
                     value="{{ old('common_bond_membership', $appGenInfo->common_bond_membership ?? 'N/A') }}"
@@ -88,20 +88,20 @@
 
         <!-- Membership Fee, Email, Contact No -->
         <div class="flex justify-between">
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">Membership Fee</label>
                 <input type="number" step="0.01" name="membership_fee"
                     value="{{ old('membership_fee', $appGenInfo->membership_fee ?? '0.00') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">Business Email</label>
                 <input type="email" name="email" value="{{ old('email', $appGenInfo->email ?? '') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">Contact Number</label>
                 <input type="text" name="contact_no"
                     value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}"
@@ -113,13 +113,13 @@
         <div class="flex justify-between">
             <div class="w-full">
                 @if ($application->application_type !== 'CGS Renewal')
-                    <div class="w-1/2">
+                    <div class="w-1/2 mx-1">
                         <label class="text-sm text-gray-500">Business Address</label>
                         <input type="text" name="business_address"
                             value="{{ old('business_address', $application->address ?? 'N/A') }}"
                             class="border p-2 rounded w-full mt-1 mb-1">
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-1/2 mx-1">
                         <label class="text-sm text-gray-500">Barangay</label>
                         <input type="text" name="barangay"
                             value="{{ old('barangay', $application->barangay ?? 'N/A') }}" placeholder="Barangay"
@@ -130,13 +130,13 @@
 
             <div class="w-full">
                 @if ($application->application_type !== 'CGS Renewal')
-                    <div class="w-1/2">
+                    <div class="w-1/2 mx-1">
                         <label class="text-sm text-gray-500">Municipality/City</label>
                         <input type="text" name="city"
                             value="{{ old('city', $application->city_municipality ?? 'N/A') }}" placeholder="City"
                             class="border p-2 rounded w-full mt-1 mb-1" readonly>
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-1/2 mx-1">
                         <label class="text-sm text-gray-500">Region</label>
                         <input type="text" name="region" value="{{ old('region', $application->region ?? 'N/A') }}"
                             placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" readonly>
@@ -197,7 +197,7 @@
 </div>
 
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Units
     </h3>
@@ -224,7 +224,7 @@
 
 </div>
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Franchise
     </h3>
@@ -254,7 +254,7 @@
 
 
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Loans
     </h3>
@@ -282,7 +282,7 @@
 
 </div>
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Business
     </h3>
@@ -311,7 +311,7 @@
 
 </div>
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Trainings/Seminar
     </h3>
@@ -338,7 +338,7 @@
 
 
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Membership Details
     </h3>
@@ -372,7 +372,7 @@
 
 </div>
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Governance
     </h3>
@@ -401,7 +401,7 @@
 
 </div>
 
-<div class="mb-10">
+<div class="my-10">
     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Awards
     </h3>
