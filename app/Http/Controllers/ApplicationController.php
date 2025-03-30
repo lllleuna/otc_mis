@@ -185,7 +185,13 @@ class ApplicationController extends Controller
                 'bir_tax_exemption_no' => $request->input('bir_tax_exemption_no'),
                 'validity' => $request->input('validity'),
             ]);
-            
+        }
+    
+        $coopgeneralInfo = $coopgeneralInfo::where('application_id', $application->id)->first();
+
+        // Send Email Notification if status is evaluated
+        if ($status === 'evaluated' && !empty($coopgeneralInfo->email)) {
+            Mail::to($coopgeneralInfo->email)->send(new EvaluationNotification($application, $request->input('evaluation_notes')));
         }
     
         return redirect()->route('accreditation.evaluate.index', $application->id)
