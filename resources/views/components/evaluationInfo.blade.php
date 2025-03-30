@@ -57,7 +57,7 @@
 </div>
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         General Information
     </h3>
 
@@ -150,21 +150,21 @@
 
         <!-- SSS, Pag-IBIG, PhilHealth -->
         <div class="flex justify-between pt-5">
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">SSS Registration No</label>
                 <input type="text" name="employer_sss_reg_no"
                     value="{{ old('employer_sss_reg_no', $appGenInfo->employer_sss_reg_no ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">Pag-IBIG Registration No</label>
                 <input type="text" name="employer_pagibig_reg_no"
                     value="{{ old('employer_pagibig_reg_no', $appGenInfo->employer_pagibig_reg_no ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">PhilHealth Registration No</label>
                 <input type="text" name="employer_philhealth_reg_no"
                     value="{{ old('employer_philhealth_reg_no', $appGenInfo->employer_philhealth_reg_no ?? 'N/A') }}"
@@ -174,22 +174,22 @@
 
         <!-- BIR TIN, Tax Exemption, Validity -->
         <div class="flex justify-between">
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">BIR Tax Identification No</label>
                 <input type="text" name="bir_tin" value="{{ old('bir_tin', $appGenInfo->bir_tin ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">BIR Tax Exemption No</label>
                 <input type="text" name="bir_tax_exemption_no"
                     value="{{ old('bir_tax_exemption_no', $appGenInfo->bir_tax_exemption_no ?? 'N/A') }}"
                     class="border p-2 rounded w-full">
             </div>
 
-            <div>
+            <div class="mx-1">
                 <label class="text-sm text-gray-500">Date of Validity</label>
-                <input type="date" name="validity" value="{{ old('validity', $appGenInfo->validity ?? '') }}"
+                <input type="text" name="validity" value="{{ old('validity', $appGenInfo->validity ?? '') }}"
                     class="border p-2 rounded w-full">
             </div>
         </div>
@@ -198,7 +198,7 @@
 
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Units
     </h3>
 
@@ -225,7 +225,7 @@
 </div>
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Franchise
     </h3>
 
@@ -255,7 +255,7 @@
 
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Loans
     </h3>
 
@@ -283,7 +283,7 @@
 </div>
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Business
     </h3>
     <table class="w-full text-left border-collapse text-sm">
@@ -312,7 +312,7 @@
 </div>
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Trainings/Seminar
     </h3>
     <table class="w-full text-left border-collapse text-sm">
@@ -339,7 +339,7 @@
 
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class=" mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Membership Details
     </h3>
 
@@ -373,7 +373,7 @@
 </div>
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Governance
     </h3>
 
@@ -402,7 +402,7 @@
 </div>
 
 <div class="my-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="mt-10 text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Awards
     </h3>
     <table class="w-full text-left border-collapse text-sm">
