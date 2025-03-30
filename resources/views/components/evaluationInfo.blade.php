@@ -111,15 +111,15 @@
 
         <!-- Business Address -->
         <div class="flex justify-between">
-            <div>
+            <div class="w-full">
                 @if ($application->application_type !== 'CGS Renewal')
-                    <div>
+                    <div class="w-1/2">
                         <label class="text-sm text-gray-500">Business Address</label>
                         <input type="text" name="business_address"
                             value="{{ old('business_address', $application->address ?? 'N/A') }}"
                             class="border p-2 rounded w-full mt-1 mb-1">
                     </div>
-                    <div>
+                    <div class="w-1/2">
                         <label class="text-sm text-gray-500">Barangay</label>
                         <input type="text" name="barangay"
                             value="{{ old('barangay', $application->barangay ?? 'N/A') }}" placeholder="Barangay"
