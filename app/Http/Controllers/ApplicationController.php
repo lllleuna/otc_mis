@@ -29,6 +29,7 @@ use App\Mail\ApplicationStatusMail;
 use App\Mail\EvaluationNotification;
 use App\Mail\ApplicationApprovedMail;
 use App\Mail\ApplicationRejectedMail;
+use App\Models\CoopGeneralInfo;
 
 class ApplicationController extends Controller
 {
@@ -189,7 +190,7 @@ class ApplicationController extends Controller
             ]);
         }
     
-        $coopgeneralInfo = $coopgeneralInfo::where('application_id', $application->id)->first();
+        $coopgeneralInfo = CoopGeneralInfo::where('application_id', $application->id)->first();
 
         // Send Email Notification if status is evaluated
         if ($status === 'evaluated' && !empty($coopgeneralInfo->email)) {
@@ -290,7 +291,7 @@ class ApplicationController extends Controller
             'updated_by' => $userId,
         ]);
 
-        $coopgeneralInfo = $coopgeneralInfo::where('application_id', $application->id)->first();
+        $coopgeneralInfo = CoopGeneralInfo::where('application_id', $application->id)->first();
     
         // If approved, store in GeneralInfo
         if ($request->status === 'approved') {
