@@ -128,15 +128,15 @@
                 @endif
             </div>
 
-            <div>
+            <div class="w-full">
                 @if ($application->application_type !== 'CGS Renewal')
-                    <div>
+                    <div class="w-1/2">
                         <label class="text-sm text-gray-500">Municipality/City</label>
                         <input type="text" name="city"
                             value="{{ old('city', $application->city_municipality ?? 'N/A') }}" placeholder="City"
                             class="border p-2 rounded w-full mt-1 mb-1" readonly>
                     </div>
-                    <div>
+                    <div class="w-1/2">
                         <label class="text-sm text-gray-500">Region</label>
                         <input type="text" name="region" value="{{ old('region', $application->region ?? 'N/A') }}"
                             placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" readonly>
