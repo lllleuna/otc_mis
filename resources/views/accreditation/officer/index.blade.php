@@ -10,7 +10,7 @@
                 @php
                     $statusLabels = [
                         'new' => 'New Applications',
-                        'saved' => 'In Evaluation',
+                        'pending' => 'In Evaluation',
                         'evaluated' => 'Waiting Approval',
                         'approved' => 'Approved Applications',
                         'released' => 'Released Certificates',
@@ -115,8 +115,8 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
                                             $statusClasses = [
-                                                'new' => 'bg-blue-100 text-blue-800',
-                                                'saved' => 'bg-yellow-100 text-yellow-800',
+                                                'new' => 'bg-blue-100 text-blue-800', //submitted
+                                                'pending' => 'bg-yellow-100 text-yellow-800', //from saved to pending
                                                 'evaluated' => 'bg-purple-100 text-purple-800',
                                                 'approved' => 'bg-green-100 text-green-800',
                                                 'released' => 'bg-orange-100 text-orange-800',
@@ -131,7 +131,8 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                                        @if ($application->status === 'new' || $application->status === 'saved')
+                                        @if ($application->status === 'new' || $application->status === 'pending')
+                                        {{-- components.evaluationInfo --}}
                                             <a href="{{ route('accreditation.evaluate', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 Evaluate
