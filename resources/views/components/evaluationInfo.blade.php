@@ -98,7 +98,7 @@
             <div class="mx-1">
                 <label class="text-sm text-gray-500">Business Email</label>
                 <input type="email" name="email" value="{{ old('email', $appGenInfo->email ?? '') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" readonly>
             </div>
 
             <div class="mx-1">
