@@ -26,6 +26,7 @@ use App\Models\AppTrainingsList;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApplicationStatusMail;
+use App\Mail\EvaluationNotification;
 
 class ApplicationController extends Controller
 {
@@ -241,6 +242,10 @@ class ApplicationController extends Controller
         $appTrainings = AppTrainingsList::where('application_id', $id)->get();
         $appFinance = AppFinance::where('application_id', $id)->latest()->first();
         $appCetos = AppCetos::where('application_id', $id)->latest()->first();
+
+        if ($status === 'evaluated' && !empty($generalInfo->email)) {
+            Mail::to($generalInfo->email)->send(new EvaluationNotification($application, $request->input('evaluation_notes')));
+        }
     
         // Merge all data into a single array
         return view('accreditation.head.approval', array_merge(
