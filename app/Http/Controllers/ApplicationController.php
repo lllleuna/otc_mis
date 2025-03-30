@@ -29,7 +29,6 @@ use App\Mail\ApplicationStatusMail;
 use App\Mail\EvaluationNotification;
 use App\Mail\ApplicationApprovedMail;
 use App\Mail\ApplicationRejectedMail;
-use App\Models\CoopGeneralInfo;
 
 class ApplicationController extends Controller
 {
@@ -189,12 +188,10 @@ class ApplicationController extends Controller
                 'validity' => $request->input('validity'),
             ]);
         }
-    
-        $coopgeneralInfo = CoopGeneralInfo::where('application_id', $application->id)->first();
 
         // Send Email Notification if status is evaluated
-        if ($status === 'evaluated' && !empty($coopgeneralInfo->email)) {
-            Mail::to($coopgeneralInfo->email)->send(new EvaluationNotification($application, $request->input('evaluation_notes')));
+        if ($status === 'evaluated' && !empty($generalInfo->email)) {
+            Mail::to($generalInfo->email)->send(new EvaluationNotification($application, $request->input('evaluation_notes')));
         }
     
         return redirect()->route('accreditation.evaluate.index', $application->id)
@@ -291,7 +288,7 @@ class ApplicationController extends Controller
             'updated_by' => $userId,
         ]);
 
-        $coopgeneralInfo = CoopGeneralInfo::where('application_id', $application->id)->first();
+        $generalInfo = AppGeneralInfo::where('application_id', $id)->first();
     
         // If approved, store in GeneralInfo
         if ($request->status === 'approved') {
@@ -324,12 +321,12 @@ class ApplicationController extends Controller
             ]);
     
             // Send Approval Email
-            Mail::to($coopgeneralInfo->email)->send(new ApplicationApprovedMail($application));
+            Mail::to($generalInfo->email)->send(new ApplicationApprovedMail($application));
         }
     
         // If rejected, send a rejection email
         if ($request->status === 'rejected') {
-            Mail::to($coopgeneralInfo->email)->send(new ApplicationRejectedMail($application, $request->message));
+            Mail::to($generalInfo->email)->send(new ApplicationRejectedMail($application, $request->message));
         }
     
         // Update application status
