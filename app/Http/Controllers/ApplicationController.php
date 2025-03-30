@@ -89,6 +89,7 @@ class ApplicationController extends Controller
     
         // Default values
         $regionName = 'Unknown Region';
+        $cityName = 'Unknown City/Municipality';
         $barangayName = 'Unknown Barangay';
     
         // Fetch Region Name from PSGC API
