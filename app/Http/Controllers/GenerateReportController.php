@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Exports\GeneralInfoExport;
 use App\Exports\AccreditedCooperativesExport;
 use Illuminate\Support\Facades\Http;
+use App\Exports\AccreditationReportExport;
 
 
 class GenerateReportController extends Controller
