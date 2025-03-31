@@ -6,7 +6,7 @@
     <x-slot:title>Client Details</x-slot:title>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">General Information</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Transporation Cooperatives</h2>
 
         <!-- Search & Filter Controls -->
         <div class="flex flex-col md:flex-row gap-4 mb-6">
@@ -34,14 +34,14 @@
         <div class="overflow-x-auto shadow-md rounded-lg">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-800">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Accreditation No</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Accreditation Date</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Region</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">City</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Contact No</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Action</th>
+                    <tr class="text-blue-900">
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation No</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Region</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">City</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Contact No</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Action</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200" id="infoTable">
