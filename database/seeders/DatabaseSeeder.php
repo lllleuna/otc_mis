@@ -30,35 +30,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Employee accounts
-        User::factory(10)->create(); 
+        User::factory(5)->create(); 
 
         $this->call([
             UsersTableSeeder::class,
         ]);
 
         // Create GeneralInfo records first
-        GeneralInfo::factory(10)->create()->each(function ($generalInfo) {
-            $accreditationNo = $generalInfo->accreditation_no;
-
-            // Create related records for each GeneralInfo entry
-            Membership::factory()->count(30)->create(['accreditation_no' => $accreditationNo]);
-            Employment::factory()->count(3)->create(['accreditation_no' => $accreditationNo]);
-            Unit::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
-            Franchise::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
-            Cgs::factory()->count(1)->create(['accreditation_no' => $accreditationNo]);
-            Governance::factory()->count(3)->create(['accreditation_no' => $accreditationNo]);
-
-            // New Tables
-            Finance::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
-            GrantsDonation::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
-            Scholarship::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
-            Loan::factory()->count(2)->create(['accreditation_no' => $accreditationNo]);
         
-            TrainingSeminar::factory()->count(2)->create(['accreditation_no' => $generalInfo->accreditation_no]);
-            Business::factory()->count(1)->create(['accreditation_no' => $generalInfo->accreditation_no]);
-            Cetos::factory()->count(1)->create(['accreditation_no' => $generalInfo->accreditation_no]);
-        
-        });
 
 
         // Seeder for external users (client portal)
