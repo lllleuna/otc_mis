@@ -5,11 +5,11 @@
 
     <x-slot:title>Reports</x-slot:title>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+    <div class="">
+        <div class="bg-white rounded-xl overflow-hidden">
             <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-4">
-                <h2 class="text-2xl font-bold text-white">Report Generation</h2>
-                <p class="text-blue-100 mt-1">Generate customized reports based on your criteria</p>
+                <h2 class="text-2xl font-bold text-black">Report Generation</h2>
+                <p class="text-gray-600 mt-1">Generate customized reports based on your criteria</p>
             </div>
 
             <form action="{{ route('report.generate') }}" method="GET" class="p-6">
@@ -71,26 +71,30 @@
 
                     <!-- Export Format Selection -->
                     <div class="space-y-2">
-                        <label for="format" class="block text-sm font-medium text-gray-700">Export Format</label>
+                        <label class="block text-sm font-medium text-gray-700">Export Format</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <label class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
-                                <input type="radio" name="format" value="pdf" class="hidden" checked>
-                                <div class="flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                    </svg>
-                                    <span class="font-medium text-gray-700">PDF</span>
-                                </div>
-                            </label>
-                            <label class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
-                                <input type="radio" name="format" value="excel" class="hidden">
-                                <div class="flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                    <span class="font-medium text-gray-700">Excel</span>
-                                </div>
-                            </label>
+                            <div>
+                                <input type="radio" id="format_pdf" name="format" value="pdf" class="peer hidden" checked>
+                                <label for="format_pdf" class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-500">
+                                    <div class="flex items-center">
+                                        <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                        </svg>
+                                        <span class="font-medium text-gray-700">PDF</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="format_excel" name="format" value="excel" class="peer hidden">
+                                <label for="format_excel" class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-500">
+                                    <div class="flex items-center">
+                                        <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        <span class="font-medium text-gray-700">Excel</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
