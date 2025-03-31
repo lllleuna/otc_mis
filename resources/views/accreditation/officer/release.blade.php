@@ -62,7 +62,7 @@
 
 
             {{-- File Upload --}}
-            @if ($application->application_type !== 'CGS Renewal')
+            @if ($application->application_type === 'accreditation')
                 <div class="mb-4">
                     <label for="accreditation_certificate_file" class="block text-sm font-medium text-gray-700">Upload Accreditation
                         Certificate</label>
