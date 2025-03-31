@@ -18,7 +18,7 @@ class GeneralInfoController extends Controller
             ->orderBy('accreditation_date', 'desc')
             ->get();
     
-        return view('general-info.index', compact('generalInfos'));
+        return view('client.index', compact('generalInfos'));
     }
     
 
