@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\GeneralInfoController;
 
 
 Route::get('/download-cgs/{filename}', function ($filename) {
@@ -139,3 +140,7 @@ Route::get('/user/profile', function () {
 Route::get('/settings', function () {
     return view('components.settings');
 })->middleware('auth');
+
+
+Route::get('/general-info', [GeneralInfoController::class, 'index'])->name('general-info.index');
+Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 'show'])->name('general-info.show');

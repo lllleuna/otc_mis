@@ -65,7 +65,8 @@ contains logo, profile name & icon, and navigation links
                     <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
                     <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
                 @endcan
-                <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link>
+                {{-- <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link> --}}
+                <x-nav-link href="{{ route('general-info.index') }}" :active="request()->is('tc*')">Record Management</x-nav-link>
                 @can('officer1-access')
                     <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')"> Accreditation & CGS
                         Evaluation </x-nav-link>
