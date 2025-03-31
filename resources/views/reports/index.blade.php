@@ -28,7 +28,7 @@
                         class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
                         <option value="">All Regions</option>
                         @foreach ($regions as $region)
-                            <option value="{{ $region['code'] }}">{{ $region['name'] }}</option>
+                            <option value="{{ $region['name'] }}">{{ $region['name'] }}</option>
                         @endforeach
                     </select>
                 </div>
