@@ -388,10 +388,10 @@ class ApplicationController extends Controller
 
     public function storeRelease(Request $request, $id)
     {
-    
         $application = Application::findOrFail($id);
         $appGen = AppGeneralInfo::where('application_id', $id)->first();
-
+        $existingGeneralInfo = GeneralInfo::where('application_id', $id)->first();
+    
         $request->validate([
             'message' => 'required|string|max:1000',
             'validity_date' => 'required|date',
@@ -400,34 +400,39 @@ class ApplicationController extends Controller
                 : 'required|mimes:pdf,jpg,jpeg,png|max:2048',
             'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
-
+    
         // Handle file uploads
-        $certificateFile = $request->file('certificate_file');
-        $cgsFile = $request->file('cgs_file');
-
         $dateString = now()->format('Ymd_His');
-
-        if ($certificateFile) { // Only process if the file exists
-            $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
-            $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
-        } else {
-            $certificateFilename = null; // Handle the case where there's no file
-        }
-
+        $cgsFile = $request->file('cgs_file');
         $cgsFilename = 'cgs_' . $dateString . '.' . $cgsFile->getClientOriginalExtension();
         $cgsFile->move(public_path('shared/certificates'), $cgsFilename);
-
-        $accreditationNumber = $this->generateUniqueAccreditationNumber();
-
     
-        // Insert new row to GeneralInfo (ALWAYS create new row)
-        $generalInfo = new GeneralInfo();
+        // Handle accreditation certificate file (only for Accreditation)
+        $certificateFilename = null;
+        if ($application->application_type === 'Accreditation' && $request->hasFile('certificate_file')) {
+            $certificateFile = $request->file('certificate_file');
+            $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
+            $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
+        }
+    
+        if ($application->application_type === 'Accreditation') {
+            // Generate accreditation number only for Accreditation
+            $accreditationNumber = $this->generateUniqueAccreditationNumber();
+    
+            // Insert new row to GeneralInfo (New Accreditation)
+            $generalInfo = new GeneralInfo();
+            $generalInfo->accreditation_no = $accreditationNumber;
+        } else {
+            // For CGS Renewal, update existing GeneralInfo
+            $generalInfo = $existingGeneralInfo ?? new GeneralInfo();
+        }
+    
+        // Common fields for both Accreditation and CGS Renewal
         $generalInfo->application_id = $application->id;
         $generalInfo->name = $application->tc_name ?? 'N/A';
         $generalInfo->accreditation_date = now();
         $generalInfo->cda_registration_date = $application->cda_reg_date ?? 'N/A';
         $generalInfo->cda_registration_no = $application->cda_reg_no ?? 'N/A';
-
         $generalInfo->common_bond_membership = $appGen->common_bond_membership ?? 'N/A';
         $generalInfo->membership_fee = $appGen->membership_fee ?? 0.00;
         $generalInfo->area = $appGen->area ?? 'N/A';
@@ -445,12 +450,14 @@ class ApplicationController extends Controller
         $generalInfo->employer_philhealth_reg_no = $appGen->employer_philhealth_reg_no ?? 'N/A';
         $generalInfo->bir_tin = $appGen->bir_tin ?? 'N/A';
         $generalInfo->bir_tax_exemption_no = $appGen->bir_tax_exemption_no ?? 'N/A';
-
-        $generalInfo->accreditation_no = $accreditationNumber;
         $generalInfo->status = 'active';
         $generalInfo->validity_date = $request->validity_date;
-        $generalInfo->accreditation_certificate_filename = $certificateFilename;
         $generalInfo->cgs_filename = $cgsFilename;
+    
+        if ($application->application_type === 'Accreditation') {
+            $generalInfo->accreditation_certificate_filename = $certificateFilename;
+        }
+    
         $generalInfo->save();
     
         // Update application status to 'released'
@@ -473,6 +480,7 @@ class ApplicationController extends Controller
     
         return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released Successfully!');
     }
+    
     
     
     public function showHistory($id)
