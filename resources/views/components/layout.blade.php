@@ -75,7 +75,7 @@ contains logo, profile name & icon, and navigation links
                     <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')"> Accreditation & CGS
                         Approval </x-nav-link>
                 @endcan
-                <x-nav-link href="{{ route('reports.index') }}" :active="request()->is('/reports*')">Report Generation</x-nav-link>
+                <x-nav-link href="{{ route('report.index') }}" :active="request()->is('/reports*')">Report Generation</x-nav-link>
 
             </div>
         </header>
