@@ -10,7 +10,8 @@ class GeneralInfoController extends Controller
 {
     public function index()
     {
-        $generalInfos = GeneralInfo::all();
+        // Fetch only records where accreditation_no is NOT NULL
+        $generalInfos = GeneralInfo::whereNotNull('accreditation_no')->get();
     
         // Fetch all regions from API
         $regionsResponse = Http::get("https://psgc.gitlab.io/api/regions/");
@@ -26,8 +27,7 @@ class GeneralInfoController extends Controller
         }
     
         return view('client.index', compact('generalInfos', 'regions'));
-    }
-    
+    }    
 
     public function show($accreditation_no)
     {

@@ -11,18 +11,13 @@
         <!-- Search & Filter Controls -->
         <div class="flex flex-col md:flex-row gap-4 mb-6">
             <div class="md:w-1/2">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors" 
-                    placeholder="Search by Accreditation No, City, or Email"
-                >
+                <input type="text" id="searchInput"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                    placeholder="Search by Accreditation No, City, or Email">
             </div>
             <div class="md:w-1/3">
-                <select 
-                    id="regionFilter" 
-                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none bg-white"
-                >
+                <select id="regionFilter"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none bg-white">
                     <option value="">All Region</option>
                     @foreach ($regions as $region)
                         <option value="{{ $region['code'] }}">{{ $region['name'] }}</option>
@@ -35,8 +30,10 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-800">
                     <tr class="text-blue-900">
-                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation No</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation No
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation Date
+                        </th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Region</th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">City</th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Email</th>
@@ -47,24 +44,30 @@
                 <tbody class="bg-white divide-y divide-gray-200" id="infoTable">
                     @forelse ($generalInfos as $info)
                         <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                {{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 {{ \Carbon\Carbon::parse($info->accreditation_date)->format('M j, Y') }}
-                            </td>                            
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700"> {{ $info->region }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->city }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->contact_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('general-info.show', ['accreditation_no' => $info->accreditation_no]) }}" 
-                                   class="inline-flex items-center px-3 py-1.5 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                                    View
-                                </a>
+                                @if ($info->accreditation_no)
+                                    <a href="{{ route('general-info.show', ['accreditation_no' => $info->accreditation_no]) }}"
+                                        class="inline-flex items-center px-3 py-1.5 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                        View
+                                    </a>
+                                @else
+                                    N/A
+                                @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No records found</td>
+                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No
+                                records found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -73,7 +76,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const searchInput = document.getElementById("searchInput");
             const regionFilter = document.getElementById("regionFilter");
             const tableRows = document.querySelectorAll("#infoTable tr");
@@ -88,7 +91,8 @@
                     const email = row.cells[4]?.textContent.toLowerCase() || '';
                     const regionCode = row.cells[2]?.getAttribute("data-region") || '';
 
-                    const matchesSearch = accreditationNo.includes(searchText) || city.includes(searchText) || email.includes(searchText);
+                    const matchesSearch = accreditationNo.includes(searchText) || city.includes(
+                        searchText) || email.includes(searchText);
                     const matchesRegion = selectedRegion === "" || regionCode === selectedRegion;
 
                     row.style.display = matchesSearch && matchesRegion ? "" : "none";
