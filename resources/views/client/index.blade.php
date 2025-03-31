@@ -20,7 +20,7 @@
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none bg-white">
                     <option value="">All Region</option>
                     @foreach ($regions as $region)
-                        <option value="{{ $region['code'] }}">{{ $region['name'] }}</option>
+                        <option value="{{ $region['name'] }}">{{ $region['name'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -89,11 +89,12 @@
                     const accreditationNo = row.cells[0]?.textContent.toLowerCase() || '';
                     const city = row.cells[3]?.textContent.toLowerCase() || '';
                     const email = row.cells[4]?.textContent.toLowerCase() || '';
-                    const regionCode = row.cells[2]?.getAttribute("data-region") || '';
+                    const regionName = row.cells[2]?.textContent.trim().toLowerCase() || '';
 
                     const matchesSearch = accreditationNo.includes(searchText) || city.includes(
                         searchText) || email.includes(searchText);
-                    const matchesRegion = selectedRegion === "" || regionCode === selectedRegion;
+                    const matchesRegion = selectedRegion === "" || regionName === selectedRegion
+                        .toLowerCase();
 
                     row.style.display = matchesSearch && matchesRegion ? "" : "none";
                 });
