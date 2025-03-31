@@ -32,7 +32,7 @@
 
 <body>
 
-    <div>
+    <div class="text-center">
         <h2 style="text-align: center;">CGS Renewal Report</h2>
         <p>Generated on: {{ now()->format('F j, Y') }}</p>
     </div>

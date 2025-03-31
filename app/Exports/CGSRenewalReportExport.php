@@ -24,6 +24,7 @@ class CGSRenewalReportExport implements FromCollection, WithHeadings
     {
         return [
             'CDA Registration No',
+            'Transport Cooperative Name',
             'Validity Date',
             'Accreditation No',
             'Region',
