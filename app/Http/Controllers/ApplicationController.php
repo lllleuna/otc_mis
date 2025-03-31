@@ -309,6 +309,8 @@ class ApplicationController extends Controller
                 'business_address' => $appgeninfo->business_address ?? 'N/A',
                 'email' => $appgeninfo->email ?? 'N/A',
                 'contact_no' => $appgeninfo->contact_no ?? 'N/A',
+                'contact_firstname' => $appgeninfo->contact_firstname ?? 'N/A',
+                'contact_lastname' => $appgeninfo->contact_lastname ?? 'N/A',
                 'employer_sss_reg_no' => $appgeninfo->employer_sss_reg_no ?? 'N/A',
                 'employer_pagibig_reg_no' => $appgeninfo->employer_pagibig_reg_no ?? 'N/A',
                 'employer_philhealth_reg_no' => $appgeninfo->employer_philhealth_reg_no ?? 'N/A',
