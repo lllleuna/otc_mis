@@ -23,7 +23,7 @@
                     id="regionFilter" 
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none bg-white"
                 >
-                    <option value="">Filter by Region</option>
+                    <option value="">All Region</option>
                     @foreach ($regions as $region)
                         <option value="{{ $region['code'] }}">{{ $region['name'] }}</option>
                     @endforeach
@@ -48,9 +48,11 @@
                     @forelse ($generalInfos as $info)
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->accreditation_date }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700" data-region="{{ $info->region_code }}">{{ $info->region_name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->city_name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                {{ \Carbon\Carbon::parse($info->accreditation_date)->format('M j, Y') }}
+                            </td>                            
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700"> {{ $info->region }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->city }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->contact_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">

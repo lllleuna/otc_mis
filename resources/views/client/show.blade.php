@@ -25,6 +25,10 @@
                 <td>{{ $info->city }}</td>
             </tr>
             <tr>
+                <th>City</th>
+                <td>{{ $info->barangay }}</td>
+            </tr>
+            <tr>
                 <th>Email</th>
                 <td>{{ $info->email }}</td>
             </tr>
