@@ -34,10 +34,17 @@ class GenerateReportController extends Controller
             'format' => 'required|in:pdf,excel',
         ]);
     
-        $query = GeneralInfo::query()
-            ->select('cda_registration_no', 'accreditation_no', 'name', 'region', 'city', 'status', 'accreditation_date')
+        $query = GeneralInfo::selectRaw("
+                cda_registration_no, 
+                MIN(accreditation_no) AS accreditation_no, 
+                MIN(name) AS name, 
+                MIN(region) AS region, 
+                MIN(city) AS city, 
+                MIN(status) AS status, 
+                MIN(accreditation_date) AS accreditation_date
+            ")
             ->whereNotNull('accreditation_no')
-            ->groupBy('cda_registration_no'); // Ensures unique CDA numbers
+            ->groupBy('cda_registration_no');
     
         if ($request->region) {
             $query->where('region', $request->region);
