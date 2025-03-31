@@ -22,15 +22,18 @@
             <tbody>
                 @foreach ($generalInfos as $info)
                     <tr>
-                        <td>{{ $info->accreditation_no }}</td>
+                        <td>{{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
                         <td>{{ $info->accreditation_date }}</td>
                         <td>{{ $info->region }}</td>
                         <td>{{ $info->city }}</td>
                         <td>{{ $info->email }}</td>
                         <td>{{ $info->contact_no }}</td>
                         <td>
-                            <a href="{{ route('general-info.show', $info->accreditation_no) }}"
-                                class="btn btn-primary btn-sm">View</a>
+                            <a href="{{ route('general-info.show', ['accreditation_no' => $info->accreditation_no]) }}"
+                                class="btn btn-primary btn-sm">
+                                View
+                            </a>
+
                         </td>
                     </tr>
                 @endforeach
