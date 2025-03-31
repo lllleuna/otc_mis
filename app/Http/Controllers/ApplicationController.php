@@ -421,6 +421,8 @@ class ApplicationController extends Controller
         $generalInfo->business_address = $appGen->business_address ?? 'N/A';
         $generalInfo->email = $appGen->email ?? 'N/A';
         $generalInfo->contact_no = $appGen->contact_no ?? 'N/A';
+        $generalInfo->contact_firstname = $appGen->contact_firstname ?? 'N/A';
+        $generalInfo->contact_lastname = $appGen->contact_lastname ?? 'N/A';
         $generalInfo->employer_sss_reg_no = $appGen->employer_sss_reg_no ?? 'N/A';
         $generalInfo->employer_pagibig_reg_no = $appGen->employer_pagibig_reg_no ?? 'N/A';
         $generalInfo->employer_philhealth_reg_no = $appGen->employer_philhealth_reg_no ?? 'N/A';
