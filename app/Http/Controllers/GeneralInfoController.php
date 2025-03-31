@@ -31,14 +31,19 @@ class GeneralInfoController extends Controller
 
     public function show($accreditation_no)
     {
+        // Get the row matching the accreditation_no
         $info = GeneralInfo::where('accreditation_no', $accreditation_no)
             ->latest('accreditation_date')
             ->first();
-
+    
         if (!$info) {
             abort(404, 'Record not found');
         }
-
-        return view('client.show', compact('info'));
+    
+        // Fetch all rows with the same cda_registration_no
+        $relatedInfos = GeneralInfo::where('cda_registration_no', $info->cda_registration_no)->get();
+    
+        return view('client.show', compact('info', 'relatedInfos'));
     }
+    
 }

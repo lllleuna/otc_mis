@@ -37,6 +37,11 @@
                 <td>{{ $info->contact_no }}</td>
             </tr>
         </table>
+
+        <h3>CGS Renewal History</h3>
+        @foreach ($relatedInfos as $relatedInfo)
+            <p>{{ $relatedInfo->created_at }}</p>
+        @endforeach
         <a href="{{ route('general-info.index') }}" class="btn btn-secondary">Back to List</a>
     </div>
 

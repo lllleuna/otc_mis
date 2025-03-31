@@ -410,11 +410,11 @@ class ApplicationController extends Controller
         $generalInfo->common_bond_membership = $appGen->common_bond_membership ?? 'N/A';
         $generalInfo->membership_fee = $appGen->membership_fee ?? 0.00;
         $generalInfo->area = $appGen->area ?? 'N/A';
-        $generalInfo->region = $application->region ?? 'N/A';
-        $generalInfo->city = $application->city ?? 'N/A';
+        $generalInfo->region = $appGen->region ?? 'N/A';
+        $generalInfo->city = $appGen->city ?? 'N/A';
         $generalInfo->province = $appGen->province ?? 'N/A';
-        $generalInfo->barangay = $application->barangay ?? 'N/A';
-        $generalInfo->business_address = $application->business_address ?? 'N/A';
+        $generalInfo->barangay = $appGen->barangay ?? 'N/A';
+        $generalInfo->business_address = $appGen->business_address ?? 'N/A';
         $generalInfo->email = $appGen->email ?? 'N/A';
         $generalInfo->contact_no = $appGen->contact_no ?? 'N/A';
         $generalInfo->contact_firstname = $appGen->contact_firstname ?? 'N/A';
