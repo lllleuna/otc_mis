@@ -25,7 +25,7 @@ class ApplicationRejectedMail extends Mailable
                     ->view('emails.application-rejected')
                     ->with([
                         'referenceNumber' => $this->application->reference_number,
-                        'name' => $this->application->user->name,
+                        'name' => $this->application->tc_name,
                         'reason' => $this->reason,
                     ]);
     }
