@@ -44,7 +44,7 @@
                 <th>Cooperative Name</th>
                 <th>Region</th>
                 <th>City</th>
-                <th>Status</th>
+                {{-- <th>Status</th> --}}
                 <th>Accreditation Date</th>
             </tr>
         </thead>
@@ -55,7 +55,7 @@
                     <td>{{ $coop->name }}</td>
                     <td>{{ $coop->region }}</td>
                     <td>{{ $coop->city }}</td>
-                    <td>{{ $coop->status }}</td>
+                    {{-- <td>{{ $coop->status }}</td> --}}
                     <td>{{ \Carbon\Carbon::parse($coop->accreditation_date)->format('M j, Y') }}</td>
                 </tr>
             @empty

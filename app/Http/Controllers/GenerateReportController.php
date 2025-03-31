@@ -29,7 +29,7 @@ class GenerateReportController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'report_type' => 'required',
+            'report_type' => 'nullable',
             'region' => 'nullable|string',
             'format' => 'required|in:pdf,excel',
         ]);
