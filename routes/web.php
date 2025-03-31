@@ -133,8 +133,8 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/reports/download/{id}', [ReportController::class, 'download'])->name('reports.download');
 // });
 
-Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
-Route::get('/reports/generate', [ReportController::class, 'generate'])->name('report.generate');
+Route::get('/reports', [GenerateReportController::class, 'index'])->name('report.index');
+Route::get('/reports/generate', [GenerateReportController::class, 'generate'])->name('report.generate');
 
 Route::get('/user/profile', function () {
     return view('components.view-profile');
