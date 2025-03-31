@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GeneralInfoController;
+use App\Http\Controllers\GenerateReportController;
 
 
 Route::get('/download-cgs/{filename}', function ($filename) {
@@ -126,12 +127,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/backup/download/{fileName}', [BackupController::class, 'downloadBackup'])->name('backup.download');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/generate-reports', [ReportController::class, 'index'])->name('reports.generate');
-    Route::post('/generate-reports', [ReportController::class, 'generateReport'])->name('reports.generate.submit');
-    Route::get('/reports/download/{id}', [ReportController::class, 'download'])->name('reports.download');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/generate-reports', [ReportController::class, 'index'])->name('reports.generate');
+//     Route::post('/generate-reports', [ReportController::class, 'generateReport'])->name('reports.generate.submit');
+//     Route::get('/reports/download/{id}', [ReportController::class, 'download'])->name('reports.download');
+// });
 
+Route::get('/reports', [GenerateReportController::class, 'index'])->name('reports.index');
+Route::post('/reports/generate', [GenerateReportController::class, 'generateReport'])->name('reports.generate');
 
 Route::get('/user/profile', function () {
     return view('components.view-profile');
