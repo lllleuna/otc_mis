@@ -58,42 +58,59 @@
                     <div class="space-y-2">
                         <label class="block text-sm font-medium text-gray-700">Export Format</label>
                         <div class="grid grid-cols-2 gap-3">
+                            <!-- PDF Option -->
                             <div>
-                                <input type="radio" id="format_pdf" name="format" value="pdf" class="peer hidden" checked>
-                                <label for="format_pdf" class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-500">
+                                <input type="radio" id="format_pdf" name="format" value="pdf" class="peer hidden"
+                                    checked>
+                                <label for="format_pdf"
+                                    class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-500">
                                     <div class="flex items-center">
-                                        <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                        <svg class="w-6 h-6 mr-2 text-red-500 peer-checked:text-white"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                         </svg>
-                                        <span class="font-medium text-gray-700">PDF</span>
+                                        <span class="font-medium">PDF</span>
                                     </div>
                                 </label>
                             </div>
+
+                            <!-- Excel Option -->
                             <div>
-                                <input type="radio" id="format_excel" name="format" value="excel" class="peer hidden">
-                                <label for="format_excel" class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-500">
+                                <input type="radio" id="format_excel" name="format" value="excel"
+                                    class="peer hidden">
+                                <label for="format_excel"
+                                    class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 peer-checked:bg-green-500 peer-checked:text-white peer-checked:border-green-600 peer-checked:ring-2 peer-checked:ring-green-500">
                                     <div class="flex items-center">
-                                        <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        <svg class="w-6 h-6 mr-2 text-green-600 peer-checked:text-white"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
-                                        <span class="font-medium text-gray-700">Excel</span>
+                                        <span class="font-medium">Excel</span>
                                     </div>
                                 </label>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Submit Button -->
-                <div class="mt-8">
+                <div class="mt-8 flex justify-end">
                     <button type="submit"
-                        class="w-1/2 self-end px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg shadow-md hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        class="px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                         Generate Report
                     </button>
                 </div>
+
             </form>
         </div>
     </div>
