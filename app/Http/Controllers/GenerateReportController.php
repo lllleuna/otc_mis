@@ -30,45 +30,74 @@ class GenerateReportController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'report_type' => 'nullable',
+            'report_type' => 'required|in:accreditation,cgs',
             'region' => 'nullable|string',
             'year' => 'nullable|integer',
             'format' => 'required|in:pdf,excel',
         ]);
     
-        $query = GeneralInfo::selectRaw("
-                cda_registration_no, 
-                MIN(accreditation_no) AS accreditation_no, 
-                MIN(name) AS name, 
-                MIN(region) AS region, 
-                MIN(city) AS city, 
-                MIN(status) AS status, 
-                MIN(accreditation_date) AS accreditation_date
-            ")
-            ->whereNotNull('accreditation_no')
-            ->groupBy('cda_registration_no');
+        if ($request->report_type === 'accreditation') {
+            // Accreditation Report Query
+            $query = GeneralInfo::selectRaw("
+                    cda_registration_no, 
+                    MIN(accreditation_no) AS accreditation_no, 
+                    MIN(name) AS name, 
+                    MIN(region) AS region, 
+                    MIN(city) AS city, 
+                    MIN(status) AS status, 
+                    MIN(accreditation_date) AS accreditation_date
+                ")
+                ->whereNotNull('accreditation_no')
+                ->groupBy('cda_registration_no');
+            
+            // Apply Year Filter
+            if ($request->year) {
+                $query->whereYear('accreditation_date', $request->year);
+            }
+    
+        } elseif ($request->report_type === 'cgs') {
+            // CGS Renewal Report Query
+            $query = GeneralInfo::selectRaw("
+                    cda_registration_no, 
+                    MAX(validity_date) AS validity_date,
+                    (SELECT accreditation_no FROM general_info gi2 
+                     WHERE gi2.cda_registration_no = general_info.cda_registration_no 
+                     ORDER BY gi2.accreditation_date DESC LIMIT 1) AS accreditation_no,
+                    MIN(region) AS region
+                ")
+                ->whereNotNull('validity_date')
+                ->groupBy('cda_registration_no');
+            
+            // Apply Year Filter
+            if ($request->year) {
+                $query->whereYear('validity_date', $request->year);
+            }
+        }
     
         // Apply Region Filter
         if ($request->region) {
             $query->where('region', $request->region);
         }
     
-        // Apply Year Filter
-        if ($request->year) {
-            $query->whereYear('accreditation_date', $request->year);
-        }
-    
         $cooperatives = $query->get();
     
         if ($request->format === 'pdf') {
-            $pdf = Pdf::loadView('reports.generated', compact('cooperatives'));
-            return $pdf->download('accreditation_report.pdf');
+            $pdf = Pdf::loadView(
+                $request->report_type === 'accreditation' ? 'reports.generated' : 'reports.generated_cgs',
+                compact('cooperatives')
+            );
+            return $pdf->download("{$request->report_type}_report.pdf");
         } elseif ($request->format === 'excel') {
-            return Excel::download(new AccreditationReportExport($cooperatives), 'accreditation_report.xlsx');
+            $exportClass = $request->report_type === 'accreditation' 
+                ? new AccreditationReportExport($cooperatives) 
+                : new CGSRenewalReportExport($cooperatives);
+            
+            return Excel::download($exportClass, "{$request->report_type}_report.xlsx");
         }
     
         return back()->withErrors(['Invalid format selected']);
-    }    
+    }
+     
     
 
 }

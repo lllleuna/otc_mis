@@ -10,7 +10,14 @@
 
         <form action="{{ route('report.generate') }}" method="GET">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
+                <div>
+                    <label for="report_type" class="block text-sm font-medium text-gray-700">Report Type</label>
+                    <select id="report_type" name="report_type"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                        <option value="accreditation">Accreditation Report</option>
+                        <option value="cgs">CGS Report</option>
+                    </select>
+                </div>
                 <!-- Region Selection -->
                 <div>
                     <label for="region" class="block text-sm font-medium text-gray-700">Region</label>
