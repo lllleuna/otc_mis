@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
+use Illuminate\Support\Facades\Http;
 
 class GeneralInfoController extends Controller
 {
     public function index()
     {
-        $generalInfos = GeneralInfo::select('accreditation_no', 'accreditation_date', 'region', 'city', 'email', 'contact_no')
-            ->whereIn('id', function ($query) {
-                $query->selectRaw('MAX(id)')
-                    ->from('general_info')
-                    ->groupBy('accreditation_no');
-            })
-            ->orderBy('accreditation_date', 'desc')
-            ->get();
+        $generalInfos = GeneralInfo::all();
     
-        return view('client.index', compact('generalInfos'));
+        // Fetch all regions from API
+        $regionsResponse = Http::get("https://psgc.gitlab.io/api/regions/");
+        $regions = $regionsResponse->json();
+    
+        // Convert region codes to names
+        foreach ($generalInfos as $info) {
+            $regionNameResponse = Http::get("https://psgc.gitlab.io/api/regions/{$info->region}");
+            $info->region_name = $regionNameResponse->json()['name'] ?? 'Unknown Region';
+    
+            $cityNameResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$info->city}");
+            $info->city_name = $cityNameResponse->json()['name'] ?? 'Unknown City';
+        }
+    
+        return view('general-info', compact('generalInfos', 'regions'));
     }
     
 
