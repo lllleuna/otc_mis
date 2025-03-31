@@ -288,9 +288,9 @@ class ApplicationController extends Controller
             'updated_by' => $userId,
         ]);
     
-        $generalInfo = GeneralInfo::where('application_id', $id)->first();
+        $appgeninfo = AppGeneralInfo::where('application_id', $id)->first();
     
-        if ($request->status === 'approved' && !$generalInfo) {
+        if ($request->status === 'approved' && !$appgeninfo) {
     
             // Send Approval Email
             Mail::to($appgeninfo->email)->send(new ApplicationApprovedMail($application));
