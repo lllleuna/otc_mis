@@ -25,7 +25,7 @@ class GeneralInfoController extends Controller
             $info->city_name = $cityNameResponse->json()['name'] ?? 'Unknown City';
         }
     
-        return view('general-info', compact('generalInfos', 'regions'));
+        return view('client.index', compact('generalInfos', 'regions'));
     }
     
 
