@@ -290,7 +290,7 @@ class ApplicationController extends Controller
     
         $appgeninfo = AppGeneralInfo::where('application_id', $id)->first();
     
-        if ($request->status === 'approved' && !$appgeninfo) {
+        if ($request->status === 'approved') {
     
             // Send Approval Email
             Mail::to($appgeninfo->email)->send(new ApplicationApprovedMail($application));
