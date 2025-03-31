@@ -399,6 +399,16 @@ class ApplicationController extends Controller
                 : 'required|mimes:pdf,jpg,jpeg,png|max:5048',
             'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:5048',
         ]);
+
+        dd($request->all());
+
+        if (!$request->hasFile('cgs_file')) {
+            dd('No CGS file uploaded.');
+        }
+        if ($application->application_type === 'accreditation' && !$request->hasFile('accreditation_certificate_filename')) {
+            dd('No accreditation certificate uploaded.');
+        }
+        
     
         // Handle file uploads
         $dateString = now()->format('Ymd_His');
