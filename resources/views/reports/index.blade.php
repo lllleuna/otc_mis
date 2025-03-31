@@ -5,48 +5,49 @@
 
     <x-slot:title>Reports</x-slot:title>
 
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Accreditation Report</h2>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Select Accreditation Report</h2>
 
-        <form action="{{ route('reports.generate') }}" method="POST">
-            @csrf
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Report Type Selection -->
+        <form action="{{ route('report.generate') }}" method="GET">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Accreditation Type Selection -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-600">Select Accreditation Report</label>
-                    <select name="report_type" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md">
-                        <option value="all_accredited">List of Accredited Cooperatives</option>
-                        <option value="newly_accredited">Newly Accredited Cooperatives</option>
-                        <option value="active">List of Active Cooperatives</option>
-                        <option value="inactive">List of Inactive Cooperatives</option>
+                    <label for="report_type" class="block text-sm font-medium text-gray-700">Report Type</label>
+                    <select id="report_type" name="report_type"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                        <option value="">Select Report</option>
+                        <option value="summary">Summary</option>
+                        <option value="detailed">Detailed</option>
                     </select>
                 </div>
 
                 <!-- Region Selection -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-600">Select Region</label>
-                    <select name="region" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md">
+                    <label for="region" class="block text-sm font-medium text-gray-700">Region</label>
+                    <select id="region" name="region"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
                         <option value="">All Regions</option>
-                        <option value="Region 1">Region 1</option>
-                        <option value="Region 2">Region 2</option>
-                        <option value="Region 3">Region 3</option>
-                        <option value="NCR">National Capital Region</option>
-                        <!-- Add more regions as needed -->
+                        @foreach ($regions as $region)
+                            <option value="{{ $region['code'] }}">{{ $region['name'] }}</option>
+                        @endforeach
                     </select>
                 </div>
 
-                <!-- Export Format -->
+                <!-- Export Format Selection -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-600">Export Format</label>
-                    <select name="format" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md">
+                    <label for="format" class="block text-sm font-medium text-gray-700">Export Format</label>
+                    <select id="format" name="format"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
                         <option value="pdf">PDF</option>
                         <option value="excel">Excel</option>
                     </select>
                 </div>
             </div>
 
+            <!-- Submit Button -->
             <div class="mt-6">
-                <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-md">
+                <button type="submit"
+                    class="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
                     Generate Report
                 </button>
             </div>

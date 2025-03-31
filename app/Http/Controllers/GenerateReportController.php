@@ -16,52 +16,39 @@ use App\Exports\AccreditedCooperativesExport;
 
 class GenerateReportController extends Controller
 {
-    // Main page for selecting the report type and filters
     public function index()
     {
-        return view('reports.index');
+        // Fetch all regions from API
+        $regionsResponse = Http::get("https://psgc.gitlab.io/api/regions/");
+        $regions = $regionsResponse->json();
+
+        return view('reports.index', compact('regions'));
     }
 
-    // Generate the selected report (PDF or Excel)
-    public function generateReport(Request $request)
+    public function generate(Request $request)
     {
-        $reportType = $request->input('report_type');
-        $region = $request->input('region');
-        $format = $request->input('format');
+        $request->validate([
+            'report_type' => 'required',
+            'region' => 'nullable|string',
+            'format' => 'required|in:pdf,excel',
+        ]);
 
-        // Query the cooperatives based on filters
         $query = GeneralInfo::query();
 
-        if ($region) {
-            $query->where('region', $region);
-        }
-
-        switch ($reportType) {
-            case 'all_accredited':
-                // No additional filtering needed
-                break;
-            case 'newly_accredited':
-                $query->whereYear('accreditation_date', now()->year);
-                break;
-            case 'active':
-                $query->where('status', 'Active');
-                break;
-            case 'inactive':
-                $query->where('status', 'Inactive');
-                break;
+        if ($request->region) {
+            $query->where('region', $request->region);
         }
 
         $cooperatives = $query->get();
 
-        // Generate PDF or Excel
-        if ($format == 'pdf') {
-            $pdf = Pdf::loadView('reports.generated', compact('cooperatives', 'reportType', 'region'));
-            return $pdf->download('accredited_cooperatives_report.pdf');
+        if ($request->format === 'pdf') {
+            $pdf = Pdf::loadView('reports.pdf', compact('cooperatives'));
+            return $pdf->download('accreditation_report.pdf');
+        } elseif ($request->format === 'excel') {
+            return Excel::download(new AccreditationReportExport($cooperatives), 'accreditation_report.xlsx');
         }
 
-        if ($format == 'excel') {
-            return Excel::download(new AccreditedCooperativesExport($cooperatives), 'accredited_cooperatives_report.xlsx');
-        }
+        return back()->withErrors(['Invalid format selected']);
     }
-    
+
 }
