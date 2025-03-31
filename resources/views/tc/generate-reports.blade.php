@@ -19,7 +19,8 @@
             </div>
 
             <div class="p-6 bg-gray-60">
-                <form id="reportForm" action="{{ route('reports.generate.submit') }}" method="POST">
+                <form id="reportForm" action="#" method="POST"> 
+                    {{-- action="{{ route('reports.generate.submit') }}" --}}
                     @csrf
                     <!-- Report Type and Period -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
