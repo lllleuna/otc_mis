@@ -408,8 +408,8 @@ class ApplicationController extends Controller
     
         // Handle accreditation certificate file (only for Accreditation)
         $certificateFilename = null;
-        if ($application->application_type === 'Accreditation' && $request->hasFile('certificate_file')) {
-            $certificateFile = $request->file('certificate_file');
+        if ($application->application_type === 'accreditation' && $request->hasFile('accreditation_certificate_filename')) {
+            $certificateFile = $request->file('accreditation_certificate_filename');
             $certificateFilename = 'accreditation_' . $dateString . '.' . $certificateFile->getClientOriginalExtension();
             $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
         }
@@ -417,7 +417,7 @@ class ApplicationController extends Controller
         if (!$generalInfo) {
             $generalInfo = new GeneralInfo();
             $generalInfo->application_id = $application->id;
-            if ($application->application_type === 'Accreditation') {
+            if ($application->application_type === 'accreditation') {
                 $generalInfo->accreditation_no = $this->generateUniqueAccreditationNumber();
             }
         }
