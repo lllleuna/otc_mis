@@ -3,28 +3,24 @@
 namespace App\Exports;
 
 use App\Models\GeneralInfo;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings; // Import WithHeadings concern
 
 class AccreditationReportExport implements FromCollection, WithHeadings
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
+    protected $cooperatives;
+
+    // Accept the filtered cooperatives as a parameter
+    public function __construct(Collection $cooperatives)
+    {
+        $this->cooperatives = $cooperatives;
+    }
+
     public function collection()
     {
-        // Fetch the data you want to export
-        return GeneralInfo::selectRaw("
-                cda_registration_no, 
-                accreditation_no, 
-                name, 
-                region, 
-                city, 
-                status, 
-                accreditation_date
-            ")
-            ->whereNotNull('accreditation_no')
-            ->get();
+        // Return the filtered cooperatives data
+        return $this->cooperatives;
     }
 
     /**
