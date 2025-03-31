@@ -396,8 +396,8 @@ class ApplicationController extends Controller
             'validity_date' => 'required|date',
             'accreditation_certificate_filename' => $application->application_type === 'CGS Renewal' 
                 ? 'nullable' 
-                : 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-            'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+                : 'required|mimes:pdf,jpg,jpeg,png|max:5048',
+            'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:5048',
         ]);
     
         // Handle file uploads
