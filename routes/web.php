@@ -143,4 +143,6 @@ Route::get('/settings', function () {
 
 
 Route::get('/general-info', [GeneralInfoController::class, 'index'])->name('general-info.index');
-Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 'show'])->name('general-info.show');
+Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 'show'])
+    ->where('accreditation_no', '.*')
+    ->name('general-info.show');
