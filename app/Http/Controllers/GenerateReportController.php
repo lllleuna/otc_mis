@@ -53,7 +53,7 @@ class GenerateReportController extends Controller
         $cooperatives = $query->get();
     
         if ($request->format === 'pdf') {
-            $pdf = Pdf::loadView('reports.pdf', compact('cooperatives'));
+            $pdf = Pdf::loadView('reports.generate', compact('cooperatives'));
             return $pdf->download('accreditation_report.pdf');
         } elseif ($request->format === 'excel') {
             return Excel::download(new AccreditationReportExport($cooperatives), 'accreditation_report.xlsx');
