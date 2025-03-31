@@ -5,44 +5,59 @@
 
     <x-slot:title>Client Details</x-slot:title>
 
-    <div class="container">
-        <h2 class="mb-4">General Information Details</h2>
-        <table class="table table-bordered">
-            <tr>
-                <th>Accreditation No</th>
-                <td>{{ $info->accreditation_no }}</td>
-            </tr>
-            <tr>
-                <th>Accreditation Date</th>
-                <td>{{ $info->accreditation_date }}</td>
-            </tr>
-            <tr>
-                <th>Region</th>
-                <td>{{ $info->region }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ $info->city }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ $info->barangay }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ $info->email }}</td>
-            </tr>
-            <tr>
-                <th>Contact No</th>
-                <td>{{ $info->contact_no }}</td>
-            </tr>
-        </table>
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">General Information Details</h2>
+        
+        <div class="bg-white shadow-md rounded-lg overflow-hidden mb-8">
+            <table class="w-full border-collapse">
+                <tbody>
+                    <tr class="border-b">
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider w-1/3">Accreditation No</th>
+                        <td class="px-6 py-4 text-gray-800">{{ $info->accreditation_no }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Accreditation Date</th>
+                        <td class="px-6 py-4 text-gray-800">{{ date('M d, Y', strtotime($info->accreditation_date)) }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Region</th>
+                        <td class="px-6 py-4 text-gray-800">{{ $info->region }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">City</th>
+                        <td class="px-6 py-4 text-gray-800">{{ $info->city }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Barangay</th>
+                        <td class="px-6 py-4 text-gray-800">{{ $info->barangay }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Email</th>
+                        <td class="px-6 py-4 text-gray-800">{{ $info->email }}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-gray-50 px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Contact No</th>
+                        <td class="px-6 py-4 text-gray-800">{{ $info->contact_no }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <h3>CGS Renewal History</h3>
-        @foreach ($relatedInfos as $relatedInfo)
-            <p>{{ $relatedInfo->created_at }}</p>
-        @endforeach
-        <a href="{{ route('general-info.index') }}" class="btn btn-secondary">Back to List</a>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">CGS Renewal History</h3>
+        <div class="bg-white shadow-md rounded-lg overflow-hidden mb-8 p-6">
+            @foreach ($relatedInfos as $relatedInfo)
+                <div class="py-2 border-b border-gray-200 last:border-0">
+                    <p class="text-gray-700">{{ date('M d, Y', strtotime($relatedInfo->created_at)) }}</p>
+                </div>
+            @endforeach
+        </div>
+        
+        <a href="{{ route('general-info.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition duration-150 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to List
+        </a>
     </div>
 
 </x-layout>
