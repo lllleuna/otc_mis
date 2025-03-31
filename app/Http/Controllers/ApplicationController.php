@@ -444,7 +444,7 @@ class ApplicationController extends Controller
         $generalInfo->validity_date = $request->validity_date;
         $generalInfo->cgs_filename = $cgsFilename;
     
-        if ($application->application_type === 'Accreditation') {
+        if ($application->application_type === 'accreditation') {
             $generalInfo->accreditation_certificate_filename = $certificateFilename;
         }
     
