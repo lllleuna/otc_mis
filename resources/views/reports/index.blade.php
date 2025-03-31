@@ -10,16 +10,6 @@
 
         <form action="{{ route('report.generate') }}" method="GET">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Accreditation Type Selection -->
-                {{-- <div>
-                    <label for="report_type" class="block text-sm font-medium text-gray-700">Report Type</label>
-                    <select id="report_type" name="report_type"
-                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
-                        <option value="">Select Report</option>
-                        <option value="summary">Summary</option>
-                        <option value="detailed">Detailed</option>
-                    </select>
-                </div> --}}
 
                 <!-- Region Selection -->
                 <div>
@@ -30,6 +20,18 @@
                         @foreach ($regions as $region)
                             <option value="{{ $region['name'] }}">{{ $region['name'] }}</option>
                         @endforeach
+                    </select>
+                </div>
+
+                <!-- Year Selection -->
+                <div>
+                    <label for="year" class="block text-sm font-medium text-gray-700">Year</label>
+                    <select id="year" name="year"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                        <option value="">All Years</option>
+                        @for ($i = date('Y'); $i >= 2000; $i--)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
                     </select>
                 </div>
 
@@ -53,5 +55,4 @@
             </div>
         </form>
     </div>
-
 </x-layout>

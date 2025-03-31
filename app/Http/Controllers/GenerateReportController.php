@@ -31,6 +31,7 @@ class GenerateReportController extends Controller
         $request->validate([
             'report_type' => 'nullable',
             'region' => 'nullable|string',
+            'year' => 'nullable|integer',
             'format' => 'required|in:pdf,excel',
         ]);
     
@@ -46,8 +47,14 @@ class GenerateReportController extends Controller
             ->whereNotNull('accreditation_no')
             ->groupBy('cda_registration_no');
     
+        // Apply Region Filter
         if ($request->region) {
             $query->where('region', $request->region);
+        }
+    
+        // Apply Year Filter
+        if ($request->year) {
+            $query->whereYear('accreditation_date', $request->year);
         }
     
         $cooperatives = $query->get();
@@ -60,7 +67,7 @@ class GenerateReportController extends Controller
         }
     
         return back()->withErrors(['Invalid format selected']);
-    }
+    }    
     
 
 }
