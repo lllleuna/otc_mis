@@ -64,12 +64,12 @@
             {{-- File Upload --}}
             @if ($application->application_type === 'accreditation')
                 <div class="mb-4">
-                    <label for="accreditation_certificate_file" class="block text-sm font-medium text-gray-700">Upload Accreditation
+                    <label for="accreditation_certificate_filename" class="block text-sm font-medium text-gray-700">Upload Accreditation
                         Certificate</label>
-                    <input type="file" name="accreditation_certificate_file" id="accreditation_certificate_file"
+                    <input type="file" name="accreditation_certificate_filename" id="accreditation_certificate_filename"
                         class="w-full p-2 border rounded-md" accept=".pdf,.jpg,.jpeg,.png">
 
-                    @error('accreditation_certificate_file')
+                    @error('accreditation_certificate_filename')
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                     @enderror
                 </div>

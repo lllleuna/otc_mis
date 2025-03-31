@@ -365,6 +365,7 @@ class ApplicationController extends Controller
         $appGen = AppGeneralInfo::where('application_id', $id)->first();
         $generalInfo = GeneralInfo::where('application_id', $id)->first();
     
+        // Validation rules based on application type
         $request->validate([
             'message' => 'required|string|max:1000',
             'validity_date' => 'required|date',
@@ -373,24 +374,16 @@ class ApplicationController extends Controller
                 : 'required|mimes:pdf,jpg,jpeg,png|max:5048',
             'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:5048',
         ]);
-
-        dd($request->all());
-
-        if (!$request->hasFile('cgs_file')) {
-            dd('No CGS file uploaded.');
-        }
-        if ($application->application_type === 'accreditation' && !$request->hasFile('accreditation_certificate_filename')) {
-            dd('No accreditation certificate uploaded.');
-        }
-        
     
         // Handle file uploads
         $dateString = now()->format('Ymd_His');
+        
+        // Save CGS File
         $cgsFile = $request->file('cgs_file');
         $cgsFilename = 'cgs_' . $dateString . '.' . $cgsFile->getClientOriginalExtension();
         $cgsFile->move(public_path('shared/certificates'), $cgsFilename);
     
-        // Handle accreditation certificate file (only for Accreditation)
+        // Save Accreditation Certificate (if applicable)
         $certificateFilename = null;
         if ($application->application_type === 'accreditation' && $request->hasFile('accreditation_certificate_filename')) {
             $certificateFile = $request->file('accreditation_certificate_filename');
@@ -398,15 +391,18 @@ class ApplicationController extends Controller
             $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
         }
     
+        // If CGS Renewal, update existing record; if Accreditation, create if not exists
         if (!$generalInfo) {
             $generalInfo = new GeneralInfo();
             $generalInfo->application_id = $application->id;
+    
+            // Only generate accreditation number for accreditation applications
             if ($application->application_type === 'accreditation') {
                 $generalInfo->accreditation_no = $this->generateUniqueAccreditationNumber();
             }
         }
     
-        // Update fields
+        // Update GeneralInfo fields
         $generalInfo->name = $application->tc_name ?? 'N/A';
         $generalInfo->accreditation_date = now();
         $generalInfo->cda_registration_date = $application->cda_reg_date ?? 'N/A';
@@ -432,6 +428,7 @@ class ApplicationController extends Controller
         $generalInfo->validity_date = $request->validity_date;
         $generalInfo->cgs_filename = $cgsFilename;
     
+        // Store accreditation certificate only if it's an accreditation
         if ($application->application_type === 'accreditation') {
             $generalInfo->accreditation_certificate_filename = $certificateFilename;
         }
@@ -445,6 +442,7 @@ class ApplicationController extends Controller
     
         return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released.');
     }
+    
     
     
     public function showHistory($id)
