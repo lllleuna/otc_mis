@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-8 max-w-6xl">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">
-        {{ ucfirst(str_replace('_', ' ', $reportType)) }} Report
+        Accreditation Report
     </h2>
 
     <p class="mb-4">
