@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\GeneralInfoExport;
 use App\Exports\AccreditedCooperativesExport;
+use Illuminate\Support\Facades\Http;
 
 
 class GenerateReportController extends Controller
