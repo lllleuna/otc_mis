@@ -26,25 +26,36 @@ class GenerateReportController extends Controller
     public function generateReport(Request $request)
     {
         $reportType = $request->input('report_type');
+        $region = $request->input('region');
         $format = $request->input('format');
-        $filters = $request->all();
 
-        // Fetch the data based on selected filters
+        // Query the cooperatives based on filters
         $query = GeneralInfo::query();
 
-        if ($filters['status']) {
-            $query->where('status', $filters['status']);
+        if ($region) {
+            $query->where('region', $region);
         }
 
-        if ($filters['accreditation_date']) {
-            $query->whereYear('accreditation_date', $filters['accreditation_date']);
+        switch ($reportType) {
+            case 'all_accredited':
+                // No additional filtering needed
+                break;
+            case 'newly_accredited':
+                $query->whereYear('accreditation_date', now()->year);
+                break;
+            case 'active':
+                $query->where('status', 'Active');
+                break;
+            case 'inactive':
+                $query->where('status', 'Inactive');
+                break;
         }
 
         $cooperatives = $query->get();
 
-        // Generate PDF or Excel based on user selection
+        // Generate PDF or Excel
         if ($format == 'pdf') {
-            $pdf = Pdf::loadView('reports.generated', compact('cooperatives', 'filters'));
+            $pdf = Pdf::loadView('reports.generated', compact('cooperatives', 'reportType', 'region'));
             return $pdf->download('accredited_cooperatives_report.pdf');
         }
 
@@ -52,4 +63,5 @@ class GenerateReportController extends Controller
             return Excel::download(new AccreditedCooperativesExport($cooperatives), 'accredited_cooperatives_report.xlsx');
         }
     }
+    
 }

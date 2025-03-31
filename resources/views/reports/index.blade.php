@@ -6,37 +6,33 @@
     <x-slot:title>Reports</x-slot:title>
 
     <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Generate Report</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Accreditation Report</h2>
 
         <form action="{{ route('reports.generate') }}" method="POST">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Report Type Selection -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-600">Select Report</label>
+                    <label class="block text-sm font-medium text-gray-600">Select Accreditation Report</label>
                     <select name="report_type" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md">
-                        <option value="accredited">Accredited Cooperatives</option>
+                        <option value="all_accredited">List of Accredited Cooperatives</option>
                         <option value="newly_accredited">Newly Accredited Cooperatives</option>
-                        <option value="active">Active Cooperatives</option>
-                        <option value="inactive">Inactive Cooperatives</option>
+                        <option value="active">List of Active Cooperatives</option>
+                        <option value="inactive">List of Inactive Cooperatives</option>
                     </select>
                 </div>
 
-                <!-- Status Filter -->
+                <!-- Region Selection -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-600">Status</label>
-                    <select name="status" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md">
-                        <option value="">All</option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                    <label class="block text-sm font-medium text-gray-600">Select Region</label>
+                    <select name="region" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="">All Regions</option>
+                        <option value="Region 1">Region 1</option>
+                        <option value="Region 2">Region 2</option>
+                        <option value="Region 3">Region 3</option>
+                        <option value="NCR">National Capital Region</option>
+                        <!-- Add more regions as needed -->
                     </select>
-                </div>
-
-                <!-- Accreditation Date Filter -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-600">Accreditation Date (Year)</label>
-                    <input type="number" name="accreditation_date"
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="e.g. 2023">
                 </div>
 
                 <!-- Export Format -->

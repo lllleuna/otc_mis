@@ -1,12 +1,13 @@
 <div class="container mx-auto px-4 py-8 max-w-6xl">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Accredited Cooperatives</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        {{ ucfirst(str_replace('_', ' ', $reportType)) }} Report
+    </h2>
 
-    <p class="mb-4">Filters Applied:
-        @if ($filters['status'])
-            Status: {{ $filters['status'] }},
-        @endif
-        @if ($filters['accreditation_date'])
-            Accreditation Date: {{ $filters['accreditation_date'] }},
+    <p class="mb-4">
+        @if ($region)
+            Region: {{ $region }}
+        @else
+            All Regions
         @endif
     </p>
 
