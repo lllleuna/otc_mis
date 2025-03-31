@@ -13,7 +13,7 @@ class GeneralInfoController extends Controller
         $generalInfos = GeneralInfo::select('accreditation_no', 'accreditation_date', 'region', 'city', 'email', 'contact_no')
             ->whereIn('id', function ($query) {
                 $query->selectRaw('MAX(id)')
-                      ->from('general_infos')
+                      ->from('general_info')
                       ->groupBy('accreditation_no');
             })
             ->orderBy('accreditation_date', 'desc')
