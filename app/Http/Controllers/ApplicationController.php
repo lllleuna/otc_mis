@@ -287,14 +287,14 @@ class ApplicationController extends Controller
             'message' => $request->message,
             'updated_by' => $userId,
         ]);
-
-        $generalInfo = AppGeneralInfo::where('application_id', $id)->first();
     
-        // If approved, store in GeneralInfo
-        if ($request->status === 'approved') {
+        $generalInfo = GeneralInfo::where('application_id', $id)->first();
+    
+        if ($request->status === 'approved' && !$generalInfo) {
             $appgeninfo = AppGeneralInfo::where('application_id', $id)->first();
     
             GeneralInfo::create([
+                'application_id' => $application->id,
                 'name' => $appgeninfo->name ?? 'N/A',
                 'accreditation_date' => now(),
                 'cda_registration_no' => $appgeninfo->cda_registration_no ?? 'N/A',
@@ -309,10 +309,6 @@ class ApplicationController extends Controller
                 'business_address' => $appgeninfo->business_address ?? 'N/A',
                 'email' => $appgeninfo->email ?? 'N/A',
                 'contact_no' => $appgeninfo->contact_no ?? 'N/A',
-                'contact_firstname' => "test",
-                'contact_lastname' => "test",
-                'contact_mid_initial' => "test",
-                'contact_suffix' => "test",
                 'employer_sss_reg_no' => $appgeninfo->employer_sss_reg_no ?? 'N/A',
                 'employer_pagibig_reg_no' => $appgeninfo->employer_pagibig_reg_no ?? 'N/A',
                 'employer_philhealth_reg_no' => $appgeninfo->employer_philhealth_reg_no ?? 'N/A',
@@ -321,12 +317,12 @@ class ApplicationController extends Controller
             ]);
     
             // Send Approval Email
-            Mail::to($generalInfo->email)->send(new ApplicationApprovedMail($application));
+            Mail::to($appgeninfo->email)->send(new ApplicationApprovedMail($application));
         }
     
         // If rejected, send a rejection email
         if ($request->status === 'rejected') {
-            Mail::to($generalInfo->email)->send(new ApplicationRejectedMail($application, $request->message));
+            Mail::to($appgeninfo->email)->send(new ApplicationRejectedMail($application, $request->message));
         }
     
         // Update application status
@@ -338,6 +334,7 @@ class ApplicationController extends Controller
         return redirect()->route('accreditation.approval.index')
             ->with('success', 'Application status updated successfully.');
     }
+    
 
 
     function generateUniqueAccreditationNumber()
@@ -390,12 +387,12 @@ class ApplicationController extends Controller
     {
         $application = Application::findOrFail($id);
         $appGen = AppGeneralInfo::where('application_id', $id)->first();
-        $existingGeneralInfo = GeneralInfo::where('application_id', $id)->first();
+        $generalInfo = GeneralInfo::where('application_id', $id)->first();
     
         $request->validate([
             'message' => 'required|string|max:1000',
             'validity_date' => 'required|date',
-            'certificate_file' => $application->application_type === 'CGS Renewal' 
+            'accreditation_certificate_filename' => $application->application_type === 'CGS Renewal' 
                 ? 'nullable' 
                 : 'required|mimes:pdf,jpg,jpeg,png|max:2048',
             'cgs_file' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
@@ -415,20 +412,15 @@ class ApplicationController extends Controller
             $certificateFile->move(public_path('shared/certificates'), $certificateFilename);
         }
     
-        if ($application->application_type === 'Accreditation') {
-            // Generate accreditation number only for Accreditation
-            $accreditationNumber = $this->generateUniqueAccreditationNumber();
-    
-            // Insert new row to GeneralInfo (New Accreditation)
+        if (!$generalInfo) {
             $generalInfo = new GeneralInfo();
-            $generalInfo->accreditation_no = $accreditationNumber;
-        } else {
-            // For CGS Renewal, update existing GeneralInfo
-            $generalInfo = $existingGeneralInfo ?? new GeneralInfo();
+            $generalInfo->application_id = $application->id;
+            if ($application->application_type === 'Accreditation') {
+                $generalInfo->accreditation_no = $this->generateUniqueAccreditationNumber();
+            }
         }
     
-        // Common fields for both Accreditation and CGS Renewal
-        $generalInfo->application_id = $application->id;
+        // Update fields
         $generalInfo->name = $application->tc_name ?? 'N/A';
         $generalInfo->accreditation_date = now();
         $generalInfo->cda_registration_date = $application->cda_reg_date ?? 'N/A';
@@ -443,8 +435,6 @@ class ApplicationController extends Controller
         $generalInfo->business_address = $appGen->business_address ?? 'N/A';
         $generalInfo->email = $appGen->email ?? 'N/A';
         $generalInfo->contact_no = $appGen->contact_no ?? 'N/A';
-        $generalInfo->contact_firstname = $appGen->contact_firstname ?? 'N/A';
-        $generalInfo->contact_lastname = $appGen->contact_lastname ?? 'N/A';
         $generalInfo->employer_sss_reg_no = $appGen->employer_sss_reg_no ?? 'N/A';
         $generalInfo->employer_pagibig_reg_no = $appGen->employer_pagibig_reg_no ?? 'N/A';
         $generalInfo->employer_philhealth_reg_no = $appGen->employer_philhealth_reg_no ?? 'N/A';
@@ -465,22 +455,8 @@ class ApplicationController extends Controller
         $application->release_message = $request->message;
         $application->save();
     
-        // Add to status history
-        ApplicationStatusHistory::create([
-            'application_id' => $application->id,
-            'status' => 'released',
-            'message' => $request->message,
-            'updated_by' => auth()->id(),
-        ]);
-    
-        // Update external user status
-        ExternalUser::where('id', $application->user_id)->update([
-            'accreditation_status' => 'Active',
-        ]);
-    
-        return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released Successfully!');
+        return redirect()->route('accreditation.evaluate.index')->with('success', 'Certificate Released.');
     }
-    
     
     
     public function showHistory($id)
