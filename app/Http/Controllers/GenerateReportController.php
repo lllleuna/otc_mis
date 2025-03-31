@@ -14,6 +14,7 @@ use App\Exports\GeneralInfoExport;
 use App\Exports\AccreditedCooperativesExport;
 use Illuminate\Support\Facades\Http;
 use App\Exports\AccreditationReportExport;
+use App\Exports\CGSRenewalReportExport;
 
 
 class GenerateReportController extends Controller
@@ -59,10 +60,15 @@ class GenerateReportController extends Controller
             // CGS Renewal Report Query
             $query = GeneralInfo::selectRaw("
                     cda_registration_no, 
+                    MIN(name) AS name, 
                     MAX(validity_date) AS validity_date,
-                    (SELECT accreditation_no FROM general_info gi2 
-                     WHERE gi2.cda_registration_no = general_info.cda_registration_no 
-                     ORDER BY gi2.accreditation_date DESC LIMIT 1) AS accreditation_no,
+                    (
+                        SELECT accreditation_no FROM general_info gi2 
+                        WHERE gi2.cda_registration_no = general_info.cda_registration_no 
+                        AND gi2.accreditation_no IS NOT NULL
+                        ORDER BY gi2.accreditation_date DESC 
+                        LIMIT 1
+                    ) AS accreditation_no,
                     MIN(region) AS region
                 ")
                 ->whereNotNull('validity_date')
