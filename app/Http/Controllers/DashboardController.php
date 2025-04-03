@@ -34,10 +34,9 @@ class DashboardController extends Controller
         $year = $request->year ?? date('Y');
 
         // Cooperatives per Region
-        $regionsData = GeneralInfo::select('region')
-            ->distinct('cda_registration_no')
+        $regionsData = GeneralInfo::whereNotNull('accreditation_no')
             ->groupBy('region')
-            ->selectRaw('region, COUNT(DISTINCT cda_registration_no) as total')
+            ->selectRaw('region, COUNT(*) as total')
             ->get();
 
         // CGS Renewals per Year (since 2020)
