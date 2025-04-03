@@ -23,6 +23,13 @@ contains logo, profile name & icon, and navigation links
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo3.png') }}" alt="OTC Logo">
+                        {{-- Check if the authenticated user is an Admin --}}
+                        @if (auth()->user()->role === 'Admin')
+                            <h3>Admin Portal</h3>
+                        @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
+                            <h3>Officer Portal</h3>
+                        @endif
+
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
