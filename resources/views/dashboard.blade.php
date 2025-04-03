@@ -57,8 +57,8 @@
                         r => r.total));
                     renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c
                         .total));
-                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#FCDE70',
-                        '#E88D67', '#51829B', '#6AAB9C', '#C370A8', '#A35D6A'
+                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#a35d6a',
+                        '#51829B', '#E88D67', '#6aab9c', '#C370A8', '#fcde70'
                     ]);
                     renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#FCDE70', '#E88D67', '#51829B',
                         '#6AAB9C', '#C370A8', '#A35D6A'
@@ -79,9 +79,9 @@
                 xaxis: {
                     categories: categories
                 },
-                colors: ['#FCDE70', '#E88D67', '#51829B', '#6AAB9C', '#C370A8',
+                colors: ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8',
                     '#A35D6A'
-                ], // Custom colors for bars
+                ], 
             }).render();
         }
 
