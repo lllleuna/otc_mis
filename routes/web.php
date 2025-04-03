@@ -12,6 +12,7 @@ use App\Models\GeneralInfo;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GeneralInfoController;
 use App\Http\Controllers\GenerateReportController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/download-cgs/{filename}', function ($filename) {
@@ -24,27 +25,8 @@ Route::get('/download-cgs/{filename}', function ($filename) {
     }
 })->name('download.cgs');
 
-// Dashboard Route
-Route::get('/dashboard', function () {
-    $user = auth()->user();
-
-    if (!$user) {
-        return redirect()->route('auth.login'); // Redirect to login if not authenticated
-    }
-
-    if (!$user->password_changed) {
-        return view('auth.update-password'); // Redirect to password change page
-    }
-
-    // Check role
-    if ($user->role === 'Admin') {
-        return view('dashboard'); // Admins go to login view (as per your requirement)
-    } else {
-        return route('general-info.index'); // Non-admin users go to tc.index view
-    }
-
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/charts', [DashboardController::class, 'getChartData'])->middleware(['auth', 'verified']);
 
 
 // password change requirement for new account
@@ -98,7 +80,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/dashboard');
+    return route('dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
