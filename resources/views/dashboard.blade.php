@@ -6,7 +6,7 @@
         <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
         <!-- Year Filter -->
-        {{-- <div class="mb-4">
+        <div class="mb-4">
             <label for="yearFilter" class="text-gray-700 font-semibold">Select Year:</label>
             <select id="yearFilter" class="border rounded px-2 py-1">
                 @for ($i = date('Y'); $i >= 2020; $i--)
@@ -14,7 +14,7 @@
                     </option>
                 @endfor
             </select>
-        </div> --}}
+        </div>
 
         <!-- 1st ROW -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
