@@ -12,22 +12,33 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-
+    
         if (!$user) {
-            return redirect()->route('auth.login'); // Redirect to login if not authenticated
+            return redirect()->route('auth.login');
         }
-
+    
         if (!$user->password_changed) {
-            return view('auth.update-password'); // Redirect to password change page
+            return view('auth.update-password');
         }
-
-        // Check role
+    
         if ($user->role === 'Admin') {
-            return view('dashboard'); // Admins go to login view (as per your requirement)
+    
+            // Count the rows in the GeneralInfo model with accreditation_no not null
+            $generalInfoCount = GeneralInfo::whereNotNull('accreditation_no')->count();
+    
+            // Count the rows in the Application model where status is not 'rejected' or 'released'
+            $applicationCount = Application::whereNotIn('status', ['rejected', 'released'])->count();
+    
+            // Pass the counts to the dashboard view
+            return view('dashboard', [
+                'generalInfoCount' => $generalInfoCount,
+                'applicationCount' => $applicationCount
+            ]);
         } else {
-            return redirect()->route('general-info.index'); // Non-admin users go to tc.index view
+            return redirect()->route('general-info.index');
         }
     }
+    
     
     public function getChartData(Request $request)
     {

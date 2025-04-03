@@ -5,6 +5,39 @@
     <div class="container mx-auto px-4 py-6">
         <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
+        <!-- Summary Cards - Updated with specific metrics -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">OTC Performance Summary</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Accredited Transport Cooperatives -->
+                <div class="bg-blue-100 p-4 rounded-md">
+                    <h3 class="font-semibold text-blue-700">Accredited Transport Cooperatives</h3>
+                    <p class="text-xl font-bold text-gray-800">
+                        @if ($generalInfoCount && $generalInfoCount > 0)
+                            {{ $generalInfoCount }}
+                        @else
+                            <span class="text-red-600">No data available</span>
+                        @endif
+                    </p>
+                    <p class="text-sm text-gray-600">Across All Regions</p>
+                </div>
+
+                <!-- Active Applications -->
+                <div class="bg-green-100 p-4 rounded-md">
+                    <h3 class="font-semibold text-green-700">Active Applications</h3>
+                    <p class="text-xl font-bold text-gray-800">
+                        @if ($applicationCount && $applicationCount > 0)
+                            {{ $applicationCount }}
+                        @else
+                            <span class="text-red-600">No data available</span>
+                        @endif
+                    </p>
+                    <p class="text-sm text-gray-600">Accreditation and CGS Renewal</p>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Year Filter -->
         <div class="mb-4 hidden">
             <label for="yearFilter" class="text-gray-700 font-semibold">Select Year:</label>
@@ -91,7 +124,7 @@
 
             // Map the statuses to the colors in the `statusColors` object
             const colors = data.map(d => statusColors[d.status.toLowerCase()] ||
-            '#A35D6A'); // Default color if status is missing
+                '#A35D6A'); // Default color if status is missing
 
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
