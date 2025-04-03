@@ -5,49 +5,78 @@
     <div class="container mx-auto px-4 py-6">
         <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
-        {{-- // --}}
+        <!-- Year Filter -->
+        <div class="mb-4">
+            <label for="yearFilter" class="text-gray-700 font-semibold">Select Year:</label>
+            <select id="yearFilter" class="border rounded px-2 py-1">
+                @for ($i = date('Y'); $i >= 2020; $i--)
+                    <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
 
         <!-- 1st ROW -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <!-- Total Accredited Transporation Cooperatives Per Regions -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <div class="flex justify-between items-center ">
-                    <h2 class="text-lg font-semibold text-gray-700">TC per Regions</h2>
-                </div>
+                <h2 class="text-lg font-semibold text-gray-700">TC per Regions</h2>
                 <div id="regionsChart" class="w-full h-full"></div>
             </div>
 
-            <!-- Total No. of CGS Renewals Per Year -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <div class="flex justify-between items-center ">
-                    <h2 class="text-lg font-semibold text-gray-700">CGS Renewals Per Year</h2>
-                </div>
+                <h2 class="text-lg font-semibold text-gray-700">CGS Renewals Per Year</h2>
                 <div id="cgsChart" class="w-full h-full"></div>
             </div>
         </div>
 
-        {{-- 2nd ROW --}}
+        <!-- 2nd ROW -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <!-- No. of Applications For Accreditation per Status (new, saved, evaluated, approved, rejected, released) -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
                 <h2 class="text-lg font-semibold text-gray-700">Accreditation Status</h2>
                 <div id="accreditationChart" class="w-full h-full"></div>
             </div>
 
-            <!-- No. of Applications For CGS Renewals per Status (new, saved, evaluated, approved, rejected, released) -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <div class="flex justify-between items-center ">
-                    <h2 class="text-lg font-semibold text-gray-700">CGS Renewal Status</h2>
-                </div>
+                <h2 class="text-lg font-semibold text-gray-700">CGS Renewal Status</h2>
                 <div id="renewalChart" class="w-full h-full"></div>
             </div>
         </div>
-
     </div>
 
-    <!-- Footer -->
     @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        function fetchChartData(year) {
+            fetch(`/dashboard/charts?year=${year}`)
+                .then(response => response.json())
+                .then(data => {
+                    renderBarChart('regionsChart', 'TC per Regions', data.regions.map(r => r.region), data.regions.map(r => r.total));
+                    renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c.total));
+                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation);
+                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal);
+                });
+        }
 
+        function renderBarChart(id, title, categories, series) {
+            new ApexCharts(document.querySelector(`#${id}`), {
+                chart: { type: 'bar', height: 250 },
+                series: [{ name: title, data: series }],
+                xaxis: { categories: categories },
+            }).render();
+        }
+
+        function renderPieChart(id, title, data) {
+            new ApexCharts(document.querySelector(`#${id}`), {
+                chart: { type: 'pie', height: 250 },
+                series: data.map(d => d.total),
+                labels: data.map(d => d.status),
+            }).render();
+        }
+
+        document.getElementById('yearFilter').addEventListener('change', function() {
+            fetchChartData(this.value);
+        });
+
+        fetchChartData(new Date().getFullYear());
+    </script>
 </x-layout>
