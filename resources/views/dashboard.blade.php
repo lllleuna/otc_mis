@@ -65,10 +65,8 @@
         function renderBarChart(id, title, categories, series) {
             const barColors = ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'];
 
-            // If there are more categories than colors, repeat the colors to match the number of categories
-            const colors = Array.from({
-                length: categories.length
-            }, (_, index) => barColors[index % barColors.length]);
+            // Ensure the color array is applied correctly to all bars
+            const colors = categories.map((_, index) => barColors[index % barColors.length]);
 
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
@@ -82,7 +80,7 @@
                 xaxis: {
                     categories: categories
                 },
-                colors: colors, // Apply colors dynamically based on the categories
+                colors: colors, // Apply the dynamic colors
             }).render();
         }
 
@@ -98,7 +96,7 @@
 
             // Map the statuses to the colors in the `statusColors` object
             const colors = data.map(d => statusColors[d.status.toLowerCase()] ||
-                '#A35D6A'); // Default color if status is missing
+            '#A35D6A'); // Default color if status is missing
 
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
