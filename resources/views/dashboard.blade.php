@@ -81,12 +81,12 @@
 
         function renderPieChart(id, title, data) {
             const statusColors = {
-                'new': '#FCDE70', // Yellow
+                'new': '#5F99AE', // Blue
                 'saved': '#FCDE70', // Yellow
                 'evaluated': '#E88D67', // Orange
-                'approved': '#51829B', // Blue
-                'rejected': '#6AAB9C', // Green
-                'released': '#C370A8' // Pink
+                'approved': '#6AAB9C', // Green
+                'rejected': '#9F5255', // Red
+                'released': '#FBF4DB' // Cream
             };
 
             // Map the statuses to the colors in the `statusColors` object
