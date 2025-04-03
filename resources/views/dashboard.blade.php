@@ -63,11 +63,6 @@
         }
 
         function renderBarChart(id, title, categories, series) {
-            const barColors = ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'];
-
-            // Ensure the color array is applied correctly to all bars
-            const colors = categories.map((_, index) => barColors[index % barColors.length]);
-
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
                     type: 'bar',
@@ -80,7 +75,7 @@
                 xaxis: {
                     categories: categories
                 },
-                colors: colors, // Apply the dynamic colors
+                colors: ['#536493', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'],
             }).render();
         }
 
@@ -115,7 +110,6 @@
 
         fetchChartData(new Date().getFullYear());
     </script>
-
 
 
 </x-layout>
