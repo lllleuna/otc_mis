@@ -10,7 +10,8 @@
             <label for="yearFilter" class="text-gray-700 font-semibold">Select Year:</label>
             <select id="yearFilter" class="border rounded px-2 py-1">
                 @for ($i = date('Y'); $i >= 2020; $i--)
-                    <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}</option>
+                    <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}
+                    </option>
                 @endfor
             </select>
         </div>
@@ -45,31 +46,51 @@
     @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    
     <script>
         function fetchChartData(year) {
             fetch(`/dashboard/charts?year=${year}`)
                 .then(response => response.json())
                 .then(data => {
-                    renderBarChart('regionsChart', 'TC per Regions', data.regions.map(r => r.region), data.regions.map(r => r.total));
-                    renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c.total));
-                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation);
-                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal);
+                    renderBarChart('regionsChart', 'TC per Regions', data.regions.map(r => r.region), data.regions.map(
+                        r => r.total));
+                    renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c
+                        .total));
+                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#1E40AF',
+                        '#F59E0B', '#10B981', '#EF4444', '#9333EA'
+                    ]);
+                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#3B82F6', '#FACC15', '#22C55E',
+                        '#F43F5E', '#A855F7'
+                    ]);
                 });
         }
 
         function renderBarChart(id, title, categories, series) {
             new ApexCharts(document.querySelector(`#${id}`), {
-                chart: { type: 'bar', height: 250 },
-                series: [{ name: title, data: series }],
-                xaxis: { categories: categories },
+                chart: {
+                    type: 'bar',
+                    height: 250
+                },
+                series: [{
+                    name: title,
+                    data: series
+                }],
+                xaxis: {
+                    categories: categories
+                },
             }).render();
         }
 
-        function renderPieChart(id, title, data) {
+        function renderPieChart(id, title, data, colors) {
             new ApexCharts(document.querySelector(`#${id}`), {
-                chart: { type: 'pie', height: 250 },
+                chart: {
+                    type: 'pie',
+                    height: 250
+                },
                 series: data.map(d => d.total),
                 labels: data.map(d => d.status),
+                colors: colors,
             }).render();
         }
 
@@ -79,4 +100,5 @@
 
         fetchChartData(new Date().getFullYear());
     </script>
+
 </x-layout>
