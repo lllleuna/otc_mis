@@ -3,116 +3,61 @@
     <x-slot:title>Dashboard</x-slot:title>
 
     <div class="container mx-auto px-4 py-6">
-        <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Management Dashboard</h1>
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
         <!-- Summary Cards - Updated with specific metrics -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-xl font-semibold mb-4 text-gray-700">OTC Performance Summary</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-blue-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-blue-700">Active Transport Cooperatives</h3>
-                    <p class="text-xl font-bold text-gray-800">150</p>
-                    <p class="text-sm text-gray-600">Fully operational cooperatives</p>
+                    <h3 class="font-semibold text-blue-700">Accredited Transport Cooperatives</h3>
+                    <p class="text-xl font-bold text-gray-800">{{ $tcs->total ?? 'N/A' }}</p>
+                    <p class="text-sm text-gray-600">Accross All Regions</p>
                 </div>
                 <div class="bg-green-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-green-700">Approved Route Plans</h3>
-                    <p class="text-xl font-bold text-gray-800">230</p>
-                    <p class="text-sm text-gray-600">Across all regions</p>
-                </div>
-                <div class="bg-yellow-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-yellow-700">Pending Applications</h3>
-                    <p class="text-xl font-bold text-gray-800">40</p>
-                    <p class="text-sm text-gray-600">Awaiting final approval</p>
-                </div>
-                <div class="bg-purple-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-purple-700">CETOP Trained Personnel</h3>
-                    <p class="text-xl font-bold text-gray-800">1,247</p>
-                    <p class="text-sm text-gray-600">Cooperative members trained</p>
+                    <h3 class="font-semibold text-green-700">Active Applications</h3>
+                    <p class="text-xl font-bold text-gray-800">{{ $tcs->total ?? 'N/A' }}</p>
+                    <p class="text-sm text-gray-600">Accreditation and CGS Renewal</p>
                 </div>
             </div>
         </div>
 
-        <!-- Calendar Filter - MOVED TO HERE, below summary -->
-        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <h2 class="text-lg font-semibold mb-3 md:mb-0 text-gray-700">Filter Dashboard Data</h2>
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <div class="flex items-center">
-                        <label for="filter-type" class="mr-2 text-sm font-medium text-gray-700">View:</label>
-                        <select id="filter-type" class="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="day">Daily</option>
-                            <option value="month" selected>Monthly</option>
-                            <option value="year">Yearly</option>
-                        </select>
-                    </div>
-                    <div class="flex items-center">
-                        <label for="date-range" class="mr-2 text-sm font-medium text-gray-700">Date:</label>
-                        <input type="date" id="date-from" class="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="mx-2">to</span>
-                        <input type="date" id="date-to" class="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <button class="bg-blue-600 text-white px-4 py-1 rounded-md text-sm hover:bg-blue-700">Apply</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- First Row of Charts (Smaller sized) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <!-- Transaction Status (single month - current selected date) -->
+        <!-- 1st ROW - SUMMARY (released/get from general_info table) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <!-- Total Accredited Transporation Cooperatives Per Regions -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
                 <div class="flex justify-between items-center ">
-                    <h2 class="text-lg font-semibold text-gray-700">Transaction Status</h2>
+                    <h2 class="text-lg font-semibold text-gray-700">TC per Regions</h2>
                 </div>
                 <div id="transactionStatusChart" class="w-full h-full"></div>
             </div>
 
-            <!-- Registration Status - Updated Categories -->
+            <!-- Total No. of CGS Renewals Per Year -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">Registration Status</h2>
+                <div class="flex justify-between items-center ">
+                    <h2 class="text-lg font-semibold text-gray-700">CGS Renewals Per Year</h2>
+                </div>
+                <div id="transactionStatusChart" class="w-full h-full"></div>
+            </div>
+        </div>
+
+        {{-- 2nd ROW - APPLICATIONS (get from applications table)--}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <!-- No. of Applications For Accreditation per Status (new/submitted, saved/pending, evaluated, approved, rejected, released) -->
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
+                <h2 class="text-lg font-semibold text-gray-700">Accreditation Status</h2>
                 <div id="registrationStatusChart" class="w-full h-full"></div>
             </div>
 
-            <!-- Transportation Cooperative Status -->
+            <!-- No. of Applications For CGS Renewals per Status (new/submitted, saved/pending, evaluated, approved, rejected, released) -->
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">Transportation Cooperative Status</h2>
-                <div id="transportationStatusChart" class="w-full h-full"></div>
-            </div>
-        </div>
-
-        <!-- Regional Analysis Section -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold mb-4 text-gray-700">Regional Distribution of Transportation Cooperatives</h2>
-
-            <!-- Regional Distribution Row -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Regional Cooperative Map -->
-                <div class="bg-gray-50 rounded-lg p-7 overflow-hidden" style="height: 360px;">
-                    <h3 class="text-lg font-semibold text-gray-700">Geographical Distribution</h3>
-                    <div id="philippinesMapChart" class="w-full h-full"></div>
+                <div class="flex justify-between items-center ">
+                    <h2 class="text-lg font-semibold text-gray-700">CGS Renewal Status</h2>
                 </div>
-
-                <!-- Regional Cooperative Bar Chart -->
-                <div class="bg-gray-50 rounded-lg p-7 overflow-hidden" style="height: 360px;">
-                    <h3 class="text-lg font-semibold text-gray-700">Registered Cooperatives by Region</h3>
-                    <div id="regionalBarChart" class="w-full h-full"></div>
-                </div>
+                <div id="transactionStatusChart" class="w-full h-full"></div>
             </div>
         </div>
 
-        <!-- Additional Analytics Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <!-- Transportation Type Distribution -->
-            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">Transportation Types</h2>
-                <div id="transportationTypeChart" class="w-full h-full"></div>
-            </div>
-
-            <!-- Growth Trends -->
-            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">Cooperative Growth by Quarter</h2>
-                <div id="growthTrendChart" class="w-full h-full"></div>
-            </div>
-        </div>
     </div>
 
     <!-- Footer -->
@@ -124,16 +69,26 @@
         if (typeof ApexCharts !== 'undefined') {
             // Transaction Status Chart - Now showing only current month data
             var transactionStatusChart = new ApexCharts(document.getElementById("transactionStatusChart"), {
-                series: [
-                    { name: 'Evaluated', data: [45] },
-                    { name: 'In Progress', data: [25] },
-                    { name: 'Completed', data: [15] }
+                series: [{
+                        name: 'Evaluated',
+                        data: [45]
+                    },
+                    {
+                        name: 'In Progress',
+                        data: [25]
+                    },
+                    {
+                        name: 'Completed',
+                        data: [15]
+                    }
                 ],
                 chart: {
                     type: 'bar',
                     height: '100%',
                     stacked: false,
-                    toolbar: { show: false }
+                    toolbar: {
+                        show: false
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -143,7 +98,7 @@
                     }
                 },
                 xaxis: {
-                    categories: ['March']  // Current month - will be updated by filter
+                    categories: ['March'] // Current month - will be updated by filter
                 },
                 legend: {
                     position: 'bottom',
@@ -155,11 +110,13 @@
                         vertical: 0
                     }
                 },
-                fill: { opacity: .85 },
+                fill: {
+                    opacity: .85
+                },
                 colors: ['#FFB547', '#00C3E3', '#43C46F'],
                 dataLabels: {
                     enabled: true,
-                    formatter: function (val) {
+                    formatter: function(val) {
                         return val;
                     },
                     style: {
@@ -186,7 +143,7 @@
                 },
                 dataLabels: {
                     enabled: true,
-                    formatter: function (val, opt) {
+                    formatter: function(val, opt) {
                         return opt.w.globals.labels[opt.seriesIndex] + ': ' + val + '%';
                     },
                     style: {
@@ -196,8 +153,12 @@
                 responsive: [{
                     breakpoint: 480,
                     options: {
-                        chart: { width: 200 },
-                        legend: { position: 'bottom' }
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
                 }]
             });
@@ -218,15 +179,19 @@
                 },
                 dataLabels: {
                     enabled: true,
-                    formatter: function (val, opt) {
+                    formatter: function(val, opt) {
                         return opt.w.globals.labels[opt.seriesIndex] + ': ' + val + '%';
                     }
                 },
                 responsive: [{
                     breakpoint: 480,
                     options: {
-                        chart: { width: 200 },
-                        legend: { position: 'bottom' }
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
                     }
                 }]
             });
@@ -240,7 +205,9 @@
                 chart: {
                     type: 'bar',
                     height: '100%',
-                    toolbar: { show: false }
+                    toolbar: {
+                        show: false
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -250,7 +217,7 @@
                 },
                 dataLabels: {
                     enabled: true,
-                    formatter: function (val) {
+                    formatter: function(val) {
                         return val;
                     },
                     offsetX: 10,
@@ -271,26 +238,45 @@
                         }
                     }
                 },
-                colors: ['#008FFB',]
+                colors: ['#008FFB', ]
             });
 
             // Philippines Map Chart
             var philippinesMapChart = new ApexCharts(document.getElementById("philippinesMapChart"), {
                 series: [{
                     name: 'Cooperatives',
-                    data: [
-                        { x: 'NCR', y: 28 },
-                        { x: 'Region IV-A', y: 24 },
-                        { x: 'Region I', y: 18 },
-                        { x: 'Region II', y: 15 },
-                        { x: 'Region III', y: 12 },
-                        { x: 'Region X', y: 12 }
+                    data: [{
+                            x: 'NCR',
+                            y: 28
+                        },
+                        {
+                            x: 'Region IV-A',
+                            y: 24
+                        },
+                        {
+                            x: 'Region I',
+                            y: 18
+                        },
+                        {
+                            x: 'Region II',
+                            y: 15
+                        },
+                        {
+                            x: 'Region III',
+                            y: 12
+                        },
+                        {
+                            x: 'Region X',
+                            y: 12
+                        }
                     ]
                 }],
                 chart: {
                     height: '100%',
                     type: 'treemap',
-                    toolbar: { show: false }
+                    toolbar: {
+                        show: false
+                    }
                 },
                 colors: [
                     '#3B93A5', '#F7B844', '#ADD8C7', '#EC3C65', '#CDD7B6',
@@ -305,86 +291,96 @@
                 }
             });
 
-                   // Transportation Type Chart with pastel colors
-        var transportationTypeChart = new ApexCharts(document.getElementById("transportationTypeChart"), {
-            series: [45, 25, 15, 10, 5],
-            chart: {
-                type: 'pie',
-                height: '100%'
-            },
-            labels: ['Jeepney', 'UV Express', 'Bus', 'Taxi', 'Others'],
-            colors: ['#3498DB', '#E67E22', '#8E44AD', '#E74C3C', '#2ECC71'], // Darker, more vivid colors
-            legend: { position: 'bottom', fontSize: '10px', show: true },
-            dataLabels: {
-                enabled: true,
-                formatter: function (val, opt) {
-                    return opt.w.globals.labels[opt.seriesIndex] + ': ' + val + '%';
+            // Transportation Type Chart with pastel colors
+            var transportationTypeChart = new ApexCharts(document.getElementById("transportationTypeChart"), {
+                series: [45, 25, 15, 10, 5],
+                chart: {
+                    type: 'pie',
+                    height: '100%'
                 },
-                style: {
+                labels: ['Jeepney', 'UV Express', 'Bus', 'Taxi', 'Others'],
+                colors: ['#3498DB', '#E67E22', '#8E44AD', '#E74C3C', '#2ECC71'], // Darker, more vivid colors
+                legend: {
+                    position: 'bottom',
                     fontSize: '10px',
-                    colors: ['#FFF'] // White text for better contrast on darker colors
-                }
-            },
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: { width: 200 },
-                    legend: { position: 'bottom' }
-                }
-            }]
-        });
-
-        // Regional Bar Chart with darker colors
-        var regionalBarChart = new ApexCharts(document.getElementById("regionalBarChart"), {
-            series: [{
-                name: 'Registered Cooperatives',
-                data: [28, 18, 15, 12, 24, 14, 10, 8, 9, 7, 6, 12, 9, 11, 13, 8, 6]
-            }],
-            chart: {
-                type: 'bar',
-                height: '100%',
-                toolbar: { show: false }
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 4,
-                    horizontal: true,
-                    distributed: true,
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function (val) {
-                    return val;
+                    show: true
                 },
-                offsetX: 10,
-                style: {
-                    fontSize: '10px',
-                    colors: ['#000000']
-                }
-            },
-            xaxis: {
-                categories: [
-                    'NCR', 'Region I', 'Region II', 'Region III', 'Region IV-A',
-                    'Region IV-B', 'Region V', 'Region VI', 'Region VII',
-                    'Region VIII', 'Region IX', 'Region X', 'Region XI',
-                    'Region XII', 'Region XIII', 'CAR', 'BARMM'
-                ],
-                labels: {
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val, opt) {
+                        return opt.w.globals.labels[opt.seriesIndex] + ': ' + val + '%';
+                    },
                     style: {
-                        fontSize: '10px'
+                        fontSize: '10px',
+                        colors: ['#FFF'] // White text for better contrast on darker colors
                     }
-                }
-            },
-            colors: [
-                '#3498DB', '#16A085', '#8E44AD', '#2980B9', '#E67E22',
-                '#C0392B', '#9B59B6', '#1ABC9C', '#D35400', '#7D3C98',
-                '#2874A6', '#1B9CFC', '#E74C3C', '#4A69BD', '#6C3483',
-                '#FF6B6B', '#F39C12'
-            ]
-        });
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            });
 
-       // Growth Trend Chart - Redesigned for better readability
+            // Regional Bar Chart with darker colors
+            var regionalBarChart = new ApexCharts(document.getElementById("regionalBarChart"), {
+                series: [{
+                    name: 'Registered Cooperatives',
+                    data: [28, 18, 15, 12, 24, 14, 10, 8, 9, 7, 6, 12, 9, 11, 13, 8, 6]
+                }],
+                chart: {
+                    type: 'bar',
+                    height: '100%',
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                        distributed: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val;
+                    },
+                    offsetX: 10,
+                    style: {
+                        fontSize: '10px',
+                        colors: ['#000000']
+                    }
+                },
+                xaxis: {
+                    categories: [
+                        'NCR', 'Region I', 'Region II', 'Region III', 'Region IV-A',
+                        'Region IV-B', 'Region V', 'Region VI', 'Region VII',
+                        'Region VIII', 'Region IX', 'Region X', 'Region XI',
+                        'Region XII', 'Region XIII', 'CAR', 'BARMM'
+                    ],
+                    labels: {
+                        style: {
+                            fontSize: '10px'
+                        }
+                    }
+                },
+                colors: [
+                    '#3498DB', '#16A085', '#8E44AD', '#2980B9', '#E67E22',
+                    '#C0392B', '#9B59B6', '#1ABC9C', '#D35400', '#7D3C98',
+                    '#2874A6', '#1B9CFC', '#E74C3C', '#4A69BD', '#6C3483',
+                    '#FF6B6B', '#F39C12'
+                ]
+            });
+
+            // Growth Trend Chart - Redesigned for better readability
             var growthTrendChart = new ApexCharts(document.getElementById("growthTrendChart"), {
                 series: [{
                     name: 'New Cooperatives',
@@ -393,7 +389,9 @@
                 chart: {
                     height: '100%',
                     type: 'bar',
-                    toolbar: { show: false }
+                    toolbar: {
+                        show: false
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -424,7 +422,9 @@
                     colors: ['#2E86C1']
                 },
                 xaxis: {
-                    categories: ['Q1 2023', 'Q2 2023', 'Q3 2023', 'Q4 2023', 'Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024'],
+                    categories: ['Q1 2023', 'Q2 2023', 'Q3 2023', 'Q4 2023', 'Q1 2024', 'Q2 2024', 'Q3 2024',
+                        'Q4 2024'
+                    ],
                     position: 'bottom',
                     labels: {
                         style: {
@@ -453,7 +453,7 @@
                     shared: true,
                     intersect: false,
                     y: {
-                        formatter: function (y) {
+                        formatter: function(y) {
                             if (typeof y !== "undefined") {
                                 return y.toFixed(0) + " cooperatives";
                             }
@@ -477,7 +477,9 @@
                 chart: {
                     type: 'bar',
                     height: '100%',
-                    toolbar: { show: false }
+                    toolbar: {
+                        show: false
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -488,7 +490,7 @@
                 },
                 dataLabels: {
                     enabled: true,
-                    formatter: function (val) {
+                    formatter: function(val) {
                         return val;
                     },
                     offsetX: 10,
@@ -561,6 +563,6 @@
                     // to fetch new data and update the charts
                 });
             });
-            }
-     </script>
+        }
+    </script>
 </x-layout>

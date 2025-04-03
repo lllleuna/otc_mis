@@ -40,7 +40,7 @@ Route::get('/dashboard', function () {
     if ($user->role === 'Admin') {
         return view('dashboard'); // Admins go to login view (as per your requirement)
     } else {
-        return view('tc.index'); // Non-admin users go to tc.index view
+        return route('general-info.index'); // Non-admin users go to tc.index view
     }
 
 })->middleware(['auth', 'verified'])->name('dashboard');
