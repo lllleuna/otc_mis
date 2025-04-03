@@ -47,7 +47,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    
+
     <script>
         function fetchChartData(year) {
             fetch(`/dashboard/charts?year=${year}`)
@@ -57,11 +57,11 @@
                         r => r.total));
                     renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c
                         .total));
-                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#1E40AF',
-                        '#F59E0B', '#10B981', '#EF4444', '#9333EA'
+                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#FCDE70',
+                        '#E88D67', '#51829B', '#6AAB9C', '#C370A8', '#A35D6A'
                     ]);
-                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#3B82F6', '#FACC15', '#22C55E',
-                        '#F43F5E', '#A855F7'
+                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#FCDE70', '#E88D67', '#51829B',
+                        '#6AAB9C', '#C370A8', '#A35D6A'
                     ]);
                 });
         }
