@@ -57,12 +57,8 @@
                         r => r.total));
                     renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c
                         .total));
-                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#a35d6a',
-                        '#E88D67', '#51829B', '#6aab9c', '#C370A8', '#fcde70'
-                    ]);
-                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#a35d6a',
-                        '#E88D67', '#51829B', '#6aab9c', '#C370A8', '#fcde70'
-                    ]);
+                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation);
+                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal);
                 });
         }
 
@@ -79,14 +75,24 @@
                 xaxis: {
                     categories: categories
                 },
-                colors: ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8',
-                    '#A35D6A'
-                ], 
+                colors: ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'],
             }).render();
         }
 
+        function renderPieChart(id, title, data) {
+            const statusColors = {
+                'new': '#FCDE70', // Yellow
+                'saved': '#FCDE70', // Yellow
+                'evaluated': '#E88D67', // Orange
+                'approved': '#51829B', // Blue
+                'rejected': '#6AAB9C', // Green
+                'released': '#C370A8' // Pink
+            };
 
-        function renderPieChart(id, title, data, colors) {
+            // Map the statuses to the colors in the `statusColors` object
+            const colors = data.map(d => statusColors[d.status.toLowerCase()] ||
+            '#A35D6A'); // Default color if status is missing
+
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
                     type: 'pie',
@@ -94,7 +100,7 @@
                 },
                 series: data.map(d => d.total),
                 labels: data.map(d => d.status),
-                colors: colors,
+                colors: colors, // Apply the specific colors based on status
             }).render();
         }
 
@@ -104,5 +110,6 @@
 
         fetchChartData(new Date().getFullYear());
     </script>
+
 
 </x-layout>
