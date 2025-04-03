@@ -30,13 +30,13 @@
         </div>
 
         <!-- 2nd ROW -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-10">
-            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden mb-6" style="height: 300px;">
                 <h2 class="text-lg font-semibold text-gray-700">Accreditation Status</h2>
                 <div id="accreditationChart" class="w-full h-full"></div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden mb-6" style="height: 300px;">
                 <h2 class="text-lg font-semibold text-gray-700">CGS Renewal Status</h2>
                 <div id="renewalChart" class="w-full h-full"></div>
             </div>
@@ -63,6 +63,13 @@
         }
 
         function renderBarChart(id, title, categories, series) {
+            const barColors = ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'];
+
+            // If there are more categories than colors, repeat the colors to match the number of categories
+            const colors = Array.from({
+                length: categories.length
+            }, (_, index) => barColors[index % barColors.length]);
+
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
                     type: 'bar',
@@ -75,7 +82,7 @@
                 xaxis: {
                     categories: categories
                 },
-                colors: ['#51829B', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'],
+                colors: colors, // Apply colors dynamically based on the categories
             }).render();
         }
 
@@ -91,7 +98,7 @@
 
             // Map the statuses to the colors in the `statusColors` object
             const colors = data.map(d => statusColors[d.status.toLowerCase()] ||
-            '#A35D6A'); // Default color if status is missing
+                '#A35D6A'); // Default color if status is missing
 
             new ApexCharts(document.querySelector(`#${id}`), {
                 chart: {
@@ -110,6 +117,7 @@
 
         fetchChartData(new Date().getFullYear());
     </script>
+
 
 
 </x-layout>
