@@ -79,8 +79,12 @@
                 xaxis: {
                     categories: categories
                 },
+                colors: ['#FCDE70', '#E88D67', '#51829B', '#6AAB9C', '#C370A8',
+                    '#A35D6A'
+                ], // Custom colors for bars
             }).render();
         }
+
 
         function renderPieChart(id, title, data, colors) {
             new ApexCharts(document.querySelector(`#${id}`), {
