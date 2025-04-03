@@ -30,7 +30,7 @@
         </div>
 
         <!-- 2nd ROW -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-10">
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
                 <h2 class="text-lg font-semibold text-gray-700">Accreditation Status</h2>
                 <div id="accreditationChart" class="w-full h-full"></div>
@@ -58,10 +58,10 @@
                     renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c
                         .total));
                     renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation, ['#a35d6a',
-                        '#51829B', '#E88D67', '#6aab9c', '#C370A8', '#fcde70'
+                        '#E88D67', '#51829B', '#6aab9c', '#C370A8', '#fcde70'
                     ]);
-                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#FCDE70', '#E88D67', '#51829B',
-                        '#6AAB9C', '#C370A8', '#A35D6A'
+                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal, ['#a35d6a',
+                        '#E88D67', '#51829B', '#6aab9c', '#C370A8', '#fcde70'
                     ]);
                 });
         }
