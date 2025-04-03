@@ -25,9 +25,9 @@ contains logo, profile name & icon, and navigation links
                         <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo4.png') }}" alt="OTC Logo">
                         {{-- Check if the authenticated user is an Admin --}}
                         @if (auth()->user()->role === 'Admin')
-                            <h3 class="text-white">Admin Portal</h3>
+                            <h3 class="text-white text-lg font-semibold uppercase">Admin Portal</h3>
                         @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
-                            <h3 class="text-white">Officer Portal</h3>
+                            <h3 class="text-white text-lg font-semibold uppercase">Officer Portal</h3>
                         @endif
 
                     </div>
