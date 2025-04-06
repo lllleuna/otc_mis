@@ -27,7 +27,7 @@ contains logo, profile name & icon, and navigation links
                         @if (auth()->user()->role === 'Admin')
                             <div class="flex items-center space-x-2">
                                 <span
-                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md uppercase">Admin Portal</span>
+                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md uppercase">Head Portal</span>
                             </div>
                         @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
                             <div class="flex items-center space-x-2">
