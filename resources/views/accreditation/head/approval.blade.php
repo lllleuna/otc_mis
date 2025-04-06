@@ -5,19 +5,12 @@
 
     <x-slot:title>Approval</x-slot:title>
 
-    <div class="max-w-5xl mx-auto p-8 bg-white rounded-2xl shadow-lg relative">
-        {{-- Title --}}
-        <h2 class="text-2xl font-bold text-blue-900 mb-6">Application Status History</h2>
-    
-        {{-- Fixed Back Button on the right --}}
+    <div class="max-w-7xl mx-auto p-4">
         <button onclick="window.history.back()"
-            class="fixed right-8 top-8 px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition z-50 shadow-md">
+            class="px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-gray-300 transition">
             ← Back
         </button>
-    
-        {{-- Rest of your content --}}
     </div>
-    
 
     <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="w-full bg-blue-900 py-2 px-5">
