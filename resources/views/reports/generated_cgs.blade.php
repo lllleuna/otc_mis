@@ -20,7 +20,7 @@
             border: 1px solid #e5e7eb;
         }
         .table th {
-            background-color: #a9c0ee;
+            background-color: #c0c9d9;
             font-weight: bold;
         }
         .table tr:hover {

@@ -34,7 +34,7 @@
             border: 1px solid #e5e7eb;
         }
         .table th {
-            background-color: #a4bef0;
+            background-color: #c0c9d9;
             font-weight: bold;
         }
         .table tr:hover {
