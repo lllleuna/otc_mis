@@ -104,11 +104,11 @@ class GenerateReportController extends Controller
             return $pdf->download("{$request->report_type}_report.pdf");
         } elseif ($request->format === 'excel') {
             $exportClass = $request->report_type === 'accreditation' 
-                ? new AccreditationReportExport($cooperatives) 
-                : new CGSRenewalReportExport($cooperatives);
+                ? new AccreditationReportExport($cooperatives, auth()->user()) 
+                : new CGSRenewalReportExport($cooperatives, auth()->user());
             
             return Excel::download($exportClass, "{$request->report_type}_report.xlsx");
-        }
+        }        
     
         return back()->withErrors(['Invalid format selected']);
     }
