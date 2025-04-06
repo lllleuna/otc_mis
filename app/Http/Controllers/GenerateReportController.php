@@ -55,6 +55,11 @@ class GenerateReportController extends Controller
             if ($request->year) {
                 $query->whereYear('accreditation_date', $request->year);
             }
+
+            // Apply Region Filter
+            if ($request->region) {
+                $query->where('region', $request->region);
+            }
     
         } elseif ($request->report_type === 'cgs') {
             // CGS Renewal Report Query
@@ -78,12 +83,10 @@ class GenerateReportController extends Controller
             if ($request->year) {
                 $query->whereYear('validity_date', $request->year);
             }
+
         }
     
-        // Apply Region Filter
-        if ($request->region) {
-            $query->where('region', $request->region);
-        }
+        
     
         $cooperatives = $query->get();
     
