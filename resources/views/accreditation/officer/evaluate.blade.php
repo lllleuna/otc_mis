@@ -5,17 +5,15 @@
 
     <x-slot:title>Evaluation</x-slot:title>
 
-    <div class="max-w-7xl mx-auto p-4">
-        <button onclick="window.history.back()"
-            class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
-            ← Back
-        </button>
-    </div>
 
     <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
-        <div class="bg-blue-900 px-6 py-4">
-            <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-blue-900">Evaluate Application</h2>
+            <button onclick="window.history.back()"
+                class="px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition">
+                ← Back
+            </button>
         </div>
 
         <form method="POST" action="{{ route('accreditation.storeEvaluation', $application->id) }}">
