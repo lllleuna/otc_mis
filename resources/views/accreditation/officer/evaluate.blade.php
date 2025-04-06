@@ -90,4 +90,4 @@
             });
         });
     </script>
-/<x-layout>
+</x-layout>
