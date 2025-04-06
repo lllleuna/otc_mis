@@ -84,6 +84,11 @@ class GenerateReportController extends Controller
                 $query->whereYear('validity_date', $request->year);
             }
 
+            // Apply Region Filter
+            if ($request->region) {
+                $query->where('region', $request->region);
+            }
+
         }
     
         
