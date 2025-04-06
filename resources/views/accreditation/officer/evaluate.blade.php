@@ -8,7 +8,7 @@
 
     <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
-        <div class="bg-blue-900 px-6 py-4 flex items-center justify-between mb-6"">
+        <div class="bg-blue-900 px-6 py-4 flex items-center justify-between mb-6">
             <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
             <button onclick="window.history.back()"
                 class="px-4 py-2 font-bold text-sm bg-white text-black rounded-lg hover:bg-gray-400 transition">
