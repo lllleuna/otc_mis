@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layout>
+    <x-slot:vite>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </x-slot:vite>
 
-<head>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        @vite(['resources/css/app.css'])
-        <title>Approval</title>
-    </head>
-</head>
-
-<body class="bg-gray-200">
+    <x-slot:title>Approval</x-slot:title>
 
     <div class="max-w-7xl mx-auto p-4">
         <button onclick="window.history.back()"
@@ -23,7 +14,7 @@
 
     <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="w-full bg-blue-900 py-2 px-5">
-            <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
+            <h2 class="text-xl font-bold text-white">Application</h2>
         </div>
 
         {{-- Application Information --}}
@@ -71,6 +62,4 @@
             </button>
         </form>
     </div>
-</body>
-
-</html>
+</x-layout>

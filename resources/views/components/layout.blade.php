@@ -21,15 +21,22 @@ contains logo, profile name & icon, and navigation links
         <nav class="bg-blue-900">
             <div class="">
                 <div class="flex h-16 items-center justify-between">
-                    <div class="flex items-center">
+                    <div class="flex items-center space-x-4">
                         <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo4.png') }}" alt="OTC Logo">
-                        {{-- Check if the authenticated user is an Admin --}}
-                        @if (auth()->user()->role === 'Admin')
-                            <h3 class="text-white text-lg font-semibold uppercase">Admin Portal</h3>
-                        @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
-                            <h3 class="text-white text-lg font-semibold uppercase">Officer Portal</h3>
-                        @endif
 
+                        @if (auth()->user()->role === 'Admin')
+                            <div class="flex items-center space-x-2">
+                                <h3 class="text-white text-lg font-semibold uppercase">Admin Portal</h3>
+                                <span
+                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md">Admin</span>
+                            </div>
+                        @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
+                            <div class="flex items-center space-x-2">
+                                <h3 class="text-white text-lg font-semibold uppercase">Officer Portal</h3>
+                                <span
+                                    class="text-sm font-medium bg-green-600 text-white px-2 py-1 rounded-md">Officer</span>
+                            </div>
+                        @endif
                     </div>
                     <div class="block">
                         <div class="mr-6 flex items-center">
@@ -73,7 +80,7 @@ contains logo, profile name & icon, and navigation links
                     <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
                 @endcan
                 {{-- <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link> --}}
-                <x-nav-link href="{{ route('general-info.index') }}" :active="request()->is('tc*')">Client Details</x-nav-link>
+                <x-nav-link href="{{ route('general-info.index') }}" :active="request()->is('/general-info*')">Client Details</x-nav-link>
                 @can('officer1-access')
                     <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')"> Accreditation & CGS
                         Evaluation </x-nav-link>

@@ -1,6 +1,9 @@
-@extends('layouts.app')
+<x-layout>
+    <x-slot:vite>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </x-slot:vite>
 
-@section('content')
+    <x-slot:title>Client Details</x-slot:title>
     <div class="max-w-5xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
 
         {{-- Application Details --}}
@@ -83,4 +86,4 @@
         @endif
 
     </div>
-@endsection
+</x-layout>
