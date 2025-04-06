@@ -54,12 +54,13 @@
                     <td>{{ $coop->accreditation_no }}</td>
                     <td>{{ $coop->name }}</td>
                     <td>{{ \Carbon\Carbon::parse($coop->validity_date)->format('F d, Y') }}</td>
-                    <td>{{ $coop->region }}</td>
+                    <td>{{ $coop->region ?? 'N/A' }}</td> <!-- Show 'N/A' if region is null -->
                 </tr>
             @endforeach
         </tbody>
     </table>
 
 </body>
+
 
 </html>
