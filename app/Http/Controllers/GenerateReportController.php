@@ -37,6 +37,9 @@ class GenerateReportController extends Controller
             'format' => 'required|in:pdf,excel',
         ]);
     
+        // Retrieve the authenticated user
+        $user = auth()->user();
+    
         if ($request->report_type === 'accreditation') {
             // Accreditation Report Query
             $query = GeneralInfo::selectRaw("
@@ -55,7 +58,7 @@ class GenerateReportController extends Controller
             if ($request->year) {
                 $query->whereYear('accreditation_date', $request->year);
             }
-
+    
             // Apply Region Filter
             if ($request->region) {
                 $query->where('region', $request->region);
@@ -90,15 +93,13 @@ class GenerateReportController extends Controller
             }
         }
         
-    
-        
-    
         $cooperatives = $query->get();
     
         if ($request->format === 'pdf') {
+            // Pass the user details to the PDF view
             $pdf = Pdf::loadView(
                 $request->report_type === 'accreditation' ? 'reports.generated' : 'reports.generated_cgs',
-                compact('cooperatives')
+                compact('cooperatives', 'user') // Pass the authenticated user
             );
             return $pdf->download("{$request->report_type}_report.pdf");
         } elseif ($request->format === 'excel') {
@@ -111,7 +112,7 @@ class GenerateReportController extends Controller
     
         return back()->withErrors(['Invalid format selected']);
     }
-     
+    
     
 
 }
