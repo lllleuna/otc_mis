@@ -63,7 +63,26 @@
 
     <button id="backToTopBtn"
         class="hidden fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-opacity duration-300">
-        ↑ Top
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 011.414 0L10 5.414l5.293 4.293a1 1 0 111.414-1.414l-6-5a1 1 0 00-1.414 0l-6 5a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>        
     </button>
+
+    <script>
+        const backToTopBtn = document.getElementById("backToTopBtn");
+    
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                backToTopBtn.classList.remove("hidden");
+            } else {
+                backToTopBtn.classList.add("hidden");
+            }
+        });
+    
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+    
 
 </x-layout>
