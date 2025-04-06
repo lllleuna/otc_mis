@@ -57,7 +57,7 @@
 </div>
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-10 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         General Information
     </h3>
 
@@ -204,7 +204,7 @@
 
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Units
     </h3>
 
@@ -231,7 +231,7 @@
 </div>
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Franchise
     </h3>
 
@@ -261,7 +261,7 @@
 
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Loans
     </h3>
 
@@ -289,7 +289,7 @@
 </div>
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Business
     </h3>
     <table class="w-full text-left border-collapse text-sm">
@@ -318,7 +318,7 @@
 </div>
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Trainings/Seminar
     </h3>
     <table class="w-full text-left border-collapse text-sm">
@@ -345,7 +345,7 @@
 
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Membership Details
     </h3>
 
@@ -379,7 +379,7 @@
 </div>
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Governance
     </h3>
 
@@ -408,7 +408,7 @@
 </div>
 
 <div class="mb-10">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+    <h3 class="text-lg mt-5 font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
         Awards
     </h3>
     <table class="w-full text-left border-collapse text-sm">
