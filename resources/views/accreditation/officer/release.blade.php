@@ -12,8 +12,15 @@
         </button>
     </div>
 
-    <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold mb-4">Releasing of Certificate</h2>
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+
+        <div class="bg-blue-900 px-6 py-4 flex items-center justify-between mb-6">
+            <h2 class="text-xl font-semibold mb-4">Releasing of Certificate</h2>
+            <button onclick="window.history.back()"
+                class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                ← Back
+            </button>
+        </div>
 
         {{-- Application Information --}}
         <div class="mb-4 p-4 border rounded-md bg-gray-50 max-h-64 overflow-y-auto">
@@ -55,10 +62,12 @@
             {{-- File Upload --}}
             @if ($application->application_type === 'accreditation')
                 <div class="mb-4">
-                    <label for="accreditation_certificate_filename" class="block text-sm font-medium text-gray-700">Upload Accreditation
+                    <label for="accreditation_certificate_filename"
+                        class="block text-sm font-medium text-gray-700">Upload Accreditation
                         Certificate</label>
-                    <input type="file" name="accreditation_certificate_filename" id="accreditation_certificate_filename"
-                        class="w-full p-2 border rounded-md" accept=".pdf,.jpg,.jpeg,.png">
+                    <input type="file" name="accreditation_certificate_filename"
+                        id="accreditation_certificate_filename" class="w-full p-2 border rounded-md"
+                        accept=".pdf,.jpg,.jpeg,.png">
 
                     @error('accreditation_certificate_filename')
                         <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
