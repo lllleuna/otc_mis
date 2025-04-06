@@ -8,17 +8,17 @@
 
     <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-blue-900">Evaluate Application</h2>
+        <div class="bg-blue-900 px-6 py-4 flex items-center justify-between mb-6"">
+            <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
             <button onclick="window.history.back()"
-                class="px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition">
+                class="px-4 py-2 font-bold text-sm bg-white text-black rounded-lg hover:bg-gray-400 transition">
                 ← Back
             </button>
         </div>
 
         <form method="POST" action="{{ route('accreditation.storeEvaluation', $application->id) }}">
             @csrf
-            
+
             <div class="md:flex ">
                 <!-- Application Details (Left Panel) -->
                 <div class="md:w-2/3 p-6 bg-gray-50 md:overflow-y-auto md:max-h-[calc(100vh-12rem)]">
@@ -79,7 +79,7 @@
             document.querySelector('form').addEventListener('submit', function(e) {
                 const evaluationNotes = document.getElementById('evaluation_notes');
                 evaluationNotes.value = evaluationNotes.value.trim();
-                
+
                 if (!evaluationNotes.value) {
                     e.preventDefault();
                     alert('Please enter evaluation notes before proceeding.');
