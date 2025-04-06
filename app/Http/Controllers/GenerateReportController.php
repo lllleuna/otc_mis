@@ -74,7 +74,7 @@ class GenerateReportController extends Controller
                         ORDER BY gi2.accreditation_date DESC 
                         LIMIT 1
                     ) AS accreditation_no,
-                    MIN(region) AS region
+                    MAX(CASE WHEN accreditation_no IS NOT NULL THEN region ELSE NULL END) AS region
                 ")
                 ->whereNotNull('validity_date')
                 ->groupBy('cda_registration_no');
@@ -83,13 +83,13 @@ class GenerateReportController extends Controller
             if ($request->year) {
                 $query->whereYear('validity_date', $request->year);
             }
-
+        
             // Apply Region Filter
             if ($request->region) {
                 $query->where('region', $request->region);
             }
-
         }
+        
     
         
     
