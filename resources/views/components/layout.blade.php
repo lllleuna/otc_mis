@@ -27,12 +27,12 @@ contains logo, profile name & icon, and navigation links
                         @if (auth()->user()->role === 'Admin')
                             <div class="flex items-center space-x-2">
                                 <span
-                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md">Admin Portal</span>
+                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md uppercase">Admin Portal</span>
                             </div>
                         @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
                             <div class="flex items-center space-x-2">
                                 <span
-                                    class="text-sm font-medium bg-green-600 text-white px-2 py-1 rounded-md">Officer Portal</span>
+                                    class="text-sm font-medium bg-green-600 text-white px-2 py-1 rounded-md uppercase">Officer Portal</span>
                             </div>
                         @endif
                     </div>
@@ -75,7 +75,7 @@ contains logo, profile name & icon, and navigation links
 
                 @can('admin-access')
                     <x-nav-link href="/dashboard" :active="request()->is('dashboard')">Dashboard</x-nav-link>
-                    <x-nav-link href="/users" :active="request()->is('users*')">User Management</x-nav-link>
+                    <x-nav-link href="/users" :active="request()->is('users*')">Employee User Management</x-nav-link>
                 @endcan
                 {{-- <x-nav-link href="/tc" :active="request()->is('tc*')">Record Management</x-nav-link> --}}
                 <x-nav-link href="{{ route('general-info.index') }}" :active="request()->is('general-info*')">Client Details</x-nav-link>
