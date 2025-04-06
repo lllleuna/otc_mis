@@ -5,14 +5,8 @@
 
     <x-slot:title>Approval</x-slot:title>
 
-    <div class="max-w-7xl mx-auto p-4">
-        <button onclick="window.history.back()"
-            class="px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-gray-300 transition">
-            ← Back
-        </button>
-    </div>
 
-    <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="w-full bg-blue-900 py-2 px-5 flex items-center justify-between mb-6">
             <h2 class="text-xl font-bold text-white">Application</h2>
             <button onclick="window.history.back()"
