@@ -56,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @forelse ($users as $user)
                     <tr class="bg-white border-b hover:bg-gray-50" data-division="{{ $user['division'] }}">
                         <td class="px-6 py-4">
                             <a
@@ -71,9 +71,14 @@
                                 more</a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        <td colspan="5" class="text-center py-6 text-gray-500">No records found.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+
     </div>
 
     <div class="mt-4">
