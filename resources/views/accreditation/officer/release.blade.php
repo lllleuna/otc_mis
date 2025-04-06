@@ -5,17 +5,11 @@
 
     <x-slot:title>Client Details</x-slot:title>
 
-    <div class="max-w-7xl mx-auto p-4">
-        <button onclick="window.history.back()"
-            class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
-            ← Back
-        </button>
-    </div>
 
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
 
         <div class="bg-blue-900 px-6 py-4 flex items-center justify-between mb-6">
-            <h2 class="text-xl font-semibold mb-4">Releasing of Certificate</h2>
+            <h2 class="text-xl text-white font-semibold">Releasing of Certificate</h2>
             <button onclick="window.history.back()"
                 class="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
                 ← Back
