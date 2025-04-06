@@ -72,7 +72,7 @@
                         </td>
                     </tr>
                 @empty
-                    <tr class="bg-white border-b hover:bg-gray-50">
+                    <tr class="bg-white py-8 border-b hover:bg-gray-50">
                         <td colspan="5" class="text-center py-6 text-gray-500">No records found.</td>
                     </tr>
                 @endforelse
