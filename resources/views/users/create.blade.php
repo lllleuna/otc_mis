@@ -1,4 +1,4 @@
-<form action="/users" method="POST" id="create_form" class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+<form action="/users" method="POST" id="create_form" >
     @csrf
    
     <x-form-title class="text-2xl font-bold text-center mb-6 text-black">Create Account</x-form-title>
