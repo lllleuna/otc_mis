@@ -7,11 +7,13 @@
     <div class="max-w-5xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
 
         {{-- Application Details --}}
-        <h2 class="text-2xl font-bold text-blue-900 mb-6">Application Status History</h2>
-        <button onclick="window.history.back()"
-            class="px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-gray-300 transition">
-            ← Back
-        </button>
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-blue-900">Application Status History</h2>
+            <button onclick="window.history.back()"
+                class="px-4 py-2 font-bold text-sm bg-blue-900 text-white rounded-lg hover:bg-blue-700 transition">
+                ← Back
+            </button>
+        </div>
 
         {{-- Status Histories Table --}}
         <div class="overflow-x-auto">
