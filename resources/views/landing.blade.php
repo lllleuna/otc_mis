@@ -76,12 +76,17 @@
                     </a>
                 </div>
 
-                <!-- Footer -->
+               <!-- Footer -->
                 <div class="ml-24 md:ml-48 mt-16 animate-fade-up delay-3">
                     <div class="flex justify-between items-center text-sm text-gray-500">
                         <span>© {{ date('Y') }} Office of Transportation Cooperatives</span>
                         <a href="mailto:support@otc.gov.ph" class="text-otc-blue">support@otc.gov.ph</a>
                     </div>
+                </div>
+
+                <!-- Page Switcher - Below footer, aligned right -->
+                <div class="ml-30 md:ml-48 mt-20 flex justify-end animate-fade-up delay-4">
+                    @include('components.page-switcher')
                 </div>
             </div>
         </div>
