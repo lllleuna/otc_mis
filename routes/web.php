@@ -28,6 +28,7 @@ Route::get('/download-cgs/{filename}', function ($filename) {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard/charts', [DashboardController::class, 'getChartData'])->middleware(['auth', 'verified']);
 
+Route::get('/landing', [DashboardController::class, 'landing'])->name('landing.page');
 
 // password change requirement for new account
 Route::post('/auth/update-password', [RegisteredUserController::class, 'changePassword'])->name('password.update');
@@ -67,9 +68,14 @@ Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->midd
 // User Search Route
 Route::get('/search', [RegisteredUserController::class, 'search'])->middleware('auth');
 
-// Authentication Routes
-Route::get('/', [SessionController::class, 'index'])->name('login');
-Route::post('/', [SessionController::class, 'store']);
+// Update the default route to the landing page
+Route::get('/', function () {
+    return view('landing');
+})->name('landing.page');
+
+// Move the login route to a different path
+Route::get('/login', [SessionController::class, 'index'])->name('login');
+Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 // Email Verification Process
