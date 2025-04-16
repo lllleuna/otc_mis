@@ -63,7 +63,7 @@
                                 <input type="radio" id="format_pdf" name="format" value="pdf"
                                     class="absolute opacity-0 w-0 h-0" checked>
                                 <label for="format_pdf"
-                                    class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
+                                    class="z-10 flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
                                     <div class="flex items-center justify-center">
                                         <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,7 +75,7 @@
                                 </label>
                                 <!-- Selection indicator that shows/hides based on state -->
                                 <div
-                                    class="absolute inset-0 rounded-lg ring-2 ring-blue-500 bg-blue-100 bg-opacity-40 pointer-events-none hidden radio-selected">
+                                    class="absolute inset-0 rounded-lg ring-2 ring-blue-500 bg-blue-100 bg-opacity-40 pointer-events-none hidden radio-selected z-0">
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
                                 <input type="radio" id="format_excel" name="format" value="excel"
                                     class="absolute opacity-0 w-0 h-0">
                                 <label for="format_excel"
-                                    class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
+                                    class="z-10 flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
                                     <div class="flex items-center justify-center">
                                         <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,7 +96,7 @@
                                 </label>
                                 <!-- Selection indicator that shows/hides based on state -->
                                 <div
-                                    class="absolute inset-0 rounded-lg ring-2 ring-green-500 bg-green-100 bg-opacity-40 pointer-events-none hidden radio-selected">
+                                    class="absolute inset-0 rounded-lg ring-2 ring-blue-500 bg-blue-100 bg-opacity-40 pointer-events-none hidden radio-selected z-0">
                                 </div>
                             </div>
                         </div>
