@@ -59,32 +59,39 @@
                         <label class="block text-sm font-medium text-gray-700">Export Format</label>
                         <div class="grid grid-cols-2 gap-3">
                             <!-- PDF Option -->
-                            <label for="format_pdf"
-                                class="flex items-center justify-center p-3 border rounded-lg cursor-pointer transition-all duration-200 w-full peer-checked:bg-blue-100 peer-checked:border-blue-500">
+                            <div>
                                 <input type="radio" id="format_pdf" name="format" value="pdf" class="peer hidden"
                                     checked>
-                                <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                </svg>
-                                <span class="font-medium">PDF</span>
-                            </label>
+                                <label for="format_pdf"
+                                    class="flex items-center justify-center p-3 border rounded-lg cursor-pointer transition-all duration-200 w-full 
+                       peer-checked:bg-blue-100 peer-checked:border-blue-500 peer-checked:ring-2 peer-checked:ring-blue-400">
+                                    <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                    <span class="font-medium text-gray-800">PDF</span>
+                                </label>
+                            </div>
 
                             <!-- Excel Option -->
-                            <label for="format_excel"
-                                class="flex items-center justify-center p-3 border rounded-lg cursor-pointer transition-all duration-200 w-full peer-checked:bg-green-100 peer-checked:border-green-500">
+                            <div>
                                 <input type="radio" id="format_excel" name="format" value="excel"
                                     class="peer hidden">
-                                <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                <span class="font-medium">Excel</span>
-                            </label>
+                                <label for="format_excel"
+                                    class="flex items-center justify-center p-3 border rounded-lg cursor-pointer transition-all duration-200 w-full 
+                       peer-checked:bg-green-100 peer-checked:border-green-500 peer-checked:ring-2 peer-checked:ring-green-400">
+                                    <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <span class="font-medium text-gray-800">Excel</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
+
 
 
 
@@ -107,33 +114,4 @@
         </div>
     </div>
 
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all radio inputs
-            const radioInputs = document.querySelectorAll('input[type="radio"][name="format"]');
-
-            // Function to update the selected state
-            function updateSelectedState() {
-                radioInputs.forEach(input => {
-                    const container = input.closest('.relative');
-                    const indicator = container.querySelector('.radio-selected');
-
-                    if (input.checked) {
-                        indicator.classList.remove('hidden');
-                    } else {
-                        indicator.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Add change event listeners to all radio inputs
-            radioInputs.forEach(input => {
-                input.addEventListener('change', updateSelectedState);
-            });
-
-            // Initialize on page load
-            updateSelectedState();
-        });
-    </script>
 </x-layout>
