@@ -1,4 +1,4 @@
-<form action="/users/{{ $user->id }}" method="POST" id="edit_form" class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+<form action="/users/{{ $user->id }}" method="POST" id="edit_form" >
     @csrf
     @method('PATCH')    
    
