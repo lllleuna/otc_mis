@@ -57,51 +57,36 @@
                     <!-- Export Format Selection -->
                     <div class="space-y-2">
                         <label class="block text-sm font-medium text-gray-700">Export Format</label>
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="flex space-x-4">
                             <!-- PDF Option -->
-                            <div class="relative">
-                                <input type="radio" id="format_pdf" name="format" value="pdf"
-                                    class="absolute opacity-0 w-0 h-0" checked>
-                                <label for="format_pdf"
-                                    class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
-                                    <div class="flex items-center justify-center">
-                                        <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                        </svg>
-                                        <span class="font-medium">PDF</span>
-                                    </div>
-                                </label>
-                                <!-- Selection indicator that shows/hides based on state -->
-                                <div
-                                    class="absolute inset-0 rounded-lg ring-2 ring-blue-500 bg-blue-100 bg-opacity-40 pointer-events-none hidden radio-selected">
-                                </div>
-                            </div>
+                            <label class="flex items-center cursor-pointer">
+                                <input type="radio" name="format" value="pdf"
+                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500" checked>
+                                <span class="ml-2 flex items-center">
+                                    <svg class="w-5 h-5 mr-1 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                    <span class="font-medium">PDF</span>
+                                </span>
+                            </label>
 
                             <!-- Excel Option -->
-                            <div class="relative">
-                                <input type="radio" id="format_excel" name="format" value="excel"
-                                    class="absolute opacity-0 w-0 h-0">
-                                <label for="format_excel"
-                                    class="flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
-                                    <div class="flex items-center justify-center">
-                                        <svg class="w-6 h-6 mr-2 text-green-600" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                        </svg>
-                                        <span class="font-medium">Excel</span>
-                                    </div>
-                                </label>
-                                <!-- Selection indicator that shows/hides based on state -->
-                                <div
-                                    class="absolute inset-0 rounded-lg ring-2 ring-green-500 bg-green-100 bg-opacity-40 pointer-events-none hidden radio-selected">
-                                </div>
-                            </div>
+                            <label class="flex items-center cursor-pointer">
+                                <input type="radio" name="format" value="excel"
+                                    class="h-4 w-4 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 flex items-center">
+                                    <svg class="w-5 h-5 mr-1 text-green-600" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <span class="font-medium">Excel</span>
+                                </span>
+                            </label>
                         </div>
                     </div>
-
 
                 </div>
 
