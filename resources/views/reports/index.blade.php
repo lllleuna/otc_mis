@@ -76,6 +76,17 @@
                                 <!-- Selection indicator that shows/hides based on state -->
                                 <div
                                     class="absolute inset-0 rounded-lg ring-2 ring-blue-500 bg-blue-100 bg-opacity-40 pointer-events-none hidden radio-selected z-0">
+                                    <label for="format_pdf"
+                                        class="z-10 flex items-center justify-center p-3 bg-gray-50 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-200 block w-full">
+                                        <div class="flex items-center justify-center">
+                                            <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                            </svg>
+                                            <span class="font-medium">PDF</span>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
 
