@@ -55,51 +55,37 @@
                     </div>
 
                     <!-- Export Format Selection -->
-                    <div class="flex space-x-2 border-[3px] border-gray-300 rounded-xl select-none">
-                      <!-- PDF Option -->
-                      <label class="radio flex flex-grow items-center justify-center rounded-lg p-1 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="format"
-                          value="pdf"
-                          class="peer hidden"
-                          checked
-                        />
-                        <span
-                          class="flex items-center gap-2 peer-checked:bg-blue-300 peer-checked:text-white text-gray-700 p-2 px-6 rounded-lg transition duration-150 ease-in-out"
-                        >
-                          <!-- PDF Icon (Document Icon) -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M7 21h10a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-4.828-4.828A2 2 0 0012.172 1H7a2 2 0 00-2 2v16a2 2 0 002 2z" />
-                          </svg>
-                          PDF
-                        </span>
-                      </label>
-                    
-                      <!-- Excel Option -->
-                      <label class="radio flex flex-grow items-center justify-center rounded-lg p-1 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="format"
-                          value="excel"
-                          class="peer hidden"
-                        />
-                        <span
-                          class="flex items-center gap-2 peer-checked:bg-green-300 peer-checked:text-white text-gray-700 p-2 px-6 rounded-lg transition duration-150 ease-in-out"
-                        >
-                          <!-- Excel Icon (Bar Chart Icon) -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                          Excel
-                        </span>
-                      </label>
+                    <div class="flex gap-2 border-[3px] border-gray-300 rounded-xl p-1 select-none">
+                        <!-- PDF Option -->
+                        <label class="flex items-center w-full cursor-pointer">
+                            <input type="radio" name="format" value="pdf" class="peer hidden" checked />
+                            <span
+                                class="flex items-center justify-center w-full gap-2 peer-checked:bg-blue-300 peer-checked:text-white text-gray-700 p-2 rounded-lg transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M7 21h10a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-4.828-4.828A2 2 0 0012.172 1H7a2 2 0 00-2 2v16a2 2 0 002 2z" />
+                                </svg>
+                                PDF
+                            </span>
+                        </label>
+
+                        <!-- Excel Option -->
+                        <label class="flex items-center w-full cursor-pointer">
+                            <input type="radio" name="format" value="excel" class="peer hidden" />
+                            <span
+                                class="flex items-center justify-center w-full gap-2 peer-checked:bg-green-300 peer-checked:text-white text-gray-700 p-2 rounded-lg transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 17v-2m3 2v-4m3 2v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                Excel
+                            </span>
+                        </label>
                     </div>
-                    
+
+
 
                 </div>
 
