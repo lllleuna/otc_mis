@@ -28,7 +28,7 @@
 
         <div class="overflow-x-auto shadow-md rounded-lg">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-800">
+                <thead class="bg-gray-200">
                     <tr class="text-blue-900">
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation No
                         </th>

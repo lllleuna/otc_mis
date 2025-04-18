@@ -7,7 +7,7 @@
 
     <div class="">
         <div class="bg-white rounded-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-4">
+            <div class="bg-gray-200 px-6 py-4">
                 <h2 class="text-2xl font-bold text-black">Report Generation</h2>
                 <p class="text-gray-600 mt-1">Generate customized reports based on your criteria</p>
             </div>

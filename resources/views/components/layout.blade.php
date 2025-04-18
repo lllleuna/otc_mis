@@ -21,8 +21,12 @@ contains logo, profile name & icon, and navigation links
         <nav class="bg-blue-900">
             <div class="">
                 <div class="flex h-16 items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo4.png') }}" alt="OTC Logo">
+                    <div class="flex items-center">
+                        <img class="h-14" src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="OTC Logo">
+                        <div class="ml-3 flex flex-col">
+                            <span class="text-white font-semibold text-lg">Office of Transportation Cooperatives</span>
+                            <p class="text-white italic text-sm">Management Information System</p>
+                        </div>
 
                         @if (auth()->user()->role === 'Admin')
                             <div class="flex items-center space-x-2">
