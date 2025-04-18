@@ -123,9 +123,8 @@
                     </div>
                     <div class="mx-1">
                         <label class="text-sm text-gray-500">Barangay</label>
-                        <input type="text" name="barangay"
-                            value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}" placeholder="Barangay"
-                            class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
+                        <input type="text" name="barangay" value="{{ old('barangay', $barangayName ?? 'N/A') }}"
+                            placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
             </div>
@@ -134,14 +133,13 @@
                 @if ($application->application_type !== 'CGS Renewal')
                     <div class="mx-1">
                         <label class="text-sm text-gray-500">Municipality/City</label>
-                        <input type="text" name="city" value="{{ old('city', $appGenInfo->city ?? 'N/A') }}"
+                        <input type="text" name="city" value="{{ old('city', $cityName ?? 'N/A') }}"
                             placeholder="City" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                     <div class="mx-1">
                         <label class="text-sm text-gray-500">Region</label>
-                        <input type="text" name="region"
-                            value="{{ old('region', $appGenInfo->region ?? 'N/A') }}" placeholder="Region"
-                            class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
+                        <input type="text" name="region" value="{{ old('region', $regionName ?? 'N/A') }}"
+                            placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
             </div>

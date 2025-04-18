@@ -14,9 +14,9 @@
                 <p style="font-size: 16px; color: #555;">We regret to inform you that your application has been <strong style="color: #dc3545;">rejected</strong>.</p>
 
                 <p style="font-size: 16px; color: #555;"><strong>Reference Number:</strong> {{ $referenceNumber }}</p>
-                <p style="font-size: 16px; color: #555;"><strong>Reason for Rejection:</strong> {{ $reason }}</p>
+                <p style="font-size: 16px; color: #555;"><strong>Reason for Rejection: <br></strong> {{ $reason }}</p>
 
-                <p style="font-size: 16px; color: #555;">Please review the reason above and reapply if necessary. You may revisit your application on our website.</p>
+                <p style="font-size: 16px; color: #555;">Please review the reason above and reapply if necessary.</p>
 
                 <div style="margin: 30px 0;">
                     <a href="https://client.otcs.digital/" target="_blank" style="display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 5px; font-weight: bold;">Visit OTC Website</a>
