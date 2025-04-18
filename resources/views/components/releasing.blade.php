@@ -137,19 +137,9 @@
         @if ($application->application_type !== 'CGS Renewal')
             <div class="flex justify-between">
                 <div>
-                    <label class="text-sm text-gray-500">Province</label>
-                    <input type="text" name="province" value="{{ old('province', $appGenInfo->province ?? 'N/A') }}"
-                        placeholder="Province" class="border p-2 rounded w-full mt-1 mb-1" disabled>
-                </div>
-                <div>
                     <label class="text-sm text-gray-500">Region</label>
                     <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
                         placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" disabled>
-                </div>
-                <div>
-                    <label class="text-sm text-gray-500">Area</label>
-                    <input type="text" name="area" value="{{ old('area', $appGenInfo->area ?? 'N/A') }}"
-                        placeholder="Area" class="border p-2 rounded w-full mt-1 mb-1" disabled>
                 </div>
             </div>
         @endif
