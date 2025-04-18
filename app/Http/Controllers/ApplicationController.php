@@ -85,39 +85,6 @@ class ApplicationController extends Controller
         $application = Application::findOrFail($id);
         $appGenInfo = AppGeneralInfo::where('application_id', $id)->latest()->first();
     
-        // Get codes from database if not in session
-        $regionCode = $formData['region'] ?? $appGenInfo->region ?? null;
-        $cityCode = $formData['city'] ?? $appGenInfo->city ?? null;
-        $barangayCode = $formData['barangay'] ?? $appGenInfo->barangay ?? null;
-    
-        // Default values
-        $regionName = 'Unknown Region';
-        $cityName = 'Unknown City/Municipality';
-        $barangayName = 'Unknown Barangay';
-    
-        // Fetch Region Name from PSGC API
-        if ($regionCode) {
-            $regionResponse = Http::get("https://psgc.gitlab.io/api/regions/{$regionCode}/");
-            if ($regionResponse->successful()) {
-                $regionName = $regionResponse->json()['name'];
-            }
-        }
-    
-        // Fetch City/Municipality Name from PSGC API
-        if ($cityCode) {
-            $cityResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$cityCode}/");
-            if ($cityResponse->successful()) {
-                $cityName = $cityResponse->json()['name'];
-            }
-        }
-    
-        // Fetch Barangay Name from PSGC API
-        if ($barangayCode) {
-            $barangayResponse = Http::get("https://psgc.gitlab.io/api/barangays/{$barangayCode}/");
-            if ($barangayResponse->successful()) {
-                $barangayName = $barangayResponse->json()['name'];
-            }
-        }
     
         $latestEvaluation = ApplicationStatusHistory::where('application_id', $id)->latest()->first();
         $appUnits = AppUnit::where('application_id', $id)->get();
@@ -132,12 +99,7 @@ class ApplicationController extends Controller
         $appCetos = AppCetos::where('application_id', $id)->latest()->first();
     
         return view('accreditation.officer.evaluate', array_merge(
-            compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises'),
-            [
-                'regionName' => $regionName,
-                'cityName' => $cityName,
-                'barangayName' => $barangayName,
-            ]
+            compact('appTrainings', 'appBusinesses', 'appAwards', 'appGrants', 'appGov', 'appCetos', 'appLoans', 'appFinance', 'application', 'latestEvaluation', 'appGenInfo', 'appUnits', 'appFranchises')
         ));
     }    
     
