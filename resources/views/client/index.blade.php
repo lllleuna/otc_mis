@@ -34,8 +34,7 @@
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">TC Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Region</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Contact No</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Contact</th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Accreditation Date
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">Action</th>
@@ -48,8 +47,7 @@
                                 {{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700"> {{ $info->region }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->contact_no }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }} <br> {{ $info->contact_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 {{ \Carbon\Carbon::parse($info->accreditation_date)->format('M j, Y') }}
                             </td>
