@@ -68,7 +68,8 @@
                 <label class="text-sm text-gray-500">CDA Registration No</label>
                 <input type="text" name="cda_registration_no"
                     value="{{ old('cda_registration_no', $application->cda_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="10" pattern="^T-\d{8}$"
+                    title="Format must be T- followed by 8 digits, e.g., T-00000000">
             </div>
 
             <div class="mx-1">
@@ -82,8 +83,9 @@
                 <label class="text-sm text-gray-500">Common Bond Membership</label>
                 <input type="text" name="common_bond_membership"
                     value="{{ old('common_bond_membership', $appGenInfo->common_bond_membership ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="20">
             </div>
+
         </div>
 
         <!-- Membership Fee, Email, Contact No -->
@@ -104,8 +106,8 @@
             <div class="mx-1">
                 <label class="text-sm text-gray-500">Contact Number</label>
                 <input type="text" name="contact_no"
-                    value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}" class="border p-2 rounded w-full"
+                    pattern="^9\d{9}$" title="Contact number must start with 9 followed by 9 digits">
             </div>
         </div>
 
@@ -113,31 +115,31 @@
         <div class="flex justify-between">
             <div class="w-full">
                 @if ($application->application_type !== 'CGS Renewal')
-                    <div class="w-1/2 mx-1">
+                    <div class="mx-1">
                         <label class="text-sm text-gray-500">Business Address</label>
                         <input type="text" name="business_address"
                             value="{{ old('business_address', $application->address ?? 'N/A') }}"
-                            class="border p-2 rounded w-full mt-1 mb-1">
+                            class="border p-2 rounded w-full mt-1 mb-1" maxlength="100">
                     </div>
-                    <div class="w-1/2 mx-1">
+                    <div class="mx-1">
                         <label class="text-sm text-gray-500">Barangay</label>
                         <input type="text" name="barangay" value="{{ old('barangay', $barangayName ?? 'N/A') }}"
-                            placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" readonly>
+                            placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
             </div>
 
             <div class="w-full">
                 @if ($application->application_type !== 'CGS Renewal')
-                    <div class="w-1/2 mx-1">
+                    <div class="mx-1">
                         <label class="text-sm text-gray-500">Municipality/City</label>
                         <input type="text" name="city" value="{{ old('city', $cityName ?? 'N/A') }}"
-                            placeholder="City" class="border p-2 rounded w-full mt-1 mb-1" readonly>
+                            placeholder="City" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
-                    <div class="w-1/2 mx-1">
+                    <div class="mx-1">
                         <label class="text-sm text-gray-500">Region</label>
                         <input type="text" name="region" value="{{ old('region', $regionName ?? 'N/A') }}"
-                            placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" readonly>
+                            placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
             </div>
@@ -151,21 +153,21 @@
                 <label class="text-sm text-gray-500">SSS Registration No</label>
                 <input type="text" name="employer_sss_reg_no"
                     value="{{ old('employer_sss_reg_no', $appGenInfo->employer_sss_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="15">
             </div>
 
             <div class="mx-1">
                 <label class="text-sm text-gray-500">Pag-IBIG Registration No</label>
                 <input type="text" name="employer_pagibig_reg_no"
                     value="{{ old('employer_pagibig_reg_no', $appGenInfo->employer_pagibig_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="15">
             </div>
 
             <div class="mx-1">
                 <label class="text-sm text-gray-500">PhilHealth Registration No</label>
                 <input type="text" name="employer_philhealth_reg_no"
                     value="{{ old('employer_philhealth_reg_no', $appGenInfo->employer_philhealth_reg_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="15">
             </div>
         </div>
 
@@ -174,14 +176,14 @@
             <div class="mx-1">
                 <label class="text-sm text-gray-500">BIR Tax Identification No</label>
                 <input type="text" name="bir_tin" value="{{ old('bir_tin', $appGenInfo->bir_tin ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="15">
             </div>
 
             <div class="mx-1">
                 <label class="text-sm text-gray-500">BIR Tax Exemption No</label>
                 <input type="text" name="bir_tax_exemption_no"
                     value="{{ old('bir_tax_exemption_no', $appGenInfo->bir_tax_exemption_no ?? 'N/A') }}"
-                    class="border p-2 rounded w-full">
+                    class="border p-2 rounded w-full" maxlength="15">
             </div>
 
             <div class="mx-1">
