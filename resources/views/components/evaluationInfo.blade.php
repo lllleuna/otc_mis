@@ -106,7 +106,7 @@
             <div class="mx-1">
                 <label class="text-sm text-gray-500">Contact Number</label>
                 <input type="text" name="contact_no"
-                    value="{{ old('contact_no', $appGenInfo->contact_no ?? 'N/A') }}" class="border p-2 rounded w-full"
+                    value="{{ old('contact_no', $appGenInfo->contact_no ?? '9000000000') }}" class="border p-2 rounded w-full"
                     pattern="^9\d{9}$" maxlength="10" title="Contact number must start with 9 followed by 9 digits">
             </div>
         </div>
