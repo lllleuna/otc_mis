@@ -47,7 +47,8 @@
                                 {{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700"> {{ $info->region }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }} <br> {{ $info->contact_no }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }} <br>
+                                {{ $info->contact_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 {{ \Carbon\Carbon::parse($info->accreditation_date)->format('M j, Y') }}
                             </td>
@@ -70,6 +71,10 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-4">
+                {{ $generalInfos->links() }}
+            </div>
+
         </div>
     </div>
 

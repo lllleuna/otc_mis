@@ -11,7 +11,7 @@ class GeneralInfoController extends Controller
     public function index()
     {
         // Fetch only records where accreditation_no is NOT NULL
-        $generalInfos = GeneralInfo::whereNotNull('accreditation_no')->get();
+        $generalInfos = GeneralInfo::whereNotNull('accreditation_no')->paginate(5);
     
         // Fetch all regions from API
         $regionsResponse = Http::get("https://psgc.gitlab.io/api/regions/");
@@ -21,7 +21,7 @@ class GeneralInfoController extends Controller
         foreach ($generalInfos as $info) {
             $regionNameResponse = Http::get("https://psgc.gitlab.io/api/regions/{$info->region}");
             $info->region_name = $regionNameResponse->json()['name'] ?? 'Unknown Region';
-    
+        
             $cityNameResponse = Http::get("https://psgc.gitlab.io/api/cities-municipalities/{$info->city}");
             $info->city_name = $cityNameResponse->json()['name'] ?? 'Unknown City';
         }
