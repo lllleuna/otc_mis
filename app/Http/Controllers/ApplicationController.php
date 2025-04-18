@@ -90,6 +90,11 @@ class ApplicationController extends Controller
         $cityCode = $formData['city'] ?? $appGenInfo->city ?? null;
         $barangayCode = $formData['barangay'] ?? $appGenInfo->barangay ?? null;
     
+        // Default values
+        $regionName = 'Unknown Region';
+        $cityName = 'Unknown City/Municipality';
+        $barangayName = 'Unknown Barangay';
+    
         // Fetch Region Name from PSGC API
         if ($regionCode) {
             $regionResponse = Http::get("https://psgc.gitlab.io/api/regions/{$regionCode}/");
