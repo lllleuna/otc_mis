@@ -22,7 +22,9 @@
                     <tr>
                         <th class="border border-gray-200 p-3 text-left text-blue-900 font-semibold">Status</th>
                         <th class="border border-gray-200 p-3 text-left text-blue-900 font-semibold">Message</th>
-                        <th class="border border-gray-200 p-3 text-left text-blue-900 font-semibold">Updated By</th>
+                        @if (!in_array($history->status, ['saved', 'evaluated']))
+                            <th class="border border-gray-200 p-3 text-left text-blue-900 font-semibold">Updated By</th>
+                        @endif
                         <th class="border border-gray-200 p-3 text-left text-blue-900 font-semibold">Date</th>
                     </tr>
                 </thead>
@@ -31,7 +33,10 @@
                         <tr class="hover:bg-gray-100">
                             <td class="border border-gray-200 p-3 capitalize">{{ $history->status }}</td>
                             <td class="border border-gray-200 p-3">{{ $history->message ?? '-' }}</td>
-                            <td class="border border-gray-200 p-3">{{ $history->updatedBy->firstname ?? '-' }} {{ $history->updatedBy->lastname ?? '-' }}</td>
+                            @if (!in_array($history->status, ['saved', 'evaluated']))
+                                <td class="border border-gray-200 p-3">{{ $history->updatedBy->firstname ?? '-' }}
+                                    {{ $history->updatedBy->lastname ?? '-' }}</td>
+                            @endif
                             <td class="border border-gray-200 p-3">{{ $history->created_at->format('M d, Y H:i') }}</td>
                         </tr>
                     @endforeach
@@ -48,7 +53,8 @@
         @if ($application->maingeneralInfo)
             <div class="bg-gray-100 p-6 rounded-lg mb-6">
                 <p class="mb-2 text-gray-700">Accreditation Number:
-                    <span class="font-semibold text-blue-900">{{ $application->maingeneralInfo->accreditation_no }}</span>
+                    <span
+                        class="font-semibold text-blue-900">{{ $application->maingeneralInfo->accreditation_no }}</span>
                 </p>
                 <p class="mb-4 text-gray-700">Validity Date:
                     <span
