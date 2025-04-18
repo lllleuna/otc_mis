@@ -140,6 +140,11 @@
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
                                                 View
                                             </a>
+                                        @elseif ($application->status === 'approved')
+                                            <a href="{{ route('applications.history', $application->id) }}"
+                                                class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
+                                                View
+                                            </a>
                                         @elseif ($application->status === 'approved' && Auth::user()->role !== 'Admin')
                                             <a href="{{ route('accreditation.release', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
