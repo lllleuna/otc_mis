@@ -29,7 +29,7 @@
                     {{ optional($evaluation->updatedBy)->lastname ?? '' }}</p>
                 <p><strong>Employee ID:</strong> {{ optional($evaluation->updatedBy)->employee_id_no ?? 'Unknown' }}</p>
                 <p><strong>Date of Evaluation:</strong> {{ $evaluation->updated_at->format('F d, Y H:i A') }}</p>
-                <p><strong>Message:</strong> {{ $evaluation->message }}</p>
+                <p><strong>Message for Transportation Cooperative:</strong> {{ $evaluation->message }}</p>
             @else
                 <p class="text-gray-500">No evaluation records found.</p>
             @endif
