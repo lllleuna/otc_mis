@@ -33,7 +33,7 @@
                 <p class="">
                     <span
                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {{ ucfirst($application->status) }}
+                        {{ $application->status === 'saved' ? 'Pending' : ucfirst($application->status) }}
                     </span>
                 </p>
             </div>
@@ -123,8 +123,9 @@
                     </div>
                     <div class="mx-1">
                         <label class="text-sm text-gray-500">Barangay</label>
-                        <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
-                            placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
+                        <input type="text" name="barangay"
+                            value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}" placeholder="Barangay"
+                            class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
             </div>
@@ -138,8 +139,9 @@
                     </div>
                     <div class="mx-1">
                         <label class="text-sm text-gray-500">Region</label>
-                        <input type="text" name="region" value="{{ old('region', $appGenInfo->region ?? 'N/A') }}"
-                            placeholder="Region" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
+                        <input type="text" name="region"
+                            value="{{ old('region', $appGenInfo->region ?? 'N/A') }}" placeholder="Region"
+                            class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
             </div>
