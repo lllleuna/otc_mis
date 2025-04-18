@@ -123,7 +123,7 @@
                     </div>
                     <div class="mx-1">
                         <label class="text-sm text-gray-500">Barangay</label>
-                        <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->barangay ?? 'N/A') }}"
+                        <input type="text" name="barangay" value="{{ old('barangay', $appGenInfo->email ?? 'N/A') }}"
                             placeholder="Barangay" class="border p-2 rounded w-full mt-1 mb-1" maxlength="25" readonly>
                     </div>
                 @endif
