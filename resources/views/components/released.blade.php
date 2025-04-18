@@ -31,7 +31,7 @@
                         <tr class="hover:bg-gray-100">
                             <td class="border border-gray-200 p-3 capitalize">{{ $history->status }}</td>
                             <td class="border border-gray-200 p-3">{{ $history->message ?? '-' }}</td>
-                            <td class="border border-gray-200 p-3">{{ $history->updatedBy->employee_id_no ?? '-' }}</td>
+                            <td class="border border-gray-200 p-3">{{ $history->updatedBy->firstname ?? '-' }} {{ $history->updatedBy->lastname ?? '-' }}</td>
                             <td class="border border-gray-200 p-3">{{ $history->created_at->format('M d, Y H:i') }}</td>
                         </tr>
                     @endforeach
