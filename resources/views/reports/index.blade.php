@@ -28,10 +28,10 @@
                         </div>
                     </div>
 
-                    <div class="space-y-2" id="status_select" style="display: none;">
+                    <div class="space-y-2" id="status-select-group" style="display: none;">
                         <label for="status" class="block text-sm font-medium text-gray-700">Application Status</label>
                         <div class="relative">
-                            <select name="status">
+                            <select name="status" id="status">
                                 <option value="">All Status</option>
                                 <option value="new">New</option>
                                 <option value="saved">Saved</option>
@@ -126,15 +126,16 @@
 
 
     <script>
-        function toggleStatusSelect() {
-            const reportType = document.getElementById('report_type').value;
-            const statusSelect = document.getElementById('status_select');
-            if (reportType === 'accreditation application' || reportType === 'cgs application') {
-                statusSelect.style.display = 'inline-block';
+        document.getElementById('report_type').addEventListener('change', function() {
+            const statusGroup = document.getElementById('status-select-group');
+            const selectedType = this.value;
+            if (selectedType === 'accreditation application' || selectedType === 'cgs application') {
+                statusGroup.style.display = 'block';
             } else {
-                statusSelect.style.display = 'none';
+                statusGroup.style.display = 'none';
+                document.getElementById('status').value = '';
             }
-        }
+        });
 
         // Auto-trigger on load if form is submitted with report_type set
         document.addEventListener('DOMContentLoaded', toggleStatusSelect);
