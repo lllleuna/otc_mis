@@ -76,10 +76,19 @@
         </div>
     </div>
 
-    <button onclick="printDiv('printableArea')" class="mb-4 px-4 py-2 justify-end bg-blue-600 text-white rounded hover:bg-blue-700">
-        Print Analytics
-    </button>
-    
+    <div class="flex justify-end mb-4">
+        <button onclick="printDiv('printableArea')"
+            class="flex items-center gap-2 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800">
+            <!-- Heroicon: Printer -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6 9V4h12v5m-6 4h6v6H6v-6h6zM6 14v2m0 0h12m0 0v-2" />
+            </svg>
+            Print Analytics
+        </button>
+    </div>
+
     @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
