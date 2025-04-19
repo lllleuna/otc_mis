@@ -23,24 +23,20 @@ class RegisteredUserController extends Controller
     public function search(Request $request) 
     {
         $search = $request->search;
-        $roleFilter = $request->role_filter;
-    
-        $users = User::when($roleFilter, function ($query, $roleFilter) {
-                return $query->where('role', $roleFilter);
-            })
-            ->where(function($query) use ($search){
-                $query->where('firstname', 'like', "%$search%")
-                      ->orWhere('lastname', 'like', "%$search%")
-                      ->orWhere('division', 'like', "%$search%")
-                      ->orWhere('employee_id_no', 'like', "%$search%")
-                      ->orWhere('role', 'like', "%$search%");
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-    
-        return view('users.index', compact('users', 'search', 'roleFilter'));
+
+        $users = User::where(function($query) use ($search){
+
+            $query->where('firstname', 'like', "%$search%")
+            ->orWhere('lastname', 'like', "%$search%")
+            ->orWhere('division', 'like', "%$search%")
+            ->orWhere('employee_id_no', 'like', "%$search%")
+            ->orWhere('role', 'like', "%$search%");
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+        return view('users.index', compact('users','search'));
     }
-    
 
     public function create() 
     {

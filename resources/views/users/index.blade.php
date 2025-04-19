@@ -23,14 +23,6 @@
                     <option value="OED">OED</option>
                 </select>
 
-                <select id="role_filter"
-                    class="block p-2 text-sm px-5 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="">All Divisions</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Officer 1">Officer 1</option>
-                    <option value="Officer 2">Officer 2</option>
-                </select>
-
                 {{-- Search Bar --}}
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
