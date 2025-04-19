@@ -145,12 +145,12 @@
                                         @elseif ($application->status === 'evaluated' && Auth::user()->role === 'Admin')
                                             <a href="{{ route('accreditation.approval', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
-                                                View
+                                                View1
                                             </a>
                                         @elseif ($application->status === 'evaluated' && Auth::user()->role === 'Officer 1' || Auth::user()->role === 'Officer 2')
                                             <a href="{{ route('applications.history', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
-                                                View
+                                                View2
                                             </a>
                                         @elseif ($application->status === 'approved')
                                             <a href="{{ route('accreditation.release', $application->id) }}"
@@ -160,7 +160,7 @@
                                         @elseif ($application->status === 'released' || $application->status === 'rejected')
                                             <a href="{{ route('applications.history', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
-                                                View
+                                                View3
                                             </a>
                                         @else
                                             <span class="text-gray-500">N/A</span>
