@@ -131,3 +131,7 @@ Route::get('/general-info', [GeneralInfoController::class, 'index'])->name('gene
 Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 'show'])
     ->where('accreditation_no', '.*')
     ->name('general-info.show');
+
+Route::get('/landing', function() {
+    return view('landing');
+})->name('landing.page');
