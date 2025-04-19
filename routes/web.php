@@ -52,8 +52,8 @@ Route::get('/api/cooperatives', function (Request $request) {
     )->get();
 });
 
-Route::get('/cooperatives/{accreditation_no}', [TransportCoopController::class, 'show'])->name('cooperative.details');
-Route::get('/cooperative/edit/{accreditation_no}', [TransportCoopController::class, 'edit'])->name('edit.cooperative');
+Route::get('/cooperatives/{accreditation_no}', [TransportCoopController::class, 'show'])->middleware('auth')->name('cooperative.details');
+Route::get('/cooperative/edit/{accreditation_no}', [TransportCoopController::class, 'edit'])->middleware('auth')->name('edit.cooperative');
 
 
 // Resource Routes for Transport Cooperative and Users
@@ -115,8 +115,10 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/reports/download/{id}', [ReportController::class, 'download'])->name('reports.download');
 // });
 
-Route::get('/reports', [GenerateReportController::class, 'index'])->name('report.index');
-Route::get('/reports/generate', [GenerateReportController::class, 'generate'])->name('report.generate');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reports', [GenerateReportController::class, 'index'])->name('report.index');
+    Route::get('/reports/generate', [GenerateReportController::class, 'generate'])->name('report.generate');
+});
 
 Route::get('/user/profile', function () {
     return view('components.view-profile');
@@ -126,11 +128,12 @@ Route::get('/settings', function () {
     return view('components.settings');
 })->middleware('auth');
 
-
-Route::get('/general-info', [GeneralInfoController::class, 'index'])->name('general-info.index');
-Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 'show'])
-    ->where('accreditation_no', '.*')
-    ->name('general-info.show');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/general-info', [GeneralInfoController::class, 'index'])->name('general-info.index');
+    Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 'show'])
+        ->where('accreditation_no', '.*')
+        ->name('general-info.show');
+});
 
 Route::get('/', function() {
     return view('landing');
