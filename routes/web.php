@@ -69,7 +69,7 @@ Route::get('/search', [RegisteredUserController::class, 'search'])->middleware('
 
 // Authentication Routes
 Route::get('/login', [SessionController::class, 'index'])->name('login');
-Route::post('/', [SessionController::class, 'store']);
+Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 // Email Verification Process
