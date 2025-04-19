@@ -76,10 +76,10 @@
         </div>
     </div>
 
-    <button onclick="printDiv('printableArea')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">
-        Print Summary
+    <button onclick="printDiv('printableArea')" class="mb-4 px-4 py-2 justify-end bg-blue-600 text-white rounded hover:bg-blue-700">
+        Print Analytics
     </button>
-
+    
     @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
