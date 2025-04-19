@@ -20,8 +20,25 @@
                         <div class="relative">
                             <select id="report_type" name="report_type"
                                 class="w-full pl-4 pr-10 py-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none">
-                                <option value="accreditation">Accreditation Report</option>
-                                <option value="cgs">CGS Report</option>
+                                <option value="accreditation">Accredited TC</option>
+                                <option value="cgs">CGS Renewed TC</option>
+                                <option value="accreditation application">Accreditation Application</option>
+                                <option value="cgs application">CGS Application</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Report Type</label>
+                        <div class="relative">
+                            <select name="status" id="status_select" style="display: none;">
+                                <option value="">All Status</option>
+                                <option value="new">New</option>
+                                <option value="saved">Saved</option>
+                                <option value="evaluated">Evaluated</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="released">Released</option>
                             </select>
                         </div>
                     </div>
@@ -109,6 +126,18 @@
 
 
     <script>
+        function toggleStatusSelect() {
+            const reportType = document.getElementById('report_type').value;
+            const statusSelect = document.getElementById('status_select');
+            if (reportType === 'accreditation application' || reportType === 'cgs application') {
+                statusSelect.style.display = 'inline-block';
+            } else {
+                statusSelect.style.display = 'none';
+            }
+        }
+
+        // Auto-trigger on load if form is submitted with report_type set
+        document.addEventListener('DOMContentLoaded', toggleStatusSelect);
         document.addEventListener('DOMContentLoaded', function() {
             // Get all radio inputs
             const radioInputs = document.querySelectorAll('input[type="radio"][name="format"]');
