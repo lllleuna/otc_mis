@@ -72,6 +72,20 @@
             z-index: 1;
         }
 
+        /* Page switcher container positioning */
+        .page-switcher-container {
+            position: absolute;
+            right: 40px;
+            top: 0;
+            bottom: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+        }
+        .page-switcher-container > * {
+            pointer-events: auto;
+        }
 
         /* Subtle animations for content */
         @keyframes fadeUp {
@@ -200,24 +214,19 @@
         <!-- Vehicle Icons for the Blue Side -->
         <div class="absolute left-0 top-0 h-1/3 md:h-full w-full md:w-1/4 overflow-hidden">
             <!-- Bus -->
-            <i
-                class="fas fa-bus vehicle-icon text-4xl md:text-6xl absolute top-[15%] left-[20%] animate-float-slow"></i>
+            <i class="fas fa-bus vehicle-icon text-4xl md:text-6xl absolute top-[15%] left-[20%] animate-float-slow"></i>
 
             <!-- Jeepney/Minibus -->
-            <i
-                class="fas fa-shuttle-van vehicle-icon text-3xl md:text-5xl absolute top-[35%] left-[60%] animate-float"></i>
+            <i class="fas fa-shuttle-van vehicle-icon text-3xl md:text-5xl absolute top-[35%] left-[60%] animate-float"></i>
 
             <!-- Car -->
-            <i
-                class="fas fa-car vehicle-icon text-3xl md:text-5xl absolute top-[55%] left-[30%] animate-float-fast"></i>
+            <i class="fas fa-car vehicle-icon text-3xl md:text-5xl absolute top-[55%] left-[30%] animate-float-fast"></i>
 
             <!-- Taxi - Hidden on smallest screens -->
-            <i
-                class="fas fa-taxi vehicle-icon text-2xl md:text-4xl absolute top-[75%] left-[50%] animate-float-slow delay-3 hidden sm:block"></i>
+            <i class="fas fa-taxi vehicle-icon text-2xl md:text-4xl absolute top-[75%] left-[50%] animate-float-slow delay-3 hidden sm:block"></i>
 
             <!-- Truck - Hidden on smallest screens -->
-            <i
-                class="fas fa-truck vehicle-icon text-4xl md:text-6xl absolute top-[85%] left-[15%] animate-float delay-2 hidden sm:block"></i>
+            <i class="fas fa-truck vehicle-icon text-4xl md:text-6xl absolute top-[85%] left-[15%] animate-float delay-2 hidden sm:block"></i>
         </div>
 
         <!-- Content Container -->
@@ -233,8 +242,7 @@
                 </div>
 
                 <!-- Mobile Logo Position -->
-                <div
-                    class="md:hidden absolute left-1/2 top-full transform -translate-x-1/2 -translate-y-1/2 mobile-logo-position">
+                <div class="md:hidden absolute left-1/2 top-full transform -translate-x-1/2 -translate-y-1/2 mobile-logo-position">
                     <div class="logo-container" style="width: 200px; height: 200px;">
                         <img src="{{ asset('images/OTC-UpdatedBannerLogo2.png') }}" alt="OTC Logo"
                             class="w-full max-w-[180px] h-auto animate-fade-up">
@@ -243,12 +251,10 @@
             </div>
 
             <!-- Right Panel - Content (larger) -->
-            <div
-                class="md:w-3/4 p-6 md:p-16 flex flex-col justify-center min-h-[70vh] md:min-h-screen mobile-white-section">
+            <div class="md:w-3/4 p-6 md:p-16 flex flex-col justify-center min-h-[70vh] md:min-h-screen mobile-white-section">
                 <!-- Top Section with Header -->
                 <div class="md:ml-48 mb-8 animate-fade-up delay-1 mobile-content-margin">
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-otc-blue mb-2">Management Information
-                        System</h1>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-otc-blue mb-2">Management Information System</h1>
                     <p class="text-gray-600 text-base md:text-lg">Office of Transportation Cooperatives</p>
                     <div class="h-1 w-20 bg-otc-blue mt-4 mobile-divider"></div>
                 </div>
@@ -288,9 +294,11 @@
                     </div>
                 </div>
 
+                <!-- Page Switcher - Below footer, aligned right -->
+                <div class="ml-30 md:ml-48 mt-20 pt-20 flex justify-end animate-fade-up delay-4">
+                    @include('components.page-switcher')
+                </div>
             </div>
-            @include('components.page-switcher')
-
         </div>
     </div>
 
