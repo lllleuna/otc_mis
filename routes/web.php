@@ -68,7 +68,7 @@ Route::patch('/users/{user}', [RegisteredUserController::class, 'update'])->midd
 Route::get('/search', [RegisteredUserController::class, 'search'])->middleware('auth');
 
 // Authentication Routes
-Route::get('/', [SessionController::class, 'index'])->name('login');
+Route::get('/login', [SessionController::class, 'index'])->name('login');
 Route::post('/', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
@@ -132,6 +132,6 @@ Route::get('/general-info/{accreditation_no}', [GeneralInfoController::class, 's
     ->where('accreditation_no', '.*')
     ->name('general-info.show');
 
-Route::get('/landing', function() {
+Route::get('/', function() {
     return view('landing');
 })->name('landing.page');

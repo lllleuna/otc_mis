@@ -147,6 +147,6 @@ class SessionController extends Controller
     {
         Auth::logout();
 
-        return redirect('/');
+        return redirest()->route('landing.page');
     }
 }

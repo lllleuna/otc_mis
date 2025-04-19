@@ -213,7 +213,7 @@
                 <div class="ml-24 md:ml-48 animate-fade-up delay-3">
                     <a href="{{ route('login') }}"
                         class="inline-block bg-otc-blue hover:bg-blue-800 text-white py-3 px-8 rounded-md font-medium text-base transition duration-300 shadow-md">
-                        ACCESS SYSTEM
+                        Employee Login
                     </a>
                 </div>
 

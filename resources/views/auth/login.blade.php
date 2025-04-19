@@ -96,6 +96,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-@include('components.page-switcher')
 @endsection
