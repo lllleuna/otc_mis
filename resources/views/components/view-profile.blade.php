@@ -16,13 +16,13 @@
                                 <div class="absolute bottom-2 right-2 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
                             </div>
                             <h2 class="mt-4 text-xl font-bold text-gray-800">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}</h2>
-                            <p class="mt-2 text-gray-600">vladimir27@example.net</p>
+                            <p class="mt-2 text-gray-600">{{ Auth::user()->email}}</p>
 
-                            <div class="mt-4 flex justify-center">
+                            {{-- <div class="mt-4 flex justify-center">
                                 <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100">
                                     Edit Profile
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
 
                     </div>
@@ -40,42 +40,37 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Employee ID</p>
-                                    <p class="text-gray-800">230166674</p>
+                                    <p class="text-gray-800">{{ Auth::user()->employee_id_no }}</p>
                                 </div>
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Full Name</p>
-                                    <p class="text-gray-800">Levi Thompson</p>
+                                    <p class="text-gray-800">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}Levi Thompson</p>
                                 </div>
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Email Address</p>
-                                    <p class="text-gray-800">vladimir27@example.net</p>
+                                    <p class="text-gray-800">{{ Auth::user()->email}}</p>
                                 </div>
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Contact Number</p>
-                                    <p class="text-gray-800">+123 456 7890</p>
+                                    <p class="text-gray-800">{{ Auth::user()->mobile_number}}</p>
                                 </div>
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Division</p>
-                                    <p class="text-gray-800">Administrative and Finance Division (AFD)</p>
+                                    <p class="text-gray-800">{{ Auth::user()->division}}</p>
                                 </div>
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Position</p>
-                                    <p class="text-gray-800">Department Head</p>
-                                </div>
-
-                                <div>
-                                    <p class="text-sm font-medium text-gray-500 mb-1">Office Address</p>
-                                    <p class="text-gray-800">123 Main Street, City, Country</p>
+                                    <p class="text-gray-800">{{ Auth::user()->role}}</p>
                                 </div>
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Date Joined</p>
-                                    <p class="text-gray-800">January 1, 2023</p>
+                                    <p class="text-gray-800">{{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('F j, Y') }}</p>
                                 </div>
 
                             </div>
