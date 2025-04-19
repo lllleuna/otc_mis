@@ -1,3 +1,24 @@
+@php
+    $regionNames = [
+        '010000000' => 'Region I (Ilocos Region)',
+        '020000000' => 'Region II (Cagayan Valley)',
+        '030000000' => 'Region III (Central Luzon)',
+        '040000000' => 'Region IV-A (CALABARZON)',
+        '170000000' => 'MIMAROPA Region',
+        '050000000' => 'Region V (Bicol Region)',
+        '060000000' => 'Region VI (Western Visayas)',
+        '070000000' => 'Region VII (Central Visayas)',
+        '080000000' => 'Region VIII (Eastern Visayas)',
+        '090000000' => 'Region IX (Zamboanga Peninsula)',
+        '100000000' => 'Region X (Northern Mindanao)',
+        '110000000' => 'Region XI (Davao Region)',
+        '120000000' => 'Region XII (SOCCSKSARGEN)',
+        '130000000' => 'Region XIII (Caraga)',
+        'CAR' => 'Cordillera Administrative Region',
+        'NCR' => 'National Capital Region',
+        'BARMM' => 'Bangsamoro Autonomous Region in Muslim Mindanao',
+    ];
+@endphp
 <table>
     <thead>
         <tr>
@@ -16,10 +37,10 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $coop->tc_name }}</td>
                 <td>{{ $coop->cda_reg_no }}</td>
-                <td>{{ $coop->cda_reg_date ? \Carbon\Carbon::parse($coop->cda_reg_date)->format('Y-m-d') : 'N/A' }}</td>
-                <td>{{ $coop->region }}</td>
+                <td>{{ $coop->cda_reg_date ? \Carbon\Carbon::parse($coop->cda_reg_date)->format('d M Y') : 'N/A' }}</td>
+                <td>{{ $regionNames[$coop->region] ?? $coop->region }}</td>
                 <td>{{ ucfirst($coop->status) }}</td>
-                <td>{{ \Carbon\Carbon::parse($coop->created_at)->format('Y-m-d') }}</td>
+                <td>{{ \Carbon\Carbon::parse($coop->created_at)->format('d M Y') }}</td>
             </tr>
         @endforeach
     </tbody>
