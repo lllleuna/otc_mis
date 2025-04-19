@@ -10,7 +10,7 @@
             font-size: 12px;
         }
         .header {
-            text-align: center;
+            text-align: left;
             margin-bottom: 20px;
         }
         .header h2 {
@@ -41,7 +41,7 @@
             background-color: #f9fafb;
         }
         .table td {
-            text-align: center;
+            text-align: left;
         }
         .no-records {
             text-align: center;
