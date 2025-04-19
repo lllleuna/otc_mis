@@ -10,7 +10,7 @@
             font-size: 12px;
         }
         .header {
-            text-align: left;
+            text-align: center;
             margin-bottom: 20px;
         }
         .header h2 {
