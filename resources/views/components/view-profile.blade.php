@@ -15,10 +15,7 @@
                                 <img src="{{ asset('images\icons8-male-user-50.png') }}" alt="OTC Logo" class="w-32 h-32 rounded-full object-cover border-4 border-blue-900 shadow mx-auto">
                                 <div class="absolute bottom-2 right-2 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
                             </div>
-                            <h2 class="mt-4 text-xl font-bold text-gray-800">Levi Thompson</h2>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-2">
-                                Administrator
-                            </span>
+                            <h2 class="mt-4 text-xl font-bold text-gray-800">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}</h2>
                             <p class="mt-2 text-gray-600">vladimir27@example.net</p>
 
                             <div class="mt-4 flex justify-center">
