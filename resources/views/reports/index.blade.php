@@ -28,10 +28,10 @@
                         </div>
                     </div>
 
-                    <div class="space-y-2">
-                        <label for="status" class="block text-sm font-medium text-gray-700">Report Type</label>
+                    <div class="space-y-2" id="status_select" style="display: none;">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Application Status</label>
                         <div class="relative">
-                            <select name="status" id="status_select" style="display: none;">
+                            <select name="status">
                                 <option value="">All Status</option>
                                 <option value="new">New</option>
                                 <option value="saved">Saved</option>
