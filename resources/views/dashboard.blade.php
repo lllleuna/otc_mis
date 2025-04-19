@@ -8,7 +8,7 @@
         <!-- Summary Cards - Updated with specific metrics -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-xl font-semibold mb-4 text-gray-700">OTC Performance Summary</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-2">
                 <!-- Accredited Transport Cooperatives -->
                 <div class="bg-blue-100 p-4 rounded-md">
                     <h3 class="font-semibold text-blue-700">Accredited Transport Cooperatives</h3>
