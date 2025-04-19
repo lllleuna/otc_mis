@@ -2,7 +2,7 @@
     <x-slot:vite></x-slot:vite>
     <x-slot:title>Dashboard</x-slot:title>
 
-    <div class="container mx-auto px-4 py-6">
+    <div class="container mx-auto px-4 py-6" id="printableArea">
         <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
         <!-- Summary Cards - Updated with specific metrics -->
@@ -74,6 +74,11 @@
                 <div id="renewalChart" class="w-full h-full"></div>
             </div>
         </div>
+
+        <button onclick="printDiv('printableArea')" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+            Print Analytics
+        </button>
+
     </div>
 
     @include('components.footer')
@@ -82,6 +87,18 @@
 
 
     <script>
+        function printDiv(divId) {
+            const printContents = document.getElementById(divId).innerHTML;
+            const originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+
+            // Reload the page after printing to restore JS functionalities (e.g., ApexCharts)
+            window.location.reload();
+        }
+
         function fetchChartData(year) {
             fetch(`/dashboard/charts?year=${year}`)
                 .then(response => response.json())
