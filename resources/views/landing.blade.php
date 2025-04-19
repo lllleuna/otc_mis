@@ -253,7 +253,7 @@
             <!-- Right Panel - Content (larger) -->
             <div class="md:w-3/4 p-6 md:p-16 flex flex-col justify-center min-h-[70vh] md:min-h-screen mobile-white-section">
                 <!-- Top Section with Header -->
-                <div class="md:ml-48 mb-8 animate-fade-up delay-1 mobile-content-margin">
+                <div class="md:ml-48 mb-8 mt-10 animate-fade-up delay-1 mobile-content-margin">
                     <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-otc-blue mb-2">Management Information System</h1>
                     <p class="text-gray-600 text-base md:text-lg">Office of Transportation Cooperatives</p>
                     <div class="h-1 w-20 bg-otc-blue mt-4 mobile-divider"></div>
@@ -279,7 +279,7 @@
                 </div>
 
                 <!-- Access Button -->
-                <div class="md:ml-48 animate-fade-up delay-3 flex justify-start md:justify-center">
+                <div class="md:ml-48 mb-10 animate-fade-up delay-3 flex justify-start md:justify-center">
                     <a href="{{ route('login') }}"
                         class="inline-block bg-otc-blue hover:bg-blue-800 text-white py-3 px-8 rounded-md font-medium text-base transition duration-300 shadow-md">
                         Employee Login
@@ -287,7 +287,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="md:ml-48 mt-12 md:mt-16 animate-fade-up delay-3 mobile-content-margin">
+                <div class="md:ml-48 mt-10 md:mt-16 animate-fade-up delay-3 mobile-content-margin">
                     <div class="flex justify-between items-center text-sm text-gray-500 mobile-footer">
                         <span>© {{ date('Y') }} Office of Transportation Cooperatives</span>
                         <a href="mailto:support@otc.gov.ph" class="text-otc-blue">support@otc.gov.ph</a>
