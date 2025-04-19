@@ -76,9 +76,9 @@
         </div>
     </div>
 
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-end mb-4 mr-2">
         <button onclick="printDiv('printableArea')"
-            class="flex items-center gap-2 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800">
+            class="flex items-center gap-2 px-5 py-2 bg-blue-900 text-white rounded hover:bg-blue-800">
             <!-- Heroicon: Printer -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
