@@ -281,7 +281,7 @@
                 </div>
 
                 <!-- Access Button -->
-                <div class="md:ml-48 animate-fade-up delay-3 flex justify-center md:justify-start">
+                <div class="md:ml-48 animate-fade-up delay-3 flex justify-start md:justify-center">
                     <a href="{{ route('login') }}"
                         class="inline-block bg-otc-blue hover:bg-blue-800 text-white py-3 px-8 rounded-md font-medium text-base transition duration-300 shadow-md">
                         Employee Login
@@ -297,7 +297,7 @@
                 </div>
 
                 <!-- Page Switcher - Below footer, aligned right -->
-                <div class="md:ml-48 mt-12 md:mt-16 flex justify-center md:justify-end animate-fade-up delay-4">
+                <div class="md:ml-48 mt-12 md:mt-16 flex justify-end animate-fade-up delay-4">
                     @include('components.page-switcher')
                 </div>
             </div>
