@@ -110,11 +110,11 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $coop->tc_name }}</td>
                         <td>{{ $coop->cda_reg_no }}</td>
-                        <td>{{ $coop->cda_reg_date ? \Carbon\Carbon::parse($coop->cda_reg_date)->format('F j, Y') : 'N/A' }}
+                        <td>{{ $coop->cda_reg_date ? \Carbon\Carbon::parse($coop->cda_reg_date)->format('d M Y') : 'N/A' }}
                         </td>
                         <td>{{ $coop->region }}</td>
                         <td>{{ ucfirst($coop->status) }}</td>
-                        <td>{{ \Carbon\Carbon::parse($coop->created_at)->format('F j, Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($coop->created_at)->format('d M Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
