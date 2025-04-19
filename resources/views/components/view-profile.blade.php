@@ -45,7 +45,7 @@
 
                                 <div>
                                     <p class="text-sm font-medium text-gray-500 mb-1">Full Name</p>
-                                    <p class="text-gray-800">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}Levi Thompson</p>
+                                    <p class="text-gray-800">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}</p>
                                 </div>
 
                                 <div>
