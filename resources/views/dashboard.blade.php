@@ -2,7 +2,7 @@
     <x-slot:vite></x-slot:vite>
     <x-slot:title>Dashboard</x-slot:title>
 
-    <div id="printableArea" class="container mx-auto px-4 py-6">
+    <div id="printableArea" class="container mx-auto px-4 pt-5">
         <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
         <!-- Summary Cards - Updated with specific metrics -->
