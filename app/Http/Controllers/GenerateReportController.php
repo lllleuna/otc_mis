@@ -16,6 +16,7 @@ use App\Exports\AccreditedCooperativesExport;
 use Illuminate\Support\Facades\Http;
 use App\Exports\AccreditationReportExport;
 use App\Exports\CGSRenewalReportExport;
+use App\Exports\ApplicationReportExport;
 
 
 class GenerateReportController extends Controller
