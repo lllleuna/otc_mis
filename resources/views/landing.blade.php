@@ -74,19 +74,17 @@
 
         /* Page switcher container positioning */
         .page-switcher-container {
-            position: relative;
+            position: absolute;
+            right: 40px;
+            top: 0;
+            bottom: 0;
             z-index: 30;
             display: flex;
             align-items: center;
+            pointer-events: none;
         }
-
-        @media (min-width: 768px) {
-            .page-switcher-container {
-                position: absolute;
-                right: 40px;
-                top: 0;
-                bottom: 0;
-            }
+        .page-switcher-container > * {
+            pointer-events: auto;
         }
 
         /* Subtle animations for content */
@@ -297,7 +295,7 @@
                 </div>
 
                 <!-- Page Switcher - Below footer, aligned right -->
-                <div class="md:ml-48 mt-12 md:mt-16 flex justify-end animate-fade-up delay-4">
+                <div class="ml-30 md:ml-48 mt-20 flex justify-end animate-fade-up delay-4">
                     @include('components.page-switcher')
                 </div>
             </div>
