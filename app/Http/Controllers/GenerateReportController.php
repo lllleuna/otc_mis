@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GeneralInfo;
+use App\Models\Application;
 use App\Models\ReportHistory;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -31,17 +32,17 @@ class GenerateReportController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'report_type' => 'required|in:accreditation,cgs',
+            'report_type' => 'required|in:accreditation,cgs,acc_app,cgs_app',
+            'status' => 'nullable|string',
             'region' => 'nullable|string',
             'year' => 'nullable|integer',
             'format' => 'required|in:pdf,excel',
         ]);
     
-        // Retrieve the authenticated user
         $user = auth()->user();
     
         if ($request->report_type === 'accreditation') {
-            // Accreditation Report Query
+            // [Unchanged Accreditation Report Logic]
             $query = GeneralInfo::selectRaw("
                     cda_registration_no, 
                     MIN(accreditation_no) AS accreditation_no, 
@@ -53,19 +54,27 @@ class GenerateReportController extends Controller
                 ")
                 ->whereNotNull('accreditation_no')
                 ->groupBy('cda_registration_no');
-            
-            // Apply Year Filter
+    
             if ($request->year) {
                 $query->whereYear('accreditation_date', $request->year);
             }
     
-            // Apply Region Filter
             if ($request->region) {
                 $query->where('region', $request->region);
             }
     
-        } elseif ($request->report_type === 'cgs') {
-            // CGS Renewal Report Query
+            $cooperatives = $query->get();
+    
+            if ($request->format === 'pdf') {
+                $pdf = Pdf::loadView('reports.generated', compact('cooperatives', 'user'));
+                return $pdf->download("{$request->report_type}_report.pdf");
+            } elseif ($request->format === 'excel') {
+                return Excel::download(new AccreditationReportExport($cooperatives, $user), "{$request->report_type}_report.xlsx");
+            }
+        }
+    
+        elseif ($request->report_type === 'cgs') {
+            // [Unchanged CGS Report Logic]
             $query = GeneralInfo::selectRaw("
                     cda_registration_no, 
                     MIN(name) AS name, 
@@ -81,38 +90,52 @@ class GenerateReportController extends Controller
                 ")
                 ->whereNotNull('validity_date')
                 ->groupBy('cda_registration_no');
-            
-            // Apply Year Filter
+    
             if ($request->year) {
                 $query->whereYear('validity_date', $request->year);
             }
-        
-            // Apply Region Filter
+    
             if ($request->region) {
                 $query->where('region', $request->region);
             }
-        }
-        
-        $cooperatives = $query->get();
     
-        if ($request->format === 'pdf') {
-            // Pass the user details to the PDF view
-            $pdf = Pdf::loadView(
-                $request->report_type === 'accreditation' ? 'reports.generated' : 'reports.generated_cgs',
-                compact('cooperatives', 'user') // Pass the authenticated user
-            );
-            return $pdf->download("{$request->report_type}_report.pdf");
-        } elseif ($request->format === 'excel') {
-            $exportClass = $request->report_type === 'accreditation' 
-                ? new AccreditationReportExport($cooperatives, auth()->user()) 
-                : new CGSRenewalReportExport($cooperatives, auth()->user());
-            
-            return Excel::download($exportClass, "{$request->report_type}_report.xlsx");
-        }        
+            $cooperatives = $query->get();
+    
+            if ($request->format === 'pdf') {
+                $pdf = Pdf::loadView('reports.generated_cgs', compact('cooperatives', 'user'));
+                return $pdf->download("{$request->report_type}_report.pdf");
+            } elseif ($request->format === 'excel') {
+                return Excel::download(new CGSRenewalReportExport($cooperatives, $user), "{$request->report_type}_report.xlsx");
+            }
+        }
+    
+        elseif (in_array($request->report_type, ['acc_app', 'cgs_app'])) {
+            $query = Application::select('tc_name', 'cda_reg_no', 'cda_reg_date', 'region', 'status', 'created_at');
+    
+            if ($request->status) {
+                $query->where('status', $request->status);
+            }
+    
+            if ($request->region) {
+                $query->where('region', $request->region);
+            }
+    
+            if ($request->year) {
+                $query->whereYear('updated_at', $request->year);
+            }
+    
+            $cooperatives = $query->get();
+    
+            // Use new views and export classes
+            if ($request->format === 'pdf') {
+                $pdf = Pdf::loadView('reports.generated_application', compact('cooperatives', 'user'));
+                return $pdf->download("{$request->report_type}_report.pdf");
+            } elseif ($request->format === 'excel') {
+                return Excel::download(new ApplicationReportExport($cooperatives, $user), "{$request->report_type}_report.xlsx");
+            }
+        }
     
         return back()->withErrors(['Invalid format selected']);
-    }
-    
-    
+    }    
 
 }
