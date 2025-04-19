@@ -289,10 +289,11 @@
                 </div>
 
             </div>
+            @include('components.page-switcher')
+
         </div>
     </div>
 
-    @include('components.page-switcher')
 </body>
 
 </html>
