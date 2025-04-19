@@ -31,7 +31,8 @@
                     <div class="space-y-2" id="status-select-group" style="display: none;">
                         <label for="status" class="block text-sm font-medium text-gray-700">Application Status</label>
                         <div class="relative">
-                            <select name="status" id="status">
+                            <select name="status" id="status"
+                                class="w-full pl-4 pr-10 py-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none">
                                 <option value="">All Status</option>
                                 <option value="new">New</option>
                                 <option value="saved">Saved</option>
