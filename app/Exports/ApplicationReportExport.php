@@ -24,3 +24,4 @@ class ApplicationReportExport implements FromView
         ]);
     }
 }
+

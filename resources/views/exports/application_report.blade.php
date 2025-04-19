@@ -1,166 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+@php
+    use Carbon\Carbon;
 
-<head>
-    <meta charset="UTF-8">
-    <title>{{ strtoupper(str_replace('_', ' ', request('report_type'))) }} Report</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 13px;
-            color: #111827;
-            margin: 30px;
-        }
+    $regionNames = [
+        '010000000' => 'Region I (Ilocos Region)',
+        '020000000' => 'Region II (Cagayan Valley)',
+        '030000000' => 'Region III (Central Luzon)',
+        '040000000' => 'Region IV-A (CALABARZON)',
+        '170000000' => 'MIMAROPA Region',
+        '050000000' => 'Region V (Bicol Region)',
+        '060000000' => 'Region VI (Western Visayas)',
+        '070000000' => 'Region VII (Central Visayas)',
+        '080000000' => 'Region VIII (Eastern Visayas)',
+        '090000000' => 'Region IX (Zamboanga Peninsula)',
+        '100000000' => 'Region X (Northern Mindanao)',
+        '110000000' => 'Region XI (Davao Region)',
+        '120000000' => 'Region XII (SOCCSKSARGEN)',
+        '130000000' => 'Region XIII (Caraga)',
+        'CAR' => 'Cordillera Administrative Region',
+        'NCR' => 'National Capital Region',
+        'BARMM' => 'Bangsamoro Autonomous Region in Muslim Mindanao',
+    ];
+@endphp
 
-        .header {
-            text-align: center;
-            font-size: 22px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 5px;
-        }
-
-        .subheader {
-            text-align: center;
-            color: #6b7280;
-            font-size: 13px;
-            margin-bottom: 30px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
-        }
-
-        table thead {
-            background-color: #dbeafe;
-        }
-
-        table th,
-        table td {
-            border: 1px solid #e5e7eb;
-            padding: 10px 8px;
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        table th {
-            color: #1e40af;
-            font-weight: 600;
-        }
-
-        table tbody tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
-
-        table tbody tr:hover {
-            background-color: #f3f4f6;
-        }
-
-        .no-records {
-            text-align: center;
-            font-size: 16px;
-            color: #dc2626;
-            font-weight: 500;
-            padding: 20px;
-        }
-
-        .user-info {
-            border-top: 2px solid #e5e7eb;
-            padding-top: 20px;
-            margin-top: 40px;
-            font-size: 14px;
-        }
-
-        .user-info h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
-
-        .user-info p {
-            line-height: 1.6;
-            color: #374151;
-        }
-    </style>
-</head>
-
-<body>
-    @php
-        $regionNames = [
-            '010000000' => 'Region I (Ilocos Region)',
-            '020000000' => 'Region II (Cagayan Valley)',
-            '030000000' => 'Region III (Central Luzon)',
-            '040000000' => 'Region IV-A (CALABARZON)',
-            '170000000' => 'MIMAROPA Region',
-            '050000000' => 'Region V (Bicol Region)',
-            '060000000' => 'Region VI (Western Visayas)',
-            '070000000' => 'Region VII (Central Visayas)',
-            '080000000' => 'Region VIII (Eastern Visayas)',
-            '090000000' => 'Region IX (Zamboanga Peninsula)',
-            '100000000' => 'Region X (Northern Mindanao)',
-            '110000000' => 'Region XI (Davao Region)',
-            '120000000' => 'Region XII (SOCCSKSARGEN)',
-            '130000000' => 'Region XIII (Caraga)',
-            'CAR' => 'Cordillera Administrative Region',
-            'NCR' => 'National Capital Region',
-            'BARMM' => 'Bangsamoro Autonomous Region in Muslim Mindanao',
-        ];
-
-        $headerTitle = match (request('report_type')) {
-            'acc_app' => 'Accreditation Applications',
-            'cgs_app' => 'CGS Renewal Applications',
-            default => strtoupper(str_replace('_', ' ', request('report_type'))) . ' Report',
-        };
-    @endphp
-
-    <div class="header">{{ $headerTitle }}</div>
-    <div class="subheader">Generated on: {{ now()->format('F j, Y') }}</div>
-
-    @if ($cooperatives->isEmpty())
-        <div class="no-records">No records found</div>
-    @else
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Cooperative Name</th>
-                    <th>CDA Registration No.</th>
-                    <th>Registration Date</th>
-                    <th>Region</th>
-                    <th>Status</th>
-                    <th>Submitted On</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($cooperatives as $index => $coop)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $coop->tc_name }}</td>
-                        <td>{{ $coop->cda_reg_no }}</td>
-                        <td>{{ $coop->cda_reg_date ? \Carbon\Carbon::parse($coop->cda_reg_date)->format('d M Y') : 'N/A' }}
-                        </td>
-                        <td>{{ $regionNames[$coop->region] ?? $coop->region }}</td>
-                        <td>{{ ucfirst($coop->status) }}</td>
-                        <td>{{ \Carbon\Carbon::parse($coop->created_at)->format('d M Y') }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
-
-    <div class="user-info">
-        <h3>Report Generated By</h3>
-        <p>
-            <strong>Employee ID No:</strong> {{ $user->employee_id_no }}<br>
-            <strong>Name:</strong> {{ $user->firstname }} {{ $user->lastname }}<br>
-            <strong>Division:</strong> {{ $user->division }}<br>
-            <strong>Role:</strong> {{ $user->role }}<br>
-            <strong>Email:</strong> {{ $user->email }}
-        </p>
-    </div>
-</body>
-
-</html>
+<table>
+    <thead>
+        <tr><th colspan="7" style="font-size: 16px; font-weight: bold; text-align: center;">Application Report</th></tr>
+        <tr><th colspan="7" style="font-size: 10px;">Generated on: {{ Carbon::now()->format('F j, Y') }}</th></tr>
+        <tr><th colspan="7" style="font-size: 10px;">Generated by: {{ $user->employee_id_no }} - {{ $user->firstname }} {{ $user->lastname }}</th></tr>
+        <tr><th colspan="7" style="font-size: 10px;">Division: {{ $user->division }} | Role: {{ $user->role }} | Email: {{ $user->email }}</th></tr>
+        <tr><td colspan="7"></td></tr> {{-- Spacer Row --}}
+        <tr style="background-color: #f2f2f2; font-weight: bold; text-align: center;">
+            <th>#</th>
+            <th>Cooperative Name</th>
+            <th>CDA Registration No.</th>
+            <th>Registration Date</th>
+            <th>Region</th>
+            <th>Status</th>
+            <th>Submitted On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($cooperatives as $index => $coop)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $coop->tc_name }}</td>
+                <td>{{ $coop->cda_reg_no }}</td>
+                <td>{{ $coop->cda_reg_date ? Carbon::parse($coop->cda_reg_date)->format('d M Y') : 'N/A' }}</td>
+                <td>{{ $regionNames[$coop->region] ?? $coop->region }}</td>
+                <td>{{ ucfirst($coop->status) }}</td>
+                <td>{{ Carbon::parse($coop->created_at)->format('d M Y') }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
