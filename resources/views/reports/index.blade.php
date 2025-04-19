@@ -22,8 +22,8 @@
                                 class="w-full pl-4 pr-10 py-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none">
                                 <option value="accreditation">Accredited TC</option>
                                 <option value="cgs">CGS Renewed TC</option>
-                                <option value="accreditation application">Accreditation Application</option>
-                                <option value="cgs application">CGS Application</option>
+                                <option value="acc_app">Accreditation Application</option>
+                                <option value="cgs_app">CGS Application</option>
                             </select>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
         document.getElementById('report_type').addEventListener('change', function() {
             const statusGroup = document.getElementById('status-select-group');
             const selectedType = this.value;
-            if (selectedType === 'accreditation application' || selectedType === 'cgs application') {
+            if (selectedType === 'acc_app' || selectedType === 'cgs_app') {
                 statusGroup.style.display = 'block';
             } else {
                 statusGroup.style.display = 'none';
