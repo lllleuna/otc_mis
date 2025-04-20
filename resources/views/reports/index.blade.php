@@ -7,9 +7,19 @@
 
     <div class="">
         <div class="bg-white rounded-xl overflow-hidden">
-            <div class="bg-white px-6 py-4">
-                <h2 class="text-2xl font-bold text-black">Report Generation</h2>
-                <p class="text-gray-600 mt-1">Generate customized reports based on your criteria</p>
+            <div class="bg-white px-6 py-4 flex items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-black">Report Generation</h2>
+                    <p class="text-gray-600 mt-1">Generate customized reports based on your criteria</p>
+                </div>
+                <span class="ml-2 relative group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-2 px-3 left-7 -mt-2 w-56">
+                        Export cooperative data filtered by region, year, and status.
+                    </span>
+                </span>
             </div>
 
             <form action="{{ route('report.generate') }}" method="GET" class="p-6">

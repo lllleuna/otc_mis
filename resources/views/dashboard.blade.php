@@ -7,11 +7,31 @@
 
         <!-- Summary Cards - Updated with specific metrics -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold mb-4 text-gray-700">OTC Performance Summary</h2>
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 flex items-center">
+                OTC Performance Summary
+                <span class="ml-2 relative group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-64">
+                        Key metrics showing total accredited cooperatives and current application volume.
+                    </span>
+                </span>
+            </h2>
             <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-2">
                 <!-- Accredited Transport Cooperatives -->
                 <div class="bg-blue-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-blue-700">Accredited Transport Cooperatives</h3>
+                    <h3 class="font-semibold text-blue-700 flex items-center">
+                        Accredited Transport Cooperatives
+                        <span class="ml-2 relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-56">
+                                Total cooperatives with active OTC accreditation certificates.
+                            </span>
+                        </span>
+                    </h3>
                     <p class="text-xl font-bold text-gray-800">
                         @if ($generalInfoCount && $generalInfoCount > 0)
                             {{ $generalInfoCount }}
@@ -24,7 +44,17 @@
 
                 <!-- Active Applications -->
                 <div class="bg-green-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-green-700">Active Applications</h3>
+                    <h3 class="font-semibold text-green-700 flex items-center">
+                        Active Applications
+                        <span class="ml-2 relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-56">
+                                Applications currently in review or approval process.
+                            </span>
+                        </span>
+                    </h3>
                     <p class="text-xl font-bold text-gray-800">
                         @if ($applicationCount && $applicationCount > 0)
                             {{ $applicationCount }}
@@ -52,12 +82,32 @@
         <!-- 1st ROW -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">TC per Regions</h2>
+                <h2 class="text-lg font-semibold text-gray-700 flex items-center">
+                    TC per Regions
+                    <span class="ml-2 relative group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-60">
+                            Regional distribution breakdown of active cooperatives.
+                        </span>
+                    </span>
+                </h2>
                 <div id="regionsChart" class="w-full h-full"></div>
             </div>
 
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">CGS Renewals Per Year</h2>
+                <h2 class="text-lg font-semibold text-gray-700 flex items-center">
+                    CGS Renewals Per Year
+                    <span class="ml-2 relative group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-60">
+                            Yearly trend showing certificate renewal applications.
+                        </span>
+                    </span>
+                </h2>
                 <div id="cgsChart" class="w-full h-full"></div>
             </div>
         </div>
@@ -65,12 +115,32 @@
         <!-- 2nd ROW -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden mb-6" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">Accreditation Status</h2>
+                <h2 class="text-lg font-semibold text-gray-700 flex items-center">
+                    Accreditation Status
+                    <span class="ml-2 relative group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-60">
+                            Current distribution of applications in each approval stage.
+                        </span>
+                    </span>
+                </h2>
                 <div id="accreditationChart" class="w-full h-full"></div>
             </div>
 
             <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden mb-6" style="height: 300px;">
-                <h2 class="text-lg font-semibold text-gray-700">CGS Renewal Status</h2>
+                <h2 class="text-lg font-semibold text-gray-700 flex items-center">
+                    CGS Renewal Status
+                    <span class="ml-2 relative group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-2 left-6 w-60">
+                            Status breakdown of ongoing certificate renewal applications.
+                        </span>
+                    </span>
+                </h2>
                 <div id="renewalChart" class="w-full h-full"></div>
             </div>
         </div>
@@ -78,7 +148,7 @@
 
     <div class="flex justify-end mb-4 mr-2">
         <button onclick="printDiv('printableArea')"
-            class="flex items-center gap-2 px-5 py-2 bg-blue-900 text-white rounded hover:bg-blue-800">
+            class="flex items-center gap-2 px-5 py-2 bg-blue-900 text-white rounded hover:bg-blue-800 relative group">
             <!-- Heroicon: Printer -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
@@ -86,6 +156,9 @@
                     d="M6 9V4h12v5m-6 4h6v6H6v-6h6zM6 14v2m0 0h12m0 0v-2" />
             </svg>
             Print Analytics
+            <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -mt-16 -ml-16 w-40">
+                Generate printable report of all dashboard metrics.
+            </span>
         </button>
     </div>
 
@@ -158,16 +231,16 @@
                 },
                 series: data.map(d => d.total),
                 labels: data.map(d => d.status),
-                colors: colors, // Apply the specific colors based on status
+                colors: colors,
             }).render();
         }
 
-        document.getElementById('yearFilter').addEventListener('change', function() {
-            fetchChartData(this.value);
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchChartData(new Date().getFullYear());
+
+            document.getElementById('yearFilter').addEventListener('change', function() {
+                fetchChartData(this.value);
+            });
         });
-
-        fetchChartData(new Date().getFullYear());
     </script>
-
-
 </x-layout>

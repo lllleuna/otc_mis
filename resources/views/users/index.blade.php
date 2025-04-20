@@ -5,6 +5,18 @@
     <div class="mx-4 relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <div>
+
+                <!-- Information icon positioned above the table but not touching the Name column -->
+        <div class="px-6 pb-2 flex justify-start">
+            <span class="relative group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-2 px-3 -mt-2 left-7 w-56">
+                    Manage OTC employee accounts and assign user roles by division.
+                </span>
+            </span>
+        </div>
                 @if (session('success'))
                     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
                         {{ session('success') }}

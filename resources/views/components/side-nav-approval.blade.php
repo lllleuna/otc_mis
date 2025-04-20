@@ -1,9 +1,17 @@
 {{-- Accreditation Module --}}
 
 <div x-data="{ open: false }" class="h-screen flex flex-col w-64 bg-gray-200 rounded-lg text-black-900 fixed shadow-lg">
-    <!-- Header/Logo Area -->
-    <div class="p-4 border-b border-gray-700">
+    <!-- Header/Logo Area with information icon -->
+    <div class="p-4 border-b border-gray-700 flex justify-between items-center">
         <h2 class="text-xl font-semibold">Application Status</h2>
+        <span class="relative group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-2 px-3 right-0 -mt-2 w-56">
+                Use this panel to filter applications by their current status in the approval workflow.
+            </span>
+        </span>
     </div>
 
     <!-- Navigation Links -->
@@ -21,7 +29,7 @@
                 request()->query('status') ?? (request()->has('search') ? session('last_status', 'new') : 'new');
         @endphp
 
-        
+
         @can('admin-access')
             @foreach ($head_statuses as $status => $label)
                 <x-apply-side-nav-links
