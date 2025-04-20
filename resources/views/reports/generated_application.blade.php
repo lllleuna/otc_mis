@@ -12,7 +12,7 @@
 
         .header {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 5px;
             font-size: 24px;
             font-weight: 600;
             color: #4b5563;
@@ -69,6 +69,17 @@
             font-size: 14px;
             color: #6b7280;
         }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .logo {
+            max-width: 80%;
+            height: auto;
+            opacity: .9;
+        }
     </style>
 </head>
 
@@ -94,6 +105,15 @@
             'BARMM' => 'Bangsamoro Autonomous Region in Muslim Mindanao',
         ];
     @endphp
+    @php
+        $path = public_path('images/OTC-UpdatedBannerLogo4Black.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    @endphp
+    <div class="logo-container">
+        <img src="{{ $base64 }}" alt="OTC Banner Logo" class="logo">
+    </div>
 
     <div class="header">
         @php

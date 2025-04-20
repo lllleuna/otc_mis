@@ -38,6 +38,17 @@
         th {
             background-color: #eee;
         }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .logo {
+            max-width: 80%;
+            height: auto;
+            opacity: .9;
+        }
     </style>
 </head>
 
@@ -65,10 +76,19 @@
         ];
     @endphp
 
+    @php
+        $path = public_path('images/OTC-UpdatedBannerLogo4Black.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    @endphp
+    <div class="logo-container">
+        <img src="{{ $base64 }}" alt="OTC Banner Logo" class="logo">
+    </div>
 
     <div class="header">
         <h2>{{ $report_type }} Report</h2>
-        <p>Region: {{ $region ? ($regions[$region] ?? 'Unknown Region') : 'All Regions' }}</p>
+        <p>Region: {{ $region ? $regions[$region] ?? 'Unknown Region' : 'All Regions' }}</p>
         <p>Year: {{ $year ?? 'All Years' }}</p>
         <p>Date Generated: {{ \Carbon\Carbon::parse($generated_at)->format('F d, Y h:i A') }}</p>
     </div>

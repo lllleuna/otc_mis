@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,62 +10,96 @@
             font-family: Arial, sans-serif;
             font-size: 12px;
         }
+
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .header h2 {
             margin: 0;
             font-size: 24px;
             font-weight: 600;
             color: #4b5563;
         }
+
         .header p {
             font-size: 12px;
             color: #6b7280;
         }
+
         .table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .table th, .table td {
+
+        .table th,
+        .table td {
             padding: 10px;
             text-align: left;
             border: 1px solid #e5e7eb;
         }
+
         .table th {
             background-color: #c0c9d9;
             font-weight: bold;
         }
+
         .table tr:hover {
             background-color: #f9fafb;
         }
+
         .table td {
             text-align: left;
         }
+
         .no-records {
             text-align: center;
             font-size: 16px;
             color: #ef4444;
         }
+
         .user-info {
             margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid #e5e7eb;
         }
+
         .user-info h3 {
             font-size: 16px;
             font-weight: 600;
             color: #374151;
         }
+
         .user-info p {
             font-size: 14px;
             color: #6b7280;
         }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .logo {
+            max-width: 80%;
+            height: auto;
+            opacity: .9;
+        }
     </style>
 </head>
+
 <body>
+    @php
+        $path = public_path('images/OTC-UpdatedBannerLogo4Black.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    @endphp
+    <div class="logo-container">
+        <img src="{{ $base64 }}" alt="OTC Banner Logo" class="logo">
+    </div>
     <div class="header">
         <h2>Accreditation Report</h2>
         <p>Generated on: {{ now()->format('F j, Y') }}</p>
@@ -112,4 +147,5 @@
         </div>
     </div>
 </body>
+
 </html>
