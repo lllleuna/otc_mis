@@ -126,7 +126,33 @@ class GenerateReportController extends Controller
             }
         
             if ($request->region) {
-                $query->where('region', $request->region);
+                // If region is selected and it's acc_app or cgs_app, convert name to code
+                $regionNames = [
+                    '010000000' => 'Region I (Ilocos Region)',
+                    '020000000' => 'Region II (Cagayan Valley)',
+                    '030000000' => 'Region III (Central Luzon)',
+                    '040000000' => 'Region IV-A (CALABARZON)',
+                    '170000000' => 'MIMAROPA Region',
+                    '050000000' => 'Region V (Bicol Region)',
+                    '060000000' => 'Region VI (Western Visayas)',
+                    '070000000' => 'Region VII (Central Visayas)',
+                    '080000000' => 'Region VIII (Eastern Visayas)',
+                    '090000000' => 'Region IX (Zamboanga Peninsula)',
+                    '100000000' => 'Region X (Northern Mindanao)',
+                    '110000000' => 'Region XI (Davao Region)',
+                    '120000000' => 'Region XII (SOCCSKSARGEN)',
+                    '130000000' => 'Region XIII (Caraga)',
+                    'CAR' => 'Cordillera Administrative Region',
+                    'NCR' => 'National Capital Region',
+                    'BARMM' => 'Bangsamoro Autonomous Region in Muslim Mindanao',
+                ];
+        
+                // Convert region name to code
+                $regionCode = array_search($request->region, $regionNames);
+        
+                if ($regionCode) {
+                    $query->where('region', $regionCode);
+                }
             }
         
             if ($request->year) {
