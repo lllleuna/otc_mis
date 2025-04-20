@@ -74,9 +74,14 @@
 </head>
 
 <body>
+    @php
+        $path = public_path('images/OTC-UpdatedBannerLogo4Black.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    @endphp
     <div class="logo-container">
-        <img src="{{ asset('images/OTC-UpdatedBannerLogo4Black.png') }}"
-            alt="OTC Banner Logo" class="logo">
+        <img src="{{ $base64 }}" alt="OTC Banner Logo" class="logo">
     </div>
     <div class="header">
         <h2>CGS Renewal Report</h2>
