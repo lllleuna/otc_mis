@@ -35,7 +35,7 @@
 
         .header {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 10px;
             font-size: 24px;
             font-weight: 600;
             color: #4b5563;
@@ -73,12 +73,13 @@
 
         .logo-container {
             text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 0px;
         }
 
         .logo {
             max-width: 80%;
             height: auto;
+            opacity: .9;
         }
     </style>
 </head>
@@ -120,7 +121,7 @@
                             <td>{{ $coop->cda_registration_no }}</td>
                             <td>{{ $coop->accreditation_no }}</td>
                             <td>{{ $coop->name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($coop->validity_date)->format('F d, Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($coop->validity_date)->format('d M Y') }}</td>
                             <td>{{ $coop->region ?? 'N/A' }}</td>
                         </tr>
                     @endforeach
