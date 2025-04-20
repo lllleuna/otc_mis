@@ -109,24 +109,24 @@ class GenerateReportController extends Controller
                 return Excel::download(new CGSRenewalReportExport($cooperatives, $user), "{$request->report_type}_report.xlsx");
             }
         } 
-        
+    
         elseif (in_array($request->report_type, ['acc_app', 'cgs_app'])) {
             $query = Application::select('tc_name', 'cda_reg_no', 'cda_reg_date', 'region', 'status', 'created_at');
-            
+        
             // Filter by application_type based on report_type
             if ($request->report_type === 'acc_app') {
                 $query->where('application_type', 'accreditation');
             } elseif ($request->report_type === 'cgs_app') {
                 $query->where('application_type', 'CGS Renewal');
             }
-            
+        
             // Optional filters
             if ($request->status) {
                 $query->where('status', $request->status);
             }
         
             if ($request->region) {
-                // If region is selected, convert name to code
+                // If region is selected and it's acc_app or cgs_app, convert name to code
                 $regionNames = [
                     '010000000' => 'Ilocos Region',
                     '020000000' => 'Cagayan Valley',
@@ -159,30 +159,17 @@ class GenerateReportController extends Controller
                 $query->whereYear('updated_at', $request->year);
             }
         
-            // Get the cooperatives matching the initial filters
             $cooperatives = $query->get();
-        
-            // If the report_type is 'cgs_app', filter rows with the same cda_reg_no and region not null
-            if ($request->report_type === 'cgs_app') {
-                // Get the cda_reg_no from the first matching row
-                $cdaRegNo = $cooperatives->first()->cda_reg_no ?? null;
-        
-                if ($cdaRegNo) {
-                    // Filter the query to find rows with the same cda_reg_no and where region is not null
-                    $filteredCooperatives = Application::where('cda_reg_no', $cdaRegNo)
-                        ->whereNotNull('region')
-                        ->get();
-                }
-            }
         
             // Use new views and export classes
             if ($request->format === 'pdf') {
-                $pdf = Pdf::loadView('reports.generated_application', compact('filteredCooperatives', 'user'));
+                $pdf = Pdf::loadView('reports.generated_application', compact('cooperatives', 'user'));
                 return $pdf->download("{$request->report_type}_report.pdf");
             } elseif ($request->format === 'excel') {
-                return Excel::download(new ApplicationReportExport($filteredCooperatives, $user), "{$request->report_type}_report.xlsx");
+                return Excel::download(new ApplicationReportExport($cooperatives, $user), "{$request->report_type}_report.xlsx");
             }
-        }        
+        }
+        
     
         return back()->withErrors(['Invalid format selected']);
     }    
