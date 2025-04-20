@@ -112,21 +112,29 @@ class GenerateReportController extends Controller
     
         elseif (in_array($request->report_type, ['acc_app', 'cgs_app'])) {
             $query = Application::select('tc_name', 'cda_reg_no', 'cda_reg_date', 'region', 'status', 'created_at');
-    
+        
+            // Filter by application_type based on report_type
+            if ($request->report_type === 'acc_app') {
+                $query->where('application_type', 'accreditation');
+            } elseif ($request->report_type === 'cgs_app') {
+                $query->where('application_type', 'CGS Renewal');
+            }
+        
+            // Optional filters
             if ($request->status) {
                 $query->where('status', $request->status);
             }
-    
+        
             if ($request->region) {
                 $query->where('region', $request->region);
             }
-    
+        
             if ($request->year) {
                 $query->whereYear('updated_at', $request->year);
             }
-    
+        
             $cooperatives = $query->get();
-    
+        
             // Use new views and export classes
             if ($request->format === 'pdf') {
                 $pdf = Pdf::loadView('reports.generated_application', compact('cooperatives', 'user'));
@@ -135,6 +143,7 @@ class GenerateReportController extends Controller
                 return Excel::download(new ApplicationReportExport($cooperatives, $user), "{$request->report_type}_report.xlsx");
             }
         }
+        
     
         return back()->withErrors(['Invalid format selected']);
     }    

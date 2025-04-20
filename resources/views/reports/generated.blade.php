@@ -13,19 +13,17 @@
 
         .header {
             text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h2 {
-            margin: 0;
+            padding-top: 10px;
             font-size: 24px;
             font-weight: 600;
             color: #4b5563;
         }
 
-        .header p {
-            font-size: 12px;
+        .subheader {
+            text-align: center;
             color: #6b7280;
+            font-size: 12px;
+            margin-top: 5px;
         }
 
         .table {
@@ -101,8 +99,8 @@
         <img src="{{ $base64 }}" alt="OTC Banner Logo" class="logo">
     </div>
     <div class="header">
-        <h2>Accreditation Report</h2>
-        <p>Generated on: {{ now()->format('F j, Y') }}</p>
+        <h3>Accredited Transport Cooperatives</h3>
+        <p class="subheader">Generated on: {{ now()->format('F j, Y') }}</p>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-4">
