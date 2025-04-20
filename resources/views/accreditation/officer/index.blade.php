@@ -6,7 +6,7 @@
 
     <div class="ml-64 p-6 bg-gray-50 min-h-screen">
         <div class="bg-white rounded-lg shadow-md p-6">
-            <h1 class="text-2xl font-bold mb-6">
+            <h1 class="text-2xl font-bold mb-6 flex items-center">
                 @php
                     $statusLabels = [
                         'new' => 'New Applications',
@@ -16,11 +16,31 @@
                         'released' => 'Released Certificates',
                         'rejected' => 'Rejected Applications',
                     ];
+                    $statusTooltips = [
+                        'new' => 'Applications newly submitted for evaluation.',
+                        'saved' => 'Applications currently being evaluated.',
+                        'evaluated' => 'Applications pending head approval.',
+                        'approved' => 'Applications approved for certificate release.',
+                        'released' => 'Applications with issued certificates.',
+                        'rejected' => 'Applications that failed requirements.',
+                    ];
                     $currentStatus =
                         request()->query('status') ??
                         (request()->has('search') ? session('last_status', 'new') : 'new');
                     echo $statusLabels[$currentStatus] ?? 'All Applications';
+                    $currentTooltip = $statusTooltips[$currentStatus] ?? 'View applications by status.';
                 @endphp
+                <span class="ml-2 relative group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 cursor-help" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span
+                        class="absolute z-10 invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-2 px-3 -mt-2 left-7 w-56">
+                        {{ $currentTooltip }}
+                    </span>
+                </span>
             </h1>
 
             {{-- Search Container --}}
