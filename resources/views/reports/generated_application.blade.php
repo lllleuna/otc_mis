@@ -129,7 +129,7 @@
         <p class="subheader">Generated on: {{ now()->format('F j, Y') }}</p>
     </div>
 
-    @if ($cooperatives->isEmpty())
+    @if ($filteredCooperatives->isEmpty())
         <div class="no-records">
             <p>No records found</p>
         </div>
@@ -147,7 +147,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cooperatives as $index => $coop)
+                @foreach ($filteredCooperatives as $index => $coop)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $coop->tc_name }}</td>
@@ -174,5 +174,6 @@
         </p>
     </div>
 </body>
+
 
 </html>
