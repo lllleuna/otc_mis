@@ -70,6 +70,16 @@
             font-size: 14px;
             color: #6b7280;
         }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
