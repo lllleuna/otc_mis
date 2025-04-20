@@ -73,11 +73,11 @@
 
         .logo-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .logo {
-            max-width: 100%;
+            max-width: 80%;
             height: auto;
         }
     </style>
