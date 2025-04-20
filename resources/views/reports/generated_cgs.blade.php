@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,29 @@
             font-family: Arial, sans-serif;
             font-size: 12px;
         }
+
         .table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .table th, .table td {
+
+        .table th,
+        .table td {
             padding: 8px;
             text-align: left;
             border: 1px solid #e5e7eb;
         }
+
         .table th {
             background-color: #c0c9d9;
             font-weight: bold;
         }
+
         .table tr:hover {
             background-color: #f9fafb;
         }
+
         .header {
             text-align: center;
             padding-top: 20px;
@@ -33,34 +40,44 @@
             font-weight: 600;
             color: #4b5563;
         }
+
         .subheader {
             text-align: center;
             color: #6b7280;
             font-size: 12px;
             margin-top: 5px;
         }
+
         .no-records {
             text-align: center;
             font-size: 16px;
             color: #ef4444;
         }
+
         .user-info {
             margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid #e5e7eb;
         }
+
         .user-info h3 {
             font-size: 16px;
             font-weight: 600;
             color: #374151;
         }
+
         .user-info p {
             font-size: 14px;
             color: #6b7280;
         }
     </style>
 </head>
+
 <body>
+    <div class="logo-container">
+        <img src="{{ asset('images/OTC-UpdatedBannerLogo4Black.png') }}"
+            alt="OTC Banner Logo" class="logo">
+    </div>
     <div class="header">
         <h2>CGS Renewal Report</h2>
         <p class="subheader">Generated on: {{ now()->format('F j, Y') }}</p>
@@ -108,4 +125,5 @@
         </div>
     </div>
 </body>
+
 </html>
