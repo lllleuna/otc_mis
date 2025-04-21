@@ -11,10 +11,11 @@ class TrainingRequestController extends Controller
     public function index(Request $request)
     {
         $requests = TrainingRequest::query()
-        ->when($request->filled('cda_reg_no'), fn($q) => $q->where('cda_reg_no', 'like', '%' . $request->cda_reg_no . '%'))
-        ->when($request->filled('training_type'), fn($q) => $q->where('training_type', $request->training_type))
-        ->latest()
-        ->paginate(10);
+            ->when($request->filled('cda_reg_no'), fn($q) => $q->where('cda_reg_no', 'like', '%' . $request->cda_reg_no . '%'))
+            ->when($request->filled('training_type'), fn($q) => $q->where('training_type', $request->training_type))
+            ->when($request->filled('reference_no'), fn($q) => $q->where('reference_no', 'like', '%' . $request->reference_no . '%'))
+            ->latest()
+            ->paginate(10);    
                         
         return view('training_requests.index', compact('requests'));
     }    

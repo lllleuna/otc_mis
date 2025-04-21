@@ -13,19 +13,27 @@
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
-                <label for="training_type" class="block text-sm font-medium text-gray-700">Search by Training Type</label>
+                <label for="training_type" class="block text-sm font-medium text-gray-700">Search by Training
+                    Type</label>
                 <select name="training_type" id="training_type"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     <option value="">All</option>
-                    <option value="face-to-face" {{ request('training_type') == 'face-to-face' ? 'selected' : '' }}>Face-to-Face</option>
+                    <option value="face-to-face" {{ request('training_type') == 'face-to-face' ? 'selected' : '' }}>
+                        Face-to-Face</option>
                     <option value="online" {{ request('training_type') == 'online' ? 'selected' : '' }}>Online</option>
                 </select>
+            </div>
+            <div>
+                <label for="reference_no" class="block text-sm font-medium text-gray-700">Search by Reference No</label>
+                <input type="text" name="reference_no" id="reference_no" value="{{ request('reference_no') }}"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div class="flex items-end">
                 <button type="submit"
                     class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Search</button>
             </div>
         </form>
+
 
         <!-- Table -->
         <div class="overflow-x-auto rounded-lg shadow">
@@ -47,9 +55,12 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->reference_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->cda_reg_no }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->training_type ?? 'N/A' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ ucfirst($req->status) }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->created_at->format('Y-m-d') }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                {{ $req->training_type ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ ucfirst($req->status) }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                {{ $req->created_at->format('Y-m-d') }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a href="{{ route('training.show', $req->id) }}"
                                     class="inline-block bg-blue-500 text-blue-800 text-xs px-3 py-1 rounded hover:bg-blue-600 transition">View</a>
@@ -57,7 +68,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">No training requests found.</td>
+                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">No training requests found.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
