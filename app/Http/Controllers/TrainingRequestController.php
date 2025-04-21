@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 
 class TrainingRequestController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $requests = TrainingRequest::query()
         ->when($request->filled('cda_reg_no'), fn($q) => $q->where('cda_reg_no', 'like', '%' . $request->cda_reg_no . '%'))
