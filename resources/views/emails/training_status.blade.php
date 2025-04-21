@@ -44,7 +44,7 @@
 
         <p>Dear {{ $training->email }},</p>
 
-        <p>Your training request with reference number <strong>{{ $training->reference_no }}</strong> has been <strong>{{ ucfirst($request->status) }}</strong>.</p>
+        <p>Your training request with reference number <strong>{{ $training->reference_no }}</strong> has been <strong>{{ ucfirst($training->status) }}</strong>.</p>
 
         @if($training->status == 'approved')
             <p><strong>Training Type:</strong> {{ ucfirst($training->training_type) }}<br>
