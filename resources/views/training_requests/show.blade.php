@@ -18,12 +18,18 @@
             </div>
         </div>
 
+        @php
+            $isFinalized = in_array($request->status, ['approved', 'rejected']);
+        @endphp
+
         <form method="POST" action="{{ route('training.update', $request->id) }}">
             @csrf
+
             <!-- Training Type Selection -->
             <div class="mb-3">
                 <label for="training_type" class="form-label">Training Type</label>
-                <select name="training_type" id="training_type" class="form-select" required>
+                <select name="training_type" id="training_type" class="form-select" {{ $isFinalized ? 'disabled' : '' }}
+                    required>
                     <option value="" disable>Select Type</option>
                     <option value="face-to-face" {{ $request->training_type == 'face-to-face' ? 'selected' : '' }}>
                         Face-to-Face</option>
@@ -35,28 +41,33 @@
                 <label for="training_date_time" class="form-label">Training Date & Time</label>
                 <input type="datetime-local" name="training_date_time" class="form-control"
                     value="{{ $request->training_date_time ? \Carbon\Carbon::parse($request->training_date_time)->format('Y-m-d\TH:i') : '' }}"
-                    required>
+                    {{ $isFinalized ? 'disabled' : '' }} required>
             </div>
 
             <!-- Meeting Link (conditionally shown) -->
             <div class="mb-3" id="meeting_link_group"
                 style="display: {{ $request->training_type == 'online' ? 'block' : 'none' }};">
-                <label for="meeting_link" class="form-label">Google Meeting Link (optional)</label>
-                <input type="url" name="meeting_link" class="form-control" value="{{ $request->meeting_link }}">
+                <label for="meeting_link" class="form-label">Google Meeting Link</label>
+                <input type="url" name="meeting_link" class="form-control" value="{{ $request->meeting_link }}"
+                    {{ $isFinalized ? 'disabled' : '' }}>
             </div>
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
-                <select name="status" class="form-select" required>
+                <select name="status" class="form-select" {{ $isFinalized ? 'disabled' : '' }} required>
                     <option value="pending" {{ $request->status == 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="approved" {{ $request->status == 'approved' ? 'selected' : '' }}>Approved</option>
                     <option value="rejected" {{ $request->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-success">Update & Notify</button>
+            @unless ($isFinalized)
+                <button type="submit" class="btn btn-success">Update & Notify</button>
+            @endunless
+
             <a href="{{ route('training.index') }}" class="btn btn-secondary">Back</a>
         </form>
+
     </div>
 
     <script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             color: #333;
             padding: 20px;
         }
+
         .email-container {
             background: #fff;
             padding: 30px;
@@ -19,6 +21,7 @@
             max-width: 600px;
             margin: auto;
         }
+
         .btn {
             display: inline-block;
             padding: 12px 20px;
@@ -28,9 +31,11 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
         .btn:hover {
             background-color: #2980b9;
         }
+
         .footer {
             margin-top: 40px;
             font-size: 0.9em;
@@ -38,21 +43,32 @@
         }
     </style>
 </head>
+
 <body>
     <div class="email-container">
         <h2>Training Request Update</h2>
 
         <p>Dear {{ $training->email }},</p>
 
-        <p>Your training request with reference number <strong>{{ $training->reference_no }}</strong> has been <strong>{{ ucfirst($training->status) }}</strong>.</p>
+        <p>Your training request with reference number <strong>{{ $training->reference_no }}</strong> has been
+            <strong>{{ ucfirst($training->status) }}</strong>.</p>
 
-        @if($training->status == 'approved')
-            <p><strong>Training Type:</strong> {{ ucfirst($training->training_type) }}<br>
-            <strong>Scheduled On:</strong> {{ \Carbon\Carbon::parse($training->training_date_time)->format('F d, Y h:i A') }}</p>
+        @if ($training->status == 'approved')
+            <p>
+                <strong>Training Type:</strong> {{ ucfirst($training->training_type) }}<br>
+                <strong>Scheduled On:</strong>
+                {{ \Carbon\Carbon::parse($training->training_date_time)->format('F d, Y h:i A') }}
+            </p>
 
-            @if($training->meeting_link)
+            @if ($training->training_type === 'online' && $training->meeting_link)
                 <p>You can join the training using the link below:</p>
                 <a href="{{ $training->meeting_link }}" class="btn">Join Meeting</a>
+            @elseif($training->training_type === 'face-to-face')
+                <p><strong>Venue:</strong><br>
+                    Training Room, 8th Floor Columbia Towers<br>
+                    H3V4+QFQ, Ortigas Ave, Mandaluyong, Metro Manila<br>
+                    <a href="https://maps.app.goo.gl/nyhGcJoLtsnonWT37" target="_blank">View on Google Maps</a>
+                </p>
             @endif
         @endif
 
@@ -63,4 +79,5 @@
         </div>
     </div>
 </body>
+
 </html>
