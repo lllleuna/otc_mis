@@ -10,9 +10,12 @@ class TrainingRequestController extends Controller
 {
     public function index()
     {
-        $requests = TrainingRequest::select('id', 'email', 'cda_reg_no', 'status', 'created_at')->get();
+        $requests = TrainingRequest::select('id', 'email', 'cda_reg_no', 'status', 'created_at')
+                        ->latest()
+                        ->paginate(10); // Add pagination
+                        
         return view('training_requests.index', compact('requests'));
-    }
+    }    
 
     public function show($id)
     {

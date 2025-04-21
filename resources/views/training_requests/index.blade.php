@@ -9,6 +9,7 @@
                 <tr>
                     <th>Email</th>
                     <th>CDA Reg. No</th>
+                    <th>Training Type</th>
                     <th>Status</th>
                     <th>Submitted At</th>
                     <th>Action</th>
@@ -19,6 +20,7 @@
                     <tr>
                         <td>{{ $req->email }}</td>
                         <td>{{ $req->cda_reg_no }}</td>
+                        <td>{{ $req->training_type }}</td>
                         <td>{{ ucfirst($req->status) }}</td>
                         <td>{{ $req->created_at->format('Y-m-d') }}</td>
                         <td><a href="{{ route('training.show', $req->id) }}" class="btn btn-primary btn-sm">View</a></td>
@@ -26,6 +28,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $requests->links() }}    
     </div>
 
 </x-layout>
