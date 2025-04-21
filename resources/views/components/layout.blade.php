@@ -31,12 +31,14 @@ contains logo, profile name & icon, and navigation links
                         @if (auth()->user()->role === 'Admin')
                             <div class="flex items-center space-x-2">
                                 <span
-                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md uppercase">Head Portal</span>
+                                    class="text-sm font-medium bg-blue-600 text-white px-2 py-1 rounded-md uppercase">Head
+                                    Portal</span>
                             </div>
                         @elseif(auth()->user()->role === 'Officer 1' || auth()->user()->role === 'Officer 2')
                             <div class="flex items-center space-x-2">
                                 <span
-                                    class="text-sm font-medium bg-green-600 text-white px-2 py-1 rounded-md uppercase">Officer Portal</span>
+                                    class="text-sm font-medium bg-green-600 text-white px-2 py-1 rounded-md uppercase">Officer
+                                    Portal</span>
                             </div>
                         @endif
                     </div>
@@ -86,6 +88,7 @@ contains logo, profile name & icon, and navigation links
                 @can('officer1-access')
                     <x-nav-link href="{{ route('accreditation.evaluate.index') }}" :active="request()->is('application/evaluate*')"> Accreditation & CGS
                         Evaluation </x-nav-link>
+                    <x-nav-link href="{{ route('training.index') }}" :active="request()->is('officer/training-requests*')"> Training Management </x-nav-link>
                 @endcan
                 @can('admin-access')
                     <x-nav-link href="{{ route('accreditation.approval.index') }}" :active="request()->is('application/approval*')"> Accreditation & CGS

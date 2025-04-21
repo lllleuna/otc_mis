@@ -13,6 +13,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GeneralInfoController;
 use App\Http\Controllers\GenerateReportController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TrainingRequestController;
 
 
 Route::get('/download-cgs/{filename}', function ($filename) {
@@ -146,4 +147,10 @@ Route::get('/test-email', function () {
     });
 
     return 'Email sent!';
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/officer/training-requests', [TrainingRequestController::class, 'index'])->name('training.index');
+    Route::get('/officer/training-requests/{id}', [TrainingRequestController::class, 'show'])->name('training.show');
+    Route::post('/officer/training-requests/{id}/update', [TrainingRequestController::class, 'update'])->name('training.update');
 });
