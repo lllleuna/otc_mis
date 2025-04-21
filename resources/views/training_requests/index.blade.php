@@ -64,7 +64,7 @@
 
         <!-- Pagination -->
         <div class="mt-6">
-            {{ $requests->withQueryString()->links('vendor.pagination.tailwind') }}
+            {{ $requests->withQueryString()->links() }}
         </div>
     </div>
 </x-layout>
