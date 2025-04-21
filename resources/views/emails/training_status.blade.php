@@ -42,17 +42,17 @@
     <div class="email-container">
         <h2>Training Request Update</h2>
 
-        <p>Dear {{ $request->email }},</p>
+        <p>Dear {{ $training->email }},</p>
 
-        <p>Your training request with reference number <strong>{{ $request->reference_no }}</strong> has been <strong>{{ ucfirst($request->status) }}</strong>.</p>
+        <p>Your training request with reference number <strong>{{ $training->reference_no }}</strong> has been <strong>{{ ucfirst($request->status) }}</strong>.</p>
 
-        @if($request->status == 'approved')
-            <p><strong>Training Type:</strong> {{ ucfirst($request->training_type) }}<br>
-            <strong>Scheduled On:</strong> {{ \Carbon\Carbon::parse($request->training_date_time)->format('F d, Y h:i A') }}</p>
+        @if($training->status == 'approved')
+            <p><strong>Training Type:</strong> {{ ucfirst($training->training_type) }}<br>
+            <strong>Scheduled On:</strong> {{ \Carbon\Carbon::parse($training->training_date_time)->format('F d, Y h:i A') }}</p>
 
-            @if($request->meeting_link)
+            @if($training->meeting_link)
                 <p>You can join the training using the link below:</p>
-                <a href="{{ $request->meeting_link }}" class="btn">Join Meeting</a>
+                <a href="{{ $training->meeting_link }}" class="btn">Join Meeting</a>
             @endif
         @endif
 
