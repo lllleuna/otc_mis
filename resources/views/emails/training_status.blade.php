@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training Request Update</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-        
+
         body {
             font-family: 'Roboto', Arial, sans-serif;
             background-color: #f6f9fc;
@@ -177,18 +178,27 @@
 
         <p>Dear {{ $training->email }},</p>
 
-        <p>We're reaching out to inform you that your training request with reference number <strong>{{ $training->reference_no }}</strong> has been <strong>{{ ucfirst($training->status) }}</strong>.</p>
+        <p>We're reaching out to inform you that your training request with reference number
+            <strong>{{ $training->reference_no }}</strong> has been <strong>{{ ucfirst($training->status) }}</strong>.
+        </p>
 
         @if ($training->status == 'approved')
             <div class="training-details">
                 <h3>Training Information</h3>
                 <p><span class="detail-label">Type:</span> {{ ucfirst($training->training_type) }}</p>
-                <p><span class="detail-label">Date & Time:</span> {{ \Carbon\Carbon::parse($training->training_date_time)->format('F d, Y h:i A') }}</p>
-                
-                @if ($training->training_type === 'online' && $training->meeting_link)
+                <p><span class="detail-label">Date & Time:</span>
+                    {{ \Carbon\Carbon::parse($training->training_date_time)->format('F d, Y h:i A') }}</p>
+
+                @if ($training->training_type === 'online')
                     <p><span class="detail-label">Format:</span> Virtual Session</p>
-                    <p>You can join the training using the button below:</p>
-                    <a href="{{ $training->meeting_link }}" class="btn">Join Training Session</a>
+
+                    @if ($training->meeting_link)
+                        <p>You can join the training using the button below:</p>
+                        <a href="{{ $training->meeting_link }}" class="btn">Join Training Session</a>
+                    @else
+                        <p><em>The meeting link is not yet available. Please wait for a follow-up email or contact our
+                                training department.</em></p>
+                    @endif
                 @elseif($training->training_type === 'face-to-face')
                     <p><span class="detail-label">Format:</span> In-person Session</p>
                     <div class="venue-box">
@@ -197,20 +207,27 @@
                             Training Room, 8th Floor Columbia Towers<br>
                             H3V4+QFQ, Ortigas Ave, Mandaluyong, Metro Manila
                         </p>
-                        <a href="https://maps.app.goo.gl/nyhGcJoLtsnonWT37" target="_blank" class="map-link">View on Google Maps</a>
+                        <a href="https://maps.app.goo.gl/nyhGcJoLtsnonWT37" target="_blank" class="map-link">View on
+                            Google Maps</a>
                     </div>
                 @endif
             </div>
 
-            <p>Please arrive 15 minutes before the scheduled time. Don't forget to bring your company ID for quick access to the facility.</p>
+            <p>Please arrive 15 minutes before the scheduled time. Don't forget to bring your company ID for quick
+                access to the facility.</p>
         @endif
 
-        <p>If you have any questions or need to make changes to your request, please reply to this email or contact our training department directly.</p>
+        <p>If you have any questions or need to make changes to your request, please reply to this email or contact our
+            training department directly.</p>
 
         <div class="footer">
             <p class="signature">Best regards,</p>
             <p>The Operations Team</p>
         </div>
+
+        {{-- Debug (optional) --}}
+        {{-- <p><strong>DEBUG:</strong> Type: {{ $training->training_type }}, Meeting Link: {{ $training->meeting_link ?? 'N/A' }}</p> --}}
     </div>
 </body>
+
 </html>
