@@ -20,7 +20,7 @@ class TrainingRequestController extends Controller
             })
             ->when($request->filled('training_type'), fn($q) => $q->where('training_type', $request->training_type))
             ->latest()
-            ->paginate(10);
+            ->paginate(5);
                         
         return view('training_requests.index', compact('requests'));
     }    
