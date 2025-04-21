@@ -138,3 +138,12 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', function() {
     return view('landing');
 })->name('landing.page');
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email from Brevo.', function ($message) {
+        $message->to('leuna.sag@gmail.com')
+                ->subject('Test Email');
+    });
+
+    return 'Email sent!';
+});
