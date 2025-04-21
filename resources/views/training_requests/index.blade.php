@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $req->email }}</td>
                         <td>{{ $req->cda_reg_no }}</td>
-                        <td>{{ $req->training_type }}</td>
+                        <td>{{ $req->training_type ?? "na"}}</td>
                         <td>{{ ucfirst($req->status) }}</td>
                         <td>{{ $req->created_at->format('Y-m-d') }}</td>
                         <td><a href="{{ route('training.show', $req->id) }}" class="btn btn-primary btn-sm">View</a></td>
