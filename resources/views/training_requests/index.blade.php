@@ -8,8 +8,9 @@
         <!-- Search Form -->
         <form method="GET" action="{{ route('training.index') }}" class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-                <label for="cda_reg_no" class="block text-sm font-medium text-gray-700">Search by CDA Reg. No</label>
-                <input type="text" name="cda_reg_no" id="cda_reg_no" value="{{ request('cda_reg_no') }}"
+                <label for="search" class="block text-sm font-medium text-gray-700">Search by CDA Reg. No or Reference
+                    No</label>
+                <input type="text" name="search" id="search" value="{{ request('search') }}"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
@@ -22,11 +23,6 @@
                         Face-to-Face</option>
                     <option value="online" {{ request('training_type') == 'online' ? 'selected' : '' }}>Online</option>
                 </select>
-            </div>
-            <div>
-                <label for="reference_no" class="block text-sm font-medium text-gray-700">Search by Reference No</label>
-                <input type="text" name="reference_no" id="reference_no" value="{{ request('reference_no') }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div class="flex items-end">
                 <button type="submit"
