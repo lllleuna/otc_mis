@@ -28,7 +28,7 @@
         </form>
 
         <!-- Table -->
-        <div class="overflow-x-auto rounded-lg shadow ring-1 ring-black ring-opacity-5">
+        <div class="overflow-x-auto rounded-lg shadow">
             <table class="min-w-full divide-y divide-gray-200 bg-white">
                 <thead class="bg-gray-100">
                     <tr>
@@ -50,7 +50,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->created_at->format('Y-m-d') }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a href="{{ route('training.show', $req->id) }}"
-                                    class="inline-block bg-blue-500 text-white text-xs px-3 py-1 rounded hover:bg-blue-600 transition">View</a>
+                                    class="inline-block bg-blue-500 text-blue-800 text-xs px-3 py-1 rounded hover:bg-blue-600 transition">View</a>
                             </td>
                         </tr>
                     @empty
