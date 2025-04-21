@@ -20,9 +20,10 @@
 
         <form method="POST" action="{{ route('training.update', $request->id) }}">
             @csrf
+            <!-- Training Type Selection -->
             <div class="mb-3">
                 <label for="training_type" class="form-label">Training Type</label>
-                <select name="training_type" class="form-select" required>
+                <select name="training_type" id="training_type" class="form-select" required>
                     <option value="">Select Type</option>
                     <option value="face-to-face" {{ $request->training_type == 'face-to-face' ? 'selected' : '' }}>
                         Face-to-Face</option>
@@ -37,7 +38,9 @@
                     required>
             </div>
 
-            <div class="mb-3">
+            <!-- Meeting Link (conditionally shown) -->
+            <div class="mb-3" id="meeting_link_group"
+                style="display: {{ $request->training_type == 'online' ? 'block' : 'none' }};">
                 <label for="meeting_link" class="form-label">Google Meeting Link (optional)</label>
                 <input type="url" name="meeting_link" class="form-control" value="{{ $request->meeting_link }}">
             </div>
@@ -55,5 +58,23 @@
             <a href="{{ route('training.index') }}" class="btn btn-secondary">Back</a>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const trainingTypeSelect = document.getElementById('training_type');
+            const meetingLinkGroup = document.getElementById('meeting_link_group');
+
+            function toggleMeetingLink() {
+                if (trainingTypeSelect.value === 'online') {
+                    meetingLinkGroup.style.display = 'block';
+                } else {
+                    meetingLinkGroup.style.display = 'none';
+                }
+            }
+
+            trainingTypeSelect.addEventListener('change', toggleMeetingLink);
+            toggleMeetingLink(); // initial check
+        });
+    </script>
 
 </x-layout>
