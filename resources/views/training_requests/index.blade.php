@@ -32,6 +32,7 @@
             <table class="min-w-full divide-y divide-gray-200 bg-white">
                 <thead class="bg-gray-100">
                     <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Ref No.</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Email</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">CDA Reg. No</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Training Type</th>
@@ -43,6 +44,7 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($requests as $req)
                         <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->reference_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->cda_reg_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $req->training_type ?? 'N/A' }}</td>
