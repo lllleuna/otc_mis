@@ -24,7 +24,7 @@
             <div class="mb-3">
                 <label for="training_type" class="form-label">Training Type</label>
                 <select name="training_type" id="training_type" class="form-select" required>
-                    <option value="">Select Type</option>
+                    <option value="" disable>Select Type</option>
                     <option value="face-to-face" {{ $request->training_type == 'face-to-face' ? 'selected' : '' }}>
                         Face-to-Face</option>
                     <option value="online" {{ $request->training_type == 'online' ? 'selected' : '' }}>Online</option>
