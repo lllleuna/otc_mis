@@ -17,7 +17,8 @@ class TrainingRequest extends Model
         'reference_no', 
         'email', 
         'status', 
-        'training_date_time'
+        'training_date_time',
+        'meeting_link',
     ];
 
     const STATUS_NEW = 'new'; // When the client has just submitted a training request
