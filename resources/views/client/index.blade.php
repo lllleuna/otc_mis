@@ -13,12 +13,12 @@
             <div class="md:w-1/2">
                 <input type="text" id="searchInput"
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-                    placeholder="Search by Accreditation No, City, or Email">
+                    placeholder="Search by Accreditation No or Email">
             </div>
             <div class="md:w-1/3">
                 <select id="regionFilter"
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none bg-white">
-                    <option value="">All Region</option>
+                    <option value="">Select Region</option>
                     @foreach ($regions as $region)
                         <option value="{{ $region['name'] }}">{{ $region['name'] }}</option>
                     @endforeach
@@ -76,7 +76,7 @@
 
             <!-- Search Hint Message -->
             <div id="searchHint" class="text-center text-gray-500 py-8 text-sm">
-                Search by Accreditation No, Region, or Contact to view records.
+                Search by Accreditation No or Email Account.
             </div>
 
             <!-- Pagination Links -->
