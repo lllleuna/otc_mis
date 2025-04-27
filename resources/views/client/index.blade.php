@@ -18,7 +18,7 @@
             <div class="md:w-1/3">
                 <select id="regionFilter"
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors appearance-none bg-white">
-                    <option value="">Select Region</option>
+                    <option value="">All Region</option>
                     @foreach ($regions as $region)
                         <option value="{{ $region['name'] }}">{{ $region['name'] }}</option>
                     @endforeach
