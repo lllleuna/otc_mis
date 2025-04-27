@@ -80,9 +80,9 @@
             </div>
 
             <!-- Pagination Links -->
-            <div id="paginationLinks" class="mt-4 hidden">
+            {{-- <div id="paginationLinks" class="mt-4 hidden">
                 {{ $generalInfos->links() }}
-            </div>
+            </div> --}}
 
 
         </div>
