@@ -42,13 +42,14 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200" id="infoTable">
                     @forelse ($generalInfos as $info)
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-50 transition-colors hidden">
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                {{ $info->accreditation_no ?? 'No Accreditation No' }}</td>
+                                {{ $info->accreditation_no ?? 'No Accreditation No' }}
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700"> {{ $info->region }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->email }} <br>
-                                {{ $info->contact_no }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $info->region }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                {{ $info->email }}<br>{{ $info->contact_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 {{ \Carbon\Carbon::parse($info->accreditation_date)->format('M j, Y') }}
                             </td>
@@ -70,6 +71,7 @@
                         </tr>
                     @endforelse
                 </tbody>
+
             </table>
             <div class="mt-4">
                 {{ $generalInfos->links() }}
@@ -85,26 +87,41 @@
             const tableRows = document.querySelectorAll("#infoTable tr");
 
             function filterTable() {
-                const searchText = searchInput.value.toLowerCase();
-                const selectedRegion = regionFilter.value;
+                const searchText = searchInput.value.trim().toLowerCase();
+                const selectedRegion = regionFilter.value.toLowerCase();
+                let hasMatch = false;
 
                 tableRows.forEach(row => {
-                    const accreditationNo = row.cells[0]?.textContent.toLowerCase() || '';
-                    const city = row.cells[3]?.textContent.toLowerCase() || '';
-                    const email = row.cells[4]?.textContent.toLowerCase() || '';
-                    const regionName = row.cells[2]?.textContent.trim().toLowerCase() || '';
+                    const cells = row.querySelectorAll("td");
+                    if (cells.length === 0) return; // Skip "no records" row
 
-                    const matchesSearch = accreditationNo.includes(searchText) || city.includes(
-                        searchText) || email.includes(searchText);
-                    const matchesRegion = selectedRegion === "" || regionName === selectedRegion
-                        .toLowerCase();
+                    const accreditationNo = cells[0]?.textContent.toLowerCase() || '';
+                    const name = cells[1]?.textContent.toLowerCase() || '';
+                    const regionName = cells[2]?.textContent.toLowerCase() || '';
+                    const contact = cells[3]?.textContent.toLowerCase() || '';
 
-                    row.style.display = matchesSearch && matchesRegion ? "" : "none";
+                    const matchesSearch = accreditationNo.includes(searchText) || name.includes(
+                        searchText) || contact.includes(searchText);
+                    const matchesRegion = selectedRegion === "" || regionName === selectedRegion;
+
+                    if (searchText !== "" || selectedRegion !== "") {
+                        if (matchesSearch && matchesRegion) {
+                            row.classList.remove("hidden");
+                            hasMatch = true;
+                        } else {
+                            row.classList.add("hidden");
+                        }
+                    } else {
+                        row.classList.add("hidden"); // Hide all if no search/filter
+                    }
                 });
+
+                // Optional: Handle "No Records" text visibility if needed
             }
 
             searchInput.addEventListener("input", filterTable);
             regionFilter.addEventListener("change", filterTable);
         });
     </script>
+
 </x-layout>
