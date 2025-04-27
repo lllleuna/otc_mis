@@ -10,7 +10,7 @@
                 @php
                     $statusLabels = [
                         'new' => 'New Applications',
-                        'saved' => 'In Evaluation',
+                        'saved' => 'Pending Authentication',
                         'evaluated' => 'Waiting Approval',
                         'approved' => 'Approved Applications',
                         'released' => 'Released Certificates',
@@ -144,10 +144,15 @@
                                             ];
                                             $statusClass =
                                                 $statusClasses[$application->status] ?? 'bg-gray-100 text-gray-800';
-                                            $statusLabel =
-                                                $application->status === 'saved'
-                                                    ? 'Pending'
-                                                    : ucfirst($application->status);
+
+                                            // Custom label for specific statuses
+                                            if ($application->status === 'saved') {
+                                                $statusLabel = 'Pending';
+                                            } elseif ($application->status === 'evaluated') {
+                                                $statusLabel = 'Authenticated';
+                                            } else {
+                                                $statusLabel = ucfirst($application->status);
+                                            }
                                         @endphp
                                         <span
                                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusClass }}">
@@ -160,8 +165,8 @@
                                             {{-- components.evaluationInfo --}}
                                             <a href="{{ route('accreditation.evaluate', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
-                                                Evaluate
-                                            </a>
+                                                View
+                                            </a> {{-- Authenticate the new submitted applications  --}}
                                         @elseif ($application->status === 'evaluated' && Auth::user()->role === 'Admin')
                                             <a href="{{ route('accreditation.approval', $application->id) }}"
                                                 class="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1 rounded-md transition-colors">
