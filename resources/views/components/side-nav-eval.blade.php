@@ -11,8 +11,8 @@
         @php
             $statuses = [
                 'new' => 'New Applications',
-                'saved' => 'In Evaluation',
-                'evaluated' => 'Waiting Approval',
+                'saved' => 'Pending Authentication',
+                'evaluated' => 'For Evaluation',
                 'approved' => 'Approved',
                 'released' => 'Released Certificates',
                 'rejected' => 'Rejected',
