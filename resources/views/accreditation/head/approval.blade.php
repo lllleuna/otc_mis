@@ -23,15 +23,15 @@
 
         {{-- Evaluator Details --}}
         <div class="mb-4 p-4 border rounded-md bg-gray-50">
-            <h3 class="text-lg font-semibold mb-2">Evaluation Details</h3>
+            <h3 class="text-lg font-semibold mb-2">Authentication Details</h3>
             @if ($evaluation)
-                <p><strong>Evaluator:</strong> {{ optional($evaluation->updatedBy)->firstname ?? '' }}
+                <p><strong>OD Officer Name:</strong> {{ optional($evaluation->updatedBy)->firstname ?? '' }}
                     {{ optional($evaluation->updatedBy)->lastname ?? '' }}</p>
                 <p><strong>Employee ID:</strong> {{ optional($evaluation->updatedBy)->employee_id_no ?? 'Unknown' }}</p>
-                <p><strong>Date of Evaluation:</strong> {{ $evaluation->updated_at->format('F d, Y H:i A') }}</p>
+                <p><strong>Date of Authentication:</strong> {{ $evaluation->updated_at->format('F d, Y H:i A') }}</p>
                 <p><strong>Message:</strong> {{ $evaluation->message }}</p>
             @else
-                <p class="text-gray-500">No evaluation records found.</p>
+                <p class="text-gray-500">No records found.</p>
             @endif
         </div>
 
