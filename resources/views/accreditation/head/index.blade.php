@@ -11,13 +11,13 @@
                     $statusLabels = [
                         'new' => 'New Applications',
                         'saved' => 'In Evaluation',
-                        'evaluated' => 'Waiting Approval',
+                        'evaluated' => 'Evaluation',
                         'approved' => 'Approved Applications',
                         'released' => 'Released Certificates',
                         'rejected' => 'Rejected Applications',
                     ];
                     $statusTooltips = [
-                        'evaluated' => 'Applications waiting for your approval decision.',
+                        'evaluated' => 'Applications waiting for your approval.',
                         'approved' => 'Applications approved, pending certificate release.',
                         'released' => 'Applications with certificates already issued.',
                         'rejected' => 'Applications that did not meet requirements.',

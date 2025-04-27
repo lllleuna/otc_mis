@@ -10,7 +10,7 @@
     <nav class="mt-4 flex-1 overflow-y-auto">
         @php
             $head_statuses = [
-                'evaluated' => 'For Approval',
+                'evaluated' => 'For Evaluation',
                 'approved' => 'Approved',
                 'released' => 'Released Certificates',
                 'rejected' => 'Rejected',
