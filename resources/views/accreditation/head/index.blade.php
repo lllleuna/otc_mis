@@ -132,8 +132,8 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
                                             $statusClasses = [
-                                                'new' => 'bg-blue-100 text-blue-800',
-                                                'saved' => 'bg-yellow-100 text-yellow-800',
+                                                'new' => 'bg-blue-100 text-blue-800', // submitted
+                                                'saved' => 'bg-yellow-100 text-yellow-800', // now mapped to "Pending"
                                                 'evaluated' => 'bg-purple-100 text-purple-800',
                                                 'approved' => 'bg-green-100 text-green-800',
                                                 'released' => 'bg-orange-100 text-orange-800',
@@ -141,10 +141,19 @@
                                             ];
                                             $statusClass =
                                                 $statusClasses[$application->status] ?? 'bg-gray-100 text-gray-800';
+
+                                            // Custom label for specific statuses
+                                            if ($application->status === 'saved') {
+                                                $statusLabel = 'Pending';
+                                            } elseif ($application->status === 'evaluated') {
+                                                $statusLabel = 'Authenticated';
+                                            } else {
+                                                $statusLabel = ucfirst($application->status);
+                                            }
                                         @endphp
                                         <span
                                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusClass }}">
-                                            {{ ucfirst($application->status) }}
+                                            {{ $statusLabel }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
