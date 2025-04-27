@@ -9,7 +9,7 @@
     <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <!-- Header -->
         <div class="bg-blue-900 px-6 py-4 flex items-center justify-between mb-6">
-            <h2 class="text-xl font-bold text-white">Evaluate Application</h2>
+            <h2 class="text-xl font-bold text-white">Authentication</h2>
             <button onclick="window.history.back()"
                 class="px-4 py-2 font-bold text-sm bg-white text-black rounded-lg hover:bg-gray-400 transition">
                 ← Back
@@ -28,12 +28,12 @@
                 <!-- Evaluation Form (Right Panel) -->
                 <div class="md:w-1/3 p-6 bg-white">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-                        Evaluation Form
+                        Authentication Form
                     </h3>
                     <div class="space-y-6">
                         <div>
                             <label for="evaluation_notes" class="block text-sm font-medium text-gray-700 mb-1">
-                                Evaluation Notes <span class="text-red-500">*</span>
+                                Authentication Notes <span class="text-red-500">*</span>
                             </label>
                             <textarea id="evaluation_notes" name="evaluation_notes"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
