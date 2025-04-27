@@ -66,16 +66,24 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No
-                                records found</td>
+                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                No records available.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
-
             </table>
-            <div class="mt-4">
+
+            <!-- Search Hint Message -->
+            <div id="searchHint" class="text-center text-gray-500 py-8 text-sm">
+                Search by Accreditation No, Region, or Contact to view records.
+            </div>
+
+            <!-- Pagination Links -->
+            <div id="paginationLinks" class="mt-4 hidden">
                 {{ $generalInfos->links() }}
             </div>
+
 
         </div>
     </div>
@@ -85,6 +93,8 @@
             const searchInput = document.getElementById("searchInput");
             const regionFilter = document.getElementById("regionFilter");
             const tableRows = document.querySelectorAll("#infoTable tr");
+            const searchHint = document.getElementById("searchHint");
+            const paginationLinks = document.getElementById("paginationLinks");
 
             function filterTable() {
                 const searchText = searchInput.value.trim().toLowerCase();
@@ -116,12 +126,24 @@
                     }
                 });
 
-                // Optional: Handle "No Records" text visibility if needed
+                // Handle Search Hint and Pagination Visibility
+                if (searchText !== "" || selectedRegion !== "") {
+                    searchHint.classList.add("hidden");
+                    if (hasMatch) {
+                        paginationLinks.classList.remove("hidden");
+                    } else {
+                        paginationLinks.classList.add("hidden");
+                    }
+                } else {
+                    searchHint.classList.remove("hidden");
+                    paginationLinks.classList.add("hidden");
+                }
             }
 
             searchInput.addEventListener("input", filterTable);
             regionFilter.addEventListener("change", filterTable);
         });
     </script>
+
 
 </x-layout>
