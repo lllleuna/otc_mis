@@ -35,13 +35,25 @@
             @endif
         </div>
 
+        @if ($application->additional_file)
+            <div class="mb-4 p-4 border rounded-md bg-gray-50">
+                <h3 class="text-lg font-semibold mb-2">Additional File</h3>
+                <div>
+                    <!-- Link or Display the additional file -->
+                    <a href="{{ asset($application->additional_file) }}" target="_blank" class="text-blue-600">View File</a>
+                </div>
+            </div>
+        @endif
+
+
         {{-- Approval Form --}}
         <form action="{{ route('accreditation.storeApproval', $application->id) }}" method="POST">
             @csrf
 
             {{-- Message Box --}}
             <div class="mb-4">
-                <label for="message" class="block text-sm font-medium text-gray-700">Message for Transportation Cooperative</label>
+                <label for="message" class="block text-sm font-medium text-gray-700">Message for Transportation
+                    Cooperative</label>
                 <textarea name="message" id="message" rows="4" class="w-full p-2 border rounded-md" required></textarea>
             </div>
 
@@ -64,13 +76,15 @@
     <button id="backToTopBtn"
         class="hidden fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-opacity duration-300">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 011.414 0L10 5.414l5.293 4.293a1 1 0 111.414-1.414l-6-5a1 1 0 00-1.414 0l-6 5a1 1 0 010 1.414z" clip-rule="evenodd" />
-        </svg>        
+            <path fill-rule="evenodd"
+                d="M3.293 9.707a1 1 0 011.414 0L10 5.414l5.293 4.293a1 1 0 111.414-1.414l-6-5a1 1 0 00-1.414 0l-6 5a1 1 0 010 1.414z"
+                clip-rule="evenodd" />
+        </svg>
     </button>
 
     <script>
         const backToTopBtn = document.getElementById("backToTopBtn");
-    
+
         window.addEventListener("scroll", () => {
             if (window.scrollY > 200) {
                 backToTopBtn.classList.remove("hidden");
@@ -78,11 +92,14 @@
                 backToTopBtn.classList.add("hidden");
             }
         });
-    
+
         backToTopBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         });
     </script>
-    
+
 
 </x-layout>
