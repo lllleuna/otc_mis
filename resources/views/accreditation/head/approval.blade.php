@@ -62,7 +62,6 @@
                 <label for="status" class="block text-sm font-medium text-gray-700">Approval Status</label>
                 <select name="status" id="status" class="w-full p-2 border rounded-md" required>
                     <option value="approved">Approve</option>
-                    <option value="rejected">Reject</option>
                 </select>
             </div>
 
