@@ -3,7 +3,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </x-slot:vite>
 
-    <x-slot:title>Evaluation</x-slot:title>
+    <x-slot:title>Authentication</x-slot:title>
 
 
     <div class="w-4/5 m-auto bg-white rounded-lg shadow-lg overflow-hidden">
