@@ -78,7 +78,7 @@
                             </label>
                             <textarea id="evaluation_notes" name="evaluation_notes"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
-                                rows="8" placeholder="Enter your evaluation notes here..." required>
+                                rows="4" placeholder="Enter your evaluation notes here..." required>
                             {{ old('evaluation_notes', $latestEvaluation->message ?? '') }}
                         </textarea>
                             @error('evaluation_notes')
@@ -99,17 +99,6 @@
                                 Save Draft
                             </button>
 
-                            <!-- Submit Evaluation Button -->
-                            <button type="submit" name="action" value="submit"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7" />
-                                </svg>
-                                Submit
-                            </button>
-
                             <!-- Send Email Button -->
                             <button type="submit" name="action" value="send_email"
                                 class="inline-flex items-center px-4 py-2 border border-blue-300 text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
@@ -120,6 +109,17 @@
                                         d="M16 12H8m8 0l-4 4m4-4l-4-4m-6 8a9 9 0 1118 0 9 9 0 01-18 0z" />
                                 </svg>
                                 Send Email
+                            </button>
+
+                            <!-- Submit Evaluation Button -->
+                            <button type="submit" name="action" value="submit"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                Submit
                             </button>
                         </div>
 
