@@ -15,7 +15,6 @@
                 'evaluated' => 'For Evaluation',
                 'approved' => 'Approved',
                 'released' => 'Released Certificates',
-                'rejected' => 'Rejected',
             ];
 
             $head_statuses = [

@@ -13,7 +13,6 @@
                 'evaluated' => 'For Evaluation',
                 'approved' => 'Approved',
                 'released' => 'Released Certificates',
-                'rejected' => 'Rejected',
             ];
 
             // Get current status from query parameters or search
