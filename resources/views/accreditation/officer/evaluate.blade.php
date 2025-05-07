@@ -36,40 +36,59 @@
                         <ul class="space-y-2">
                             <li class="flex items-start">
                                 <input type="checkbox" name="requirements[letter_request]" value="1"
-                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                    @checked($application->has_letter_request == 1)>
                                 <span class="ml-3 text-sm text-gray-700">Letter Request signed by the Cooperative’s
                                     Chairperson</span>
                             </li>
                             <li class="flex items-start">
                                 <input type="checkbox" name="requirements[cda_cert]" value="1"
-                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                    @checked($application->has_cda_cert == 1)>
                                 <span class="ml-3 text-sm text-gray-700">Photocopy of Certificate of Registration issued
                                     by the CDA</span>
                             </li>
                             <li class="flex items-start">
                                 <input type="checkbox" name="requirements[orcr_15_units]" value="1"
-                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                    @checked($application->has_orcr_15_units == 1)>
                                 <span class="ml-3 text-sm text-gray-700">At least 15 units of OR/CR together with the
                                     copy of Decision/Order of CPC</span>
                             </li>
                             <li class="flex items-start">
                                 <input type="checkbox" name="requirements[bank_cert]" value="1"
-                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                    @checked($application->has_bank_cert == 1)>
                                 <span class="ml-3 text-sm text-gray-700">Bank Certificate of Deposit representing the
                                     paid-up capital of the cooperative</span>
                             </li>
                         </ul>
                     </div>
+
                     <div class="mb-6">
                         <label for="additional_file" class="block text-sm font-medium text-gray-700 mb-1">
                             Upload Additional File
                         </label>
                         <input type="file" name="additional_file" id="additional_file"
                             class="block w-full text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+
+                        @if ($application->additional_file)
+                            <div class="mt-2">
+                                <span class="text-sm text-gray-700">Uploaded File: </span>
+                                <a href="{{ asset('storage/' . $application->additional_file) }}" class="text-blue-600"
+                                    target="_blank">{{ basename($application->additional_file) }}</a>
+                            </div>
+                        @else
+                            <div class="mt-2">
+                                <span class="text-sm text-gray-700">No file uploaded</span>
+                            </div>
+                        @endif
+
                         @error('additional_file')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+
 
                     <div class="space-y-6">
                         <div>
