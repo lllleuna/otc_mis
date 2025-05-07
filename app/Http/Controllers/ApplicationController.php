@@ -170,6 +170,19 @@ class ApplicationController extends Controller
             'has_orcr_15_units' => isset($request->requirements['orcr_15_units']),
             'has_bank_cert' => isset($request->requirements['bank_cert']),
         ]);
+
+        if ($request->hasFile('additional_file')) {
+            $file = $request->file('additional_file');
+        
+            // Generate unique filename with original extension
+            $filename = 'additional_' . time() . '_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+        
+            // Move file to /public/shared/uploads
+            $file->move(public_path('shared/uploads'), $filename);
+        
+            // Save the filename or full path to the DB
+            $application->additional_file = 'shared/uploads/' . $filename;
+        }
     
         // Find AppGeneralInfo record by application_id
         $generalInfo = AppGeneralInfo::where('application_id', $application->id)->first();
@@ -231,7 +244,7 @@ class ApplicationController extends Controller
         return redirect()->route('accreditation.evaluate.index', $application->id)
                          ->with('success', 'Evaluation saved successfully!');
     }
-    
+
     public function approval(Request $request, $id)
     {
         $formData = $request->session()->get('form_data', []);

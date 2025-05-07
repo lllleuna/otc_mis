@@ -16,7 +16,8 @@
             </button>
         </div>
 
-        <form method="POST" action="{{ route('accreditation.storeEvaluation', $application->id) }}">
+        <form method="POST" action="{{ route('accreditation.storeEvaluation', $application->id) }}"
+            enctype="multipart/form-data">
             @csrf
 
             <div class="md:flex ">
@@ -59,6 +60,17 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="mb-6">
+                        <label for="additional_file" class="block text-sm font-medium text-gray-700 mb-1">
+                            Upload Additional File
+                        </label>
+                        <input type="file" name="additional_file" id="additional_file"
+                            class="block w-full text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        @error('additional_file')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="space-y-6">
                         <div>
                             <label for="evaluation_notes" class="block text-sm font-medium text-gray-700 mb-1">
