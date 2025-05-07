@@ -37,9 +37,6 @@
                     <p style="font-size: 16px; color: #9a3412; margin: 0;">Please submit the missing documents as soon as possible to proceed with your application. You may submit it through this email thread.</p>
                 </div>
 
-                <div style="text-align: center; margin: 35px 0;">
-                    <a href="https://client.otcs.digital/" target="_blank" style="display: inline-block; background-color: #b91c1c; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: bold; font-size: 16px; transition: background-color 0.3s;">Upload Requirements</a>
-                </div>
 
                 <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">Thank you for your cooperation.</p>
 

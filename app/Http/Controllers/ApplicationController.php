@@ -164,24 +164,29 @@ class ApplicationController extends Controller
             'evaluated_by' => $userId,
         ]);
     
+        // Update the checklist requirements
         $application->update([
             'has_letter_request' => isset($request->requirements['letter_request']),
             'has_cda_cert' => isset($request->requirements['cda_cert']),
             'has_orcr_15_units' => isset($request->requirements['orcr_15_units']),
             'has_bank_cert' => isset($request->requirements['bank_cert']),
         ]);
-
+    
+        // Handle file upload
         if ($request->hasFile('additional_file')) {
             $file = $request->file('additional_file');
         
-            // Generate unique filename with original extension
+            // Generate a unique filename with original extension
             $filename = 'additional_' . time() . '_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
         
-            // Move file to /public/shared/uploads
+            // Move the file to /public/shared/uploads
             $file->move(public_path('shared/uploads'), $filename);
         
-            // Save the filename or full path to the DB
+            // Save the file path in the database
             $application->additional_file = 'shared/uploads/' . $filename;
+            
+            // Don't forget to save the application after modifying the additional_file field
+            $application->save();  // This ensures the changes are persisted
         }
     
         // Find AppGeneralInfo record by application_id
@@ -244,6 +249,7 @@ class ApplicationController extends Controller
         return redirect()->route('accreditation.evaluate.index', $application->id)
                          ->with('success', 'Evaluation saved successfully!');
     }
+    
 
     public function approval(Request $request, $id)
     {
