@@ -22,7 +22,7 @@ class EvaluationNotification extends Mailable
 
     public function build()
     {
-        return $this->subject('Your Application Has Been Evaluated')
+        return $this->subject('Your Application Has Been Reviewed')
                     ->view('emails.evaluation_notification')
                     ->with([
                         'application' => $this->application,

@@ -30,6 +30,35 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
                         Authentication Form
                     </h3>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Checklist of Requirements</label>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <input type="checkbox" name="requirements[letter_request]" value="1"
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <span class="ml-3 text-sm text-gray-700">Letter Request signed by the Cooperative’s
+                                    Chairperson</span>
+                            </li>
+                            <li class="flex items-start">
+                                <input type="checkbox" name="requirements[cda_cert]" value="1"
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <span class="ml-3 text-sm text-gray-700">Photocopy of Certificate of Registration issued
+                                    by the CDA</span>
+                            </li>
+                            <li class="flex items-start">
+                                <input type="checkbox" name="requirements[orcr_15_units]" value="1"
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <span class="ml-3 text-sm text-gray-700">At least 15 units of OR/CR together with the
+                                    copy of Decision/Order of CPC</span>
+                            </li>
+                            <li class="flex items-start">
+                                <input type="checkbox" name="requirements[bank_cert]" value="1"
+                                    class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <span class="ml-3 text-sm text-gray-700">Bank Certificate of Deposit representing the
+                                    paid-up capital of the cooperative</span>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="space-y-6">
                         <div>
                             <label for="evaluation_notes" class="block text-sm font-medium text-gray-700 mb-1">
@@ -47,6 +76,7 @@
 
                         <!-- Action Buttons -->
                         <div class="flex justify-end gap-4 pt-4">
+                            <!-- Save Draft Button -->
                             <button type="submit" name="action" value="save"
                                 class="inline-flex items-center px-4 py-2 border border-yellow-300 text-sm font-medium rounded-md text-yellow-700 bg-yellow-50 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
@@ -56,6 +86,8 @@
                                 </svg>
                                 Save Draft
                             </button>
+
+                            <!-- Submit Evaluation Button -->
                             <button type="submit" name="action" value="submit"
                                 class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
@@ -63,9 +95,22 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7" />
                                 </svg>
-                                Submit Evaluation
+                                Submit
+                            </button>
+
+                            <!-- Send Email Button -->
+                            <button type="submit" name="action" value="send_email"
+                                class="inline-flex items-center px-4 py-2 border border-blue-300 text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                                title="Clicking this button will send an email to the transport cooperative requesting additional information or documents.">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 12H8m8 0l-4 4m4-4l-4-4m-6 8a9 9 0 1118 0 9 9 0 01-18 0z" />
+                                </svg>
+                                Send Email
                             </button>
                         </div>
+
 
                     </div>
                 </div>

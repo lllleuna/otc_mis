@@ -29,6 +29,7 @@ use App\Mail\ApplicationStatusMail;
 use App\Mail\EvaluationNotification;
 use App\Mail\ApplicationApprovedMail;
 use App\Mail\ApplicationRejectedMail;
+use App\Mail\MissingRequirementsNotification;
 
 class ApplicationController extends Controller
 {
@@ -141,13 +142,13 @@ class ApplicationController extends Controller
         ));
     }      
     
-
     public function storeEvaluation(Request $request, $id)
     {
         $application = Application::findOrFail($id);
         $userId = Auth::id(); 
-    
-        $status = $request->input('action') === 'submit' ? 'evaluated' : 'saved';
+        $action = $request->input('action');
+        
+        $status = $action === 'submit' ? 'evaluated' : 'saved';
     
         // Save Evaluation History
         ApplicationStatusHistory::create([
@@ -161,6 +162,13 @@ class ApplicationController extends Controller
         $application->update([
             'status' => $status,
             'evaluated_by' => $userId,
+        ]);
+    
+        $application->update([
+            'has_letter_request' => isset($request->requirements['letter_request']),
+            'has_cda_cert' => isset($request->requirements['cda_cert']),
+            'has_orcr_15_units' => isset($request->requirements['orcr_15_units']),
+            'has_bank_cert' => isset($request->requirements['bank_cert']),
         ]);
     
         // Find AppGeneralInfo record by application_id
@@ -188,10 +196,36 @@ class ApplicationController extends Controller
                 'validity' => $request->input('validity'),
             ]);
         }
-
-        // Send Email Notification if status is evaluated
+    
+        // If action is send_email, determine missing requirements and send them
+        if ($action === 'send_email' && !empty($generalInfo->email)) {
+            $allRequirements = [
+                'letter_request' => 'Letter of Intent',
+                'cda_cert' => 'CDA Certificate',
+                'orcr_15_units' => 'OR/CR for at least 15 units',
+                'bank_cert' => 'Bank Certificate',
+            ];
+    
+            $missing = [];
+            foreach ($allRequirements as $field => $label) {
+                if (!isset($request->requirements[$field])) {
+                    $missing[] = $label;
+                }
+            }
+    
+            Mail::to($generalInfo->email)->send(
+                new MissingRequirementsNotification($application, $missing)
+            );
+    
+            return redirect()->route('accreditation.evaluate.index', $application->id)
+                             ->with('success', 'Email sent successfully to the cooperative with the list of missing requirements.');
+        }
+    
+        // Send evaluation notification (optional)
         if ($status === 'evaluated' && !empty($generalInfo->email)) {
-            Mail::to($generalInfo->email)->send(new EvaluationNotification($application, $request->input('evaluation_notes')));
+            Mail::to($generalInfo->email)->send(
+                new EvaluationNotification($application, $request->input('evaluation_notes'))
+            );
         }
     
         return redirect()->route('accreditation.evaluate.index', $application->id)
