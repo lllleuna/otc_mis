@@ -40,7 +40,7 @@
                 <h3 class="text-lg font-semibold mb-2">Additional File</h3>
                 <div>
                     <!-- Link or Display the additional file -->
-                    <a href="{{ asset($application->additional_file) }}" target="_blank" class="text-blue-600">View File</a>
+                    <a href="{{ asset($application->additional_file) }}" target="_blank" class="text-blue-600">View Document</a>
                 </div>
             </div>
         @endif
