@@ -75,7 +75,7 @@
                         @if ($application->additional_file)
                             <div class="mt-2">
                                 <span class="text-sm text-gray-700">Uploaded File: </span>
-                                <a href="{{ asset('storage/' . $application->additional_file) }}" class="text-blue-600"
+                                <a href="{{ asset('/' . $application->additional_file) }}" class="text-blue-600"
                                     target="_blank">{{ basename($application->additional_file) }}</a>
                             </div>
                         @else
