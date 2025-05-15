@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ strtoupper(str_replace('_', ' ', request('report_type'))) }} Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .header {
+            text-align: center;
+            padding-top: 5px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .subheader {
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+
+        .table th {
+            background-color: #c0c9d9;
+            font-weight: bold;
+        }
+
+        .table tr:hover {
+            background-color: #f9fafb;
+        }
+
+        .no-records {
+            text-align: center;
+            font-size: 16px;
+            color: #ef4444;
+        }
+
+        .user-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .user-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .user-info p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .logo {
+            max-width: 80%;
+            height: auto;
+            opacity: .9;
+        }
+    </style>
+</head>
+
+<body>
+    @php
+        $regionNames = [
+            '010000000' => 'Region I (Ilocos Region)',
+            '020000000' => 'Region II (Cagayan Valley)',
+            '030000000' => 'Region III (Central Luzon)',
+            '040000000' => 'Region IV-A (CALABARZON)',
+            '170000000' => 'MIMAROPA Region',
+            '050000000' => 'Region V (Bicol Region)',
+            '060000000' => 'Region VI (Western Visayas)',
+            '070000000' => 'Region VII (Central Visayas)',
+            '080000000' => 'Region VIII (Eastern Visayas)',
+            '090000000' => 'Region IX (Zamboanga Peninsula)',
+            '100000000' => 'Region X (Northern Mindanao)',
+            '110000000' => 'Region XI (Davao Region)',
+            '120000000' => 'Region XII (SOCCSKSARGEN)',
+            '130000000' => 'Region XIII (Caraga)',
+            'CAR' => 'Cordillera Administrative Region',
+            'NCR' => 'National Capital Region',
+            'BARMM' => 'Bangsamoro Autonomous Region in Muslim Mindanao',
+        ];
+    @endphp
+    @php
+        $path = public_path('images/OTC-UpdatedBannerLogo4Black.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    @endphp
+    <div class="logo-container">
+        <img src="{{ $base64 }}" alt="OTC Banner Logo" class="logo">
+    </div>
+
+    <div class="header">
+        @php
+            $headerTitle = match (request('report_type')) {
+                'acc_app' => 'Accreditation Applications',
+                'cgs_app' => 'CGS Renewal Applications',
+                default => strtoupper(str_replace('_', ' ', request('report_type'))) . ' Report',
+            };
+        @endphp
+
+        <h2>{{ $headerTitle }}</h2>
+
+        <p class="subheader">Generated on: {{ now()->format('F j, Y') }}</p>
+    </div>
+
+    @if ($cooperatives->isEmpty())
+        <div class="no-records">
+            <p>No records found</p>
+        </div>
+    @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Cooperative Name</th>
+                    <th>CDA Registration No.</th>
+                    <th>Registration Date</th>
+                    <th>Region</th>
+                    <th>Status</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($cooperatives as $index => $coop)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $coop->tc_name }}</td>
+                        <td>{{ $coop->cda_reg_no }}</td>
+                        <td>{{ $coop->cda_reg_date ? \Carbon\Carbon::parse($coop->cda_reg_date)->format('d M Y') : 'N/A' }}
+                        </td>
+                        <td>{{ $regionNames[$coop->region] ?? $coop->region }}</td>
+                        <td>{{ ucfirst($coop->status) }}</td>
+                        <td>{{ \Carbon\Carbon::parse($coop->created_at)->format('d M Y') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    <div class="user-info">
+        <h3>Report Generated By</h3>
+        <p>
+            <strong>Employee ID No:</strong> {{ $user->employee_id_no }}<br>
+            <strong>Name:</strong> {{ $user->firstname }} {{ $user->lastname }}<br>
+            <strong>Division:</strong> {{ $user->division }}<br>
+            <strong>Role:</strong> {{ $user->role }}<br>
+            <strong>Email:</strong> {{ $user->email }}
+        </p>
+    </div>
+</body>
+
+</html>

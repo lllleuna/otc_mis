@@ -9,14 +9,18 @@
                 <h4 class="text-xl text-gray-900 font-bold">Action</h4>
                 <ul class="mt-2 text-gray-700">
                     <li class="flex border-y py-2">
-                        <button href="/users/{{ $user->id }}/edit" onclick="openModal('modalEdit')" class="text-black-600 hover:text-blue-600">Edit General Info</button>
+                        <button href="/users/{{ $user->id }}/edit" onclick="openModal('modalEdit')"
+                            class="text-black-600 hover:text-blue-600">Edit General Info</button>
                     </li>
                     <li class="flex border-b py-2">
-                        <button href="/users/{{ $user->id }}/edit" onclick="openModal('modalResetPass')" class="text-black-600 hover:text-blue-600">Reset Password</button>
+                        <button href="/users/{{ $user->id }}/edit" onclick="openModal('modalResetPass')"
+                            class="text-black-600 hover:text-blue-600">Reset Password</button>
                     </li>
                     <li class="flex border-b py-2">
-                        <a href="" class="text-black-600 hover:text-red-600">Delete Account</a>
+                        <button onclick="openModal('modalDelete')" class="text-black-600 hover:text-red-600">Delete
+                            Account</button>
                     </li>
+
                 </ul>
             </div>
 
@@ -25,7 +29,8 @@
                 <ul class="mt-2 text-gray-700">
                     <li class="flex border-y py-2">
                         <span class="font-bold w-24">Full name:</span>
-                        <span class="text-gray-700">{{ $user->firstname . " " . $user->middlename . " " . $user->lastname . " " . $user->suffix}}</span>
+                        <span
+                            class="text-gray-700">{{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname . ' ' . $user->suffix }}</span>
                     </li>
                     <li class="flex border-y py-2">
                         <span class="font-bold w-24">ID No:</span>
@@ -44,6 +49,11 @@
                         <span class="text-gray-700">{{ $user->division }}</span>
                     </li>
                     <li class="flex border-b py-2">
+                        <span class="font-bold w-24">Mobile No:</span>
+                        <span class="text-gray-700">{{ $user->mobile_number }}</span>
+                        <span class="text-gray-700 text-sm mx-2">verified</span>
+                    </li>
+                    <li class="flex border-b py-2">
                         <span class="font-bold w-24">Email:</span>
                         <span class="text-gray-700">{{ $user->email }}</span>
                         <span class="text-gray-700 text-sm mx-2">verified</span>
@@ -56,107 +66,69 @@
             </div>
         </div>
 
-        {{-- Activity Log Container --}}
-        <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-            <h4 class="text-xl text-gray-900 font-bold">Activity log</h4>
-            <div class="relative px-4">
-                <div class="absolute h-full border border-dashed border-opacity-20 border-secondary">
-                    
-                </div>
-
-                <!-- start::Timeline item -->
-                <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                        <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                        <p class="text-sm">Profile informations changed.</p>
-                        <p class="text-xs text-gray-500">3 min ago</p>
-                    </div>
-                </div>
-                <!-- end::Timeline item -->
-
-                <!-- start::Timeline item -->
-                <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                        <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                        <p class="text-sm">
-                            Connected with <a href="#" class="text-blue-600 font-bold">Colby Covington</a>.</p>
-                        <p class="text-xs text-gray-500">15 min ago</p>
-                    </div>
-                </div>
-                <!-- end::Timeline item -->
-
-                <!-- start::Timeline item -->
-                <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                        <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                        <p class="text-sm">Invoice <a href="#" class="text-blue-600 font-bold">#4563</a> was created.</p>
-                        <p class="text-xs text-gray-500">57 min ago</p>
-                    </div>
-                </div>
-                <!-- end::Timeline item -->
-
-                <!-- start::Timeline item -->
-                <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                        <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                        <p class="text-sm">
-                            Message received from <a href="#" class="text-blue-600 font-bold">Cecilia Hendric</a>.</p>
-                        <p class="text-xs text-gray-500">1 hour ago</p>
-                    </div>
-                </div>
-                <!-- end::Timeline item -->
-
-                <!-- start::Timeline item -->
-                <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                        <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                        <p class="text-sm">New order received <a href="#" class="text-blue-600 font-bold">#OR9653</a>.</p>
-                        <p class="text-xs text-gray-500">2 hours ago</p>
-                    </div>
-                </div>
-                <!-- end::Timeline item -->
-
-                <!-- start::Timeline item -->
-                <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                        <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                        <p class="text-sm">
-                            Message received from <a href="#" class="text-blue-600 font-bold">Jane Stillman</a>.</p>
-                        <p class="text-xs text-gray-500">2 hours ago</p>
-                    </div>
-                </div>
-                <!-- end::Timeline item -->
-            </div>
-        </div>
     </x-container>
 
 
-<x-modal id="modalEdit"
-class="{{ $errors->hasAny(['firstname', 'lastname', 'employee_id_no', 'email']) ? 'modal-error' : 'hidden' }}">
-    <x-slot:closebtnSlot>
-        <x-modal-close-button onclick="closeModal('modalEdit')" />
-    </x-slot:closebtnSlot>
-    @include('users.edit')
-</x-modal>
 
-<x-modal id="modalResetPass"
-class="{{ $errors->hasAny(['password', 'password_confirmation']) ? 'modal-error' : 'hidden' }}">
-    <x-slot:closebtnSlot>
-        <x-modal-close-button onclick="closeModal('modalResetPass')" />
-    </x-slot:closebtnSlot>
-    @include('users.reset-password')
-</x-modal>
+    <x-modal id="modalEdit"
+        class="{{ $errors->hasAny(['firstname', 'lastname', 'employee_id_no', 'email']) ? 'modal-error' : 'hidden' }}">
+        <x-slot:closebtnSlot>
+            <x-modal-close-button onclick="closeModal('modalEdit')" />
+        </x-slot:closebtnSlot>
+        @include('users.edit')
+    </x-modal>
+
+    <x-modal id="modalResetPass"
+        class="{{ $errors->hasAny(['password', 'password_confirmation']) ? 'modal-error' : 'hidden' }}">
+        <x-slot:closebtnSlot>
+            <x-modal-close-button onclick="closeModal('modalResetPass')" />
+        </x-slot:closebtnSlot>
+        @include('users.reset-password')
+
+    </x-modal>
+
+    <div id="modalDelete"
+        class="fixed inset-0 flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-50
+    {{ $errors->deletePassword->any() ? '' : 'hidden' }}">
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-sm mx-auto">
+            <h2 class="text-lg font-semibold mb-4 text-center">Confirm Delete</h2>
+            <p class="text-center">Enter your password to delete this account:</p>
+            <form method="POST" action="{{ route('users.destroy', $user->id) }}" class="mt-4">
+                @csrf
+                @method('DELETE')
+                <input type="password" name="password" class="border p-2 w-full mb-2" required
+                    placeholder="Password">
+                @if ($errors->deletePassword->has('password'))
+                    <p class="text-red-500 text-sm">{{ $errors->deletePassword->first('password') }}</p>
+                @endif
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="closeModal('modalDelete')"
+                        class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                    <button type="submit" class="text-red-800 font-semibold">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('#modalDelete') && !document.querySelector('#modalDelete').classList
+                .contains('hidden')) {
+                openModal('modalDelete');
+            }
+        });
+    </script>
+
 
 </x-layout>
+@include('components.footer')

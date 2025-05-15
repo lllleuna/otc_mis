@@ -4,8 +4,23 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\GeneralInfo;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Membership;
+use App\Models\Employment;
+use App\Models\Unit;
+use App\Models\Franchise;
+use App\Models\Cgs;
+use App\Models\Governance;
+use App\Models\Finance;
+use App\Models\GrantsDonation;
+use App\Models\Scholarship;
+use App\Models\Loan;
+use App\Models\Business;
+use App\Models\Cetos;
+use App\Models\TrainingSeminar;
+use Database\Seeders\ExternalUserSeeder;
+use Database\Seeders\ApplicationSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,17 +29,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        GeneralInfo::factory()->count(10)->create();
+        // Employee accounts
+        User::factory(5)->create(); 
 
-        // run once
-        User::factory()->create([
-            'firstname' => 'Carlos Antonio',
-            'lastname' => 'Albornoz',
-            'division' => 'PED',
-            'role' => 'Admin',
-            'employee_id_no' => '1234567890',
-            'email' => 'test@example.com',
+        $this->call([
+            UsersTableSeeder::class,
         ]);
+
+        // Create GeneralInfo records first
+        
+
+
+        // Seeder for external users (client portal)
+        // $this->call([
+        //     ExternalUserSeeder::class,  // Call the UserSeeder
+        // ]);
+
+        // Accreditation application factory and seeder
+        // $this->call([
+        //     ApplicationSeeder::class,  // Call the UserSeeder
+        // ]);
+
     }
 }

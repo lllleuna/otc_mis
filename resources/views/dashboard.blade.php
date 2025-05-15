@@ -2,211 +2,172 @@
     <x-slot:vite></x-slot:vite>
     <x-slot:title>Dashboard</x-slot:title>
 
-    <div class="container mx-auto">
-        <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Management Dashboard</h1>
-        <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-             <h2 class="text-xl font-semibold mb-4 text-gray-700">Summary</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  <div class="bg-blue-100 p-4 rounded-md">
-                    <h3 class="font-semibold text-blue-700">Active Cooperatives</h3>
-                    <p class="text-xl font-bold text-gray-800">150</p>
-                 </div>
-                 <div class="bg-green-100 p-4 rounded-md">
-                   <h3 class="font-semibold text-green-700">Completed Transactions</h3>
-                   <p class="text-xl font-bold text-gray-800">230</p>
-             </div>
-            <div class="bg-yellow-100 p-4 rounded-md">
-                 <h3 class="font-semibold text-yellow-700">Pending Registrations</h3>
-                 <p class="text-xl font-bold text-gray-800">40</p>
-            </div>
-     </div>
-    </div>
-    <div class="mt-8"></div>
+    <div id="printableArea" class="container mx-auto px-4 pt-5">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">OTC Dashboard</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <div class="bg-white rounded-lg shadow-md p-6" style="height: 350px;">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-semibold text-gray-700">Transaction Status</h2>
+        <!-- Summary Cards - Updated with specific metrics -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">OTC Performance Summary</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-2">
+                <!-- Accredited Transport Cooperatives -->
+                <div class="bg-blue-100 p-4 rounded-md">
+                    <h3 class="font-semibold text-blue-700">Accredited Transport Cooperatives</h3>
+                    <p class="text-xl font-bold text-gray-800">
+                        @if ($generalInfoCount && $generalInfoCount > 0)
+                            {{ $generalInfoCount }}
+                        @else
+                            <span class="text-red-600">No data available</span>
+                        @endif
+                    </p>
+                    <p class="text-sm text-gray-600">Across All Regions</p>
                 </div>
-                <div id="transactionStatusChart" class="w-full h-full"></div>
-            </div>
 
-
-            <div class="bg-white rounded-lg shadow-md p-6" style="height: 350px;">
-                <h2 class="text-xl font-semibold mb-4 text-gray-700">Registration Status</h2>
-                <div id="registrationStatusChart" class="w-full h-full"></div>
-            </div>
-        </div>
-
-        <!-- Transportation Cooperative Status - centered at the bottom -->
-        <div class="bg-white rounded-lg shadow-md p-6 mt-6" style="height: 350px;">
-            <h2 class="text-xl font-semibold mb-4 text-gray-700 text-center">Transportation Cooperative Status</h2>
-            <div id="transportationStatusChart" class="w-full h-full flex justify-center"></div>
-        </div>
-    </div>
-
-    <div class="container mx-auto mt-10">
-
-    <div class="container mx-auto mt-10">
-    <!-- Report Generation Section -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Generate Report</h2>
-        <p class="text-sm text-gray-500 mb-4">Select the report type and date range for generating a report.</p>
-
-        <!-- Report Type Selection -->
-        <div class="flex space-x-6 mb-6">
-            <div class="w-1/3">
-                <label for="reportType" class="block text-sm font-semibold text-gray-700 mb-2">Report Type</label>
-                <select id="reportType" class="block w-full border border-gray-300 rounded-md p-2">
-                    <option value="transaction">Transaction Report</option>
-                    <option value="registration">Registration Report</option>
-                    <option value="cooperative">Cooperative Report</option>
-                    <option value="summary">Summary Report</option>
-                </select>
-            </div>
-
-            <div class="w-1/3">
-                <label for="startDate" class="block text-sm font-semibold text-gray-700 mb-2">Start Date</label>
-                <input type="date" id="startDate" class="block w-full border border-gray-300 rounded-md p-2">
-
-                <label for="endDate" class="block text-sm font-semibold text-gray-700 mt-4 mb-2">End Date</label>
-                <input type="date" id="endDate" class="block w-full border border-gray-300 rounded-md p-2">
-            </div>
-
-            <div class="w-1/3 flex items-end">
-                <button class="bg-blue-500 text-white rounded-md p-2 w-full hover:bg-blue-600">
-                    Generate Report
-                </button>
-            </div>
-        </div>
-
-
-        <!-- Action Links (optional) -->
-        <div class="mt-4 flex justify-end">
-            <button class="bg-green-500 text-white rounded-md p-2 hover:bg-green-600">Download Report</button>
-            <button class="bg-yellow-500 text-white rounded-md p-2 ml-4 hover:bg-yellow-600">Send via Email</button>
-        </div>
-    </div>
-</div>
-
-
-    <!-- Task or Reminder Section -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Upcoming Tasks & Reminders</h2>
-        <div class="space-y-4">
-            <!-- Task 1 -->
-            <div class="flex items-center justify-between bg-blue-100 p-4 rounded-md">
-                <div>
-                    <h3 class="font-semibold text-blue-700">Complete Registration Approvals</h3>
-                    <p class="text-sm text-gray-600">Deadline: 20th Feb, 2025</p>
+                <!-- Active Applications -->
+                <div class="bg-green-100 p-4 rounded-md">
+                    <h3 class="font-semibold text-green-700">Active Applications</h3>
+                    <p class="text-xl font-bold text-gray-800">
+                        @if ($applicationCount && $applicationCount > 0)
+                            {{ $applicationCount }}
+                        @else
+                            <span class="text-red-600">No data available</span>
+                        @endif
+                    </p>
+                    <p class="text-sm text-gray-600">Accreditation and CGS Renewal</p>
                 </div>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Mark as Done</button>
+            </div>
+        </div>
+
+
+        <!-- Year Filter -->
+        <div class="mb-4 hidden">
+            <label for="yearFilter" class="text-gray-700 font-semibold">Select Year:</label>
+            <select id="yearFilter" class="border rounded px-2 py-1">
+                @for ($i = date('Y'); $i >= 2020; $i--)
+                    <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+
+        <!-- 1st ROW -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
+                <h2 class="text-lg font-semibold text-gray-700">TC per Regions</h2>
+                <div id="regionsChart" class="w-full h-full"></div>
             </div>
 
-            <!-- Task 2 -->
-            <div class="flex items-center justify-between bg-yellow-100 p-4 rounded-md">
-                <div>
-                    <h3 class="font-semibold text-yellow-700">Update Transportation Status</h3>
-                    <p class="text-sm text-gray-600">Deadline: 25th Feb, 2025</p>
-                </div>
-                <button class="bg-yellow-500 text-white px-4 py-2 rounded-md">Mark as Done</button>
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden" style="height: 300px;">
+                <h2 class="text-lg font-semibold text-gray-700">CGS Renewals Per Year</h2>
+                <div id="cgsChart" class="w-full h-full"></div>
+            </div>
+        </div>
+
+        <!-- 2nd ROW -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden mb-6" style="height: 300px;">
+                <h2 class="text-lg font-semibold text-gray-700">Accreditation Status</h2>
+                <div id="accreditationChart" class="w-full h-full"></div>
             </div>
 
-            <!-- Task 3 -->
-            <div class="flex items-center justify-between bg-green-100 p-4 rounded-md">
-                <div>
-                    <h3 class="font-semibold text-green-700">Generate Monthly Reports</h3>
-                    <p class="text-sm text-gray-600">Deadline: 28th Feb, 2025</p>
-                </div>
-                <button class="bg-green-500 text-white px-4 py-2 rounded-md">Mark as Done</button>
+            <div class="bg-white rounded-lg shadow-md p-7 overflow-hidden mb-6" style="height: 300px;">
+                <h2 class="text-lg font-semibold text-gray-700">CGS Renewal Status</h2>
+                <div id="renewalChart" class="w-full h-full"></div>
             </div>
         </div>
     </div>
-</div>
 
-
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-4 mt-10">
-    <div class="container mx-auto text-center">
-        <p>&copy; 2025 Office of Transportation Cooperatives. All rights reserved.</p>
-        <p><a href="/privacy-policy" class="text-blue-300 hover:text-blue-500">Privacy Policy</a> | <a href="/terms-of-service" class="text-blue-300 hover:text-blue-500">Terms of Service</a></p>
+    <div class="flex justify-end mb-4 mr-2">
+        <button onclick="printDiv('printableArea')"
+            class="flex items-center gap-2 px-5 py-2 bg-blue-900 text-white rounded hover:bg-blue-800">
+            <!-- Heroicon: Printer -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6 9V4h12v5m-6 4h6v6H6v-6h6zM6 14v2m0 0h12m0 0v-2" />
+            </svg>
+            Print Analytics
+        </button>
     </div>
-</footer>
+
+    @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+
     <script>
+        function printDiv(divId) {
+            const printContents = document.getElementById(divId).innerHTML;
+            const originalContents = document.body.innerHTML;
 
-        if (typeof ApexCharts !== 'undefined') {
-            // Transaction Status Chart (Sample Data)
-            var transactionStatusChart = new ApexCharts(document.getElementById("transactionStatusChart"), {
-                series: [
-                    { name: 'Evaluated', data: [50, 60, 45, 70, 65, 50, 55, 60, 65, 75, 80, 90] },
-                    { name: 'In Progress', data: [30, 20, 25, 15, 30, 35, 40, 45, 50, 55, 60, 65] },
-                    { name: 'Completed', data: [20, 25, 30, 25, 25, 20, 25, 30, 35, 40, 45, 50] }
-                ],
-                chart: {
-                    type: 'bar',
-                    height: '90%',
-                    stacked: false,
-                    toolbar: { show: false }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '75%',
-                        endingShape: 'rounded'
-                    }
-                },
-                xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
-                legend: { position: 'top' },
-                fill: { opacity: .85 }
-            });
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
 
-            // Registration Status Chart (Sample Data)
-            var registrationStatusChart = new ApexCharts(document.getElementById("registrationStatusChart"), {
-                series: [50, 30, 20],
-                chart: {
-                    type: 'pie',
-                    height: '90%'
-                },
-                labels: ['Newly Registered', 'CGS Application', 'Training'],
-                colors: ['#FCDE70', '#E88D67', '#51829B'],
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: { width: 200 },
-                        legend: { position: 'bottom' }
-                    }
-                }]
-            });
-
-            // Transportation Cooperative Status Chart (Sample Data)
-            var transportationStatusChart = new ApexCharts(document.getElementById("transportationStatusChart"), {
-                series: [60, 40],
-                chart: {
-                    type: 'pie',
-                    height: '90%'
-                },
-                labels: ['Active', 'Inactive'],
-                colors: ['#347928', '#E64848'],
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: { width: 200 },
-                        legend: { position: 'bottom' }
-                    }
-                }]
-            });
-
-
-            transactionStatusChart.render();
-            registrationStatusChart.render();
-            transportationStatusChart.render();
+            // Reload the page after printing to restore JS functionalities (e.g., ApexCharts)
+            window.location.reload();
         }
 
+        function fetchChartData(year) {
+            fetch(`/dashboard/charts?year=${year}`)
+                .then(response => response.json())
+                .then(data => {
+                    renderBarChart('regionsChart', 'TC per Regions', data.regions.map(r => r.region), data.regions.map(
+                        r => r.total));
+                    renderBarChart('cgsChart', 'CGS Renewals Per Year', data.cgs.map(c => c.year), data.cgs.map(c => c
+                        .total));
+                    renderPieChart('accreditationChart', 'Accreditation Status', data.accreditation);
+                    renderPieChart('renewalChart', 'CGS Renewal Status', data.renewal);
+                });
+        }
+
+        function renderBarChart(id, title, categories, series) {
+            new ApexCharts(document.querySelector(`#${id}`), {
+                chart: {
+                    type: 'bar',
+                    height: 250
+                },
+                series: [{
+                    name: title,
+                    data: series
+                }],
+                xaxis: {
+                    categories: categories
+                },
+                colors: ['#536493', '#E88D67', '#FCDE70', '#6AAB9C', '#C370A8', '#A35D6A'],
+            }).render();
+        }
+
+        function renderPieChart(id, title, data) {
+            const statusColors = {
+                'new': '#5F99AE', // Blue
+                'saved': '#FCDE70', // Yellow
+                'evaluated': '#E88D67', // Orange
+                'approved': '#6AAB9C', // Green
+                'rejected': '#9F5255', // Red
+                'released': '#FBF4DB' // Cream
+            };
+
+            // Map the statuses to the colors in the `statusColors` object
+            const colors = data.map(d => statusColors[d.status.toLowerCase()] ||
+                '#A35D6A'); // Default color if status is missing
+
+            new ApexCharts(document.querySelector(`#${id}`), {
+                chart: {
+                    type: 'pie',
+                    height: 250
+                },
+                series: data.map(d => d.total),
+                labels: data.map(d => d.status),
+                colors: colors, // Apply the specific colors based on status
+            }).render();
+        }
+
+        document.getElementById('yearFilter').addEventListener('change', function() {
+            fetchChartData(this.value);
+        });
+
+        fetchChartData(new Date().getFullYear());
     </script>
+
+
 </x-layout>

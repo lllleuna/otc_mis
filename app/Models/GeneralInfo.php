@@ -11,4 +11,10 @@ class GeneralInfo extends Model
 
     protected $table = 'general_info';
     protected $guarded = [];
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
+    }
+
 }

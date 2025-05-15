@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\GeneralInfo;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class GeneralInfoFactory extends Factory
 {
@@ -12,25 +13,74 @@ class GeneralInfoFactory extends Factory
     public function definition()
     {
         return [
-            'accreditation_no' => $this->faker->unique()->numberBetween(1000, 9999),
-            'name' => $this->faker->company,
-            'short_name' => $this->faker->word,
-            'accreditation_date' => $this->faker->date,
-            'accreditation_type' => 'Regional',
+            'accreditation_no' => ($year = $this->faker->numberBetween(2020, now()->year)) . '-' . $this->faker->numerify('######'),
+            'name' => $this->faker->company . ' Cooperative',
+            'short_name' => Str::before($this->faker->company, ' ') . ' Coop',
+            'cda_registration_date' => $cdaDate = $this->faker->dateTimeBetween('-6 years', 'now'),
             'cda_registration_no' => 'T-' . $this->faker->randomNumber(8),
-            'cda_registration_date' => $this->faker->date,
-            'common_bond_membership' => 'Transport Operators',
+            'accreditation_type' => $this->faker->randomElement(['Provisional', 'Full']),
+            'accreditation_date' => $this->faker->dateTimeBetween("$year-01-01", "$year-12-31"),
+            'common_bond_membership' => $this->faker->randomElement(['Occupational', 'Residential', 'Associational', 'Institutional', 'Others']),
             'membership_fee' => $this->faker->numberBetween(100, 500),
-            'area' => 'Metro Manila',
-            'region' => 'NCR',
-            'city' => $this->faker->city,
-            'province' => 'Metro Manila',
-            'barangay' => $this->faker->streetName,
-            'business_address' => $this->faker->address,
+            'area' => $this->faker->randomElement(['01', '02', '03']), // Example: 01 = Luzon, 02 = Visayas, 03 = Mindanao
+            'region' => $this->faker->randomElement([
+                '130000000', // NCR
+                '140000000', // CAR
+                '010000000', // Region I - Ilocos Region
+                '020000000', // Region II - Cagayan Valley
+                '030000000', // Region III - Central Luzon
+                '040000000', // Region IV-A - CALABARZON
+                '170000000', // MIMAROPA
+                '050000000', // Region V - Bicol Region
+                '060000000', // Region VI - Western Visayas
+                '070000000', // Region VII - Central Visayas
+                '080000000', // Region VIII - Eastern Visayas
+                '090000000', // Region IX - Zamboanga Peninsula
+                '100000000', // Region X - Northern Mindanao
+                '110000000', // Region XI - Davao Region
+                '120000000', // Region XII - SOCCSKSARGEN
+                '160000000', // Region XIII - Caraga
+                '150000000', // BARMM - Bangsamoro Autonomous Region in Muslim Mindanao
+            ]),
+            'province' => $this->faker->randomElement([
+                '133900000', // Metro Manila
+                '072200000', // Cebu
+                '112400000', // Davao del Sur
+                '035400000', // Pampanga
+                '043400000', // Laguna
+                '041000000', // Batangas
+                '063000000', // Iloilo
+                '101300000', // Bukidnon
+            ]),
+            'city' => $this->faker->randomElement([
+                '137400000', // Manila
+                '137600000', // Quezon City
+                '072217000', // Cebu City
+                '112402000', // Davao City
+                '141102000', // Baguio City
+                '063031000', // Iloilo City
+                '097332000', // Zamboanga City
+                '104305000', // Cagayan de Oro City
+            ]),
+            'barangay' => $this->faker->randomElement([
+                '137404050', // Brgy. 50, Manila
+                '137607041', // Brgy. Payatas, Quezon City
+                '072217012', // Brgy. Lahug, Cebu City
+                '112402019', // Brgy. Buhangin, Davao City
+                '141102004', // Brgy. Irisan, Baguio City
+            ]),
+            'business_address' => fake()->randomNumber(3) . ' Block ' . fake()->randomDigit(),
             'email' => $this->faker->unique()->safeEmail,
-            'contact_no' => $this->faker->phoneNumber,
+            'contact_no' => fake()->regexify('9[0-9]{9}'),
             'contact_firstname' => $this->faker->firstName,
             'contact_lastname' => $this->faker->lastName,
+            'contact_mid_initial' =>  $this->faker->lastName(),
+            'contact_suffix' => $this->faker->optional()->randomElement(['Jr.', 'Sr.', 'II', 'III', 'IV']),
+            'employer_sss_reg_no' => fake()->regexify('[0-9]{10}'), // Standard 10-digit SSS number
+            'employer_pagibig_reg_no' => fake()->regexify('[0-9]{4}-[0-9]{4}-[0-9]{4}'), 
+            'employer_philhealth_reg_no' => fake()->regexify('[0-9]{2}-[0-9]{9}-[0-9]'),
+            'bir_tin' => fake()->regexify('[0-9]{3}-[0-9]{3}-[0-9]{3}'), 
+            'bir_tax_exemption_no' => fake()->regexify('[A-Z0-9]{5,10}'), 
             'created_at' => now(),
             'updated_at' => now(),
         ];
